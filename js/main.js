@@ -31,22 +31,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const navLinks = document.querySelector('.nav-links');
   
   if (menuToggle && navLinks) {
-    menuToggle.addEventListener('click', () => {
-      menuToggle.classList.toggle('active');
-      navLinks.classList.toggle('active');
-      document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    const toggleMenu = (show) => {
+      const isActive = show !== undefined ? show : !navLinks.classList.contains('active');
+      menuToggle.classList.toggle('active', isActive);
+      navLinks.classList.toggle('active', isActive);
+      document.body.style.overflow = isActive ? 'hidden' : '';
+    };
+
+    menuToggle.addEventListener('click', () => toggleMenu());
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => toggleMenu(false));
     });
   }
 
-  // 4. Parallax Effect (Index page)
-  const ambientCore = document.querySelector('.ambient-core');
-  if (ambientCore) {
-    window.addEventListener('scroll', () => {
-      const scrolled = window.scrollY;
-      ambientCore.style.transform = `translate(-50%, -50%) scale(${1 + scrolled * 0.001}) translateY(${scrolled * 0.5}px)`;
-      ambientCore.style.opacity = Math.max(0.4 - scrolled * 0.001, 0);
-    });
-  }
+  // 4. Parallax Effect (Index page background effect removed)
 
   // 5. Contact Form Submission
   const form = document.getElementById('contact-form');
