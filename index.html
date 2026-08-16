@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CYNOCOR - Advanced Systems Engineering</title>
+  <link rel="icon" href="assets/logo3W.png" type="image/png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .ambient-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 110vw;
+      height: 110vh;
+      transform: translate(-50%, -50%);
+      z-index: 0;
+      pointer-events: none;
+      background-image: url('assets/hero_bg.jpg');
+      background-size: cover;
+      background-position: center;
+      opacity: 0.6;
+      mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 90%);
+      will-change: transform, opacity;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding-top: 64px;
+      overflow: hidden;
+      background: linear-gradient(180deg, var(--bg-base) 0%, #FFFFFF 100%);
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+      background-size: 32px 32px;
+      opacity: 0.6;
+      z-index: 0;
+      mask-image: radial-gradient(ellipse at top center, black 30%, transparent 80%);
+      -webkit-mask-image: radial-gradient(ellipse at top center, black 30%, transparent 80%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      transform: translateY(var(--scroll-y, 0px));
+      opacity: var(--scroll-opacity, 1);
+      will-change: transform, opacity;
+    }
+
+    .hero-content>* {
+      opacity: 0;
+      animation: heroFadeUp 1s var(--ease) forwards;
+    }
+
+    .hero-content .hero-eyebrow {
+      animation-delay: 0.1s;
+    }
+
+    .hero-content .hero-main-logo {
+      animation-delay: 0.2s;
+    }
+
+    .hero-content .hero-subheading {
+      animation-delay: 0.25s;
+    }
+
+    .hero-content p {
+      animation-delay: 0.3s;
+    }
+
+    .hero-content .btn-primary {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes heroFadeUp {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .hero-eyebrow {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: block;
+    }
+
+    .hero-main-logo {
+      margin: 0 auto 20px;
+      line-height: 1;
+    }
+
+    .hero-main-logo img {
+      width: clamp(260px, 40vw, 520px);
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    .hero-subheading {
+      font-size: clamp(1rem, 1.8vw, 1.4rem);
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .hero p {
+      font-size: clamp(1.125rem, 2vw, 1.375rem);
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto 48px;
+      line-height: 1.4;
+    }
+
+    .capabilities {
+      background: var(--bg-surface-solid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .cap-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .cap-card {
+      background: var(--bg-base);
+      border-radius: 24px;
+      padding: 48px;
+      transition: transform 0.4s var(--ease), background 0.4s var(--ease);
+    }
+
+    .cap-card:hover {
+      background: #F0F0F2;
+      transform: translateY(-4px);
+    }
+
+    .cap-icon {
+      width: 48px;
+      height: 48px;
+      background: var(--bg-surface-solid);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--accent);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    }
+
+    .cap-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .cap-card p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .process-rail {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      margin-top: 64px;
+    }
+
+    .process-step {
+      position: relative;
+    }
+
+    .process-num {
+      font-size: 4rem;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.04);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: -20px;
+      position: relative;
+      z-index: 0;
+    }
+
+    .process-step h4 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .process-step p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 900px) {
+      .cap-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .process-rail {
+        grid-template-columns: 1fr 1fr;
+        gap: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .hero {
+        padding: 140px 0 80px;
+      }
+
+      .cap-grid {
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .process-rail {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-main-logo img {
+        width: clamp(220px, 72vw, 320px);
+      }
+    }
+  </style>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/footer.js" defer></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="container nav-inner">
+      <a href="index.html" class="brand" aria-label="CYNOCOR home">
+        <img src="assets/logo.png" alt="CYNOCOR logo">
+      </a>
+      <nav class="nav-links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="team.html">Team</a>
+        <a href="projects.html">Projects</a>
+      </nav>
+      <a href="contact.html" class="nav-cta">Start a Project</a>
+      <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="ambient-core"></div>
+    <div class="container hero-content">
+      <h1 class="hero-main-logo">
+        <img src="assets/logo.png" alt="CYNOCOR">
+      </h1>
+      <h2 class="hero-subheading">The Apex Animal of Advanced Systems</h2>
+      <p>Software, automation, and business systems engineered to move first, track precisely, and outlast the
+        competition.</p>
+      <a href="contact.html" class="btn-primary">Explore Services</a>
+    </div>
+  </section>
+
+  <!-- Capabilities Section -->
+  <section class="section capabilities">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2>Built for advanced systems.</h2>
+        <p>From core software to full business infrastructure, we design and ship systems that are precise, resilient,
+          and built to scale with intent.</p>
+      </div>
+
+      <div class="cap-grid">
+        <div class="cap-card fade-up">
+          <div class="cap-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"></polyline>
+              <polyline points="8 6 2 12 8 18"></polyline>
+            </svg>
+          </div>
+          <h3>Software Development</h3>
+          <p>Web, mobile and custom platforms engineered for real workloads, not demos. We focus on clean architecture
+            and high performance.</p>
+        </div>
+
+        <div class="cap-card fade-up" style="transition-delay: 0.1s;">
+          <div class="cap-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+              <line x1="8" y1="21" x2="16" y2="21"></line>
+              <line x1="12" y1="17" x2="12" y2="21"></line>
+            </svg>
+          </div>
+          <h3>Systems Engineering</h3>
+          <p>Architecture, infrastructure and technical strategy built for scale and uptime. Resilient systems that form
+            the backbone of your business.</p>
+        </div>
+
+        <div class="cap-card fade-up" style="transition-delay: 0.2s;">
+          <div class="cap-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path
+                d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+              </path>
+            </svg>
+          </div>
+          <h3>Automation & AI</h3>
+          <p>Intelligent workflows and integrations that remove repetitive work at the root, allowing your team to focus
+            on high-impact tasks.</p>
+        </div>
+
+        <div class="cap-card fade-up" style="transition-delay: 0.3s;">
+          <div class="cap-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="20" x2="18" y2="10"></line>
+              <line x1="12" y1="20" x2="12" y2="4"></line>
+              <line x1="6" y1="20" x2="6" y2="14"></line>
+            </svg>
+          </div>
+          <h3>Business Strategy</h3>
+          <p>Growth planning and market positioning grounded in data, not guesswork. We align technical solutions with
+            your business goals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Process Section -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header fade-up">
+        <h2>A track built to close.</h2>
+        <p>Our methodology ensures precision at every stage of the project lifecycle.</p>
+      </div>
+
+      <div class="process-rail">
+        <div class="process-step fade-up">
+          <div class="process-num">01</div>
+          <h4>Track</h4>
+          <p>We study the problem, the market, and the constraints before writing a single line of code.</p>
+        </div>
+        <div class="process-step fade-up" style="transition-delay: 0.1s;">
+          <div class="process-num">02</div>
+          <h4>Design</h4>
+          <p>Architecture and experience are planned together, not bolted on afterward.</p>
+        </div>
+        <div class="process-step fade-up" style="transition-delay: 0.2s;">
+          <div class="process-num">03</div>
+          <h4>Build</h4>
+          <p>Iterative, tested delivery with clear milestones and constant visibility.</p>
+        </div>
+        <div class="process-step fade-up" style="transition-delay: 0.3s;">
+          <div class="process-num">04</div>
+          <h4>Deploy</h4>
+          <p>Launched, monitored, and supported. The system keeps running after we ship.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <div id="site-footer"></div>
+
+  <!-- Scripts -->
+  
+  <!-- Floating WhatsApp Button -->
+  <a class="whatsapp-float" href="https://wa.me/94700000000?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+  </a>
+
+</body>
+
+</html>
