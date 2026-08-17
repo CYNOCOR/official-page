@@ -315,22 +315,54 @@ footer .brand {
 
 /* Page Hero */
 .page-hero {
-  padding: 160px 0 80px;
+  position: relative;
+  padding: 90px 0 56px;
   text-align: center;
-  background: var(--bg-surface-solid);
-  border-bottom: 1px solid var(--border);
+  background:
+    radial-gradient(34% 42% at 92% 10%, rgba(92, 144, 255, 0.28), transparent 60%),
+    radial-gradient(26% 32% at 78% 65%, rgba(58, 102, 220, 0.18), transparent 64%),
+    radial-gradient(20% 24% at 18% 26%, rgba(58, 112, 255, 0.10), transparent 62%),
+    linear-gradient(90deg, #020810 0%, #050e1a 16%, #081a2d 36%, #050d1b 62%, #02080f 100%);
+  border-bottom: 1px solid rgba(126, 170, 255, 0.12);
+  overflow: hidden;
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(120deg, rgba(120, 170, 255, 0.12), rgba(120, 170, 255, 0.03) 25%, rgba(0, 0, 0, 0) 38%, rgba(98, 149, 255, 0.10) 68%, rgba(0, 0, 0, 0) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(5, 10, 18, 0.18) 100%);
+  pointer-events: none;
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 1;
+}
+
+.page-hero .eyebrow {
+  color: rgba(175, 204, 255, 0.9);
+  margin-bottom: 18px;
+  letter-spacing: 0.18em;
+  font-size: 0.72rem;
 }
 
 .page-hero h1 {
-  font-size: clamp(2.5rem, 5vw, 4rem);
-  max-width: 800px;
-  margin: 0 auto 24px;
+  font-size: clamp(2.1rem, 4vw, 3.8rem);
+  line-height: 1;
+  letter-spacing: -0.06em;
+  max-width: 860px;
+  margin: 0 auto 18px;
+  color: #edf4ff;
 }
 
 .page-hero .lead {
-  font-size: 1.25rem;
-  color: var(--text-secondary);
-  max-width: 600px;
+  font-size: clamp(0.98rem, 1.4vw, 1.18rem);
+  line-height: 1.55;
+  color: rgba(219, 229, 255, 0.82);
+  max-width: 700px;
   margin: 0 auto;
 }
 

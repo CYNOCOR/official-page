@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 <path d="M3 7l9 6 9-6"></path>
               </svg>
             </a>
-            <a href="https://www.facebook.com/cynocor" target="_blank" rel="noopener" aria-label="CYNOCOR on Facebook">
+            <a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener" aria-label="CYNOCOR on Facebook">
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                 <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"></path>
               </svg>
             </a>
-            <a href="https://www.instagram.com/cynocor" target="_blank" rel="noopener" aria-label="CYNOCOR on Instagram">
+            <a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener" aria-label="CYNOCOR on Instagram">
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
                 <rect x="3" y="3" width="18" height="18" rx="5"></rect>
                 <circle cx="12" cy="12" r="4"></circle>
