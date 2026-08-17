@@ -88,6 +88,7 @@
       display: inline-flex;
       align-items: center;
       margin-top: 16px;
+      cursor: pointer;
     }
 
     .project-link:hover {
@@ -121,8 +122,132 @@
         font-size: 0.75rem;
       }
     }
+
+
+
+
+    /* --- Popup Modal Styles (Clean White Theme) --- */
+
+    /* Modal Background (Center alignment & fade effect) */
+    .video-modal {
+      display: none;
+      position: fixed;
+      z-index: 9999;
+      left: 0;
+      top: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0);
+
+      /* Flexbox to center content perfectly */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Modal eka active unama penna */
+    .video-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+      background-color: rgba(0, 0, 0, 0.75);
+    }
+
+    /* Modal Box Content (White Background & Clean Layout) */
+    .modal-content {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 16px;
+      width: 850px;
+      max-width: 92%;
+      max-height: 90vh;
+      overflow-y: auto;
+      /* Content wadi unoth withrak scroll wenna */
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+      transform: translateY(30px) scale(0.95);
+      opacity: 0;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Scrollbar eka lassanata hide karanna (bottom bar eka nathuwa yanna) */
+    .modal-content::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
+
+    /* Modal eka active unama scale wela center ekatama enawa */
+    .video-modal.active .modal-content {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    /* Video Styling - Full video eka crop nowi hariyata penna */
+    .modal-content video {
+      width: 100%;
+      height: auto;
+      max-height: 65vh;
+      object-fit: contain;
+      border-radius: 10px;
+      outline: none;
+      background: #000;
+    }
+
+    /* Close Button (X) - Box eka athulema hariyata penna set kala */
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 18px;
+      background: #f1f1f1;
+      color: #333;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.2s;
+      z-index: 10;
+    }
+
+    .close-btn:hover {
+      background: #ff0000;
+      color: #fff;
+    }
+
+    /* Video Description (Dark text for white background) */
+    .video-description {
+      width: 100%;
+      margin-top: 18px;
+      text-align: left;
+    }
+
+    .video-description h3 {
+      font-size: 20px;
+      color: #111;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .video-description p {
+      font-size: 14px;
+      color: #555;
+      line-height: 1.6;
+    }
   </style>
-  <script src="js/main.js" defer></script>
   <script src="js/footer.js" defer></script>
 </head>
 
@@ -168,42 +293,112 @@
 
       <div class="grid-3">
 
+        <!-- 1. Kins Marine -->
         <div class="card project-card fade-up" data-cat="software">
           <div class="project-media">
-            <img src="" alt="Kins Marine Engineering Service">
+            <img src="assets/kinsmarine project.jpeg" alt="Kins Marine Engineering Service">
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>Kins Marine Engineering Service</h3>
             <p>A high-performance custom web platform engineered for real-time client operations. Replaced legacy
               systems and reduced data sync errors to zero.</p>
-            <a href="#" class="project-link">View Details &rarr;</a>
+            <a href="#" class="project-link open-modal" data-video="assets/kinsmarine video.mp4"
+              data-title="Kins Marine Engineering Service"
+              data-desc="Kins Marine Engineering Service is a marine and general contracting company based in Kirulapona, Colombo 05, Sri Lanka, operating under the direction of proprietor G. H. P. S. Kinsley. Core Specialisms: Specialising in hydraulic and pneumatic repairs for medium and heavy-duty industrial and marine machinery (such as pumps, rams, valves, and steering gear), alongside steel/pipe fabrication and boiler repairs. Operations & Emergency Response: Offers a 24-hour emergency response team ready to mobilise at short notice for anchorage, harbour, or shore-based plant breakdowns. Quality Assurance: Every repair is handled with precision workshop machining, pressure testing, and fully documented numbered work orders suitable for owners, surveyors, and class inspection.">View
+              Details &rarr;</a>
           </div>
         </div>
 
+        <!-- 2. Amali Curtain -->
         <div class="card project-card fade-up" data-cat="automation" style="transition-delay: 0.1s;">
           <div class="project-media">
             <img src="" alt="Project Vantage - Workflow Engine">
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
-            <h3>Project Vantage - Workflow Engine</h3>
+            <h3>Amali Curtain</h3>
             <p>An internal automation system that securely processes thousands of records daily, completely removing
               manual data entry across three departments.</p>
-            <a href="#" class="project-link">View Details &rarr;</a>
+            <a href="#" class="project-link open-modal" data-video="assets/amali-video.mp4" data-title="Amali Curtain"
+              data-desc="An internal automation system that securely processes thousands of records daily, completely removing manual data entry across three departments.">View
+              Details &rarr;</a>
           </div>
         </div>
 
+        <!-- 3. RUuMA Entertainment -->
         <div class="card project-card fade-up" data-cat="software" style="transition-delay: 0.2s;">
           <div class="project-media">
-            <img src="" alt="Project Meridian - Mobile App">
+            <img src="assets/ruuma entertaiment.png" alt="Project Meridian - Mobile App">
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
-            <h3>Project Meridian - Mobile App</h3>
-            <p>A cross-platform mobile application supporting field operations at scale. Architected for offline-first
-              capabilities in low-connectivity zones.</p>
-            <a href="#" class="project-link">View Details &rarr;</a>
+            <h3>RUuMA Entertainment</h3>
+            <p>RUuMA Entertainment is a sleek digital platform offering live event management, artist bookings,
+              multimedia productions, and seamless online ticketing services.</p>
+            <a href="#" class="project-link open-modal" data-video="assets/ruuma-video.mp4"
+              data-title="RUuMA Entertainment"
+              data-desc="RUuMA Entertainment is a sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.">View
+              Details &rarr;</a>
+          </div>
+        </div>
+
+        <!-- 4. LEMO Green -->
+        <div class="card project-card fade-up" data-cat="software" style="transition-delay: 0.2s;">
+          <div class="project-media">
+            <img src="assets/" alt="LEMO Green website">
+          </div>
+          <div class="project-body">
+            <span class="tag">Web Site</span>
+            <h3>LEMO Green</h3>
+            <p>discription</p>
+            <a href="#" class="project-link open-modal" data-video="assets/lemo-green-video.mp4" data-title="LEMO Green"
+              data-desc="Description for LEMO Green project goes here.">View Details &rarr;</a>
+          </div>
+        </div>
+
+        <!-- 5. LEMO - Live More -->
+        <div class="card project-card fade-up" data-cat="software" style="transition-delay: 0.2s;">
+          <div class="project-media">
+            <img src="assets/lemo.jpg" alt="LEMO Green website">
+          </div>
+          <div class="project-body">
+            <span class="tag">Web Site</span>
+            <h3>LEMO - Live More</h3>
+            <p>discription</p>
+            <a href="#" class="project-link open-modal" data-video="assets/lemo-live-video.mp4"
+              data-title="LEMO - Live More" data-desc="Description for LEMO Live More project goes here.">View Details
+              &rarr;</a>
+          </div>
+        </div>
+
+        <!-- 6. Challigraphy Hand Writing -->
+        <div class="card project-card fade-up" data-cat="software" style="transition-delay: 0.2s;">
+          <div class="project-media">
+            <img src="assets/challigraphy.png" alt="LEMO Green website">
+          </div>
+          <div class="project-body">
+            <span class="tag">Web Site</span>
+            <h3>Challigraphy Hand Writing</h3>
+            <p>discription</p>
+            <a href="#" class="project-link open-modal" data-video="assets/calligraphy-video.mp4"
+              data-title="Challigraphy Hand Writing"
+              data-desc="Description for Calligraphy Hand Writing project goes here.">View Details &rarr;</a>
+          </div>
+        </div>
+
+        <!-- 7. Dream Lence -->
+        <div class="card project-card fade-up" data-cat="software" style="transition-delay: 0.2s;">
+          <div class="project-media">
+            <img src="assets/" alt="dream lence website">
+          </div>
+          <div class="project-body">
+            <span class="tag">Web Site</span>
+            <h3>Dream Lence</h3>
+            <p>discription</p>
+            <a href="#" class="project-link open-modal" data-video="assets/dreamlence-video.mp4"
+              data-title="Dream Lence" data-desc="Description for Dream Lence project goes here.">View Details
+              &rarr;</a>
           </div>
         </div>
 
@@ -211,9 +406,28 @@
     </div>
   </section>
 
+  <!-- Popup Modal (Common Modal Structure with IDs) -->
+  <div class="video-modal" id="videoModal">
+    <div class="modal-content">
+      <!-- Close Button (X) -->
+      <span class="close-btn" id="closeModalBtn">&times;</span>
+
+      <!-- Video Element -->
+      <video controls id="modalVideo">
+        <source src="" id="videoSource" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+
+      <!-- Video Description -->
+      <div class="video-description">
+        <h3 id="modalTitle">Project Video Description</h3>
+        <p id="modalDesc">description</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <div id="site-footer"></div>
-
 
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float"
@@ -225,6 +439,8 @@
     </svg>
   </a>
 
+  <!-- JavaScript File -->
+  <script src="js/main.js"></script>
 </body>
 
 </html>

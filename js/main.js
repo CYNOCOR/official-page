@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 3. Mobile Menu Toggle
   const menuToggle = document.querySelector('.mobile-menu-toggle');
   const navLinks = document.querySelector('.nav-links');
-  
+
   if (menuToggle && navLinks) {
     const toggleMenu = (show) => {
       const isActive = show !== undefined ? show : !navLinks.classList.contains('active');
@@ -84,3 +84,63 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 });
+
+
+
+// project eke popup section eke java tika me thiyenne
+
+// --- All Projects Video Popup Modal Script ---
+const modalLinks = document.querySelectorAll(".open-modal");
+const modal = document.getElementById("videoModal");
+const closeBtn = document.getElementById("closeModalBtn");
+const video = document.getElementById("modalVideo");
+const videoSource = document.getElementById("videoSource");
+const modalTitle = document.getElementById("modalTitle");
+const modalDesc = document.getElementById("modalDesc");
+
+modalLinks.forEach(link => {
+  link.addEventListener("click", (e) => {
+    e.preventDefault();
+
+    // Data attributes walin values gannawa
+    const videoUrl = link.getAttribute("data-video");
+    const titleText = link.getAttribute("data-title");
+    const descText = link.getAttribute("data-desc");
+
+    // Modal elements walata set karanawa
+    videoSource.src = videoUrl;
+    modalTitle.textContent = titleText;
+    modalDesc.textContent = descText;
+
+    // Video reload karala modal eka open karanawa
+    video.load();
+
+    // Modal ekata active class eka add karannai (CSS eke display:flex thiyena nisa center wenawa)
+    modal.classList.add("active");
+
+    video.play();
+  });
+});
+
+if (closeBtn && modal) {
+  closeBtn.addEventListener("click", () => {
+    closeModal();
+  });
+}
+
+window.addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+function closeModal() {
+  if (modal) {
+    // Active class eka ain karama animation eka reverse wela close wenawa
+    modal.classList.remove("active");
+  }
+  if (video) {
+    video.pause();
+    video.currentTime = 0;
+  }
+}
