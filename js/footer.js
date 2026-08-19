@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <circle cx="17.2" cy="6.8" r="1"></circle>
               </svg>
             </a>
-            <a href="https://www.linkedin.com/company/cynocor" target="_blank" rel="noopener" aria-label="CYNOCOR on LinkedIn">
+            <a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener" aria-label="CYNOCOR on LinkedIn">
               <svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
                 <path d="M6.94 8.5H4.12V20h2.82V8.5Z"></path>
                 <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z"></path>
