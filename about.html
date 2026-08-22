@@ -5,8 +5,204 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About - CYNOCOR</title>
+  <meta name="description" content="Learn about CYNOCOR's mission, engineering philosophy, and the values that drive every system we build.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* ── Page sections ──────────────────────────────────── */
+    .section { padding: 100px 0; }
+
+    /* ── Mission / Philosophy cards ─────────────────────── */
+    .mission-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .mission-card {
+      background: var(--bg-surface-solid);
+      border-radius: 24px;
+      padding: 48px 40px;
+      border: 1px solid transparent;
+      box-shadow: var(--shadow-card);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .mission-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), rgba(0, 102, 204, 0.3));
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .mission-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(0, 102, 204, 0.1);
+    }
+
+    .mission-card:hover::before { opacity: 1; }
+
+    .mission-card h3 {
+      font-size: 1.35rem;
+      font-weight: 600;
+      margin-bottom: 14px;
+      letter-spacing: -0.02em;
+    }
+
+    .mission-card p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+    }
+
+    /* ── Values section ─────────────────────────────────── */
+    .values-section { background: var(--bg-surface-solid); }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .value-card {
+      background: var(--bg-base);
+      border-radius: 20px;
+      padding: 40px 32px;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
+    }
+
+    .value-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 5rem;
+      font-weight: 700;
+      color: rgba(0,0,0,0.04);
+      line-height: 1;
+      letter-spacing: -0.04em;
+      position: absolute;
+      top: -10px; right: 16px;
+      pointer-events: none;
+      transition: color 0.4s ease;
+    }
+
+    .value-card:hover {
+      transform: translateY(-5px);
+      background: #EEEEF2;
+      border-color: rgba(0, 102, 204, 0.1);
+      box-shadow: 0 16px 40px rgba(0,102,204,0.07), 0 4px 12px rgba(0,0,0,0.04);
+    }
+
+    .value-card:hover .value-num { color: rgba(0, 102, 204, 0.06); }
+
+    .value-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+      position: relative;
+      z-index: 1;
+    }
+
+    .value-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Timeline ───────────────────────────────────────── */
+    .timeline-section { background: var(--bg-base); }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      max-width: 640px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(180deg, var(--accent) 0%, rgba(0,102,204,0.15) 100%);
+    }
+
+    .timeline-item {
+      padding: 0 0 48px 40px;
+      position: relative;
+    }
+
+    .timeline-item:last-child { padding-bottom: 0; }
+
+    .timeline-dot {
+      position: absolute;
+      left: -5px;
+      top: 4px;
+      width: 11px;
+      height: 11px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg-base);
+      box-shadow: 0 0 0 3px rgba(0,102,204,0.15);
+      transition: box-shadow 0.3s ease;
+    }
+
+    .timeline-item:hover .timeline-dot {
+      box-shadow: 0 0 0 5px rgba(0,102,204,0.18);
+    }
+
+    .timeline-item .eyebrow {
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .timeline-item h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .timeline-item p {
+      color: var(--text-secondary);
+      font-size: 0.9375rem;
+      line-height: 1.65;
+    }
+
+    /* ── Responsive ─────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .mission-grid { grid-template-columns: 1fr; gap: 16px; }
+      .values-grid { grid-template-columns: 1fr; gap: 14px; }
+      .mission-card, .value-card { padding: 32px 24px; }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: 56px 0; }
+    }
+  </style>
+
   <script src="js/main.js" defer></script>
   <script src="js/footer.js" defer></script>
 </head>
@@ -41,20 +237,25 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow fade-up">About Us</span>
-      <h1 class="fade-up" style="transition-delay: 0.1s;">Built for Reliability. <br> Engineered for Scale.</h1>
-      <p class="lead fade-up" style="transition-delay: 0.2s;">We are a specialized engineering team that treats software, infrastructure, and automation as a single discipline. We don't just write code; we solve expensive business problems.</p>
+      <h1 class="fade-up" style="transition-delay:0.1s">Built for Reliability.<br>Engineered for Scale.</h1>
+      <p class="lead fade-up" style="transition-delay:0.2s">We are a specialized engineering team that treats software, infrastructure, and automation as a single discipline. We don't just write code; we solve expensive business problems.</p>
     </div>
   </section>
 
   <!-- Mission & Philosophy -->
   <section class="section">
     <div class="container">
-      <div class="grid-2">
-        <div class="card fade-up">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Who We Are</span>
+        <h2>Our Foundation</h2>
+        <p>Every system we ship is grounded in two non-negotiable commitments.</p>
+      </div>
+      <div class="mission-grid">
+        <div class="mission-card fade-up" style="transition-delay:0.1s">
           <h3>Our Mission</h3>
           <p>To architect and deploy advanced systems that allow our clients to scale without friction. We build software that doesn't break, so you can focus on growth.</p>
         </div>
-        <div class="card fade-up" style="transition-delay: 0.1s;">
+        <div class="mission-card fade-up" style="transition-delay:0.2s">
           <h3>Our Philosophy</h3>
           <p>Complex systems require direct communication and zero layers of abstraction. When you work with CYNOCOR, you work directly with the senior engineers building your platform.</p>
         </div>
@@ -63,24 +264,26 @@
   </section>
 
   <!-- Values -->
-  <section class="section section-alt">
+  <section class="section values-section">
     <div class="container">
       <div class="section-header fade-up">
         <span class="eyebrow">What Drives Us</span>
         <h2>Engineering Principles</h2>
         <p>Our core operating values that guarantee reliable delivery.</p>
       </div>
-      
-      <div class="grid-3">
-        <div class="card fade-up">
+      <div class="values-grid">
+        <div class="value-card fade-up" style="transition-delay:0.08s">
+          <span class="value-num">01</span>
           <h3>Precision First</h3>
           <p>Every system is scoped, architected, and rigorously tested before deployment. We believe in getting it right at the foundation to prevent scaling issues later.</p>
         </div>
-        <div class="card fade-up" style="transition-delay: 0.1s;">
+        <div class="value-card fade-up" style="transition-delay:0.18s">
+          <span class="value-num">02</span>
           <h3>Own the Outcome</h3>
           <p>We measure success by what the software does for your business metrics, not just by shipping a feature. If it doesn't move the needle, it wasn't successful.</p>
         </div>
-        <div class="card fade-up" style="transition-delay: 0.2s;">
+        <div class="value-card fade-up" style="transition-delay:0.28s">
+          <span class="value-num">03</span>
           <h3>Built to Last</h3>
           <p>We write clean, maintainable architecture meant to scale for years. We avoid short-term technical debt that creates long-term operational nightmares.</p>
         </div>
@@ -89,25 +292,28 @@
   </section>
 
   <!-- Timeline -->
-  <section class="section">
+  <section class="section timeline-section">
     <div class="container">
       <div class="section-header fade-up">
         <span class="eyebrow">Our Story</span>
         <h2>From Idea to Execution</h2>
+        <p>The milestones that shaped CYNOCOR into what it is today.</p>
       </div>
-
       <div class="timeline">
-        <div class="timeline-item fade-up">
+        <div class="timeline-item fade-up" style="transition-delay:0.08s">
+          <div class="timeline-dot"></div>
           <span class="eyebrow">Origin</span>
           <h3>A Strict Standard for Engineering</h3>
           <p>CYNOCOR was founded to solve a recurring problem in the industry: fragile software and broken communication. We set out to build a firm that prioritizes discipline and architectural integrity above all else.</p>
         </div>
-        <div class="timeline-item fade-up">
+        <div class="timeline-item fade-up" style="transition-delay:0.18s">
+          <div class="timeline-dot"></div>
           <span class="eyebrow">Growth</span>
           <h3>Expanding the Discipline</h3>
           <p>What began as purely software development quickly grew into a broader systems practice—spanning automation and cloud infrastructure—because real business problems rarely stay neatly inside one domain.</p>
         </div>
-        <div class="timeline-item fade-up">
+        <div class="timeline-item fade-up" style="transition-delay:0.28s">
+          <div class="timeline-dot"></div>
           <span class="eyebrow">Today</span>
           <h3>The Reliable Technology Partner</h3>
           <p>Today, CYNOCOR partners with businesses that demand technology built like it matters. Systems that are engineered deliberately and built to keep performing long after launch day.</p>
@@ -119,7 +325,6 @@
   <!-- Footer -->
   <div id="site-footer"></div>
 
-  
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float" href="https://wa.me/94700000000?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">

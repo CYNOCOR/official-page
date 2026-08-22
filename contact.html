@@ -5,74 +5,184 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contact - CYNOCOR</title>
+  <meta name="description" content="Get in touch with CYNOCOR. Speak directly with a senior engineer about your system requirements.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
+
   <style>
+    .section { padding: 100px 0; }
+
+    /* ── Contact layout ─────────────────────────────── */
     .contact-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 60px;
+      gap: 64px;
+      align-items: start;
     }
-    .contact-form {
-      background: var(--bg-surface-solid);
-      border-radius: 20px;
-      padding: 40px;
-      box-shadow: 0 4px 24px rgba(0,0,0,0.04);
+
+    /* ── Info panel ──────────────────────────────────── */
+    .contact-heading {
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin-bottom: 40px;
+      line-height: 1.2;
     }
-    .field {
-      margin-bottom: 24px;
+
+    .info-card {
+      margin-bottom: 32px;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
     }
-    .field label {
-      display: block;
-      font-size: 0.8125rem;
-      font-weight: 500;
+
+    .info-card:last-child {
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .info-card h4 {
+      font-size: 0.72rem;
+      font-weight: 600;
       color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
       margin-bottom: 8px;
     }
-    .field input, .field textarea {
-      width: 100%;
-      background: #F5F5F7;
+
+    .info-card p,
+    .info-card a {
+      font-size: 1.05rem;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .info-card a {
+      transition: color 0.2s ease;
+    }
+
+    .info-card a:hover {
+      color: var(--accent);
+    }
+
+    /* ── Form ────────────────────────────────────────── */
+    .contact-form {
+      background: var(--bg-surface-solid);
+      border-radius: 24px;
+      padding: 44px 40px;
+      box-shadow: var(--shadow-card);
       border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px 16px;
+    }
+
+    .contact-form-heading {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 28px;
+      letter-spacing: -0.01em;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    .field label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 7px;
+      letter-spacing: 0.02em;
+    }
+
+    .field input,
+    .field textarea {
+      width: 100%;
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 13px 16px;
       font-family: inherit;
       font-size: 0.9375rem;
       color: var(--text-primary);
-      transition: border-color 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      transition: border-color 0.22s var(--ease), box-shadow 0.22s var(--ease), background 0.22s ease;
     }
-    .field input:focus, .field textarea:focus {
+
+    .field input::placeholder,
+    .field textarea::placeholder {
+      color: rgba(134, 134, 139, 0.6);
+    }
+
+    .field input:focus,
+    .field textarea:focus {
       outline: none;
       border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+      background: #fff;
+      box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.09);
     }
+
     .field textarea {
       resize: vertical;
       min-height: 140px;
+      line-height: 1.6;
     }
-    .info-card {
-      margin-bottom: 32px;
+
+    .submit-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      padding: 14px 24px;
+      margin-top: 8px;
+      border-radius: 10px;
+      background: var(--text-primary);
+      color: #fff;
+      font-family: inherit;
+      font-size: 0.9375rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border: none;
+      cursor: pointer;
+      transition: background 0.22s ease, transform 0.22s var(--ease), box-shadow 0.22s ease;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
     }
-    .info-card h4 {
-      font-size: 0.8125rem;
+
+    .submit-btn:hover {
+      background: #000;
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    .form-status {
+      margin-top: 14px;
+      font-size: 0.875rem;
+      text-align: center;
       color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      margin-bottom: 8px;
+      min-height: 1.2em;
     }
-    .info-card p, .info-card a {
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-    .info-card a:hover {
-      color: var(--accent);
-      text-decoration: underline;
-    }
+
+    /* ── Responsive ─────────────────────────────────── */
     @media (max-width: 768px) {
-      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
-      .contact-form { padding: 24px; }
+      .section { padding: 72px 0; }
+      .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+      .contact-form { padding: 28px 22px; }
+    }
+
+    @media (max-width: 480px) {
+      .section { padding: 56px 0; }
+      .contact-form { padding: 24px 18px; }
     }
   </style>
+
   <script src="js/main.js" defer></script>
   <script src="js/footer.js" defer></script>
 </head>
@@ -91,10 +201,9 @@
         <a href="services.html">Services</a>
         <a href="team.html">Team</a>
         <a href="projects.html">Projects</a>
-        <a href="contact.html" class="active">Contact</a>
       </nav>
       <div class="nav-right">
-        <a href="contact.html" class="nav-cta">Contact Us</a>
+        <a href="contact.html" class="nav-cta active">Contact Us</a>
         <button class="mobile-menu-toggle" aria-label="Toggle menu">
           <span></span>
           <span></span>
@@ -108,8 +217,8 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow fade-up">Contact Us</span>
-      <h1 class="fade-up" style="transition-delay: 0.1s;">Let's discuss your architecture.</h1>
-      <p class="lead fade-up" style="transition-delay: 0.2s;">Whether you need a complete system rebuild or targeted automation, reach out. You will speak directly with an engineer who can assess your requirements.</p>
+      <h1 class="fade-up" style="transition-delay:0.1s">Let's discuss your architecture.</h1>
+      <p class="lead fade-up" style="transition-delay:0.2s">Whether you need a complete system rebuild or targeted automation, reach out. You will speak directly with an engineer who can assess your requirements.</p>
     </div>
   </section>
 
@@ -117,26 +226,26 @@
   <section class="section">
     <div class="container">
       <div class="contact-grid">
-        
-        <!-- Left: Contact Info -->
+
+        <!-- Left: Info -->
         <div class="fade-up">
-          <h2 style="margin-bottom: 32px; font-size: 2rem;">Reach the team directly</h2>
-          
+          <h2 class="contact-heading">Reach the team directly</h2>
+
           <div class="info-card">
             <h4>Email</h4>
             <a href="mailto:contact@cynocor.com">contact@cynocor.com</a>
           </div>
-          
+
           <div class="info-card">
             <h4>Phone</h4>
             <a href="tel:+94700000000">+94 7X XXX XXXX</a>
           </div>
-          
+
           <div class="info-card">
             <h4>Location</h4>
             <p>Horana, Sri Lanka</p>
           </div>
-          
+
           <div class="info-card">
             <h4>Response Time</h4>
             <p>We guarantee a technical response within 1 business day.</p>
@@ -144,25 +253,27 @@
         </div>
 
         <!-- Right: Form -->
-        <div class="fade-up" style="transition-delay: 0.1s;">
+        <div class="fade-up" style="transition-delay:0.12s">
           <form id="contact-form" class="contact-form" data-email="contact@cynocor.com">
+            <p class="contact-form-heading">Send us a message</p>
+
             <div class="field">
               <label for="name">Full Name</label>
               <input type="text" id="name" name="name" placeholder="John Doe" required>
             </div>
-            
+
             <div class="field">
               <label for="email">Work Email</label>
               <input type="email" id="email" name="email" placeholder="john@company.com" required>
             </div>
-            
+
             <div class="field">
               <label for="message">Project Details</label>
               <textarea id="message" name="message" placeholder="Briefly describe the system or problem you need us to solve..." required></textarea>
             </div>
-            
-            <button type="submit" class="btn-primary" style="width: 100%; margin-top: 8px;">Send Message</button>
-            <p id="form-status" style="margin-top: 16px; font-size: 0.875rem; text-align: center; color: var(--text-secondary);"></p>
+
+            <button type="submit" class="submit-btn">Send Message</button>
+            <p id="form-status" class="form-status"></p>
           </form>
         </div>
 
@@ -173,7 +284,6 @@
   <!-- Footer -->
   <div id="site-footer"></div>
 
-  
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float" href="https://wa.me/94700000000?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">

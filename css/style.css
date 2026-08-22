@@ -11,9 +11,13 @@
   --text-primary: #1D1D1F;
   --text-secondary: #86868B;
   --accent: #0066CC;
+  --accent-glow: rgba(0, 102, 204, 0.15);
   --border: rgba(0, 0, 0, 0.08);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --font-stack: -apple-system, BlinkMacSystemFont, 'Inter', sans-serif;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.03);
+  --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
 * {
@@ -140,11 +144,15 @@ header {
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(245, 245, 247, 0.8);
+  background: rgba(245, 245, 247, 0.82);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  transition: background 0.3s var(--ease);
+  /* Covers all properties toggled by the hero scroll behaviour */
+  transition:
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .nav-inner {
@@ -193,11 +201,31 @@ header {
   color: var(--text-secondary);
   font-weight: 400;
   transition: color 0.2s var(--ease);
+  position: relative;
+  padding-bottom: 2px;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  border-radius: 2px;
+  transition: width 0.25s var(--ease);
 }
 
 .nav-links a:hover,
 .nav-links a.active {
   color: var(--text-primary);
+}
+
+.nav-links a.active::after,
+.nav-links a:hover::after {
+  width: 16px;
 }
 
 .nav-cta {
@@ -380,13 +408,15 @@ footer .brand {
   background: var(--bg-surface-solid);
   border-radius: 20px;
   padding: 40px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
-  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+  border: 1px solid transparent;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s ease;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.06);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: rgba(0, 102, 204, 0.1);
 }
 
 .card h3 {
@@ -480,8 +510,8 @@ footer .brand {
 /* Animations */
 .fade-up {
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+  transform: translateY(24px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
 }
 
 .fade-up.visible {

@@ -5,8 +5,154 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Services - CYNOCOR</title>
+  <meta name="description" content="Web design, social media marketing, graphic design, AI video generation, and software development services by CYNOCOR.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .section { padding: 100px 0; }
+
+    /* ── Service Grid ─────────────────────────────────── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .service-card {
+      background: var(--bg-surface-solid);
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid transparent;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .service-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-card-hover);
+      border-color: rgba(0, 102, 204, 0.1);
+    }
+
+    .service-visual {
+      height: 210px;
+      overflow: hidden;
+      background: #e9e9ed;
+      position: relative;
+    }
+
+    .service-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s var(--ease);
+    }
+
+    .service-card:hover .service-visual img {
+      transform: scale(1.05);
+    }
+
+    .service-body {
+      padding: 28px 24px 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-body .eyebrow {
+      color: var(--accent);
+      margin-bottom: 8px;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+    }
+
+    .service-body h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      letter-spacing: -0.01em;
+    }
+
+    .service-body p {
+      color: var(--text-secondary);
+      font-size: 0.875rem;
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    /* ── How We Work ─────────────────────────────────── */
+    .engagement-section { background: var(--bg-surface-solid); }
+
+    .engagement-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .engagement-card {
+      background: var(--bg-base);
+      border-radius: 20px;
+      padding: 40px 32px;
+      border: 1px solid transparent;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), background 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+
+    .engagement-card:hover {
+      transform: translateY(-5px);
+      background: #EEEEF2;
+      border-color: rgba(0, 102, 204, 0.1);
+      box-shadow: 0 16px 40px rgba(0,102,204,0.07);
+    }
+
+    .engagement-card .eyebrow {
+      color: var(--accent);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .engagement-card h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 12px;
+      letter-spacing: -0.01em;
+    }
+
+    .engagement-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      line-height: 1.65;
+    }
+
+    /* ── Responsive ─────────────────────────────────── */
+    @media (max-width: 960px) {
+      .service-grid { grid-template-columns: repeat(2, 1fr); }
+      .engagement-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 768px) {
+      .section { padding: 72px 0; }
+      .service-visual { height: 180px; }
+      .service-body { padding: 20px 18px 18px; }
+    }
+
+    @media (max-width: 540px) {
+      .service-grid { grid-template-columns: 1fr; }
+      .engagement-grid { grid-template-columns: 1fr; }
+      .section { padding: 56px 0; }
+    }
+  </style>
+
   <script src="js/main.js" defer></script>
   <script src="js/footer.js" defer></script>
 </head>
@@ -41,9 +187,8 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow fade-up">Our Services</span>
-      <h1 class="fade-up" style="transition-delay: 0.1s;">Creative + Digital <br> Solutions</h1>
-      <p class="lead fade-up" style="transition-delay: 0.2s;">We help brands grow with modern design, digital marketing,
-        and practical tech support tailored to your business goals.</p>
+      <h1 class="fade-up" style="transition-delay:0.1s">Creative + Digital<br>Solutions</h1>
+      <p class="lead fade-up" style="transition-delay:0.2s">We help brands grow with modern design, digital marketing, and practical tech support tailored to your business goals.</p>
     </div>
   </section>
 
@@ -51,7 +196,8 @@
   <section class="section">
     <div class="container">
       <div class="service-grid">
-        <div class="card service-card fade-up">
+
+        <div class="service-card fade-up">
           <div class="service-visual">
             <img src="assets/web_design.jfif" alt="Web design preview">
           </div>
@@ -62,31 +208,29 @@
           </div>
         </div>
 
-        <div class="card service-card fade-up" style="transition-delay: 0.1s;">
+        <div class="service-card fade-up" style="transition-delay:0.08s">
           <div class="service-visual">
             <img src="assets/sm_marketing.jpg" alt="Social media marketing preview">
           </div>
           <div class="service-body">
             <span class="eyebrow">02</span>
             <h3>Social Media Marketing</h3>
-            <p>Growth-focused social media strategies that increase brand visibility, engagement, and customer reach.
-            </p>
+            <p>Growth-focused social media strategies that increase brand visibility, engagement, and customer reach.</p>
           </div>
         </div>
 
-        <div class="card service-card fade-up" style="transition-delay: 0.2s;">
+        <div class="service-card fade-up" style="transition-delay:0.16s">
           <div class="service-visual">
             <img src="assets/page_hand.png" alt="Social media page handling preview">
           </div>
           <div class="service-body">
             <span class="eyebrow">03</span>
             <h3>Social Media Page Handling</h3>
-            <p>Complete management of your social media profiles, including content planning, posting, and audience
-              engagement.</p>
+            <p>Complete management of your social media profiles, including content planning, posting, and audience engagement.</p>
           </div>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="service-card fade-up" style="transition-delay:0s">
           <div class="service-visual">
             <img src="assets/graphic.jpg" alt="Graphic design preview">
           </div>
@@ -97,7 +241,7 @@
           </div>
         </div>
 
-        <div class="card service-card fade-up" style="transition-delay: 0.1s;">
+        <div class="service-card fade-up" style="transition-delay:0.08s">
           <div class="service-visual">
             <img src="assets/design_logo.jpg" alt="Logo design preview">
           </div>
@@ -108,7 +252,7 @@
           </div>
         </div>
 
-        <div class="card service-card fade-up" style="transition-delay: 0.2s;">
+        <div class="service-card fade-up" style="transition-delay:0.16s">
           <div class="service-visual">
             <img src="assets/ai_video.png" alt="AI video generation preview">
           </div>
@@ -119,54 +263,52 @@
           </div>
         </div>
 
-        <div class="card service-card fade-up">
+        <div class="service-card fade-up" style="transition-delay:0s">
           <div class="service-visual">
             <img src="assets/software.jpg" alt="Software installation preview">
           </div>
           <div class="service-body">
             <span class="eyebrow">07</span>
             <h3>Software Installations</h3>
-            <p>Installation and setup support for business software, tools, and systems so your team can start using
-              them without delays.</p>
+            <p>Installation and setup support for business software, tools, and systems so your team can start using them without delays.</p>
           </div>
         </div>
 
-        <div class="card service-card fade-up" style="transition-delay: 0.1s;">
+        <div class="service-card fade-up" style="transition-delay:0.08s">
           <div class="service-visual">
             <img src="assets/develeop.jpg" alt="Software development preview">
           </div>
           <div class="service-body">
             <span class="eyebrow">08</span>
             <h3>Software Development</h3>
-            <p>Custom software solutions built to streamline business processes, improve productivity, and support
-              growth.</p>
+            <p>Custom software solutions built to streamline business processes, improve productivity, and support growth.</p>
           </div>
         </div>
+
       </div>
     </div>
   </section>
 
-  <!-- Engagement -->
-  <section class="section section-alt">
+  <!-- How We Work -->
+  <section class="section engagement-section">
     <div class="container">
       <div class="section-header fade-up">
         <span class="eyebrow">How We Work</span>
         <h2>Simple, Practical Partnership</h2>
         <p>Flexible support for your digital and branding needs.</p>
       </div>
-      <div class="grid-3">
-        <div class="card fade-up">
+      <div class="engagement-grid">
+        <div class="engagement-card fade-up" style="transition-delay:0.08s">
           <span class="eyebrow">Start</span>
           <h3>Discovery</h3>
           <p>We understand your goals, audience, and the exact problem you want solved before planning the work.</p>
         </div>
-        <div class="card fade-up" style="transition-delay: 0.1s;">
+        <div class="engagement-card fade-up" style="transition-delay:0.18s">
           <span class="eyebrow">Build</span>
           <h3>Execution</h3>
-          <p>We design and deliver the requested solution with attention to quality, consistency, and business impact.
-          </p>
+          <p>We design and deliver the requested solution with attention to quality, consistency, and business impact.</p>
         </div>
-        <div class="card fade-up" style="transition-delay: 0.2s;">
+        <div class="engagement-card fade-up" style="transition-delay:0.28s">
           <span class="eyebrow">Support</span>
           <h3>Ongoing Growth</h3>
           <p>We help maintain and improve digital assets so your brand keeps performing well after launch.</p>
@@ -178,17 +320,12 @@
   <!-- Footer -->
   <div id="site-footer"></div>
 
-
   <!-- Floating WhatsApp Button -->
-  <a class="whatsapp-float"
-    href="https://wa.me/94700000000?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
-    rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/94700000000?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
-      <path
-        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>
   </a>
 
 </body>
-
 </html>
