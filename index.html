@@ -313,40 +313,6 @@
       flex-shrink: 0;
     }
 
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute;
-      bottom: 36px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: rgba(130, 170, 255, 0.45);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      animation: scrollBob 2.4s ease-in-out infinite;
-      opacity: 0;
-      animation-delay: 1.4s;
-      animation-fill-mode: forwards;
-    }
-
-    .hero-scroll-line {
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(180deg, rgba(80, 140, 255, 0.6), transparent);
-    }
-
-    @keyframes scrollBob {
-      0%   { opacity: 0; transform: translateX(-50%) translateY(0); }
-      20%  { opacity: 0.7; }
-      50%  { transform: translateX(-50%) translateY(6px); opacity: 0.5; }
-      100% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
-    }
 
     /* ─── SERVICES MARQUEE STRIP ───────────────────────── */
     .services-strip {
@@ -1024,16 +990,11 @@
         </a>
         <a href="about.html" class="hero-cta-ghost" id="hero-cta-ghost">
           Our Story
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="6"/><path d="M8 11V8M8 5.5v.5"/></svg>
         </a>
       </div>
     </div>
 
-    <!-- Scroll hint -->
-    <div class="hero-scroll" aria-hidden="true">
-      <span class="hero-scroll-line"></span>
-      Scroll
-    </div>
+
   </section>
 
   <!-- ── SERVICES MARQUEE ───────────────────────────────── -->
