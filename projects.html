@@ -5,18 +5,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Projects - CYNOCOR</title>
-  <meta name="description" content="Explore CYNOCOR's portfolio of software, automation, and infrastructure projects delivered for real businesses.">
+  <meta name="description"
+    content="Explore CYNOCOR's portfolio of software, automation, and infrastructure projects delivered for real businesses.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    .section { padding: 100px 0; }
+    .section {
+      padding: 100px 0;
+    }
 
     /* ── Project Grid ─────────────────────────────────── */
     .project-grid {
@@ -119,6 +124,7 @@
       width: 100%;
       height: 100%;
     }
+
     .carousel-images img {
       position: absolute;
       top: 0;
@@ -127,10 +133,12 @@
       transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
       z-index: 1;
     }
+
     .carousel-images img.active {
       opacity: 1;
       z-index: 2;
     }
+
     .carousel-btn {
       position: absolute;
       top: 50%;
@@ -138,7 +146,7 @@
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(4px);
       -webkit-backdrop-filter: blur(4px);
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255, 255, 255, 0.4);
       color: #fff;
       width: 32px;
       height: 32px;
@@ -151,15 +159,19 @@
       opacity: 0;
       transition: opacity 0.3s ease, background 0.3s ease;
     }
+
     .project-media:hover .carousel-btn {
       opacity: 1;
     }
+
     .carousel-btn:hover {
       background: rgba(255, 255, 255, 0.4);
     }
+
     .carousel-btn.prev {
       left: 12px;
     }
+
     .carousel-btn.next {
       right: 12px;
     }
@@ -202,8 +214,14 @@
       align-items: center;
     }
 
-    .modal-content::-webkit-scrollbar { width: 5px; }
-    .modal-content::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
+    .modal-content::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    .modal-content::-webkit-scrollbar-thumb {
+      background: #ccc;
+      border-radius: 10px;
+    }
 
     .video-modal.active .modal-content {
       transform: translateY(0) scale(1);
@@ -231,6 +249,7 @@
       align-items: center;
       justify-content: center;
     }
+
     .modal-carousel img {
       position: absolute;
       top: 0;
@@ -242,6 +261,7 @@
       transition: opacity 0.5s var(--ease);
       z-index: 1;
     }
+
     .modal-carousel img.active {
       position: relative;
       height: auto;
@@ -295,17 +315,29 @@
 
     /* ── Responsive ─────────────────────────────────── */
     @media (max-width: 900px) {
-      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .project-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
     @media (max-width: 768px) {
-      .section { padding: 72px 0; }
-      .project-body { padding: 20px 16px 16px; }
+      .section {
+        padding: 72px 0;
+      }
+
+      .project-body {
+        padding: 20px 16px 16px;
+      }
     }
 
     @media (max-width: 540px) {
-      .project-grid { grid-template-columns: 1fr; }
-      .section { padding: 56px 0; }
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
     }
   </style>
 
@@ -344,7 +376,8 @@
     <div class="container">
       <span class="eyebrow fade-up">Our Work</span>
       <h1 class="fade-up" style="transition-delay:0.1s">Proven Outcomes</h1>
-      <p class="lead fade-up" style="transition-delay:0.2s">A selection of the software, automation, and infrastructure solutions we have engineered to solve critical business bottlenecks.</p>
+      <p class="lead fade-up" style="transition-delay:0.2s">A selection of the software, automation, and infrastructure
+        solutions we have engineered to solve critical business bottlenecks.</p>
     </div>
   </section>
 
@@ -364,17 +397,20 @@
               <img src="assets/projects/Kins%20Marine/05.png" alt="Kins Marine 5">
               <img src="assets/projects/Kins%20Marine/06.png" alt="Kins Marine 6">
             </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('kinsmarine-carousel', -1)" aria-label="Previous image">&#10094;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('kinsmarine-carousel', 1)" aria-label="Next image">&#10095;</button>
+            <button class="carousel-btn prev" onclick="moveCarousel('kinsmarine-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('kinsmarine-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>Kins Marine Engineering Service</h3>
-            <p>A high-performance custom web platform engineered for real-time client operations. Replaced legacy systems and reduced data sync errors to zero.</p>
+            <p>A high-performance custom web platform engineered for real-time client operations. Replaced legacy
+              systems and reduced data sync errors to zero.</p>
             <a href="#" class="project-link open-modal"
-               data-images="assets/projects/Kins%20Marine/01.png,assets/projects/Kins%20Marine/02.png,assets/projects/Kins%20Marine/03.png,assets/projects/Kins%20Marine/04.png,assets/projects/Kins%20Marine/05.png,assets/projects/Kins%20Marine/06.png"
-               data-title="Kins Marine Engineering Service"
-               data-desc="Kins Marine Engineering Service is a marine and general contracting company based in Kirulapona, Colombo 05, Sri Lanka. Specialising in hydraulic and pneumatic repairs for medium and heavy-duty industrial and marine machinery, alongside steel/pipe fabrication and boiler repairs. Offers a 24-hour emergency response team ready to mobilise at short notice.">
+              data-images="assets/projects/Kins%20Marine/01.png,assets/projects/Kins%20Marine/02.png,assets/projects/Kins%20Marine/03.png,assets/projects/Kins%20Marine/04.png,assets/projects/Kins%20Marine/05.png,assets/projects/Kins%20Marine/06.png"
+              data-title="Kins Marine Engineering Service"
+              data-desc="Kins Marine Engineering Service is a marine and general contracting company based in Kirulapona, Colombo 05, Sri Lanka. Specialising in hydraulic and pneumatic repairs for medium and heavy-duty industrial and marine machinery, alongside steel/pipe fabrication and boiler repairs. Offers a 24-hour emergency response team ready to mobilise at short notice.">
               View Details →
             </a>
           </div>
@@ -388,17 +424,20 @@
               <img src="assets/projects/amali%20curtain/02.jpeg" alt="Amali Curtain 2">
               <img src="assets/projects/amali%20curtain/03.jpeg" alt="Amali Curtain 3">
             </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('amali-carousel', -1)" aria-label="Previous image">&#10094;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('amali-carousel', 1)" aria-label="Next image">&#10095;</button>
+            <button class="carousel-btn prev" onclick="moveCarousel('amali-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('amali-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>Amali Curtain Centre</h3>
-            <p>We transformed a traditional curtain business by establishing their first digital footprint, delivering an elegant platform that highlights their craftsmanship.</p>
+            <p>We transformed a traditional curtain business by establishing their first digital footprint, delivering
+              an elegant platform that highlights their craftsmanship.</p>
             <a href="#" class="project-link open-modal"
-               data-images="assets/projects/amali%20curtain/01.jpeg,assets/projects/amali%20curtain/02.jpeg,assets/projects/amali%20curtain/03.jpeg"
-               data-title="Amali Curtain Centre"
-               data-desc="Amali Curtain Centre, an established curtain maker and supplier, operated entirely offline before partnering with us. We designed and developed their first-ever digital platform—an elegant, premium website that perfectly captures their classic aesthetic. The new site showcases their extensive gallery of work, tells their brand story, and features a seamless 'Request a Consultation' flow, successfully bringing their traditional craftsmanship into the digital age.">
+              data-images="assets/projects/amali%20curtain/01.jpeg,assets/projects/amali%20curtain/02.jpeg,assets/projects/amali%20curtain/03.jpeg"
+              data-title="Amali Curtain Centre"
+              data-desc="Amali Curtain Centre, an established curtain maker and supplier, operated entirely offline before partnering with us. We designed and developed their first-ever digital platform—an elegant, premium website that perfectly captures their classic aesthetic. The new site showcases their extensive gallery of work, tells their brand story, and features a seamless 'Request a Consultation' flow, successfully bringing their traditional craftsmanship into the digital age.">
               View Details →
             </a>
           </div>
@@ -411,17 +450,20 @@
               <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active">
               <img src="assets/projects/Ruuma%20Entertaunment/02.jpeg" alt="RUuMA Entertainment 2">
             </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('ruuma-carousel', -1)" aria-label="Previous image">&#10094;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('ruuma-carousel', 1)" aria-label="Next image">&#10095;</button>
+            <button class="carousel-btn prev" onclick="moveCarousel('ruuma-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('ruuma-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>RUuMA Entertainment</h3>
-            <p>A sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.</p>
+            <p>A sleek digital platform offering live event management, artist bookings, multimedia productions, and
+              seamless online ticketing services.</p>
             <a href="#" class="project-link open-modal"
-               data-images="assets/projects/Ruuma%20Entertaunment/01.jpeg,assets/projects/Ruuma%20Entertaunment/02.jpeg"
-               data-title="RUuMA Entertainment"
-               data-desc="RUuMA Entertainment is a sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.">
+              data-images="assets/projects/Ruuma%20Entertaunment/01.jpeg,assets/projects/Ruuma%20Entertaunment/02.jpeg"
+              data-title="RUuMA Entertainment"
+              data-desc="RUuMA Entertainment is a sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.">
               View Details →
             </a>
           </div>
@@ -471,47 +513,85 @@
         </div>
         -->
 
-        <!-- 6. Challigraphy -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
+        <!-- 7. RUuMA Entertainment Management System -->
+        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.24s">
           <div class="project-media carousel">
-            <div class="carousel-images" id="challigraphy-carousel">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1" class="active">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/02.jpeg" alt="Challigraphy Hand Writing 2">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/03.jpeg" alt="Challigraphy Hand Writing 3">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/04.jpeg" alt="Challigraphy Hand Writing 4">
+            <div class="carousel-images" id="ruuma-management-carousel">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg" alt="RUuMA Management 1" class="active" style="object-position: left;">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/02.jpeg" alt="RUuMA Management 2" style="object-position: left;">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/03.jpeg" alt="RUuMA Management 3" style="object-position: left;">
             </div>
-            <button class="carousel-btn prev" onclick="moveCarousel('challigraphy-carousel', -1)" aria-label="Previous image">&#10094;</button>
-            <button class="carousel-btn next" onclick="moveCarousel('challigraphy-carousel', 1)" aria-label="Next image">&#10095;</button>
+            <button class="carousel-btn prev" onclick="moveCarousel('ruuma-management-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('ruuma-management-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
-            <h3>Challigraphy Hand Writing</h3>
-            <p>An artisan brand platform that celebrates the craft of handwriting with elegant design, smooth interactions, and a curated visual identity.</p>
+            <span class="tag">Software</span>
+            <h3>RUuMA Entertainment Management System</h3>
+            <p>A comprehensive management system built to streamline operations, featuring powerful tools for event
+              planning, resource allocation, and team collaboration.</p>
             <a href="#" class="project-link open-modal"
-               data-images="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg,assets/projects/Challigraphy%20Hand%20Writing/02.jpeg,assets/projects/Challigraphy%20Hand%20Writing/03.jpeg,assets/projects/Challigraphy%20Hand%20Writing/04.jpeg"
-               data-title="Challigraphy Hand Writing"
-               data-desc="Description for Challigraphy Hand Writing project goes here.">
+              data-images="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg,assets/projects/ruuma%20entertainment%20management%20system/02.jpeg,assets/projects/ruuma%20entertainment%20management%20system/03.jpeg"
+              data-title="RUuMA Entertainment Management System"
+              data-desc="RUuMA Entertainment Management System is a robust internal tool designed to streamline operational workflows. It handles scheduling, resource allocation, and team coordination to ensure seamless execution of events and multimedia productions.">
               View Details →
             </a>
           </div>
         </div>
 
-        <!-- 7. Dream Lence -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0s">
-          <div class="project-media">
-            <img src="assets/projects/dreamlence-thumb.jpg" alt="Dream Lence website">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/dreamlence-video.mp4">
-            </video>
+        <!-- 8. Dreamlense Wedding Studio -->
+        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.32s">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="dreamlense-carousel">
+              <img src="assets/projects/Dreamlense/01.png" alt="Dreamlense 1" class="active">
+              <img src="assets/projects/Dreamlense/02.png" alt="Dreamlense 2">
+              <img src="assets/projects/Dreamlense/03.png" alt="Dreamlense 3">
+              <img src="assets/projects/Dreamlense/04.png" alt="Dreamlense 4">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('dreamlense-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('dreamlense-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
-            <h3>Dream Lence</h3>
-            <p>A photography and visual storytelling studio website built to showcase portfolio work with cinematic quality and clean, immersive layouts.</p>
+            <h3>Dreamlense Wedding Studio</h3>
+            <p>An elegant and cinematic wedding photography and videography platform designed to showcase timeless
+              memories, capturing the magic of every special moment.</p>
             <a href="#" class="project-link open-modal"
-               data-video="assets/projects/dreamlence-video.mp4"
-               data-title="Dream Lence"
-               data-desc="Description for Dream Lence project goes here.">
+              data-images="assets/projects/Dreamlense/01.png,assets/projects/Dreamlense/02.png,assets/projects/Dreamlense/03.png,assets/projects/Dreamlense/04.png"
+              data-title="Dreamlense Wedding Studio"
+              data-desc="Dreamlense Wedding Studio is a premium wedding photography and videography service. This platform is built to showcase their stunning portfolio with cinematic quality, clean, and immersive layouts that perfectly capture the magic of their clients' special days.">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+        <!-- 6. Challigraphy -->
+        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="challigraphy-carousel">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1"
+                class="active">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/02.jpeg" alt="Challigraphy Hand Writing 2">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/03.jpeg" alt="Challigraphy Hand Writing 3">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/04.jpeg" alt="Challigraphy Hand Writing 4">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('challigraphy-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('challigraphy-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
+          </div>
+          <div class="project-body">
+            <span class="tag">Web Site</span>
+            <h3>Challigraphy Hand Writing</h3>
+            <p>An artisan brand platform that celebrates the craft of handwriting with elegant design, smooth
+              interactions, and a curated visual identity.</p>
+            <a href="#" class="project-link open-modal"
+              data-images="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg,assets/projects/Challigraphy%20Hand%20Writing/02.jpeg,assets/projects/Challigraphy%20Hand%20Writing/03.jpeg,assets/projects/Challigraphy%20Hand%20Writing/04.jpeg"
+              data-title="Challigraphy Hand Writing"
+              data-desc="Description for Challigraphy Hand Writing project goes here.">
               View Details →
             </a>
           </div>
@@ -543,9 +623,12 @@
   <div id="site-footer"></div>
 
   <!-- Floating WhatsApp Button -->
-  <a class="whatsapp-float" href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="whatsapp-float"
+    href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
+    rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
     </svg>
   </a>
 
@@ -555,23 +638,24 @@
     function moveCarousel(containerId, step) {
       const container = document.getElementById(containerId);
       if (!container) return;
-      
+
       const images = container.querySelectorAll('img');
       if (images.length === 0) return;
-      
+
       let activeIndex = -1;
       images.forEach((img, index) => {
         if (img.classList.contains('active')) activeIndex = index;
       });
-      
+
       if (activeIndex === -1) activeIndex = 0;
       images[activeIndex].classList.remove('active');
-      
+
       let nextIndex = (activeIndex + step) % images.length;
       if (nextIndex < 0) nextIndex = images.length - 1;
-      
+
       images[nextIndex].classList.add('active');
     }
   </script>
 </body>
+
 </html>
