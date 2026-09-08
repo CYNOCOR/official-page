@@ -23,6 +23,38 @@
       padding: 100px 0;
     }
 
+    /* ── Project Filters ──────────────────────────────── */
+    .project-filters {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 48px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .filter-btn {
+      padding: 10px 20px;
+      border-radius: 30px;
+      border: 1px solid var(--border);
+      background: transparent;
+      color: var(--text);
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s var(--ease);
+    }
+
+    .filter-btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .filter-btn.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
     /* ── Project Grid ─────────────────────────────────── */
     .project-grid {
       display: grid;
@@ -384,10 +416,17 @@
   <!-- Projects -->
   <section class="section">
     <div class="container">
+      <div class="project-filters fade-up">
+        <button class="filter-btn active" data-filter="all">All Projects</button>
+        <button class="filter-btn" data-filter="web-platforms">Web Platforms</button>
+        <button class="filter-btn" data-filter="brand-portfolio">Brand & Portfolio Sites</button>
+        <button class="filter-btn" data-filter="custom-software">Custom Software</button>
+      </div>
+
       <div class="project-grid">
 
         <!-- 1. Kins Marine -->
-        <div class="project-card fade-up" data-cat="software">
+        <div class="project-card fade-up" data-cat="web-platforms">
           <div class="project-media carousel">
             <div class="carousel-images" id="kinsmarine-carousel">
               <img src="assets/projects/Kins%20Marine/01.png" alt="Kins Marine 1" class="active">
@@ -403,7 +442,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
+            <span class="tag">Web Platform</span>
             <h3>Kins Marine Engineering Service</h3>
             <p>A high-performance custom web platform engineered for real-time client operations. Replaced legacy
               systems and reduced data sync errors to zero.</p>
@@ -417,7 +456,7 @@
         </div>
 
         <!-- 2. Amali Curtain -->
-        <div class="project-card fade-up" data-cat="automation" style="transition-delay:0.08s">
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.08s">
           <div class="project-media carousel">
             <div class="carousel-images" id="amali-carousel">
               <img src="assets/projects/Amali%20curtain/01.jpeg" alt="Amali Curtain 1" class="active">
@@ -430,7 +469,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
+            <span class="tag">Brand & Portfolio</span>
             <h3>Amali Curtain Centre</h3>
             <p>We transformed a traditional curtain business by establishing their first digital footprint, delivering
               an elegant platform that highlights their craftsmanship.</p>
@@ -444,7 +483,7 @@
         </div>
 
         <!-- 3. RUuMA Entertainment -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
+        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.16s">
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-carousel">
               <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active">
@@ -456,7 +495,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
+            <span class="tag">Web Platform</span>
             <h3>RUuMA Entertainment</h3>
             <p>A sleek digital platform offering live event management, artist bookings, multimedia productions, and
               seamless online ticketing services.</p>
@@ -514,7 +553,7 @@
         -->
 
         <!-- 7. RUuMA Entertainment Management System -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.24s">
+        <div class="project-card fade-up" data-cat="custom-software" style="transition-delay:0.24s">
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-management-carousel">
               <img src="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg" alt="RUuMA Management 1" class="active" style="object-position: left;">
@@ -527,7 +566,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Software</span>
+            <span class="tag">Custom Software</span>
             <h3>RUuMA Entertainment Management System</h3>
             <p>A comprehensive management system built to streamline operations, featuring powerful tools for event
               planning, resource allocation, and team collaboration.</p>
@@ -541,7 +580,7 @@
         </div>
 
         <!-- 8. Dreamlense Wedding Studio -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.32s">
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.32s">
           <div class="project-media carousel">
             <div class="carousel-images" id="dreamlense-carousel">
               <img src="assets/projects/Dreamlense/01.png" alt="Dreamlense 1" class="active">
@@ -555,7 +594,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
+            <span class="tag">Brand & Portfolio</span>
             <h3>Dreamlense Wedding Studio</h3>
             <p>An elegant and cinematic wedding photography and videography platform designed to showcase timeless
               memories, capturing the magic of every special moment.</p>
@@ -569,7 +608,7 @@
         </div>
 
         <!-- 6. Challigraphy -->
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.16s">
           <div class="project-media carousel">
             <div class="carousel-images" id="challigraphy-carousel">
               <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1"
@@ -584,7 +623,7 @@
               aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
-            <span class="tag">Web Site</span>
+            <span class="tag">Brand & Portfolio</span>
             <h3>Challigraphy Hand Writing</h3>
             <p>An artisan brand platform that celebrates the craft of handwriting with elegant design, smooth
               interactions, and a curated visual identity.</p>
@@ -635,6 +674,34 @@
   <!-- JavaScript -->
   <script src="js/main.js" defer></script>
   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const projectCards = document.querySelectorAll('.project-card');
+
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          // Remove active class from all buttons
+          filterBtns.forEach(b => b.classList.remove('active'));
+          // Add active class to clicked button
+          btn.classList.add('active');
+
+          const filterValue = btn.getAttribute('data-filter');
+
+          projectCards.forEach(card => {
+            if (filterValue === 'all' || card.getAttribute('data-cat') === filterValue) {
+              card.style.display = 'flex';
+              // Trigger reflow to restart animation
+              card.style.animation = 'none';
+              card.offsetHeight; /* trigger reflow */
+              card.style.animation = null; 
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        });
+      });
+    });
+
     function moveCarousel(containerId, step) {
       const container = document.getElementById(containerId);
       if (!container) return;
