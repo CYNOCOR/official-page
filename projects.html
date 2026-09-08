@@ -217,16 +217,19 @@
       object-fit: contain;
       border-radius: 12px;
       outline: none;
-      background: #000;
+      background: transparent;
     }
 
     .modal-carousel {
       width: 100%;
-      height: 65vh;
+      max-height: 65vh;
       border-radius: 12px;
       overflow: hidden;
       position: relative;
-      background: #000;
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .modal-carousel img {
       position: absolute;
@@ -240,6 +243,8 @@
       z-index: 1;
     }
     .modal-carousel img.active {
+      position: relative;
+      height: auto;
       opacity: 1;
       z-index: 2;
     }
@@ -350,18 +355,24 @@
 
         <!-- 1. Kins Marine -->
         <div class="project-card fade-up" data-cat="software">
-          <div class="project-media">
-            <img src="assets/projects/kinsmarine project.jpeg" alt="Kins Marine Engineering Service">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/kinsmarine video.mp4">
-            </video>
+          <div class="project-media carousel">
+            <div class="carousel-images" id="kinsmarine-carousel">
+              <img src="assets/projects/Kins%20Marine/01.png" alt="Kins Marine 1" class="active">
+              <img src="assets/projects/Kins%20Marine/02.png" alt="Kins Marine 2">
+              <img src="assets/projects/Kins%20Marine/03.png" alt="Kins Marine 3">
+              <img src="assets/projects/Kins%20Marine/04.png" alt="Kins Marine 4">
+              <img src="assets/projects/Kins%20Marine/05.png" alt="Kins Marine 5">
+              <img src="assets/projects/Kins%20Marine/06.png" alt="Kins Marine 6">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('kinsmarine-carousel', -1)" aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('kinsmarine-carousel', 1)" aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>Kins Marine Engineering Service</h3>
             <p>A high-performance custom web platform engineered for real-time client operations. Replaced legacy systems and reduced data sync errors to zero.</p>
             <a href="#" class="project-link open-modal"
-               data-video="assets/projects/kinsmarine video.mp4"
+               data-images="assets/projects/Kins%20Marine/01.png,assets/projects/Kins%20Marine/02.png,assets/projects/Kins%20Marine/03.png,assets/projects/Kins%20Marine/04.png,assets/projects/Kins%20Marine/05.png,assets/projects/Kins%20Marine/06.png"
                data-title="Kins Marine Engineering Service"
                data-desc="Kins Marine Engineering Service is a marine and general contracting company based in Kirulapona, Colombo 05, Sri Lanka. Specialising in hydraulic and pneumatic repairs for medium and heavy-duty industrial and marine machinery, alongside steel/pipe fabrication and boiler repairs. Offers a 24-hour emergency response team ready to mobilise at short notice.">
               View Details →
@@ -395,18 +406,20 @@
 
         <!-- 3. RUuMA Entertainment -->
         <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
-          <div class="project-media">
-            <img src="assets/projects/ruuma entertaiment.png" alt="RUuMA Entertainment">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/ruuma-video.mp4">
-            </video>
+          <div class="project-media carousel">
+            <div class="carousel-images" id="ruuma-carousel">
+              <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active">
+              <img src="assets/projects/Ruuma%20Entertaunment/02.jpeg" alt="RUuMA Entertainment 2">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('ruuma-carousel', -1)" aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('ruuma-carousel', 1)" aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>RUuMA Entertainment</h3>
             <p>A sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.</p>
             <a href="#" class="project-link open-modal"
-               data-video="assets/projects/ruuma-video.mp4"
+               data-images="assets/projects/Ruuma%20Entertaunment/01.jpeg,assets/projects/Ruuma%20Entertaunment/02.jpeg"
                data-title="RUuMA Entertainment"
                data-desc="RUuMA Entertainment is a sleek digital platform offering live event management, artist bookings, multimedia productions, and seamless online ticketing services.">
               View Details →
@@ -414,7 +427,8 @@
           </div>
         </div>
 
-        <!-- 4. LEMO Green -->
+        <!-- [COMMENTED OUT FOR NOW]
+        4. LEMO Green
         <div class="project-card fade-up" data-cat="software" style="transition-delay:0s">
           <div class="project-media">
             <img src="assets/projects/lemo-green-thumb.jpg" alt="LEMO Green website">
@@ -435,7 +449,7 @@
           </div>
         </div>
 
-        <!-- 5. LEMO - Live More -->
+        5. LEMO - Live More
         <div class="project-card fade-up" data-cat="software" style="transition-delay:0.08s">
           <div class="project-media">
             <img src="assets/projects/lemo.jpg" alt="LEMO Live More">
@@ -455,21 +469,26 @@
             </a>
           </div>
         </div>
+        -->
 
         <!-- 6. Challigraphy -->
         <div class="project-card fade-up" data-cat="software" style="transition-delay:0.16s">
-          <div class="project-media">
-            <img src="assets/projects/challigraphy.png" alt="Challigraphy Hand Writing">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/calligraphy-video.mp4">
-            </video>
+          <div class="project-media carousel">
+            <div class="carousel-images" id="challigraphy-carousel">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1" class="active">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/02.jpeg" alt="Challigraphy Hand Writing 2">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/03.jpeg" alt="Challigraphy Hand Writing 3">
+              <img src="assets/projects/Challigraphy%20Hand%20Writing/04.jpeg" alt="Challigraphy Hand Writing 4">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('challigraphy-carousel', -1)" aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('challigraphy-carousel', 1)" aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
             <h3>Challigraphy Hand Writing</h3>
             <p>An artisan brand platform that celebrates the craft of handwriting with elegant design, smooth interactions, and a curated visual identity.</p>
             <a href="#" class="project-link open-modal"
-               data-video="assets/projects/calligraphy-video.mp4"
+               data-images="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg,assets/projects/Challigraphy%20Hand%20Writing/02.jpeg,assets/projects/Challigraphy%20Hand%20Writing/03.jpeg,assets/projects/Challigraphy%20Hand%20Writing/04.jpeg"
                data-title="Challigraphy Hand Writing"
                data-desc="Description for Challigraphy Hand Writing project goes here.">
               View Details →
