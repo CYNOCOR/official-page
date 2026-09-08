@@ -18,23 +18,66 @@
   <style>
     .section { padding: 100px 0; }
 
-    /* ── Service Grid ─────────────────────────────────── */
+    /* ── Tier Headers ─────────────────────────────── */
+    .tier-header { margin-bottom: 52px; }
+
+    .tier-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 14px;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .tier-badge.design  { background: rgba(0,102,204,0.08);  color: #0066cc; border: 1px solid rgba(0,102,204,0.2); }
+    .tier-badge.build   { background: rgba(26,158,74,0.08);  color: #1a9e4a; border: 1px solid rgba(26,158,74,0.22); }
+    .tier-badge.operate { background: rgba(139,92,246,0.08); color: #7c3aed; border: 1px solid rgba(139,92,246,0.22); }
+
+    .tier-header h2 {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .tier-header p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.65;
+      max-width: 580px;
+    }
+
+    /* Alternating tier backgrounds */
+    .tier-alt {
+      background: var(--bg-surface-solid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── Service Grid ─────────────────────────────── */
     .service-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 20px;
     }
 
     .service-card {
       background: var(--bg-surface-solid);
       border-radius: 20px;
-      overflow: hidden;
+      padding: 36px 28px 32px;
       border: 1px solid transparent;
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
+      gap: 14px;
       transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
     }
+
+    .tier-alt .service-card { background: var(--bg-base); }
 
     .service-card:hover {
       transform: translateY(-6px);
@@ -42,55 +85,51 @@
       border-color: rgba(0, 102, 204, 0.1);
     }
 
-    .service-visual {
-      height: 210px;
-      overflow: hidden;
-      background: #e9e9ed;
-      position: relative;
-    }
-
-    .service-visual img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform 0.5s var(--ease);
-    }
-
-    .service-card:hover .service-visual img {
-      transform: scale(1.05);
-    }
-
-    .service-body {
-      padding: 28px 24px 24px;
-      flex: 1;
+    .service-card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      background: rgba(0,102,204,0.07);
       display: flex;
-      flex-direction: column;
-    }
-
-    .service-body .eyebrow {
+      align-items: center;
+      justify-content: center;
       color: var(--accent);
-      margin-bottom: 8px;
-      font-size: 0.72rem;
+      transition: transform 0.3s ease, background 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .service-card:hover .service-card-icon {
+      transform: scale(1.08);
+      background: rgba(0,102,204,0.13);
+    }
+
+    .service-card .eyebrow {
+      color: var(--accent);
+      font-size: 0.7rem;
       letter-spacing: 0.12em;
+      margin-bottom: 0;
     }
 
-    .service-body h3 {
-      font-size: 1.15rem;
+    .service-card h3 {
+      font-size: 1.1rem;
       font-weight: 600;
-      margin-bottom: 10px;
       letter-spacing: -0.01em;
+      margin-bottom: 0;
     }
 
-    .service-body p {
+    .service-card p {
       color: var(--text-secondary);
       font-size: 0.875rem;
       line-height: 1.65;
       flex: 1;
+      margin-bottom: 0;
     }
 
-    /* ── How We Work ─────────────────────────────────── */
-    .engagement-section { background: var(--bg-surface-solid); }
+    /* ── How We Work ─────────────────────────────── */
+    .engagement-section {
+      background: var(--bg-surface-solid);
+      border-top: 1px solid var(--border);
+    }
 
     .engagement-grid {
       display: grid;
@@ -134,7 +173,7 @@
       line-height: 1.65;
     }
 
-    /* ── Responsive ─────────────────────────────────── */
+    /* ── Responsive ──────────────────────────────── */
     @media (max-width: 960px) {
       .service-grid { grid-template-columns: repeat(2, 1fr); }
       .engagement-grid { grid-template-columns: repeat(2, 1fr); }
@@ -142,8 +181,7 @@
 
     @media (max-width: 768px) {
       .section { padding: 72px 0; }
-      .service-visual { height: 180px; }
-      .service-body { padding: 20px 18px 18px; }
+      .service-card { padding: 28px 22px 24px; }
     }
 
     @media (max-width: 540px) {
@@ -171,6 +209,7 @@
         <a href="services.html" class="active">Services</a>
         <a href="team.html">Team</a>
         <a href="projects.html">Projects</a>
+        <a href="tools.html">Tools</a>
       </nav>
       <div class="nav-right">
         <a href="contact.html" class="nav-cta">Contact Us</a>
@@ -187,102 +226,128 @@
   <section class="page-hero">
     <div class="container">
       <span class="eyebrow fade-up">Our Services</span>
-      <h1 class="fade-up" style="transition-delay:0.1s">Creative + Digital<br>Solutions</h1>
-      <p class="lead fade-up" style="transition-delay:0.2s">We help brands grow with modern design, digital marketing, and practical tech support tailored to your business goals.</p>
+      <h1 class="fade-up" style="transition-delay:0.1s">IoT &amp; AI Automation<br>Systems Design</h1>
+      <p class="lead fade-up" style="transition-delay:0.2s">We design, build, and operate intelligent connected systems — from embedded firmware to cloud AI pipelines — engineered for real-world performance and scale.</p>
     </div>
   </section>
 
-  <!-- Service List -->
-  <section class="section">
+  <!-- ── Tier 01: Design ──────────────────────────────── -->
+  <section class="section" id="tier-design">
     <div class="container">
+      <div class="tier-header fade-up">
+        <span class="tier-badge design">Tier 01 — Design</span>
+        <h2>System Architecture &amp; Design</h2>
+        <p>Every great connected system starts with a precise blueprint. We map your requirements into scalable IoT architectures before a single component ships.</p>
+      </div>
       <div class="service-grid">
 
         <div class="service-card fade-up">
-          <div class="service-visual">
-            <img src="assets/web_design.jfif" alt="Web design preview">
+          <div class="service-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M2 12h2m16 0h2M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32l1.41 1.41M4.93 19.07l1.41-1.41m11.32-11.32l1.41-1.41"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">01</span>
-            <h3>Web Design</h3>
-            <p>Professional, modern websites built to look sharp, load fast, and convert visitors into customers.</p>
-          </div>
+          <span class="eyebrow">01</span>
+          <h3>IoT Architecture Design</h3>
+          <p>End-to-end system topology covering device selection, communication protocols (MQTT, CoAP, Zigbee, LoRaWAN), and cloud integration strategy tailored to your environment.</p>
         </div>
 
         <div class="service-card fade-up" style="transition-delay:0.08s">
-          <div class="service-visual">
-            <img src="assets/sm_marketing.jpg" alt="Social media marketing preview">
+          <div class="service-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">02</span>
-            <h3>Social Media Marketing</h3>
-            <p>Growth-focused social media strategies that increase brand visibility, engagement, and customer reach.</p>
-          </div>
+          <span class="eyebrow">02</span>
+          <h3>System Topology Planning</h3>
+          <p>Detailed network and data flow diagrams for your connected environment, including redundancy, failover, and scalability requirements built for real deployment.</p>
         </div>
 
         <div class="service-card fade-up" style="transition-delay:0.16s">
-          <div class="service-visual">
-            <img src="assets/page_hand.png" alt="Social media page handling preview">
+          <div class="service-card-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">03</span>
-            <h3>Social Media Page Handling</h3>
-            <p>Complete management of your social media profiles, including content planning, posting, and audience engagement.</p>
-          </div>
+          <span class="eyebrow">03</span>
+          <h3>Protocol &amp; Standards Selection</h3>
+          <p>Expert guidance on choosing the right communication standards, security frameworks, and compliance requirements for your industry and deployment context.</p>
         </div>
 
-        <div class="service-card fade-up" style="transition-delay:0s">
-          <div class="service-visual">
-            <img src="assets/graphic.jpg" alt="Graphic design preview">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tier 02: Build ──────────────────────────────── -->
+  <section class="section tier-alt" id="tier-build">
+    <div class="container">
+      <div class="tier-header fade-up">
+        <span class="tier-badge build">Tier 02 — Build</span>
+        <h2>Engineering &amp; Development</h2>
+        <p>From embedded firmware to AI inference pipelines, we build every layer of the system with production-grade reliability and performance.</p>
+      </div>
+      <div class="service-grid">
+
+        <div class="service-card fade-up">
+          <div class="service-card-icon" style="background:rgba(26,158,74,0.07); color:#1a9e4a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">04</span>
-            <h3>Graphic Design</h3>
-            <p>Creative visuals and branded assets made to capture attention and communicate your message clearly.</p>
-          </div>
+          <span class="eyebrow" style="color:#1a9e4a;">04</span>
+          <h3>Embedded Firmware Development</h3>
+          <p>Real-time operating systems, driver development, and hardware abstraction layers for microcontrollers and SoC-based IoT devices across ARM, RISC-V, and ESP platforms.</p>
         </div>
 
         <div class="service-card fade-up" style="transition-delay:0.08s">
-          <div class="service-visual">
-            <img src="assets/design_logo.jpg" alt="Logo design preview">
+          <div class="service-card-icon" style="background:rgba(26,158,74,0.07); color:#1a9e4a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">05</span>
-            <h3>Logo Design</h3>
-            <p>Distinct logo concepts that reflect your business identity and make a memorable first impression.</p>
-          </div>
+          <span class="eyebrow" style="color:#1a9e4a;">05</span>
+          <h3>AI / ML Pipeline Integration</h3>
+          <p>Edge AI inference, model deployment, data preprocessing pipelines, and continuous feedback loops for model improvement in live production environments.</p>
         </div>
 
         <div class="service-card fade-up" style="transition-delay:0.16s">
-          <div class="service-visual">
-            <img src="assets/ai_video.png" alt="AI video generation preview">
+          <div class="service-card-icon" style="background:rgba(26,158,74,0.07); color:#1a9e4a;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">06</span>
-            <h3>AI Video Generation</h3>
-            <p>Fast, modern AI-powered video content for promos, content marketing, and social engagement.</p>
-          </div>
+          <span class="eyebrow" style="color:#1a9e4a;">06</span>
+          <h3>Cloud-Edge Platform Build</h3>
+          <p>Scalable cloud ingestion platforms, time-series databases, and edge compute orchestration that connects physical assets to intelligent cloud backends.</p>
         </div>
 
-        <div class="service-card fade-up" style="transition-delay:0s">
-          <div class="service-visual">
-            <img src="assets/software.jpg" alt="Software installation preview">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Tier 03: Operate ────────────────────────────── -->
+  <section class="section" id="tier-operate">
+    <div class="container">
+      <div class="tier-header fade-up">
+        <span class="tier-badge operate">Tier 03 — Operate</span>
+        <h2>Monitoring &amp; Continuous Improvement</h2>
+        <p>We keep your systems alive, accurate, and improving — with real-time dashboards, proactive maintenance, and automated update pipelines.</p>
+      </div>
+      <div class="service-grid">
+
+        <div class="service-card fade-up">
+          <div class="service-card-icon" style="background:rgba(139,92,246,0.07); color:#7c3aed;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">07</span>
-            <h3>Software Installations</h3>
-            <p>Installation and setup support for business software, tools, and systems so your team can start using them without delays.</p>
-          </div>
+          <span class="eyebrow" style="color:#7c3aed;">07</span>
+          <h3>Real-Time Monitoring &amp; Dashboards</h3>
+          <p>Custom operational dashboards with live sensor feeds, alert thresholds, and KPI tracking built for engineering and operations teams managing large device fleets.</p>
         </div>
 
         <div class="service-card fade-up" style="transition-delay:0.08s">
-          <div class="service-visual">
-            <img src="assets/develeop.jpg" alt="Software development preview">
+          <div class="service-card-icon" style="background:rgba(139,92,246,0.07); color:#7c3aed;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
           </div>
-          <div class="service-body">
-            <span class="eyebrow">08</span>
-            <h3>Software Development</h3>
-            <p>Custom software solutions built to streamline business processes, improve productivity, and support growth.</p>
+          <span class="eyebrow" style="color:#7c3aed;">08</span>
+          <h3>OTA Update Management</h3>
+          <p>Secure over-the-air firmware and software update pipelines with rollback capabilities, staged rollouts, and device health monitoring at scale.</p>
+        </div>
+
+        <div class="service-card fade-up" style="transition-delay:0.16s">
+          <div class="service-card-icon" style="background:rgba(139,92,246,0.07); color:#7c3aed;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
+          <span class="eyebrow" style="color:#7c3aed;">09</span>
+          <h3>Predictive Maintenance AI</h3>
+          <p>Machine learning models that detect equipment anomalies before failure occurs, reducing unplanned downtime and extending the operational lifecycle of physical assets.</p>
         </div>
 
       </div>
@@ -294,24 +359,24 @@
     <div class="container">
       <div class="section-header fade-up">
         <span class="eyebrow">How We Work</span>
-        <h2>Simple, Practical Partnership</h2>
-        <p>Flexible support for your digital and branding needs.</p>
+        <h2>From Requirements to Running Systems</h2>
+        <p>A disciplined, hardware-in-the-loop methodology that delivers reliable IoT solutions on time and at scale.</p>
       </div>
       <div class="engagement-grid">
         <div class="engagement-card fade-up" style="transition-delay:0.08s">
           <span class="eyebrow">Start</span>
-          <h3>Discovery</h3>
-          <p>We understand your goals, audience, and the exact problem you want solved before planning the work.</p>
+          <h3>Requirements &amp; Topology Mapping</h3>
+          <p>We deeply understand your environment, constraints, and goals — mapping data flows, device counts, and integration points before any engineering begins.</p>
         </div>
         <div class="engagement-card fade-up" style="transition-delay:0.18s">
           <span class="eyebrow">Build</span>
-          <h3>Execution</h3>
-          <p>We design and deliver the requested solution with attention to quality, consistency, and business impact.</p>
+          <h3>Hardware + Software in the Loop</h3>
+          <p>We develop and test iteratively with real hardware and data, delivering milestones with full system visibility and clear documentation at every stage.</p>
         </div>
         <div class="engagement-card fade-up" style="transition-delay:0.28s">
-          <span class="eyebrow">Support</span>
-          <h3>Ongoing Growth</h3>
-          <p>We help maintain and improve digital assets so your brand keeps performing well after launch.</p>
+          <span class="eyebrow">Operate</span>
+          <h3>Live Monitoring &amp; Continuous Improvement</h3>
+          <p>We maintain your systems post-launch with OTA updates, model retraining pipelines, and ongoing telemetry monitoring to keep your deployment at peak performance.</p>
         </div>
       </div>
     </div>

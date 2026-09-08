@@ -914,6 +914,217 @@
     header.nav-hero.scrolled .mobile-menu-toggle span {
       background-color: var(--text-primary);
     }
+
+    /* ─── CANVAS NETWORK OVERLAY ─────────────────────── */
+    #iot-net {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.48;
+    }
+
+    /* ─── IOT ARCHITECTURE DIAGRAM ──────────────────── */
+    .iot-arch-section {
+      background: var(--bg-surface-solid);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .iot-arch-diagram {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      margin-top: 64px;
+    }
+
+    .arch-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      flex: 0 0 auto;
+      z-index: 1;
+      transition: transform 0.3s var(--ease);
+    }
+
+    .arch-node:hover { transform: translateY(-5px); }
+
+    .arch-node-icon {
+      width: 80px;
+      height: 80px;
+      border-radius: 22px;
+      background: var(--bg-base);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent);
+      transition: border-color 0.35s ease, box-shadow 0.35s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+    }
+
+    .arch-node:hover .arch-node-icon {
+      border-color: rgba(0,102,204,0.35);
+      box-shadow: 0 0 0 6px rgba(0,102,204,0.06), 0 8px 28px rgba(0,102,204,0.12);
+    }
+
+    .arch-node-label {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+    }
+
+    .arch-node-sub {
+      font-size: 0.72rem;
+      color: rgba(100,120,160,0.7);
+      text-align: center;
+      max-width: 96px;
+      line-height: 1.4;
+      margin-top: -6px;
+    }
+
+    .arch-connector {
+      flex: 1;
+      min-width: 28px;
+      max-width: 110px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .arch-connector::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, rgba(0,102,204,0.15), rgba(0,102,204,0.5), rgba(0,102,204,0.15));
+      transform: translateY(-50%);
+    }
+
+    .arch-dot {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #4e9aff;
+      box-shadow: 0 0 8px rgba(78,154,255,0.9);
+      top: 50%;
+      transform: translateY(-50%);
+      animation: travelRight 2.4s linear infinite;
+    }
+
+    .arch-connector:nth-of-type(2) .arch-dot { animation-delay: 0s; }
+    .arch-connector:nth-of-type(4) .arch-dot { animation-delay: 0.6s; }
+    .arch-connector:nth-of-type(6) .arch-dot { animation-delay: 1.2s; }
+    .arch-connector:nth-of-type(8) .arch-dot { animation-delay: 1.8s; }
+
+    @keyframes travelRight {
+      0%   { left: -4px; opacity: 0; }
+      8%   { opacity: 1; }
+      92%  { opacity: 1; }
+      100% { left: calc(100% + 4px); opacity: 0; }
+    }
+
+    /* ─── INDUSTRIES SECTION ─────────────────────────── */
+    .industries-section {
+      background: var(--bg-base);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .industries-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+      margin-top: 56px;
+    }
+
+    .industry-card {
+      position: relative;
+      background: var(--bg-surface-solid);
+      border-radius: 18px;
+      padding: 28px 14px 24px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+      cursor: default;
+    }
+
+    .industry-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      border-radius: 18px 18px 0 0;
+      background: var(--ind-color, var(--accent));
+      opacity: 0.65;
+      transition: opacity 0.35s ease;
+    }
+
+    .industry-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0,0,0,0.08);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.09);
+    }
+
+    .industry-card:hover::before { opacity: 1; }
+
+    .industry-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 13px;
+      background: var(--bg-base);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ind-color, var(--accent));
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .industry-card:hover .industry-icon { transform: scale(1.1); }
+
+    .industry-card h4 {
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .industry-card p {
+      font-size: 0.74rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    @media (max-width: 1100px) {
+      .iot-arch-diagram { flex-wrap: wrap; gap: 24px 16px; }
+      .arch-connector { display: none; }
+      .industries-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    @media (max-width: 640px) {
+      .industries-grid { grid-template-columns: repeat(2, 1fr); }
+      .arch-node-icon { width: 64px; height: 64px; }
+    }
   </style>
 
   <script src="js/main.js" defer></script>
@@ -936,6 +1147,7 @@
         <a href="services.html">Services</a>
         <a href="team.html">Team</a>
         <a href="projects.html">Projects</a>
+        <a href="tools.html">Tools</a>
       </nav>
       <div class="nav-right">
         <a href="contact.html" class="nav-cta">Contact Us</a>
@@ -953,13 +1165,14 @@
     <!-- Video -->
     <div class="hero-video-wrap">
       <video class="hero-video" autoplay loop muted playsinline preload="auto">
-        <source src="assets/background.mp4" type="video/mp4">
+        <source src="assets/home/background.mp4" type="video/mp4">
       </video>
       <div class="hero-video-overlay"></div>
     </div>
 
-    <!-- Ambient orbs -->
+    <!-- Ambient orbs + IoT network canvas -->
     <div class="hero-orbs" aria-hidden="true">
+      <canvas id="iot-net"></canvas>
       <div class="orb orb-1"></div>
       <div class="orb orb-2"></div>
       <div class="orb orb-3"></div>
@@ -1046,6 +1259,69 @@
     </div>
   </section>
 
+  <!-- ── IOT ARCHITECTURE DIAGRAM ───────────────────────── -->
+  <section class="section iot-arch-section" id="iot-architecture">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">How We Build Connected Systems</span>
+        <h2>Full-stack IoT architecture.</h2>
+        <p>From raw sensor data to intelligent decisions — we design and build every layer of your connected system with precision and scale in mind.</p>
+      </div>
+
+      <div class="iot-arch-diagram fade-up" style="transition-delay:0.12s">
+
+        <div class="arch-node">
+          <div class="arch-node-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
+          </div>
+          <span class="arch-node-label">Devices</span>
+          <span class="arch-node-sub">Sensors &amp; Actuators</span>
+        </div>
+
+        <div class="arch-connector"><div class="arch-dot"></div></div>
+
+        <div class="arch-node">
+          <div class="arch-node-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="2" y="14" width="20" height="8" rx="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg>
+          </div>
+          <span class="arch-node-label">Edge</span>
+          <span class="arch-node-sub">Gateways &amp; RTOS</span>
+        </div>
+
+        <div class="arch-connector"><div class="arch-dot"></div></div>
+
+        <div class="arch-node">
+          <div class="arch-node-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>
+          </div>
+          <span class="arch-node-label">Cloud</span>
+          <span class="arch-node-sub">Ingestion &amp; Storage</span>
+        </div>
+
+        <div class="arch-connector"><div class="arch-dot"></div></div>
+
+        <div class="arch-node">
+          <div class="arch-node-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.6 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 010-2.83 2 2 0 012.83 0l.06.06A1.65 1.65 0 009 4.6a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 0 2 2 0 010 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+          <span class="arch-node-label">AI / ML</span>
+          <span class="arch-node-sub">Inference &amp; Predictions</span>
+        </div>
+
+        <div class="arch-connector"><div class="arch-dot"></div></div>
+
+        <div class="arch-node">
+          <div class="arch-node-icon">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          </div>
+          <span class="arch-node-label">Control</span>
+          <span class="arch-node-sub">Dashboards &amp; Actions</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- ── CAPABILITIES ───────────────────────────────────── -->
   <section class="section capabilities" id="capabilities">
     <div class="container">
@@ -1104,6 +1380,68 @@
           </div>
           <h3>Business Strategy</h3>
           <p>Growth planning and market positioning grounded in data, not guesswork. We align technical solutions with your business goals.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── INDUSTRIES WE SERVE ─────────────────────────────── -->
+  <section class="section industries-section" id="industries">
+    <div class="container">
+      <div class="section-header fade-up">
+        <span class="eyebrow">Industries We Serve</span>
+        <h2>Connecting every sector.</h2>
+        <p>We apply IoT and AI automation expertise across diverse industries, each with unique constraints and extraordinary potential.</p>
+      </div>
+      <div class="industries-grid">
+
+        <div class="industry-card fade-up" style="--ind-color:#0066cc">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h4>Manufacturing</h4>
+          <p>Smart factory automation and predictive maintenance</p>
+        </div>
+
+        <div class="industry-card fade-up" style="--ind-color:#1a9e4a; transition-delay:0.06s">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12m0 0C8.13 12 5 8.87 5 5h14c0 3.87-3.13 7-7 7z"/></svg>
+          </div>
+          <h4>Agriculture</h4>
+          <p>Precision farming and soil &amp; crop monitoring</p>
+        </div>
+
+        <div class="industry-card fade-up" style="--ind-color:#c0392b; transition-delay:0.12s">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          </div>
+          <h4>Healthcare</h4>
+          <p>Remote patient monitoring and medical IoT</p>
+        </div>
+
+        <div class="industry-card fade-up" style="--ind-color:#e67e22; transition-delay:0.18s">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+          </div>
+          <h4>Smart Cities</h4>
+          <p>Infrastructure sensing and urban AI management</p>
+        </div>
+
+        <div class="industry-card fade-up" style="--ind-color:#8e44ad; transition-delay:0.24s">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h4>Energy</h4>
+          <p>Smart grid optimization and consumption analytics</p>
+        </div>
+
+        <div class="industry-card fade-up" style="--ind-color:#16a085; transition-delay:0.30s">
+          <div class="industry-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h4>Automotive</h4>
+          <p>Connected vehicle telemetry and fleet tracking</p>
         </div>
 
       </div>
@@ -1267,6 +1605,86 @@
       statNums.forEach(function (el) {
         observer.observe(el);
       });
+    })();
+  </script>
+
+  <!-- ── IoT Network Canvas Animation ─────────────────── -->
+  <script>
+    (function () {
+      var canvas = document.getElementById('iot-net');
+      if (!canvas) return;
+      var ctx = canvas.getContext('2d');
+      var nodes = [], W = 0, H = 0;
+
+      function resize() {
+        var parent = canvas.parentElement;
+        W = canvas.width  = parent.offsetWidth;
+        H = canvas.height = parent.offsetHeight;
+      }
+
+      function initNodes() {
+        nodes = [];
+        var count = Math.min(55, Math.floor((W * H) / 13000));
+        for (var i = 0; i < count; i++) {
+          nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.32,
+            vy: (Math.random() - 0.5) * 0.32,
+            r: Math.random() * 1.8 + 0.7,
+            pulse: Math.random() * Math.PI * 2,
+            active: Math.random() < 0.18
+          });
+        }
+      }
+
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+
+        for (var i = 0; i < nodes.length; i++) {
+          for (var j = i + 1; j < nodes.length; j++) {
+            var dx = nodes[i].x - nodes[j].x;
+            var dy = nodes[i].y - nodes[j].y;
+            var dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 130) {
+              var alpha = (1 - dist / 130) * 0.2;
+              ctx.beginPath();
+              ctx.moveTo(nodes[i].x, nodes[i].y);
+              ctx.lineTo(nodes[j].x, nodes[j].y);
+              ctx.strokeStyle = 'rgba(78,154,255,' + alpha + ')';
+              ctx.lineWidth = 0.7;
+              ctx.stroke();
+            }
+          }
+        }
+
+        nodes.forEach(function (n) {
+          n.pulse += 0.025;
+          var pSize = n.r + Math.sin(n.pulse) * 0.55;
+          ctx.beginPath();
+          ctx.arc(n.x, n.y, pSize, 0, Math.PI * 2);
+          ctx.fillStyle = n.active
+            ? 'rgba(56,220,120,' + (0.6 + Math.sin(n.pulse) * 0.28) + ')'
+            : 'rgba(78,154,255,0.78)';
+          ctx.fill();
+          n.x += n.vx;
+          n.y += n.vy;
+          if (n.x < -6 || n.x > W + 6) n.vx *= -1;
+          if (n.y < -6 || n.y > H + 6) n.vy *= -1;
+        });
+
+        requestAnimationFrame(draw);
+      }
+
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () { resize(); initNodes(); }, 220);
+      });
+
+      resize();
+      initNodes();
+      draw();
     })();
   </script>
 
