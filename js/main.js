@@ -104,21 +104,44 @@ modalLinks.forEach(link => {
 
     // Data attributes walin values gannawa
     const videoUrl = link.getAttribute("data-video");
+    const imagesUrl = link.getAttribute("data-images");
     const titleText = link.getAttribute("data-title");
     const descText = link.getAttribute("data-desc");
+    const modalImagesContainer = document.getElementById("modalImagesContainer");
+
+    if (imagesUrl) {
+      video.style.display = 'none';
+      modalImagesContainer.style.display = 'block';
+      const imagesArr = imagesUrl.split(',');
+      let imgHtml = '';
+      if (imagesArr.length > 1) {
+        imgHtml += `<div class="modal-carousel" id="modal-image-carousel">
+                      <div class="carousel-images" id="modal-carousel-inner">`;
+        imagesArr.forEach((imgSrc, idx) => {
+          imgHtml += `<img src="${imgSrc.trim()}" alt="Project Image" class="${idx === 0 ? 'active' : ''}">`;
+        });
+        imgHtml += `  </div>
+                      <button class="carousel-btn prev" style="opacity: 1;" onclick="moveCarousel('modal-carousel-inner', -1)" aria-label="Previous image">&#10094;</button>
+                      <button class="carousel-btn next" style="opacity: 1;" onclick="moveCarousel('modal-carousel-inner', 1)" aria-label="Next image">&#10095;</button>
+                    </div>`;
+      } else {
+        imgHtml = `<img src="${imagesArr[0].trim()}" style="width: 100%; height: 100%; object-fit: contain;">`;
+      }
+      modalImagesContainer.innerHTML = imgHtml;
+    } else if (videoUrl) {
+      modalImagesContainer.style.display = 'none';
+      video.style.display = 'block';
+      videoSource.src = videoUrl;
+      video.load();
+      video.play();
+    }
 
     // Modal elements walata set karanawa
-    videoSource.src = videoUrl;
     modalTitle.textContent = titleText;
     modalDesc.textContent = descText;
 
-    // Video reload karala modal eka open karanawa
-    video.load();
-
     // Modal ekata active class eka add karannai (CSS eke display:flex thiyena nisa center wenawa)
     modal.classList.add("active");
-
-    video.play();
   });
 });
 
@@ -139,7 +162,7 @@ function closeModal() {
     // Active class eka ain karama animation eka reverse wela close wenawa
     modal.classList.remove("active");
   }
-  if (video) {
+  if (video && video.style.display !== 'none') {
     video.pause();
     video.currentTime = 0;
   }

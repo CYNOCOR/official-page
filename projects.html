@@ -113,6 +113,57 @@
       opacity: 0.8;
     }
 
+    /* ── Carousel ─────────────────────────────────────── */
+    .carousel-images {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+    .carousel-images img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0;
+      transition: transform 0.5s var(--ease), opacity 0.5s var(--ease);
+      z-index: 1;
+    }
+    .carousel-images img.active {
+      opacity: 1;
+      z-index: 2;
+    }
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: #fff;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0;
+      transition: opacity 0.3s ease, background 0.3s ease;
+    }
+    .project-media:hover .carousel-btn {
+      opacity: 1;
+    }
+    .carousel-btn:hover {
+      background: rgba(255, 255, 255, 0.4);
+    }
+    .carousel-btn.prev {
+      left: 12px;
+    }
+    .carousel-btn.next {
+      right: 12px;
+    }
+
     /* ── Modal ────────────────────────────────────────── */
     .video-modal {
       position: fixed;
@@ -167,6 +218,30 @@
       border-radius: 12px;
       outline: none;
       background: #000;
+    }
+
+    .modal-carousel {
+      width: 100%;
+      height: 65vh;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      background: #000;
+    }
+    .modal-carousel img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      opacity: 0;
+      transition: opacity 0.5s var(--ease);
+      z-index: 1;
+    }
+    .modal-carousel img.active {
+      opacity: 1;
+      z-index: 2;
     }
 
     .close-btn {
@@ -296,17 +371,23 @@
 
         <!-- 2. Amali Curtain -->
         <div class="project-card fade-up" data-cat="automation" style="transition-delay:0.08s">
-          <div class="project-media">
-            <img src="" alt="Amali Curtain project">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="amali-carousel">
+              <img src="assets/projects/amali%20curtain/01.jpeg" alt="Amali Curtain 1" class="active">
+              <img src="assets/projects/amali%20curtain/02.jpeg" alt="Amali Curtain 2">
+              <img src="assets/projects/amali%20curtain/03.jpeg" alt="Amali Curtain 3">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('amali-carousel', -1)" aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('amali-carousel', 1)" aria-label="Next image">&#10095;</button>
           </div>
           <div class="project-body">
             <span class="tag">Web Site</span>
-            <h3>Amali Curtain</h3>
-            <p>An internal automation system that securely processes thousands of records daily, completely removing manual data entry across three departments.</p>
+            <h3>Amali Curtain Centre</h3>
+            <p>We transformed a traditional curtain business by establishing their first digital footprint, delivering an elegant platform that highlights their craftsmanship.</p>
             <a href="#" class="project-link open-modal"
-               data-video="assets/projects/amali-video.mp4"
-               data-title="Amali Curtain"
-               data-desc="An internal automation system that securely processes thousands of records daily, completely removing manual data entry across three departments.">
+               data-images="assets/projects/amali%20curtain/01.jpeg,assets/projects/amali%20curtain/02.jpeg,assets/projects/amali%20curtain/03.jpeg"
+               data-title="Amali Curtain Centre"
+               data-desc="Amali Curtain Centre, an established curtain maker and supplier, operated entirely offline before partnering with us. We designed and developed their first-ever digital platform—an elegant, premium website that perfectly captures their classic aesthetic. The new site showcases their extensive gallery of work, tells their brand story, and features a seamless 'Request a Consultation' flow, successfully bringing their traditional craftsmanship into the digital age.">
               View Details →
             </a>
           </div>
@@ -421,14 +502,17 @@
     </div>
   </section>
 
-  <!-- Video Modal -->
+  <!-- Video/Image Modal -->
   <div class="video-modal" id="videoModal">
     <div class="modal-content">
       <span class="close-btn" id="closeModalBtn">&times;</span>
-      <video controls id="modalVideo">
-        <source src="" id="videoSource" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+      <div id="modalMediaContainer" style="width: 100%;">
+        <video controls id="modalVideo">
+          <source src="" id="videoSource" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div id="modalImagesContainer" style="display: none;"></div>
+      </div>
       <div class="video-description">
         <h3 id="modalTitle">Project Video</h3>
         <p id="modalDesc"></p>
@@ -448,5 +532,27 @@
 
   <!-- JavaScript -->
   <script src="js/main.js" defer></script>
+  <script>
+    function moveCarousel(containerId, step) {
+      const container = document.getElementById(containerId);
+      if (!container) return;
+      
+      const images = container.querySelectorAll('img');
+      if (images.length === 0) return;
+      
+      let activeIndex = -1;
+      images.forEach((img, index) => {
+        if (img.classList.contains('active')) activeIndex = index;
+      });
+      
+      if (activeIndex === -1) activeIndex = 0;
+      images[activeIndex].classList.remove('active');
+      
+      let nextIndex = (activeIndex + step) % images.length;
+      if (nextIndex < 0) nextIndex = images.length - 1;
+      
+      images[nextIndex].classList.add('active');
+    }
+  </script>
 </body>
 </html>
