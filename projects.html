@@ -118,6 +118,48 @@
       display: inline-block;
     }
 
+    .project-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .project-meta-row .tag {
+      margin-bottom: 0;
+    }
+
+    .badge-ongoing {
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #b25e00;
+      background: rgba(255, 149, 0, 0.12);
+      border: 1px solid rgba(255, 149, 0, 0.3);
+      padding: 3px 8px;
+      border-radius: 12px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .badge-ongoing::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ff9500;
+      box-shadow: 0 0 6px rgba(255, 149, 0, 0.8);
+      animation: pulse-dot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.35; transform: scale(0.8); }
+    }
+
     .project-body h3 {
       font-size: 1.1rem;
       font-weight: 600;
@@ -425,8 +467,131 @@
 
       <div class="project-grid">
 
-        <!-- 1. Kins Marine -->
-        <div class="project-card fade-up" data-cat="web-platforms">
+        <!-- 1. Oleetzo -->
+        <div class="project-card fade-up" data-cat="brand-portfolio">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="oleetzo-carousel">
+              <img src="assets/projects/Oleetzo/01.png" alt="Oleetzo 1" class="active">
+              <img src="assets/projects/Oleetzo/02.png" alt="Oleetzo 2">
+              <img src="assets/projects/Oleetzo/03.png" alt="Oleetzo 3">
+              <img src="assets/projects/Oleetzo/04.png" alt="Oleetzo 4">
+              <img src="assets/projects/Oleetzo/05.png" alt="Oleetzo 5">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('oleetzo-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('oleetzo-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
+          </div>
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="tag">Brand & Portfolio</span>
+            </div>
+            <h3>Oleetzo (oleetzo.lk)</h3>
+            <p>A luxury digital brand showcase and web platform for single-origin Ceylon spices, celebrating authentic heritage, rich flavor profiles, and artisanal packaging.</p>
+            <a href="#" class="project-link open-modal"
+              data-images="assets/projects/Oleetzo/01.png,assets/projects/Oleetzo/02.png,assets/projects/Oleetzo/03.png,assets/projects/Oleetzo/04.png,assets/projects/Oleetzo/05.png"
+              data-title="Oleetzo (oleetzo.lk)"
+              data-desc="Oleetzo is a premium Ceylon spice brand delivering pure, sun-dried, single-origin spices directly from small family gardens across Sri Lanka's hill country. We designed and developed an elegant, immersive digital brand showcase and web platform that highlights their signature 1 kg packaging adorned with authentic Sri Lankan Raksha artwork, interactive spice tasting notes, and farm-to-table traceability.">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+        <!-- 2. Sripalee College -->
+        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.08s">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="sripalee-carousel">
+              <img src="assets/projects/Sripalee%20College/01.jpg" alt="Sripalee College 1" class="active">
+              <img src="assets/projects/Sripalee%20College/02.png" alt="Sripalee College 2">
+              <img src="assets/projects/Sripalee%20College/03.png" alt="Sripalee College 3">
+              <img src="assets/projects/Sripalee%20College/04.png" alt="Sripalee College 4">
+              <img src="assets/projects/Sripalee%20College/05.png" alt="Sripalee College 5">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('sripalee-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('sripalee-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
+          </div>
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="tag">Web Platform</span>
+              <span class="badge-ongoing">In Progress</span>
+            </div>
+            <h3>Sripalee College (sripaleecollege.com)</h3>
+            <p>An official digital web portal for Sripalee College Horana, featuring bilingual localization, comprehensive clubs & societies directory, events calendar, and heritage archives.</p>
+            <a href="#" class="project-link open-modal"
+              data-images="assets/projects/Sripalee%20College/01.jpg,assets/projects/Sripalee%20College/02.png,assets/projects/Sripalee%20College/03.png,assets/projects/Sripalee%20College/04.png,assets/projects/Sripalee%20College/05.png"
+              data-title="Sripalee College — Official Web Platform (sripaleecollege.com)"
+              data-desc="Sripalee College, Horana (established 1934 by Wilmot A. Perera and named by Gurudev Rabindranath Tagore) is a prestigious national school in Sri Lanka. We are currently architecting and developing their official digital ecosystem. The platform features bilingual localization (English / Sinhala), comprehensive club & society directories, dynamic school event calendars, heritage archives, and an interactive admissions enquiry flow. [Ongoing Project - Currently in active development]">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+        <!-- 3. Sipnena Education Institute -->
+        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.16s">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="sipnena-carousel">
+              <img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt="Sipnena Education Institute 1" class="active">
+              <img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt="Sipnena Education Institute 2">
+              <img src="assets/projects/Sipnena%20Education%20Institute/03.png" alt="Sipnena Education Institute 3">
+              <img src="assets/projects/Sipnena%20Education%20Institute/04.png" alt="Sipnena Education Institute 4">
+              <img src="assets/projects/Sipnena%20Education%20Institute/05.png" alt="Sipnena Education Institute 5">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('sipnena-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('sipnena-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
+          </div>
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="tag">Web Platform</span>
+              <span class="badge-ongoing">In Progress</span>
+            </div>
+            <h3>Sipnena Education Institute</h3>
+            <p>A modern learning platform for a premier education institute supporting 4,200+ students across Grade 6–11 (O/L), featuring class finders, digital enrollment, and campus locators.</p>
+            <a href="#" class="project-link open-modal"
+              data-images="assets/projects/Sipnena%20Education%20Institute/01.png,assets/projects/Sipnena%20Education%20Institute/02.png,assets/projects/Sipnena%20Education%20Institute/03.png,assets/projects/Sipnena%20Education%20Institute/04.png,assets/projects/Sipnena%20Education%20Institute/05.png"
+              data-title="Sipnena Education Institute (Horana)"
+              data-desc="Sipnena Education Institute is a leading learning center established in 2011, serving over 4,200 students with physical campuses in Labugama and Ballapitiya. We are engineering their complete online education platform, featuring grade-wise class finders, subject specialist teacher directories, WhatsApp academic support, and multi-branch campus details. [Ongoing Project - Currently in active development]">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+        <!-- 4. Piyasara Travels Business Suite -->
+        <div class="project-card fade-up" data-cat="custom-software" style="transition-delay:0.24s">
+          <div class="project-media carousel">
+            <div class="carousel-images" id="piyasara-carousel">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png" alt="Piyasara Travels Suite 1" class="active">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="Piyasara Travels Suite 2">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/03.png" alt="Piyasara Travels Suite 3">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/04.png" alt="Piyasara Travels Suite 4">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/05.png" alt="Piyasara Travels Suite 5">
+            </div>
+            <button class="carousel-btn prev" onclick="moveCarousel('piyasara-carousel', -1)"
+              aria-label="Previous image">&#10094;</button>
+            <button class="carousel-btn next" onclick="moveCarousel('piyasara-carousel', 1)"
+              aria-label="Next image">&#10095;</button>
+          </div>
+          <div class="project-body">
+            <div class="project-meta-row">
+              <span class="tag">Custom Software</span>
+              <span class="badge-ongoing">In Progress</span>
+            </div>
+            <h3>Piyasara Travels Business Suite</h3>
+            <p>An enterprise business and financial management system for Piyasara Travels agency, streamlining customer inquiries, booking pipelines, invoicing, and real-time analytics.</p>
+            <a href="#" class="project-link open-modal"
+              data-images="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png,assets/projects/Piyasara%20Travels%20Business%20Suite/02.png,assets/projects/Piyasara%20Travels%20Business%20Suite/03.png,assets/projects/Piyasara%20Travels%20Business%20Suite/04.png,assets/projects/Piyasara%20Travels%20Business%20Suite/05.png"
+              data-title="Piyasara Travels — Business & Financial Management Suite"
+              data-desc="Piyasara Travels Business Suite is a bespoke internal management system built specifically for the travel agency. It centralizes customer call logging, lead follow-ups, quotation and invoice generation, booking lifecycles, operational expenses, and interactive revenue analytics in one unified dashboard. [Ongoing Project - Currently in active development]">
+              View Details →
+            </a>
+          </div>
+        </div>
+
+        <!-- 5. Kins Marine -->
+        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.32s">
           <div class="project-media carousel">
             <div class="carousel-images" id="kinsmarine-carousel">
               <img src="assets/projects/Kins%20Marine/01.png" alt="Kins Marine 1" class="active">
@@ -455,8 +620,8 @@
           </div>
         </div>
 
-        <!-- 2. Amali Curtain -->
-        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.08s">
+        <!-- 6. Amali Curtain -->
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.40s">
           <div class="project-media carousel">
             <div class="carousel-images" id="amali-carousel">
               <img src="assets/projects/Amali%20curtain/01.jpeg" alt="Amali Curtain 1" class="active">
@@ -482,8 +647,8 @@
           </div>
         </div>
 
-        <!-- 3. RUuMA Entertainment -->
-        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.16s">
+        <!-- 7. RUuMA Entertainment -->
+        <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.48s">
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-carousel">
               <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active">
@@ -509,56 +674,20 @@
         </div>
 
         <!-- [COMMENTED OUT FOR NOW]
-        4. LEMO Green
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0s">
-          <div class="project-media">
-            <img src="assets/projects/lemo-green-thumb.jpg" alt="LEMO Green website">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/lemo-green-video.mp4">
-            </video>
-          </div>
-          <div class="project-body">
-            <span class="tag">Web Site</span>
-            <h3>LEMO Green</h3>
-            <p>A premium eco-conscious brand platform designed to communicate sustainability values while driving conversions and audience engagement.</p>
-            <a href="#" class="project-link open-modal"
-               data-video="assets/projects/lemo-green-video.mp4"
-               data-title="LEMO Green"
-               data-desc="Description for LEMO Green project goes here.">
-              View Details →
-            </a>
-          </div>
-        </div>
-
-        5. LEMO - Live More
-        <div class="project-card fade-up" data-cat="software" style="transition-delay:0.08s">
-          <div class="project-media">
-            <img src="assets/projects/lemo.jpg" alt="LEMO Live More">
-            <video class="project-hover-video" preload="none" loop muted playsinline 
-               data-video="assets/projects/lemo-live-video.mp4">
-            </video>
-          </div>
-          <div class="project-body">
-            <span class="tag">Web Site</span>
-            <h3>LEMO — Live More</h3>
-            <p>A lifestyle brand website focused on immersive storytelling, visual impact, and seamless user journeys from awareness to conversion.</p>
-            <a href="#" class="project-link open-modal"
-               data-video="assets/projects/lemo-live-video.mp4"
-               data-title="LEMO - Live More"
-               data-desc="Description for LEMO Live More project goes here.">
-              View Details →
-            </a>
-          </div>
-        </div>
+        LEMO Green
+        LEMO - Live More
         -->
 
-        <!-- 7. RUuMA Entertainment Management System -->
-        <div class="project-card fade-up" data-cat="custom-software" style="transition-delay:0.24s">
+        <!-- 8. RUuMA Entertainment Management System -->
+        <div class="project-card fade-up" data-cat="custom-software" style="transition-delay:0.56s">
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-management-carousel">
-              <img src="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg" alt="RUuMA Management 1" class="active" style="object-position: left;">
-              <img src="assets/projects/ruuma%20entertainment%20management%20system/02.jpeg" alt="RUuMA Management 2" style="object-position: left;">
-              <img src="assets/projects/ruuma%20entertainment%20management%20system/03.jpeg" alt="RUuMA Management 3" style="object-position: left;">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg" alt="RUuMA Management 1"
+                class="active" style="object-position: left;">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/02.jpeg" alt="RUuMA Management 2"
+                style="object-position: left;">
+              <img src="assets/projects/ruuma%20entertainment%20management%20system/03.jpeg" alt="RUuMA Management 3"
+                style="object-position: left;">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('ruuma-management-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -579,8 +708,8 @@
           </div>
         </div>
 
-        <!-- 8. Dreamlense Wedding Studio -->
-        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.32s">
+        <!-- 9. Dreamlense Wedding Studio -->
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.64s">
           <div class="project-media carousel">
             <div class="carousel-images" id="dreamlense-carousel">
               <img src="assets/projects/Dreamlense/01.png" alt="Dreamlense 1" class="active">
@@ -607,8 +736,8 @@
           </div>
         </div>
 
-        <!-- 6. Challigraphy -->
-        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.16s">
+        <!-- 10. Challigraphy -->
+        <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.72s">
           <div class="project-media carousel">
             <div class="carousel-images" id="challigraphy-carousel">
               <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1"
@@ -635,6 +764,9 @@
             </a>
           </div>
         </div>
+
+
+
 
       </div>
     </div>
@@ -693,7 +825,7 @@
               // Trigger reflow to restart animation
               card.style.animation = 'none';
               card.offsetHeight; /* trigger reflow */
-              card.style.animation = null; 
+              card.style.animation = null;
             } else {
               card.style.display = 'none';
             }
