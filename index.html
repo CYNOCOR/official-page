@@ -1125,6 +1125,735 @@
       .industries-grid { grid-template-columns: repeat(2, 1fr); }
       .arch-node-icon { width: 64px; height: 64px; }
     }
+
+    /* ─── APPLE-STYLE ANNOUNCEMENT PILL ───────────────── */
+    .hero-stealth-banner {
+      margin-top: 36px;
+      display: flex;
+      justify-content: center;
+      animation: heroFadeUp 1s var(--ease) forwards;
+      animation-delay: 0.65s;
+      opacity: 0;
+    }
+
+    .apple-news-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 7px 18px 7px 10px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 980px;
+      color: #f5f5f7;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-news-pill:hover {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: rgba(255, 255, 255, 0.28);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    .apple-pill-tag {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      padding: 3px 10px;
+      border-radius: 980px;
+      background: linear-gradient(135deg, rgba(0, 113, 227, 0.25), rgba(90, 60, 160, 0.35));
+      border: 1px solid rgba(130, 170, 255, 0.35);
+      color: #70b4ff;
+      text-transform: uppercase;
+    }
+
+    .apple-pill-text {
+      color: #e5e5ea;
+    }
+
+    .apple-pill-text strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .apple-pill-chevron {
+      font-size: 1.1rem;
+      line-height: 1;
+      color: #86868b;
+      transition: transform 0.25s ease, color 0.25s ease;
+      margin-left: -2px;
+    }
+
+    .apple-news-pill:hover .apple-pill-chevron {
+      transform: translateX(3px);
+      color: #2997ff;
+    }
+
+    /* ─── MATRIX FILM CINEMATIC CANVAS & BACKGROUND ───── */
+    .apple-cyno-section {
+      position: relative;
+      background: #01040a;
+      color: #f5f5f7;
+      padding: 130px 0 150px;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', sans-serif;
+    }
+
+    .matrix-rain-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.55;
+    }
+
+    .matrix-rain-vignette {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      background: 
+        radial-gradient(ellipse 75% 65% at 50% 45%, rgba(1, 4, 10, 0.25) 0%, rgba(1, 4, 10, 0.88) 75%, #01040a 100%),
+        linear-gradient(180deg, #01040a 0%, transparent 22%, transparent 78%, #01040a 100%);
+    }
+
+    /* Ambient Matrix Light Sheen */
+    .apple-cyno-section::before {
+      content: '';
+      position: absolute;
+      top: 40%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      width: 900px;
+      height: 600px;
+      background: radial-gradient(ellipse at center, rgba(0, 240, 255, 0.16) 0%, rgba(0, 100, 200, 0.08) 45%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .apple-cyno-container {
+      position: relative;
+      z-index: 2;
+      max-width: 1220px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Matrix & Apple Hybrid Header */
+    .apple-cyno-header {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 64px;
+    }
+
+    .apple-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Grotesk', monospace, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #00f0ff;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.35);
+      padding: 5px 16px;
+      border-radius: 980px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+    }
+
+    .matrix-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      animation: matrixPing 1.8s infinite;
+    }
+
+    @keyframes matrixPing {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(1.4); }
+    }
+
+    .apple-cyno-title {
+      font-size: clamp(2.8rem, 5.8vw, 4.8rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.05;
+      color: #ffffff;
+      margin-bottom: 22px;
+    }
+
+    .apple-text-gradient {
+      background: linear-gradient(180deg, #ffffff 20%, #00f0ff 65%, #0088ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: block;
+      filter: drop-shadow(0 0 35px rgba(0, 240, 255, 0.4));
+    }
+
+    .apple-cyno-lead {
+      font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+      line-height: 1.65;
+      color: rgba(200, 225, 255, 0.75);
+      font-weight: 400;
+      letter-spacing: -0.015em;
+      max-width: 740px;
+      margin: 0 auto;
+    }
+
+    /* ─── SHOWCASE STAGE: 3D ROBOT INTEGRATION (NO BOX/FRAME!) ─── */
+    .apple-showcase-stage {
+      display: grid;
+      grid-template-columns: 1.05fr 1.15fr;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 64px;
+      position: relative;
+    }
+
+    /* Left Narrative Column */
+    .apple-stage-narrative {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .apple-tagline {
+      font-size: clamp(1.6rem, 2.4vw, 2.3rem);
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: -0.025em;
+      color: #ffffff;
+    }
+
+    .apple-tagline mark {
+      background: none;
+      color: #00f0ff;
+      text-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+    }
+
+    .apple-stage-p {
+      font-size: 1.02rem;
+      line-height: 1.7;
+      color: rgba(200, 220, 250, 0.75);
+      font-weight: 400;
+    }
+
+    .apple-spec-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .apple-pill-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      background: rgba(0, 240, 255, 0.06);
+      border: 1px solid rgba(0, 240, 255, 0.22);
+      border-radius: 980px;
+      font-size: 0.82rem;
+      color: #e2f0ff;
+      backdrop-filter: blur(14px);
+      transition: all 0.25s ease;
+    }
+
+    .apple-pill-item:hover {
+      background: rgba(0, 240, 255, 0.14);
+      border-color: rgba(0, 240, 255, 0.55);
+      transform: translateY(-2px);
+      color: #ffffff;
+    }
+
+    .apple-pill-item-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+    }
+
+    /* CYNO Feature Highlights List */
+    .cyno-feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin: 20px 0 22px;
+    }
+
+    .cyno-feature-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 12px;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+    }
+
+    .cyno-feature-item:hover {
+      background: rgba(0, 240, 255, 0.05);
+      border-color: rgba(0, 240, 255, 0.28);
+      transform: translateX(4px);
+    }
+
+    .cyno-feature-bullet {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #00f0ff;
+      box-shadow: 0 0 10px #00f0ff;
+      margin-top: 7px;
+      flex-shrink: 0;
+    }
+
+    .cyno-feature-text {
+      font-size: 0.93rem;
+      line-height: 1.55;
+      color: #c4ccd8;
+    }
+
+    .cyno-feature-text strong {
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    /* Stay Tuned Banner */
+    .cyno-stay-tuned-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 20px;
+      margin-bottom: 22px;
+      border-radius: 980px;
+      background: rgba(0, 240, 255, 0.08);
+      border: 1px solid rgba(0, 240, 255, 0.32);
+      color: #e6f9ff;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      box-shadow: 0 4px 20px rgba(0, 240, 255, 0.15);
+    }
+
+    .apple-stage-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .apple-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 28px;
+      background: linear-gradient(135deg, #0071e3 0%, #00c6ff 100%);
+      color: #ffffff;
+      border-radius: 980px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      box-shadow: 0 8px 30px rgba(0, 198, 255, 0.35);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+
+    .apple-btn-primary:hover {
+      background: linear-gradient(135deg, #0080ff 0%, #00f0ff 100%);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 14px 40px rgba(0, 240, 255, 0.55);
+      color: #01040a;
+    }
+
+    .apple-link-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #00f0ff;
+      font-size: 0.95rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .apple-link-secondary:hover {
+      color: #ffffff;
+      text-shadow: 0 0 10px #00f0ff;
+    }
+
+    .apple-link-secondary .apple-chevron {
+      font-size: 1.15rem;
+      line-height: 1;
+      transition: transform 0.2s ease;
+    }
+
+    .apple-link-secondary:hover .apple-chevron {
+      transform: translateX(4px);
+    }
+
+    /* ─── ELEGANT CYNO BOT SHOWCASE (STATIC, CLEAN & MINIMAL) ─── */
+    .cyno-robot-stage {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 540px;
+      padding: 10px 0;
+    }
+
+    .cyno-robot-frame {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    /* Ambient soft studio halo behind the robot */
+    .cyno-robot-frame::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 340px;
+      height: 480px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 180, 255, 0.08) 0%, rgba(0, 80, 180, 0.02) 50%, transparent 72%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .cyno-robot-img {
+      position: relative;
+      z-index: 1;
+      width: auto;
+      max-width: 100%;
+      height: auto;
+      max-height: 520px;
+      object-fit: contain;
+      filter: drop-shadow(0 25px 45px rgba(0, 0, 0, 0.85));
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      user-select: none;
+    }
+
+    .cyno-robot-frame:hover .cyno-robot-img {
+      transform: translateY(-6px);
+    }
+
+    /* Natural grounded floor shadow */
+    .cyno-robot-ground-shadow {
+      position: relative;
+      z-index: 0;
+      width: 240px;
+      height: 24px;
+      margin-top: -12px;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.45) 45%, transparent 75%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    /* ─── MATRIX FROSTED BENTO SPECIFICATION GRID ───────── */
+    .apple-bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 36px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .apple-bento-card {
+      background: rgba(3, 11, 24, 0.75);
+      border: 1px solid rgba(0, 240, 255, 0.2);
+      border-radius: 24px;
+      padding: 30px 24px;
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(0, 240, 255, 0.25);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .apple-bento-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(0, 240, 255, 0.7), transparent);
+      opacity: 0.6;
+      transition: opacity 0.3s ease;
+    }
+
+    .apple-bento-card:hover {
+      background: rgba(5, 18, 40, 0.88);
+      border-color: rgba(0, 240, 255, 0.55);
+      transform: translateY(-5px);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.75), 0 0 35px rgba(0, 240, 255, 0.22);
+    }
+
+    .apple-bento-card:hover::before {
+      opacity: 1;
+    }
+
+    .apple-bento-metric {
+      font-size: clamp(1.8rem, 2.5vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      background: linear-gradient(180deg, #ffffff 20%, #00f0ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+      filter: drop-shadow(0 0 15px rgba(0, 240, 255, 0.3));
+    }
+
+    .apple-bento-metric.metric-blue {
+      background: linear-gradient(135deg, #ffffff 10%, #00f0ff 60%, #0088ff 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .apple-bento-label {
+      font-size: 1.02rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: #ffffff;
+      margin-bottom: 8px;
+    }
+
+    .apple-bento-desc {
+      font-size: 0.86rem;
+      line-height: 1.55;
+      color: rgba(185, 215, 255, 0.7);
+      font-weight: 400;
+    }
+
+    /* ─── APPLE SHEET MODAL ────────────────────────────── */
+    .apple-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(40px);
+      -webkit-backdrop-filter: blur(40px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      padding: 24px;
+    }
+
+    .apple-modal.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .apple-modal-sheet {
+      background: rgba(3, 11, 24, 0.94);
+      border: 1px solid rgba(0, 240, 255, 0.3);
+      border-radius: 28px;
+      width: 720px;
+      max-width: 100%;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 42px;
+      color: #f5f5f7;
+      position: relative;
+      box-shadow: 0 40px 100px rgba(0, 0, 0, 0.9), 0 0 60px rgba(0, 240, 255, 0.2), inset 0 1px 0 rgba(0, 240, 255, 0.25);
+      transform: scale(0.96) translateY(24px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .apple-modal.active .apple-modal-sheet {
+      transform: scale(1) translateY(0);
+    }
+
+    .apple-modal-close-btn {
+      position: absolute;
+      top: 22px;
+      right: 22px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #a1a1a6;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.15rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .apple-modal-close-btn:hover {
+      background: rgba(255, 59, 48, 0.2);
+      border-color: rgba(255, 59, 48, 0.6);
+      color: #ff3b30;
+    }
+
+    .apple-modal-badge {
+      display: inline-block;
+      font-size: 0.74rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #00f0ff;
+      margin-bottom: 12px;
+    }
+
+    .apple-modal-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.1rem);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 18px;
+    }
+
+    .apple-modal-body {
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: rgba(200, 220, 250, 0.8);
+      margin-bottom: 28px;
+    }
+
+    .apple-modal-body p {
+      margin-bottom: 14px;
+    }
+
+    .apple-modal-highlight {
+      background: rgba(0, 240, 255, 0.08);
+      border-left: 3px solid #00f0ff;
+      padding: 16px 20px;
+      border-radius: 0 14px 14px 0;
+      margin: 20px 0;
+    }
+
+    .apple-modal-highlight-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #00f0ff;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+
+    .apple-modal-highlight-text {
+      font-size: 0.9rem;
+      color: #e5e5ea;
+      line-height: 1.5;
+    }
+
+    .apple-modal-actions {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      justify-content: flex-end;
+      flex-wrap: wrap;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .apple-btn-secondary {
+      padding: 11px 22px;
+      background: rgba(255, 255, 255, 0.08);
+      color: #f5f5f7;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 980px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .apple-btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.16);
+      color: #ffffff;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+      .apple-showcase-stage {
+        grid-template-columns: 1fr;
+        gap: 50px;
+      }
+      .cyno-robot-stage {
+        order: -1;
+        min-height: auto;
+      }
+      .cyno-robot-img {
+        max-height: 440px;
+      }
+      .apple-bento-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .apple-cyno-section {
+        padding: 85px 0 100px;
+      }
+      .cyno-robot-img {
+        max-height: 360px;
+      }
+      .apple-bento-grid {
+        grid-template-columns: 1fr;
+      }
+      .apple-stage-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .apple-btn-primary {
+        width: 100%;
+      }
+      .apple-link-secondary {
+        justify-content: center;
+      }
+      .apple-modal-sheet {
+        padding: 28px 20px;
+      }
+    }
   </style>
 
   <script src="js/main.js" defer></script>
@@ -1205,6 +1934,15 @@
           Our Story
         </a>
       </div>
+
+      <!-- Apple-Style Hero News Pill -->
+      <div class="hero-stealth-banner">
+        <a href="#cyno-bot" class="apple-news-pill">
+          <span class="apple-pill-tag">Special Project</span>
+          <span class="apple-pill-text">Introducing <strong>CYNO BOT</strong> &nbsp;·&nbsp; Intelligence in physical form</span>
+          <span class="apple-pill-chevron">›</span>
+        </a>
+      </div>
     </div>
 
 
@@ -1256,6 +1994,131 @@
           <div class="stat-label">Client Satisfaction</div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── SPECIAL PROJECT SHOWCASE: CYNO BOT (MATRIX 3D SCENE) ── -->
+  <section class="apple-cyno-section" id="cyno-bot">
+    <!-- Matrix Digital Rain Canvas Background -->
+    <canvas id="cynoMatrixRain" class="matrix-rain-canvas" aria-hidden="true"></canvas>
+    <div class="matrix-rain-vignette" aria-hidden="true"></div>
+
+    <div class="apple-cyno-container">
+      
+      <!-- Section Header -->
+      <div class="apple-cyno-header fade-up">
+        <span class="apple-eyebrow">
+          <span class="matrix-live-dot"></span>
+          BY CYNOCOR · SPECIAL PROJECT
+        </span>
+        <h2 class="apple-cyno-title">
+          CYNO BOT.
+          <span class="apple-text-gradient">Something Big Is Coming!</span>
+        </h2>
+        <p class="apple-cyno-lead">
+          The Future of Smart Assistance Is Here.
+        </p>
+      </div>
+
+      <!-- Main Showcase Stage: Editorial Narrative + Pristine Robot Showcase -->
+      <div class="apple-showcase-stage">
+        
+        <!-- Left: Narrative & Specifications -->
+        <div class="apple-stage-narrative fade-up">
+          <h3 class="apple-tagline">
+            The Future of Smart Assistance <mark>Is Here</mark>
+          </h3>
+
+          <p class="apple-stage-p">
+            We are introducing <strong>CYNO BOT</strong> — our inaugural human-sized AI assistant robot. Powered by Apple Silicon M1 and built with a modular hybrid design, it is engineered for everything from campus guidance to personalized living spaces.
+          </p>
+
+          <!-- Feature Highlights -->
+          <div class="cyno-feature-list">
+            <div class="cyno-feature-item">
+              <span class="cyno-feature-bullet"></span>
+              <div class="cyno-feature-text">
+                <strong>Intelligent Presence:</strong> Person detection with expressive interactive eyes.
+              </div>
+            </div>
+
+            <div class="cyno-feature-item">
+              <span class="cyno-feature-bullet"></span>
+              <div class="cyno-feature-text">
+                <strong>Dual Profiles:</strong> University Entrance Navigator &amp; Smart Home Companion.
+              </div>
+            </div>
+
+            <div class="cyno-feature-item">
+              <span class="cyno-feature-bullet"></span>
+              <div class="cyno-feature-text">
+                <strong>Built-in Guardian:</strong> Real-time environmental sensing and instant SOS alerts.
+              </div>
+            </div>
+          </div>
+
+          <!-- Stay Tuned Badge -->
+          <div class="cyno-stay-tuned-tag">
+            <span class="matrix-live-dot"></span>
+            Stay Tuned. The Next Revolution Begins Soon.
+          </div>
+
+          <!-- CTAs -->
+          <div class="apple-stage-actions">
+            <button type="button" class="apple-btn-primary" id="open-cyno-modal">
+              Explore the Architecture
+            </button>
+            <a href="contact.html?subject=Inquiry-CYNO-BOT-Priority-Access" class="apple-link-secondary">
+              Stay Tuned for Launch Updates <span class="apple-chevron">›</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Hardware Showcase (Clean, Minimal, Pristine Product Placement) -->
+        <div class="cyno-robot-stage fade-up" style="transition-delay:0.12s">
+          <div class="cyno-robot-frame">
+            <img src="assets/home/cyno-bot.png" alt="CYNO BOT Autonomous Robotics Platform" class="cyno-robot-img">
+            <div class="cyno-robot-ground-shadow" aria-hidden="true"></div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Apple Bento Grid: 4 Pillars of Engineering -->
+      <div class="apple-bento-grid fade-up" style="transition-delay:0.2s">
+        <div class="apple-bento-card">
+          <div class="apple-bento-metric metric-blue">Apple M1</div>
+          <div>
+            <div class="apple-bento-label">Compute Core</div>
+            <div class="apple-bento-desc">Powered by Apple Silicon M1 for fast on-device neural inference and responsive real-time intelligence.</div>
+          </div>
+        </div>
+
+        <div class="apple-bento-card">
+          <div class="apple-bento-metric">Dual</div>
+          <div>
+            <div class="apple-bento-label">Dynamic Operational Profiles</div>
+            <div class="apple-bento-desc">Engineered for versatile deployment — from University Entrance Navigator to Smart Home Companion.</div>
+          </div>
+        </div>
+
+        <div class="apple-bento-card">
+          <div class="apple-bento-metric metric-blue">Vision</div>
+          <div>
+            <div class="apple-bento-label">Intelligent Presence</div>
+            <div class="apple-bento-desc">Real-time person detection paired with expressive, interactive eyes that communicate intent naturally.</div>
+          </div>
+        </div>
+
+        <div class="apple-bento-card">
+          <div class="apple-bento-metric">Guardian</div>
+          <div>
+            <div class="apple-bento-label">Built-in Guardian &amp; SOS</div>
+            <div class="apple-bento-desc">Continuous environmental sensing, obstacle telemetry, and instant automated SOS safety alerts.</div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -1685,6 +2548,162 @@
       resize();
       initNodes();
       draw();
+    })();
+  </script>
+
+  <!-- ── APPLE-INSPIRED SHEET MODAL: CYNO BOT ──────────────── -->
+  <div class="apple-modal" id="cynoModal" role="dialog" aria-modal="true" aria-labelledby="cynoModalTitle">
+    <div class="apple-modal-sheet">
+      <button type="button" class="apple-modal-close-btn" id="closeCynoModalBtn" aria-label="Close modal">&times;</button>
+      
+      <span class="apple-modal-badge">By Cynocor · Project Brief</span>
+      
+      <h3 id="cynoModalTitle" class="apple-modal-title">
+        CYNO BOT: <span style="color:#2997ff;">Something Big Is Coming!</span>
+      </h3>
+
+      <div class="apple-modal-body">
+        <p>
+          <strong>Platform Codename:</strong> CYNO BOT<br>
+          <strong>Engineered By:</strong> Cynocor Advanced Systems<br>
+          <strong>Class:</strong> Inaugural Human-Sized AI Assistant Robot<br>
+          <strong>Processing Core:</strong> Powered by Apple Silicon M1<br>
+          <strong>Chassis Architecture:</strong> Modular Hybrid Design
+        </p>
+        <p>
+          We are introducing <strong>CYNO BOT</strong> — our inaugural human-sized AI assistant robot. Powered by Apple Silicon M1 and built with a modular hybrid design, it is engineered for everything from campus guidance to personalized living spaces.
+        </p>
+        
+        <div class="apple-modal-highlight">
+          <div class="apple-modal-highlight-title">Core Capabilities &amp; Profiles</div>
+          <div class="apple-modal-highlight-text" style="line-height: 1.8;">
+            • <strong>Intelligent Presence:</strong> Person detection with expressive interactive eyes.<br>
+            • <strong>Dual Profiles:</strong> University Entrance Navigator &amp; Smart Home Companion.<br>
+            • <strong>Built-in Guardian:</strong> Real-time environmental sensing and instant SOS alerts.
+          </div>
+        </div>
+
+        <p style="margin-top: 18px; font-weight: 600; color: #00f0ff;">
+          Stay Tuned. The Next Revolution Begins Soon.
+        </p>
+      </div>
+
+      <div class="apple-modal-actions">
+        <button type="button" class="apple-btn-secondary" id="cynoModalDismiss">Close</button>
+        <a href="contact.html?subject=Inquiry-CYNO-BOT-Priority-Access" class="apple-btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">
+          Get Launch Updates
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Matrix Rain & CYNO BOT 3D Motion Scripts ────────── -->
+  <script>
+    (function () {
+      // 1. Matrix Digital Rain Canvas Background
+      var canvas = document.getElementById('cynoMatrixRain');
+      if (canvas) {
+        var ctx = canvas.getContext('2d');
+        var section = document.getElementById('cyno-bot');
+        var width, height, columns, drops;
+        
+        // Matrix glyph set: Katakana, numbers & cyber symbols
+        var chars = 'ｦｱｳｴｵｶｷｹｺｻｼｽｾｿﾀﾂﾃﾅﾆﾇﾈﾊﾋﾎﾏﾐﾑﾒﾓﾔﾕﾗﾘﾜ0123456789ABCDEF01+-*/<>[]{}|=~';
+        var charArr = chars.split('');
+        var fontSize = 14;
+
+        function resizeMatrix() {
+          if (!section) return;
+          width = canvas.width = section.offsetWidth;
+          height = canvas.height = section.offsetHeight;
+          columns = Math.floor(width / fontSize);
+          drops = [];
+          for (var i = 0; i < columns; i++) {
+            drops[i] = Math.floor(Math.random() * -50);
+          }
+        }
+
+        window.addEventListener('resize', resizeMatrix);
+        resizeMatrix();
+
+        var lastFrame = 0;
+        var fpsInterval = 1000 / 30; // 30 FPS smooth matrix rain
+
+        function drawMatrix(timestamp) {
+          requestAnimationFrame(drawMatrix);
+          if (timestamp - lastFrame < fpsInterval) return;
+          lastFrame = timestamp;
+
+          // Translucent dark fill for iconic matrix trailing fade
+          ctx.fillStyle = 'rgba(1, 4, 10, 0.12)';
+          ctx.fillRect(0, 0, width, height);
+
+          ctx.font = fontSize + 'px monospace';
+
+          for (var i = 0; i < drops.length; i++) {
+            var text = charArr[Math.floor(Math.random() * charArr.length)];
+            var x = i * fontSize;
+            var y = drops[i] * fontSize;
+
+            // Leading bright tip of each matrix column
+            if (Math.random() > 0.88) {
+              ctx.fillStyle = '#ffffff';
+              ctx.shadowColor = '#00f0ff';
+              ctx.shadowBlur = 10;
+            } else if (Math.random() > 0.5) {
+              ctx.fillStyle = '#00f0ff';
+              ctx.shadowColor = '#00f0ff';
+              ctx.shadowBlur = 6;
+            } else {
+              ctx.fillStyle = '#0088cc';
+              ctx.shadowBlur = 0;
+            }
+
+            ctx.fillText(text, x, y);
+
+            if (y > height && Math.random() > 0.975) {
+              drops[i] = 0;
+            }
+            drops[i]++;
+          }
+        }
+
+        requestAnimationFrame(drawMatrix);
+      }
+
+      // 2. Modal control
+      var openBtn = document.getElementById('open-cyno-modal');
+      var modal = document.getElementById('cynoModal');
+      var closeBtn = document.getElementById('closeCynoModalBtn');
+      var dismissBtn = document.getElementById('cynoModalDismiss');
+
+      function openModal() {
+        if (!modal) return;
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeModal() {
+        if (!modal) return;
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (dismissBtn) dismissBtn.addEventListener('click', closeModal);
+
+      if (modal) {
+        modal.addEventListener('click', function (e) {
+          if (e.target === modal) closeModal();
+        });
+      }
+
+      window.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+          closeModal();
+        }
+      });
     })();
   </script>
 
