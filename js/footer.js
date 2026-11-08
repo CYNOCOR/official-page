@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
               <li><a href="team.html">Team</a></li>
               <li><a href="services.html">Services</a></li>
               <li><a href="projects.html">Projects</a></li>
+              <li><a href="gallery.html">Gallery</a></li>
             </ul>
           </div>
 

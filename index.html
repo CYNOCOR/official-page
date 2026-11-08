@@ -1164,6 +1164,24 @@
       color: #ffffff;
     }
 
+    .apple-pill-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 50% 35%, #ffffff 0%, #eaf6ff 100%);
+      border: 1px solid rgba(0, 240, 255, 0.55);
+      box-shadow: 0 0 12px rgba(0, 240, 255, 0.35);
+      padding: 3px;
+      object-fit: contain;
+      flex-shrink: 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .apple-news-pill:hover .apple-pill-logo {
+      transform: scale(1.08) rotate(-4deg);
+      box-shadow: 0 0 18px rgba(0, 240, 255, 0.65);
+    }
+
     .apple-pill-tag {
       font-size: 0.7rem;
       font-weight: 600;
@@ -1252,6 +1270,69 @@
     }
 
     /* Matrix & Apple Hybrid Header */
+    .apple-cyno-header {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 64px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Official CynoBot Logo Emblem */
+    .cyno-brand-logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 148px;
+      height: 148px;
+      border-radius: 34px;
+      background: radial-gradient(circle at 50% 32%, #ffffff 0%, #f0f9ff 68%, #dcf2ff 100%);
+      border: 1.5px solid rgba(0, 240, 255, 0.65);
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.75),
+        0 0 40px rgba(0, 240, 255, 0.28),
+        inset 0 2px 6px rgba(255, 255, 255, 0.95);
+      padding: 18px;
+      margin-bottom: 24px;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+    }
+
+    .cyno-brand-logo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, rgba(0, 240, 255, 0.4), transparent 50%, rgba(0, 136, 255, 0.35));
+      z-index: -1;
+      filter: blur(10px);
+      opacity: 0.75;
+      transition: opacity 0.4s ease;
+    }
+
+    .cyno-brand-logo-wrap:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow:
+        0 26px 60px rgba(0, 0, 0, 0.85),
+        0 0 55px rgba(0, 240, 255, 0.48),
+        inset 0 2px 8px rgba(255, 255, 255, 1);
+    }
+
+    .cyno-brand-logo-wrap:hover::after {
+      opacity: 1;
+    }
+
+    .cyno-brand-logo {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      user-select: none;
+      filter: drop-shadow(0 4px 10px rgba(0, 40, 80, 0.12));
+    }
+
+    /* Old .apple-cyno-header overridden above */
+    .apple-cyno-header-noop {}
     .apple-cyno-header {
       text-align: center;
       max-width: 880px;
@@ -1733,6 +1814,33 @@
       color: #ff3b30;
     }
 
+    .apple-modal-brand-row {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .apple-modal-logo-box {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      background: radial-gradient(circle at 50% 35%, #ffffff 0%, #ebf7ff 70%, #d8f0ff 100%);
+      border: 1.5px solid rgba(0, 240, 255, 0.6);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6), 0 0 22px rgba(0, 240, 255, 0.25);
+      padding: 8px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .apple-modal-logo-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
     .apple-modal-badge {
       display: inline-block;
       font-size: 0.74rem;
@@ -1854,6 +1962,23 @@
       .apple-modal-sheet {
         padding: 28px 20px;
       }
+      .cyno-brand-logo-wrap {
+        width: 118px;
+        height: 118px;
+        border-radius: 28px;
+        padding: 14px;
+        margin-bottom: 18px;
+      }
+      .apple-modal-brand-row {
+        gap: 14px;
+        margin-bottom: 16px;
+      }
+      .apple-modal-logo-box {
+        width: 56px;
+        height: 56px;
+        border-radius: 14px;
+        padding: 6px;
+      }
     }
   </style>
 
@@ -1877,6 +2002,7 @@
         <a href="services.html">Services</a>
         <a href="team.html">Team</a>
         <a href="projects.html">Projects</a>
+        <a href="gallery.html">Gallery</a>
         <a href="tools.html">Tools</a>
       </nav>
       <div class="nav-right">
@@ -1939,6 +2065,7 @@
       <!-- Apple-Style Hero News Pill -->
       <div class="hero-stealth-banner">
         <a href="#cyno-bot" class="apple-news-pill">
+          <img src="assets/home/cynobot-logo.png" alt="CynoBot Logo" class="apple-pill-logo">
           <span class="apple-pill-tag">Special Project</span>
           <span class="apple-pill-text">Introducing <strong>CYNO BOT</strong> &nbsp;·&nbsp; Intelligence in physical form</span>
           <span class="apple-pill-chevron">›</span>
@@ -2008,6 +2135,9 @@
       
       <!-- Section Header -->
       <div class="apple-cyno-header fade-up">
+        <div class="cyno-brand-logo-wrap">
+          <img src="assets/home/cynobot-logo.png" alt="CynoBot Official Logo" class="cyno-brand-logo">
+        </div>
         <span class="apple-eyebrow">
           <span class="matrix-live-dot"></span>
           BY CYNOCOR · SPECIAL PROJECT
@@ -2558,6 +2688,15 @@
       <button type="button" class="apple-modal-close-btn" id="closeCynoModalBtn" aria-label="Close modal">&times;</button>
       
       <span class="apple-modal-badge">By Cynocor · Project Brief</span>
+      <div class="apple-modal-brand-row">
+        <div class="apple-modal-logo-box">
+          <img src="assets/home/cynobot-logo.png" alt="CynoBot Logo">
+        </div>
+        <div>
+          <span class="apple-modal-badge" style="margin-bottom: 4px; display: block;">By Cynocor · Project Brief</span>
+          <div style="font-size: 0.95rem; font-weight: 600; color: #e2f0ff; letter-spacing: -0.01em;">Official CynoBot Robotics Identity</div>
+        </div>
+      </div>
       
       <h3 id="cynoModalTitle" class="apple-modal-title">
         CYNO BOT: <span style="color:#2997ff;">Something Big Is Coming!</span>
