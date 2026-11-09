@@ -159,7 +159,7 @@
       transform: scale(1.08);
     }
 
-    /* Video Play/Pause Floating Control (when video slide is used) */
+    /* Video Play/Pause Floating Control */
     .video-controls-bar {
       position: absolute;
       bottom: 14px;
@@ -192,7 +192,7 @@
       transform: scale(1.06);
     }
 
-    /* Carousel Arrows & Dots inside 4:5 Banner (for multi-photo/video events) */
+    /* Carousel Arrows & Dots inside 4:5 Banner */
     .banner-nav-btn {
       position: absolute;
       top: 50%;
@@ -399,6 +399,449 @@
       margin: 0;
     }
 
+    /* "View More" Redirect Button at the bottom of University Life Card */
+    .uni-card-view-more-btn {
+      margin-top: 16px;
+      width: 100%;
+      padding: 11px 18px;
+      border-radius: 12px;
+      background: rgba(0, 102, 204, 0.08);
+      border: 1px solid rgba(0, 102, 204, 0.22);
+      color: var(--accent);
+      font-size: 0.86rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.28s var(--ease);
+    }
+
+    .uni-card-view-more-btn:hover {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.24);
+      transform: translateY(-2px);
+    }
+
+    .uni-card-view-more-btn svg {
+      transition: transform 0.25s ease;
+    }
+
+    .uni-card-view-more-btn:hover svg {
+      transform: translateX(4px);
+    }
+
+    /* ── "View More" Section Card (Placed to the Right in University Life) ── */
+    .uni-view-more-card {
+      display: none; /* Shown when University Life tab is selected */
+      cursor: pointer;
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background:
+        radial-gradient(80% 65% at 85% 15%, rgba(0, 168, 255, 0.24) 0%, transparent 60%),
+        radial-gradient(70% 60% at 15% 85%, rgba(0, 102, 204, 0.28) 0%, transparent 65%),
+        linear-gradient(155deg, #040d1a 0%, #081b33 52%, #051122 100%);
+      border: 1px solid rgba(90, 170, 255, 0.28);
+      box-shadow: 0 20px 45px rgba(2, 10, 24, 0.18);
+      padding: 34px 28px;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      color: #ffffff;
+      transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+      min-height: 100%;
+    }
+
+    .uni-view-more-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(0, 210, 255, 0.65);
+      box-shadow: 0 28px 60px rgba(0, 80, 180, 0.28);
+    }
+
+    .uni-vm-top {
+      width: 100%;
+    }
+
+    .uni-vm-preview-stack {
+      display: flex;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .uni-vm-thumb {
+      width: 56px;
+      height: 70px;
+      border-radius: 12px;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+      transition: transform 0.35s var(--ease);
+    }
+
+    .uni-vm-thumb:nth-child(2) {
+      margin-left: -16px;
+      transform: rotate(5deg);
+    }
+
+    .uni-vm-thumb:nth-child(3) {
+      margin-left: -16px;
+      transform: rotate(10deg);
+    }
+
+    .uni-view-more-card:hover .uni-vm-thumb:nth-child(1) {
+      transform: translateY(-4px) rotate(-4deg);
+    }
+
+    .uni-view-more-card:hover .uni-vm-thumb:nth-child(2) {
+      transform: translateY(-4px) translateX(4px) rotate(4deg);
+    }
+
+    .uni-view-more-card:hover .uni-vm-thumb:nth-child(3) {
+      transform: translateY(-4px) translateX(8px) rotate(11deg);
+    }
+
+    .uni-vm-count-circle {
+      margin-left: 14px;
+      padding: 6px 13px;
+      border-radius: 999px;
+      background: rgba(0, 210, 255, 0.16);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      color: #5ce1ff;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+    }
+
+    .uni-vm-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #5ce1ff;
+      margin-bottom: 10px;
+    }
+
+    .uni-vm-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: #ffffff;
+      margin: 0 0 12px;
+    }
+
+    .uni-vm-desc {
+      font-size: 0.9rem;
+      line-height: 1.65;
+      color: rgba(205, 226, 255, 0.82);
+      margin: 0 0 22px;
+    }
+
+    .uni-vm-chapters {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-bottom: 26px;
+    }
+
+    .uni-vm-chapter-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: #e6f2ff;
+      transition: background 0.25s ease, border-color 0.25s ease;
+    }
+
+    .uni-view-more-card:hover .uni-vm-chapter-item {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(92, 225, 255, 0.3);
+    }
+
+    .uni-vm-chapter-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      color: #5ce1ff;
+      background: rgba(0, 210, 255, 0.15);
+      padding: 3px 8px;
+      border-radius: 999px;
+    }
+
+    .uni-vm-cta-btn {
+      width: 100%;
+      padding: 14px 20px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #0066cc 0%, #00a8ff 100%);
+      color: #ffffff;
+      font-size: 0.92rem;
+      font-weight: 600;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      box-shadow: 0 10px 25px rgba(0, 136, 255, 0.35);
+      transition: all 0.3s var(--ease);
+    }
+
+    .uni-view-more-card:hover .uni-vm-cta-btn {
+      background: linear-gradient(135deg, #0077ee 0%, #00c6ff 100%);
+      box-shadow: 0 14px 32px rgba(0, 180, 255, 0.5);
+      transform: translateY(-2px);
+    }
+
+    .uni-vm-cta-btn svg {
+      transition: transform 0.25s ease;
+    }
+
+    .uni-view-more-card:hover .uni-vm-cta-btn svg {
+      transform: translateX(4px);
+    }
+
+    /* ── University Life Sections Popup Modal (`#uniMoreModal`) ── */
+    .uni-sections-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99995;
+      background: rgba(3, 8, 18, 0.85);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+    }
+
+    .uni-sections-modal.active {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    .uni-sections-modal:not(.active) * {
+      pointer-events: none !important;
+    }
+
+    .uni-sections-dialog {
+      background: #f5f7fb;
+      border-radius: 28px;
+      width: 1140px;
+      max-width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transform: translateY(28px) scale(0.96);
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .uni-sections-modal.active .uni-sections-dialog {
+      transform: translateY(0) scale(1);
+    }
+
+    .uni-modal-top-bar {
+      padding: 22px 30px;
+      background: linear-gradient(135deg, #040d1a 0%, #0a1e38 60%, #061529 100%);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+    }
+
+    .uni-modal-top-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .uni-modal-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: rgba(0, 180, 255, 0.16);
+      border: 1px solid rgba(0, 210, 255, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #5ce1ff;
+      flex-shrink: 0;
+    }
+
+    .uni-modal-top-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin: 0 0 2px;
+      color: #ffffff;
+    }
+
+    .uni-modal-top-sub {
+      font-size: 0.82rem;
+      color: rgba(205, 226, 255, 0.78);
+      margin: 0;
+    }
+
+    .uni-modal-close {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      color: #ffffff;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+
+    .uni-modal-close:hover {
+      background: #ff3b30;
+      border-color: #ff3b30;
+    }
+
+    .uni-modal-scroll-body {
+      padding: 26px 28px 32px;
+      overflow-y: auto;
+    }
+
+    /* Compact normal gallery-grid view inside Popup Modal */
+    .uni-modal-scroll-body .gallery-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+
+    .uni-modal-scroll-body .event-card {
+      border-radius: 18px;
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .uni-sections-modal.active .uni-modal-scroll-body .event-card:nth-child(1) {
+      animation: sectionListFadeIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.06s forwards;
+    }
+
+    .uni-sections-modal.active .uni-modal-scroll-body .event-card:nth-child(2) {
+      animation: sectionListFadeIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.14s forwards;
+    }
+
+    .uni-sections-modal.active .uni-modal-scroll-body .event-card:nth-child(3) {
+      animation: sectionListFadeIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.22s forwards;
+    }
+
+    .uni-sections-modal.active .uni-modal-scroll-body .event-card:nth-child(n+4) {
+      animation: sectionListFadeIn 0.42s cubic-bezier(0.16, 1, 0.3, 1) 0.28s forwards;
+    }
+
+    @keyframes sectionListFadeIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .uni-modal-scroll-body .event-social-bar {
+      padding: 10px 14px;
+    }
+
+    .uni-modal-scroll-body .social-icon-btn {
+      width: 34px;
+      height: 34px;
+    }
+
+    .uni-modal-scroll-body .social-icon-btn svg {
+      width: 15px;
+      height: 15px;
+    }
+
+    .uni-modal-scroll-body .event-body {
+      padding: 14px 16px 18px;
+    }
+
+    .uni-modal-scroll-body .event-body h3 {
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+
+    .uni-modal-scroll-body .event-body p {
+      font-size: 0.82rem;
+      line-height: 1.55;
+    }
+
+    /* "Coming Soon" Empty Section Cards inside Popup */
+    .event-card.coming-soon-card {
+      background: linear-gradient(160deg, #ffffff 0%, #f1f5fb 100%);
+      border: 1.5px dashed rgba(0, 102, 204, 0.22);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 40px 24px;
+      min-height: 420px;
+      box-shadow: none;
+    }
+
+    .event-card.coming-soon-card:hover {
+      transform: none;
+      border-color: rgba(0, 102, 204, 0.38);
+      box-shadow: 0 10px 28px rgba(0, 102, 204, 0.06);
+    }
+
+    .coming-soon-icon-circle {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(0, 102, 204, 0.08);
+      border: 1px solid rgba(0, 102, 204, 0.18);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .coming-soon-badge {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: var(--text-primary);
+      margin: 0 0 6px;
+    }
+
+    .coming-soon-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
     /* ── Lightbox Modal for 4:5 Images & Videos ────────── */
     .gallery-lightbox {
       position: fixed;
@@ -412,13 +855,19 @@
       justify-content: center;
       padding: 20px;
       opacity: 0;
+      visibility: hidden;
       pointer-events: none;
-      transition: opacity 0.32s var(--ease);
+      transition: opacity 0.32s var(--ease), visibility 0.32s var(--ease);
     }
 
     .gallery-lightbox.active {
       opacity: 1;
+      visibility: visible;
       pointer-events: auto;
+    }
+
+    .gallery-lightbox:not(.active) * {
+      pointer-events: none !important;
     }
 
     .lightbox-dialog {
@@ -495,7 +944,8 @@
 
     /* ── Tablet & Mobile Optimization ──────────────────── */
     @media (max-width: 992px) {
-      .gallery-grid {
+      .gallery-grid,
+      .uni-modal-scroll-body .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 22px;
       }
@@ -540,6 +990,14 @@
         width: 32px;
         height: 32px;
       }
+
+      .uni-modal-top-bar {
+        padding: 16px 20px;
+      }
+
+      .uni-modal-scroll-body {
+        padding: 18px 16px 28px;
+      }
     }
 
     @media (max-width: 580px) {
@@ -551,15 +1009,25 @@
         padding: 20px 0 56px !important;
       }
 
-      .gallery-grid {
+      .gallery-grid,
+      .uni-modal-scroll-body .gallery-grid {
         grid-template-columns: 1fr;
         max-width: 420px;
         margin: 0 auto;
         gap: 20px;
       }
 
-      .event-card {
+      .event-card,
+      .uni-view-more-card {
         border-radius: 18px;
+      }
+
+      .uni-view-more-card {
+        padding: 26px 20px;
+      }
+
+      .uni-vm-title {
+        font-size: 1.45rem;
       }
 
       .event-social-bar {
@@ -592,12 +1060,24 @@
         font-size: 0.84rem;
       }
 
-      .gallery-lightbox {
+      .gallery-lightbox,
+      .uni-sections-modal {
         padding: 12px;
       }
 
-      .lightbox-dialog {
+      .lightbox-dialog,
+      .uni-sections-dialog {
         border-radius: 18px;
+      }
+
+      .uni-popup-section-item {
+        padding: 16px 14px;
+      }
+
+      .uni-section-header-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
       }
     }
 
@@ -656,31 +1136,18 @@
 
       <!-- Category Filters -->
       <div class="gallery-filters fade-up" role="tablist" aria-label="Filter gallery by category">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="iconic-moments">Iconic Moments</button>
-        <button class="filter-btn" data-filter="robotics-ai">Robotics &amp; AI</button>
-        <button class="filter-btn" data-filter="exhibition">Exhibition</button>
-        <button class="filter-btn" data-filter="events">Events</button>
+        <button type="button" class="filter-btn active" data-filter="all">All</button>
+        <button type="button" class="filter-btn" data-filter="iconic-moments">Iconic Moments</button>
+        <button type="button" class="filter-btn" data-filter="robotics-ai">Robotics &amp; AI</button>
+        <button type="button" class="filter-btn" data-filter="exhibition">Exhibition</button>
+        <button type="button" class="filter-btn" data-filter="events">Events</button>
+        <button type="button" class="filter-btn" data-filter="university-life">University Life</button>
       </div>
-
-      <!-- =========================================================================
-           HOW TO ADD IMAGES OR VIDEOS TO AN EVENT (4:5 RATIO):
-           - For an IMAGE inside <div class="event-slides">:
-             <div class="event-slide active" data-type="image">
-               <img src="assets/gallery/your-image.jpg" alt="Event Name">
-             </div>
-           - For a VIDEO inside <div class="event-slides">:
-             <div class="event-slide active" data-type="video">
-               <video src="assets/gallery/your-video.mp4" poster="assets/gallery/poster.jpg" autoplay muted loop playsinline preload="metadata"></video>
-             </div>
-           - Multiple categories can be assigned in data-cat="robotics-ai exhibition events"
-           ========================================================================= -->
 
       <div class="gallery-grid" id="galleryGrid">
 
-        <!-- ── INFOTEL 2026 (Belongs to Robotics & AI, Exhibition, and Events) ── -->
+        <!-- ── 1. INFOTEL 2026 (Belongs to Robotics & AI, Exhibition, and Events) ── -->
         <article class="event-card fade-up" data-cat="robotics-ai exhibition events">
-          <!-- 4:5 Event Banner -->
           <div class="event-banner" id="banner-infotel-2026">
             <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -693,7 +1160,6 @@
             </div>
           </div>
 
-          <!-- Social Media Platform Icons Bar (Directly Below Banner) -->
           <div class="event-social-bar">
             <div class="event-social-icons">
               <a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
@@ -721,7 +1187,6 @@
             </div>
           </div>
 
-          <!-- Event Details -->
           <div class="event-body">
             <div class="event-tags-row">
               <span class="event-cat-pill">Robotics &amp; AI</span>
@@ -733,9 +1198,8 @@
           </div>
         </article>
 
-        <!-- ── IIT DEAN MEETING: CYNO BOT DISCUSSION (Belongs to Iconic Moments & Robotics & AI) ── -->
+        <!-- ── 2. IIT DEAN MEETING: CYNO BOT DISCUSSION (Belongs to Iconic Moments & Robotics & AI) ── -->
         <article class="event-card fade-up" data-cat="iconic-moments robotics-ai" style="transition-delay:0.08s">
-          <!-- 4:5 Event Banner -->
           <div class="event-banner" id="banner-iit-dean-meeting">
             <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
@@ -748,7 +1212,6 @@
             </div>
           </div>
 
-          <!-- Social Media Platform Icons Bar (Directly Below Banner) -->
           <div class="event-social-bar">
             <div class="event-social-icons">
               <a href="https://www.facebook.com/share/p/1DxDwHwh9Y/" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
@@ -776,7 +1239,6 @@
             </div>
           </div>
 
-          <!-- Event Details -->
           <div class="event-body">
             <div class="event-tags-row">
               <span class="event-cat-pill">Iconic Moments</span>
@@ -787,9 +1249,185 @@
           </div>
         </article>
 
+        <!-- ── 3. UNIVERSITY LIFE CARD ── -->
+        <article class="event-card fade-up" data-cat="university-life" style="transition-delay:0.16s">
+          <div class="event-banner" id="banner-university-life">
+            <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+
+            <div class="event-slides">
+              <div class="event-slide active" data-type="image">
+                <img src="assets/gallery/university-life-cover.jpg" alt="University Life - CYNOCOR Campus & Lab Chronicles">
+              </div>
+            </div>
+          </div>
+
+          <div class="event-social-bar">
+            <div class="event-social-icons">
+              <a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <circle cx="12" cy="12" r="4.5"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5H4.12V20h2.82V8.5ZM5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28ZM20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/>
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@cynocorofficial" target="_blank" rel="noopener" class="social-icon-btn tt" aria-label="View on TikTok" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="event-body">
+            <div class="event-tags-row">
+              <span class="event-cat-pill">University Life</span>
+              <span class="event-cat-pill">Campus Chronicles</span>
+            </div>
+            <h3>University Life &amp; Campus Chronicles</h3>
+            <p>From late-night robotics lab builds and module demos to campus friendships and unforgettable team moments at IIT.</p>
+            <button type="button" class="uni-card-view-more-btn" id="uniCardRedirectBtn" onclick="redirectToUniversityLifeCategory()">
+              <span>View More</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+          </div>
+        </article>
+
+        <!-- ── 4. "VIEW MORE" SECTION CARD (Placed directly to the right in University Life tab) ── -->
+        <div class="uni-view-more-card" id="uniViewMoreCard" data-cat="university-life" data-only-cat="true" onclick="openUniSectionsModal()" role="button" tabindex="0" aria-label="View More University Life Posts">
+          <div class="uni-vm-top">
+            <div class="uni-vm-preview-stack">
+              <img src="assets/gallery/university-life-cover.jpg" alt="Preview 1" class="uni-vm-thumb">
+              <span class="uni-vm-count-circle">More Coming Soon</span>
+            </div>
+
+            <span class="uni-vm-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+              University Life Archive
+            </span>
+
+            <h3 class="uni-vm-title">View More</h3>
+            <p class="uni-vm-desc">
+              Explore all posts, campus lab sessions, academic reviews, and student moments organized section by section.
+            </p>
+
+            <div class="uni-vm-chapters">
+              <div class="uni-vm-chapter-item">
+                <span class="uni-vm-chapter-num">01</span>
+                <span>Hardware &amp; AI Integration Sprints</span>
+              </div>
+              <div class="uni-vm-chapter-item">
+                <span class="uni-vm-chapter-num">02</span>
+                <span>Coming Soon</span>
+              </div>
+              <div class="uni-vm-chapter-item">
+                <span class="uni-vm-chapter-num">03</span>
+                <span>Coming Soon</span>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="uni-vm-cta-btn">
+            <span>View More Posts</span>
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+        </div>
+
       </div>
     </div>
   </section>
+
+  <!-- ── POPUP MODAL: ALL UNIVERSITY LIFE SECTIONS & POSTS (`#uniMoreModal`) ── -->
+  <div class="uni-sections-modal" id="uniMoreModal" role="dialog" aria-modal="true" aria-labelledby="uniModalTitle">
+    <div class="uni-sections-dialog">
+      <div class="uni-modal-top-bar">
+        <div class="uni-modal-top-left">
+          <div class="uni-modal-icon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+          </div>
+          <div>
+            <h3 class="uni-modal-top-title" id="uniModalTitle">University Life — All Posts &amp; Sections</h3>
+            <p class="uni-modal-top-sub">Every milestone, lab session, and campus memory organized by section</p>
+          </div>
+        </div>
+        <button type="button" class="uni-modal-close" id="closeUniModalBtn" aria-label="Close popup">&times;</button>
+      </div>
+
+      <div class="uni-modal-scroll-body">
+        <!-- Normal Gallery Grid View Inside Popup (Cards Side-by-Side) -->
+        <div class="gallery-grid">
+
+          <!-- University Life Card 1 -->
+          <article class="event-card">
+            <div class="event-banner" id="banner-uni-sec1-1">
+              <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+              </button>
+              <div class="event-slides">
+                <div class="event-slide active" data-type="image">
+                  <img src="assets/gallery/university-life-cover.jpg" alt="CynoBot Campus Lab Prototyping">
+                </div>
+              </div>
+            </div>
+            <div class="event-social-bar">
+              <div class="event-social-icons">
+                <a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/></svg>
+                </a>
+                <a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M6.94 8.5H4.12V20h2.82V8.5ZM5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28ZM20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/></svg>
+                </a>
+                <a href="https://www.tiktok.com/@cynocorofficial" target="_blank" rel="noopener" class="social-icon-btn tt" aria-label="View on TikTok" title="TikTok">
+                  <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1Z"/></svg>
+                </a>
+              </div>
+            </div>
+            <div class="event-body">
+              <div class="event-tags-row">
+                <span class="event-cat-pill">Lab Sessions</span>
+                <span class="event-cat-pill">University Life</span>
+              </div>
+              <h3>Hardware &amp; AI Integration Sprints</h3>
+              <p>Collaborative engineering sessions bringing CynoBot's neural vision, expressive eyes, and sensor telemetry to life.</p>
+            </div>
+          </article>
+
+          <!-- University Life Card 2 (Coming Soon) -->
+          <article class="event-card coming-soon-card">
+            <div class="coming-soon-icon-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="coming-soon-badge">Coming Soon</h3>
+            <p class="coming-soon-sub">New University Life post will be added here soon.</p>
+          </article>
+
+          <!-- University Life Card 3 (Coming Soon) -->
+          <article class="event-card coming-soon-card">
+            <div class="coming-soon-icon-circle">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <h3 class="coming-soon-badge">Coming Soon</h3>
+            <p class="coming-soon-sub">New University Life post will be added here soon.</p>
+          </article>
+
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- Fullscreen Lightbox Modal (Supports 4:5 Images & Videos + Social Icons) -->
   <div class="gallery-lightbox" id="galleryLightbox" role="dialog" aria-modal="true" aria-labelledby="lightboxTitle">
@@ -827,7 +1465,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const filterBtns = document.querySelectorAll('.filter-btn');
-      const eventCards = document.querySelectorAll('.event-card');
+      const gridItems = document.querySelectorAll('#galleryGrid > [data-cat]');
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -836,16 +1474,39 @@
 
           const filterValue = btn.getAttribute('data-filter');
 
-          eventCards.forEach(card => {
-            const categories = (card.getAttribute('data-cat') || '').trim().split(/\s+/);
-            if (filterValue === 'all' || categories.includes(filterValue)) {
-              card.style.display = 'flex';
+          gridItems.forEach(item => {
+            const categories = (item.getAttribute('data-cat') || '').trim().split(/\s+/);
+            const onlyCat = item.getAttribute('data-only-cat') === 'true';
+
+            if (onlyCat) {
+              // The "View More" section card is shown right next to University Life when "University Life" tab is active
+              item.style.display = (filterValue === 'university-life') ? 'flex' : 'none';
+            } else if (filterValue === 'all' || categories.includes(filterValue)) {
+              item.style.display = 'flex';
+              item.classList.add('visible');
             } else {
-              card.style.display = 'none';
+              item.style.display = 'none';
             }
           });
         });
       });
+
+      // University Life Sections Popup Modal handlers
+      const uniModal = document.getElementById('uniMoreModal');
+      const closeUniModalBtn = document.getElementById('closeUniModalBtn');
+
+      function closeUniSectionsModal() {
+        if (!uniModal) return;
+        uniModal.classList.remove('active');
+        document.body.style.overflow = '';
+      }
+
+      if (closeUniModalBtn) closeUniModalBtn.addEventListener('click', closeUniSectionsModal);
+      if (uniModal) {
+        uniModal.addEventListener('click', (e) => {
+          if (e.target === uniModal) closeUniSectionsModal();
+        });
+      }
 
       // Lightbox close handlers
       const lightbox = document.getElementById('galleryLightbox');
@@ -864,10 +1525,43 @@
           if (e.target === lightbox) closeLightbox();
         });
       }
+
       document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'Escape') {
+          if (lightbox && lightbox.classList.contains('active')) {
+            closeLightbox();
+          } else if (uniModal && uniModal.classList.contains('active')) {
+            closeUniSectionsModal();
+          }
+        }
       });
     });
+
+    // Redirect/Switch to the "University Life" Category Tab when clicking "View More" on the card
+    function redirectToUniversityLifeCategory() {
+      const uniFilterBtn = document.querySelector('.filter-btn[data-filter="university-life"]');
+      if (uniFilterBtn) {
+        if (uniFilterBtn.classList.contains('active')) {
+          openUniSectionsModal();
+        } else {
+          uniFilterBtn.click();
+          const filtersEl = document.querySelector('.gallery-filters');
+          if (filtersEl) {
+            filtersEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      }
+    }
+
+    // Open the University Life All Sections Popup Modal
+    function openUniSectionsModal() {
+      const uniModal = document.getElementById('uniMoreModal');
+      if (!uniModal) return;
+      uniModal.classList.remove('active');
+      void uniModal.offsetWidth;
+      uniModal.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
     // Step through 4:5 banner slides (Images & Videos)
     function stepBannerSlide(bannerId, step) {
