@@ -18,6 +18,16 @@
   --font-stack: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.03);
   --shadow-card-hover: 0 16px 40px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.04);
+
+  /* Motion scale (transitions.dev tokens). Use these instead of ad-hoc values. */
+  --duration-quick: 150ms;      /* close, text swap */
+  --duration-fast: 250ms;       /* hover, open */
+  --duration-slow: 400ms;       /* panel / content reveal */
+  --duration-very-slow: 500ms;  /* emphasis moments */
+  --duration-reveal: 700ms;     /* section scroll reveal */
+  --ease-smooth-out: var(--ease); /* one site-wide ease-out curve */
+  --distance-medium: 12px;
+  --distance-reveal: 20px;
 }
 
 * {
@@ -507,16 +517,36 @@ footer .brand {
   border: 4px solid var(--bg-base);
 }
 
-/* Animations */
+/* Animations: scroll reveal plays once (js/main.js unobserves after the first reveal) */
 .fade-up {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+  transform: translateY(var(--distance-reveal));
+  transition:
+    opacity var(--duration-reveal) var(--ease-smooth-out),
+    transform var(--duration-reveal) var(--ease-smooth-out);
 }
 
 .fade-up.visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+
+  .fade-up {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 @media (max-width: 768px) {

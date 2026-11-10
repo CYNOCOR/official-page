@@ -16,7 +16,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261110.2">
 
   <style>
     .section {
@@ -41,7 +41,9 @@
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.3s var(--ease);
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.3s;
+      transition-timing-function: var(--ease);
     }
 
     .filter-btn:hover {
@@ -805,7 +807,7 @@
   </a>
 
   <!-- JavaScript -->
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=20261110.2" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const filterBtns = document.querySelectorAll('.filter-btn');

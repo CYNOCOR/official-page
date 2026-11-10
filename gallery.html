@@ -16,7 +16,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css?v=20261110.2">
 
   <style>
     /* Tighter spacing between Page Hero and Gallery Filters */
@@ -46,7 +46,9 @@
       font-size: 0.88rem;
       font-weight: 500;
       cursor: pointer;
-      transition: all 0.28s var(--ease);
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.28s;
+      transition-timing-function: var(--ease);
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -150,7 +152,9 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.25s;
+      transition-timing-function: ease;
     }
 
     .banner-expand-btn:hover {
@@ -183,7 +187,9 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.25s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.25s;
+      transition-timing-function: ease;
     }
 
     .video-ctrl-btn:hover {
@@ -211,7 +217,9 @@
       cursor: pointer;
       z-index: 7;
       opacity: 0;
-      transition: all 0.25s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.25s;
+      transition-timing-function: ease;
     }
 
     .event-banner:hover .banner-nav-btn {
@@ -246,7 +254,9 @@
       height: 6px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.45);
-      transition: all 0.3s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.3s;
+      transition-timing-function: ease;
     }
 
     .banner-dot.active {
@@ -284,7 +294,9 @@
       background: #ffffff;
       border: 1px solid rgba(0, 0, 0, 0.08);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.28s;
+      transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
       -webkit-tap-highlight-color: transparent;
     }
 
@@ -415,7 +427,9 @@
       justify-content: center;
       gap: 8px;
       cursor: pointer;
-      transition: all 0.28s var(--ease);
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.28s;
+      transition-timing-function: var(--ease);
     }
 
     .uni-card-view-more-btn:hover {
@@ -596,7 +610,9 @@
       gap: 10px;
       cursor: pointer;
       box-shadow: 0 10px 25px rgba(0, 136, 255, 0.35);
-      transition: all 0.3s var(--ease);
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.3s;
+      transition-timing-function: var(--ease);
     }
 
     .uni-view-more-card:hover .uni-vm-cta-btn {
@@ -717,7 +733,9 @@
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      transition: all 0.2s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
       flex-shrink: 0;
     }
 
@@ -933,7 +951,9 @@
       justify-content: center;
       cursor: pointer;
       z-index: 10;
-      transition: all 0.2s ease;
+      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
+      transition-duration: 0.2s;
+      transition-timing-function: ease;
     }
 
     .lightbox-close:hover {
@@ -1461,7 +1481,7 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/main.js" defer></script>
+  <script src="js/main.js?v=20261110.2" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const filterBtns = document.querySelectorAll('.filter-btn');

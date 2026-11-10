@@ -5,26 +5,27 @@ document.addEventListener('DOMContentLoaded', () => {
     yearEl.textContent = new Date().getFullYear();
   }
 
-  // 2. Intersection Observer for Fade-Up animations
-  const observerOptions = {
-    root: null,
-    rootMargin: '0px',
-    threshold: 0.1
-  };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      } else {
-        // Optional: remove visible class if you want animation to repeat
-        entry.target.classList.remove('visible');
-      }
-    });
-  }, observerOptions);
+  // 2. Scroll reveal for .fade-up: plays every time an element scrolls into view
+  //    (down or up). It resets only once the element is fully off screen, so it
+  //    never flickers while still partly visible.
+  const revealEls = document.querySelectorAll('.fade-up');
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  document.querySelectorAll('.fade-up').forEach((el) => {
-    observer.observe(el);
-  });
+  if (reduceMotion || !('IntersectionObserver' in window)) {
+    revealEls.forEach((el) => el.classList.add('visible'));
+  } else {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.1) {
+          entry.target.classList.add('visible');
+        } else if (!entry.isIntersecting) {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, { root: null, rootMargin: '0px', threshold: [0, 0.1] });
+
+    revealEls.forEach((el) => observer.observe(el));
+  }
 
   // 3. Mobile Menu Toggle
   const menuToggle = document.querySelector('.mobile-menu-toggle');
