@@ -375,24 +375,7 @@
       flex-direction: column;
     }
 
-    .event-tags-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-bottom: 10px;
-    }
 
-    .event-cat-pill {
-      font-size: 0.66rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      color: var(--accent);
-      background: rgba(0, 102, 204, 0.08);
-      border: 1px solid rgba(0, 102, 204, 0.16);
-      padding: 4px 10px;
-      border-radius: 999px;
-    }
 
     .event-body h3 {
       font-size: 1.18rem;
@@ -1175,7 +1158,7 @@
 
             <div class="event-slides">
               <div class="event-slide active" data-type="image">
-                <img src="assets/gallery/infotel-2026.jpg" alt="INFOTEL 2026 - CYNOCOR & CynoBot Showcase">
+                <img src="assets/gallery/infotel-2026/infotel-2026.jpg" alt="INFOTEL 2026 - CYNOCOR & CynoBot Showcase">
               </div>
             </div>
           </div>
@@ -1208,11 +1191,6 @@
           </div>
 
           <div class="event-body">
-            <div class="event-tags-row">
-              <span class="event-cat-pill">Robotics &amp; AI</span>
-              <span class="event-cat-pill">Exhibition</span>
-              <span class="event-cat-pill">Events</span>
-            </div>
             <h3>INFOTEL 2026</h3>
             <p>Showcasing CynoBot and interactive AI assistant robotics at Sri Lanka's premier national ICT exhibition, fueling the digital economy. Special thanks to <strong>Mr. Bhanu Athuraliya</strong>, our ATP Module Leader, for organizing and giving us this incredible opportunity.</p>
           </div>
@@ -1227,7 +1205,7 @@
 
             <div class="event-slides">
               <div class="event-slide active" data-type="image">
-                <img src="assets/gallery/iit-dean-meeting.jpg" alt="CynoBot Discussion with the Dean of IIT">
+                <img src="assets/gallery/iit-dean-meeting/iit-dean-meeting.jpg" alt="CynoBot Discussion with the Dean of IIT">
               </div>
             </div>
           </div>
@@ -1260,10 +1238,6 @@
           </div>
 
           <div class="event-body">
-            <div class="event-tags-row">
-              <span class="event-cat-pill">Iconic Moments</span>
-              <span class="event-cat-pill">Robotics &amp; AI</span>
-            </div>
             <h3>CynoBot Discussion with the Dean of IIT</h3>
             <p>An inspiring milestone meeting with the Dean of Informatics Institute of Technology (IIT) to present and discuss our CynoBot project. A special thank you to <strong>Mr. Bhanu Athuraliya</strong>, our ATP Module Leader, for making this valuable opportunity possible.</p>
           </div>
@@ -1278,7 +1252,7 @@
 
             <div class="event-slides">
               <div class="event-slide active" data-type="image">
-                <img src="assets/gallery/university-life-cover.jpg" alt="University Life - CYNOCOR Campus & Lab Chronicles">
+                <img src="assets/gallery/university-life/university-life-cover.jpg" alt="University Life - CYNOCOR Campus & Lab Chronicles">
               </div>
             </div>
           </div>
@@ -1311,10 +1285,6 @@
           </div>
 
           <div class="event-body">
-            <div class="event-tags-row">
-              <span class="event-cat-pill">University Life</span>
-              <span class="event-cat-pill">Campus Chronicles</span>
-            </div>
             <h3>University Life &amp; Campus Chronicles</h3>
             <p>From late-night robotics lab builds and module demos to campus friendships and unforgettable team moments at IIT.</p>
             <button type="button" class="uni-card-view-more-btn" id="uniCardRedirectBtn" onclick="redirectToUniversityLifeCategory()">
@@ -1328,7 +1298,7 @@
         <div class="uni-view-more-card" id="uniViewMoreCard" data-cat="university-life" data-only-cat="true" onclick="openUniSectionsModal()" role="button" tabindex="0" aria-label="View More University Life Posts">
           <div class="uni-vm-top">
             <div class="uni-vm-preview-stack">
-              <img src="assets/gallery/university-life-cover.jpg" alt="Preview 1" class="uni-vm-thumb">
+              <img src="assets/gallery/university-life/university-life-cover.jpg" alt="Preview 1" class="uni-vm-thumb">
               <span class="uni-vm-count-circle">More Coming Soon</span>
             </div>
 
@@ -1396,7 +1366,7 @@
               </button>
               <div class="event-slides">
                 <div class="event-slide active" data-type="image">
-                  <img src="assets/gallery/university-life-cover.jpg" alt="CynoBot Campus Lab Prototyping">
+                  <img src="assets/gallery/university-life/hardware-ai-sprints/university-life-cover.jpg" alt="CynoBot Campus Lab Prototyping">
                 </div>
               </div>
             </div>
@@ -1417,10 +1387,6 @@
               </div>
             </div>
             <div class="event-body">
-              <div class="event-tags-row">
-                <span class="event-cat-pill">Lab Sessions</span>
-                <span class="event-cat-pill">University Life</span>
-              </div>
               <h3>Hardware &amp; AI Integration Sprints</h3>
               <p>Collaborative engineering sessions bringing CynoBot's neural vision, expressive eyes, and sensor telemetry to life.</p>
             </div>
@@ -1456,7 +1422,6 @@
       <div class="lightbox-media-col" id="lightboxMediaCol"></div>
       <div class="lightbox-info-col">
         <div>
-          <div class="event-tags-row" id="lightboxTags"></div>
           <h3 id="lightboxTitle" style="font-size: 1.45rem; margin-bottom: 10px; color: #1d1d1f;">INFOTEL 2026</h3>
           <p id="lightboxDesc" style="color: #515154; font-size: 0.93rem; line-height: 1.65;"></p>
         </div>
@@ -1637,7 +1602,6 @@
       if (!card) return;
 
       const activeSlide = card.querySelector('.event-slide.active') || card.querySelector('.event-slide');
-      const tagsHtml = card.querySelector('.event-tags-row')?.innerHTML || '';
       const title = card.querySelector('.event-body h3')?.textContent || '';
       const desc = card.querySelector('.event-body p')?.innerHTML || '';
       const socialHtml = card.querySelector('.event-social-icons')?.innerHTML || '';
@@ -1668,7 +1632,6 @@
         }
       }
 
-      document.getElementById('lightboxTags').innerHTML = tagsHtml;
       document.getElementById('lightboxTitle').textContent = title;
       document.getElementById('lightboxDesc').innerHTML = desc;
       document.getElementById('lightboxSocialBtns').innerHTML = socialHtml;
