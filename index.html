@@ -1467,13 +1467,328 @@
       .cyno-link { justify-content: center; }
       .apple-pill-text { white-space: normal; }
     }
+
+    /* ─── CYNOCOR SPLASH SCREEN ───────────────────────── */
+    body.splash-hold {
+      overflow: hidden;
+    }
+
+    body.splash-hold .hero-content > *,
+    body.splash-hold .hero-stealth-banner,
+    body.splash-hold .orb {
+      animation-play-state: paused !important;
+    }
+
+    .cynocor-splash {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background:
+        radial-gradient(circle at 50% 45%, rgba(38, 109, 255, 0.16) 0%, rgba(10, 28, 58, 0.08) 38%, transparent 70%),
+        linear-gradient(180deg, #020810 0%, #050e1a 60%, #071628 100%);
+      overflow: hidden;
+      will-change: opacity, transform, clip-path;
+      transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+        visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Subtle dot-grid texture matching the hero */
+    .cynocor-splash::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(120, 170, 255, 0.07) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 85%);
+      pointer-events: none;
+    }
+
+    /* Ambient glow pulse behind logo */
+    .splash-glow {
+      position: absolute;
+      width: min(460px, 75vw);
+      height: min(460px, 75vw);
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(38, 120, 255, 0.12) 0%, rgba(0, 180, 255, 0.03) 48%, transparent 70%);
+      filter: blur(56px);
+      pointer-events: none;
+      animation: splashGlowPulse 2.4s ease-in-out infinite alternate;
+    }
+
+    @keyframes splashGlowPulse {
+      0%   { transform: scale(0.94); opacity: 0.45; }
+      100% { transform: scale(1.06); opacity: 0.75; }
+    }
+
+    .splash-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 0 24px;
+      transition:
+        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .splash-logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      opacity: 0;
+      transform: translateY(14px) scale(0.95);
+      animation: splashLogoIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.04s forwards;
+    }
+
+    /* Faint neon aura radiating softly outside the logo mask */
+    .splash-logo-neon {
+      position: absolute;
+      inset: -18px;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.42;
+      filter:
+        blur(8px)
+        drop-shadow(0 0 6px rgba(0, 210, 255, 0.28))
+        drop-shadow(0 0 16px rgba(38, 120, 255, 0.22));
+    }
+
+    /* Inner element masked to the exact CYNOCOR wolf & letter contours */
+    .splash-logo-neon::before {
+      content: '';
+      position: absolute;
+      inset: 18px;
+      -webkit-mask-image: url('assets/logo2.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-image: url('assets/logo2.png');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      background: conic-gradient(
+        from 0deg at 50% 50%,
+        rgba(0, 60, 255, 0.08) 0deg,
+        rgba(30, 136, 255, 0.35) 55deg,
+        rgba(0, 220, 255, 0.55) 95deg,
+        rgba(200, 242, 255, 0.65) 110deg,
+        rgba(0, 220, 255, 0.55) 125deg,
+        rgba(0, 60, 255, 0.08) 180deg,
+        rgba(30, 136, 255, 0.35) 235deg,
+        rgba(0, 220, 255, 0.55) 275deg,
+        rgba(200, 242, 255, 0.65) 290deg,
+        rgba(0, 220, 255, 0.55) 305deg,
+        rgba(0, 60, 255, 0.08) 360deg
+      );
+      background-size: 200% 200%;
+      animation: neonLogoSweep 2.2s linear infinite;
+    }
+
+    /* Subtle neon shimmer masked to the logo strokes */
+    .splash-logo-wrap::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 3;
+      pointer-events: none;
+      -webkit-mask-image: url('assets/logo2.png');
+      -webkit-mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+      -webkit-mask-position: center;
+      mask-image: url('assets/logo2.png');
+      mask-size: contain;
+      mask-repeat: no-repeat;
+      mask-position: center;
+      background: linear-gradient(
+        110deg,
+        transparent 25%,
+        rgba(100, 210, 255, 0.22) 47%,
+        rgba(220, 245, 255, 0.32) 50%,
+        rgba(100, 210, 255, 0.22) 53%,
+        transparent 75%
+      );
+      background-size: 240% 100%;
+      mix-blend-mode: screen;
+      animation: neonTubeShimmer 2s ease-in-out infinite;
+    }
+
+    @keyframes neonLogoSweep {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    @keyframes neonTubeShimmer {
+      0%   { background-position: 140% 0; }
+      100% { background-position: -40% 0; }
+    }
+
+    .splash-logo {
+      position: relative;
+      z-index: 2;
+      width: clamp(230px, 38vw, 420px);
+      height: auto;
+      display: block;
+      user-select: none;
+      filter:
+        drop-shadow(0 0 5px rgba(90, 195, 255, 0.22))
+        drop-shadow(0 0 16px rgba(38, 120, 255, 0.18));
+      animation: neonTubeFlicker 2s ease-in-out infinite alternate;
+      transition: filter 0.35s ease, transform 0.35s ease;
+    }
+
+    @keyframes neonTubeFlicker {
+      0% {
+        filter:
+          drop-shadow(0 0 4px rgba(90, 195, 255, 0.14))
+          drop-shadow(0 0 12px rgba(38, 120, 255, 0.12));
+      }
+      100% {
+        filter:
+          drop-shadow(0 0 7px rgba(120, 215, 255, 0.32))
+          drop-shadow(0 0 22px rgba(38, 125, 255, 0.26));
+      }
+    }
+
+    /* Gentle glow pulse right as page finishes loading */
+    .cynocor-splash.is-ready .splash-logo {
+      filter:
+        drop-shadow(0 0 9px rgba(150, 225, 255, 0.42))
+        drop-shadow(0 0 26px rgba(46, 135, 255, 0.32));
+      transform: scale(1.015);
+    }
+
+    .splash-tagline {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(0.7rem, 1.1vw, 0.82rem);
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(185, 216, 255, 0.72);
+      text-shadow: 0 0 12px rgba(78, 154, 255, 0.22);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: splashTagIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
+    }
+
+    /* Exit transition to reveal the landing page */
+    .cynocor-splash.is-revealing {
+      opacity: 0;
+      transform: scale(1.045);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .cynocor-splash.is-revealing .splash-inner {
+      transform: translateY(-16px) scale(1.04);
+      opacity: 0;
+      filter: blur(8px);
+    }
+
+    .cynocor-splash.is-hidden {
+      display: none !important;
+    }
+
+    @keyframes splashLogoIn {
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes splashTagIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
   </style>
 
   <script src="js/main.js?v=20261110.2" defer></script>
   <script src="js/footer.js" defer></script>
 </head>
 
-<body>
+<body class="splash-hold">
+
+  <!-- ── CYNOCOR SPLASH SCREEN ─────────────────────────── -->
+  <div class="cynocor-splash" id="cynocor-splash" role="status" aria-label="Loading CYNOCOR">
+    <div class="splash-glow" aria-hidden="true"></div>
+    <div class="splash-inner">
+      <div class="splash-logo-wrap">
+        <span class="splash-logo-neon" aria-hidden="true"></span>
+        <img src="assets/logo2.png" alt="CYNOCOR" class="splash-logo" fetchpriority="high">
+      </div>
+      <span class="splash-tagline">Advanced Systems Engineering</span>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var splash = document.getElementById('cynocor-splash');
+      if (!splash) return;
+
+      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) {
+        document.body.classList.remove('splash-hold');
+        splash.classList.add('is-hidden');
+        return;
+      }
+
+      var startTime = performance.now();
+      var MIN_DISPLAY_MS = 950; // enough time for the neon light to orbit around the logo
+      var MAX_WAIT_MS = 2600;   // safety fallback so slow assets never block the user
+      var revealed = false;
+
+      function revealLandingPage() {
+        if (revealed) return;
+        revealed = true;
+
+        var elapsed = performance.now() - startTime;
+        var remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
+
+        setTimeout(function () {
+          splash.classList.add('is-ready');
+
+          setTimeout(function () {
+            // Release hero animations right as the splash screen transitions away
+            document.body.classList.remove('splash-hold');
+            splash.classList.add('is-revealing');
+            splash.setAttribute('aria-hidden', 'true');
+
+            setTimeout(function () {
+              splash.classList.add('is-hidden');
+            }, 850);
+          }, 240);
+        }, remaining);
+      }
+
+      if (document.readyState === 'complete') {
+        revealLandingPage();
+      } else {
+        window.addEventListener('load', revealLandingPage, { once: true });
+        setTimeout(revealLandingPage, MAX_WAIT_MS);
+      }
+
+      // Ensure back/forward cache restores don't stay stuck on splash
+      window.addEventListener('pageshow', function (e) {
+        if (e.persisted) {
+          document.body.classList.remove('splash-hold');
+          splash.classList.add('is-hidden');
+        }
+      });
+    })();
+  </script>
 
   <!-- Navigation -->
   <header class="nav-hero" id="site-header">
