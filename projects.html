@@ -110,6 +110,14 @@
         inset 0 1px 1px rgba(255, 255, 255, 0.14);
     }
 
+    .project-card[data-pos="hidden"],
+    .project-card[data-pos="hidden-left"],
+    .project-card[data-pos="hidden-right"] {
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      will-change: auto;
+    }
+
     .project-card[data-pos="0"] {
       transform: translate3d(0, 0, 0) scale(1);
       z-index: 5;
@@ -422,6 +430,11 @@
       position: relative;
       width: 100%;
       height: 100%;
+      background: linear-gradient(120deg, rgba(226, 236, 248, 0.45) 0%, rgba(241, 245, 249, 0.75) 50%, rgba(226, 236, 248, 0.45) 100%);
+    }
+
+    body.atmosphere-dark .carousel-images {
+      background: linear-gradient(120deg, rgba(15, 23, 42, 0.7) 0%, rgba(30, 41, 59, 0.85) 50%, rgba(15, 23, 42, 0.7) 100%);
     }
 
     .carousel-images img {
@@ -1043,11 +1056,11 @@
         <div class="project-card fade-up" data-cat="brand-portfolio">
           <div class="project-media carousel">
             <div class="carousel-images" id="oleetzo-carousel">
-              <img src="assets/projects/Oleetzo/01.png" alt="Oleetzo 1" class="active">
-              <img src="assets/projects/Oleetzo/02.png" alt="Oleetzo 2">
-              <img src="assets/projects/Oleetzo/03.png" alt="Oleetzo 3">
-              <img src="assets/projects/Oleetzo/04.png" alt="Oleetzo 4">
-              <img src="assets/projects/Oleetzo/05.png" alt="Oleetzo 5">
+              <img src="assets/projects/Oleetzo/01.png" alt="Oleetzo 1" class="active" fetchpriority="high" decoding="async">
+              <img data-src="assets/projects/Oleetzo/02.png" alt="Oleetzo 2" decoding="async">
+              <img data-src="assets/projects/Oleetzo/03.png" alt="Oleetzo 3" decoding="async">
+              <img data-src="assets/projects/Oleetzo/04.png" alt="Oleetzo 4" decoding="async">
+              <img data-src="assets/projects/Oleetzo/05.png" alt="Oleetzo 5" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('oleetzo-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1074,11 +1087,11 @@
         <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.08s">
           <div class="project-media carousel">
             <div class="carousel-images" id="sripalee-carousel">
-              <img src="assets/projects/Sripalee%20College/01.jpg" alt="Sripalee College 1" class="active">
-              <img src="assets/projects/Sripalee%20College/02.png" alt="Sripalee College 2">
-              <img src="assets/projects/Sripalee%20College/03.png" alt="Sripalee College 3">
-              <img src="assets/projects/Sripalee%20College/04.png" alt="Sripalee College 4">
-              <img src="assets/projects/Sripalee%20College/05.png" alt="Sripalee College 5">
+              <img src="assets/projects/Sripalee%20College/01.jpg" alt="Sripalee College 1" class="active" fetchpriority="high" decoding="async">
+              <img data-src="assets/projects/Sripalee%20College/02.png" alt="Sripalee College 2" decoding="async">
+              <img data-src="assets/projects/Sripalee%20College/03.png" alt="Sripalee College 3" decoding="async">
+              <img data-src="assets/projects/Sripalee%20College/04.png" alt="Sripalee College 4" decoding="async">
+              <img data-src="assets/projects/Sripalee%20College/05.png" alt="Sripalee College 5" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('sripalee-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1107,11 +1120,11 @@
           <div class="project-media carousel">
             <div class="carousel-images" id="sipnena-carousel">
               <img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt="Sipnena Education Institute 1"
-                class="active">
-              <img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt="Sipnena Education Institute 2">
-              <img src="assets/projects/Sipnena%20Education%20Institute/03.png" alt="Sipnena Education Institute 3">
-              <img src="assets/projects/Sipnena%20Education%20Institute/04.png" alt="Sipnena Education Institute 4">
-              <img src="assets/projects/Sipnena%20Education%20Institute/05.png" alt="Sipnena Education Institute 5">
+                class="active" fetchpriority="high" decoding="async">
+              <img data-src="assets/projects/Sipnena%20Education%20Institute/02.png" alt="Sipnena Education Institute 2" decoding="async">
+              <img data-src="assets/projects/Sipnena%20Education%20Institute/03.png" alt="Sipnena Education Institute 3" decoding="async">
+              <img data-src="assets/projects/Sipnena%20Education%20Institute/04.png" alt="Sipnena Education Institute 4" decoding="async">
+              <img data-src="assets/projects/Sipnena%20Education%20Institute/05.png" alt="Sipnena Education Institute 5" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('sipnena-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1140,11 +1153,11 @@
           <div class="project-media carousel">
             <div class="carousel-images" id="piyasara-carousel">
               <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png" alt="Piyasara Travels Suite 1"
-                class="active">
-              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="Piyasara Travels Suite 2">
-              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/03.png" alt="Piyasara Travels Suite 3">
-              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/04.png" alt="Piyasara Travels Suite 4">
-              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/05.png" alt="Piyasara Travels Suite 5">
+                class="active" decoding="async">
+              <img data-src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="Piyasara Travels Suite 2" decoding="async">
+              <img data-src="assets/projects/Piyasara%20Travels%20Business%20Suite/03.png" alt="Piyasara Travels Suite 3" decoding="async">
+              <img data-src="assets/projects/Piyasara%20Travels%20Business%20Suite/04.png" alt="Piyasara Travels Suite 4" decoding="async">
+              <img data-src="assets/projects/Piyasara%20Travels%20Business%20Suite/05.png" alt="Piyasara Travels Suite 5" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('piyasara-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1172,12 +1185,12 @@
         <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.32s">
           <div class="project-media carousel">
             <div class="carousel-images" id="kinsmarine-carousel">
-              <img src="assets/projects/Kins%20Marine/01.png" alt="Kins Marine 1" class="active">
-              <img src="assets/projects/Kins%20Marine/02.png" alt="Kins Marine 2">
-              <img src="assets/projects/Kins%20Marine/03.png" alt="Kins Marine 3">
-              <img src="assets/projects/Kins%20Marine/04.png" alt="Kins Marine 4">
-              <img src="assets/projects/Kins%20Marine/05.png" alt="Kins Marine 5">
-              <img src="assets/projects/Kins%20Marine/06.png" alt="Kins Marine 6">
+              <img src="assets/projects/Kins%20Marine/01.png" alt="Kins Marine 1" class="active" decoding="async">
+              <img data-src="assets/projects/Kins%20Marine/02.png" alt="Kins Marine 2" decoding="async">
+              <img data-src="assets/projects/Kins%20Marine/03.png" alt="Kins Marine 3" decoding="async">
+              <img data-src="assets/projects/Kins%20Marine/04.png" alt="Kins Marine 4" decoding="async">
+              <img data-src="assets/projects/Kins%20Marine/05.png" alt="Kins Marine 5" decoding="async">
+              <img data-src="assets/projects/Kins%20Marine/06.png" alt="Kins Marine 6" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('kinsmarine-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1202,9 +1215,9 @@
         <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.40s">
           <div class="project-media carousel">
             <div class="carousel-images" id="amali-carousel">
-              <img src="assets/projects/Amali%20curtain/01.jpeg" alt="Amali Curtain 1" class="active">
-              <img src="assets/projects/Amali%20curtain/02.jpeg" alt="Amali Curtain 2">
-              <img src="assets/projects/Amali%20curtain/03.jpeg" alt="Amali Curtain 3">
+              <img src="assets/projects/Amali%20curtain/01.jpeg" alt="Amali Curtain 1" class="active" decoding="async">
+              <img data-src="assets/projects/Amali%20curtain/02.jpeg" alt="Amali Curtain 2" decoding="async">
+              <img data-src="assets/projects/Amali%20curtain/03.jpeg" alt="Amali Curtain 3" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('amali-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1229,8 +1242,8 @@
         <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.48s">
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-carousel">
-              <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active">
-              <img src="assets/projects/Ruuma%20Entertaunment/02.jpeg" alt="RUuMA Entertainment 2">
+              <img src="assets/projects/Ruuma%20Entertaunment/01.jpeg" alt="RUuMA Entertainment 1" class="active" decoding="async">
+              <img data-src="assets/projects/Ruuma%20Entertaunment/02.jpeg" alt="RUuMA Entertainment 2" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('ruuma-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1261,11 +1274,11 @@
           <div class="project-media carousel">
             <div class="carousel-images" id="ruuma-management-carousel">
               <img src="assets/projects/ruuma%20entertainment%20management%20system/01.jpeg" alt="RUuMA Management 1"
-                class="active" style="object-position: left;">
-              <img src="assets/projects/ruuma%20entertainment%20management%20system/02.jpeg" alt="RUuMA Management 2"
-                style="object-position: left;">
-              <img src="assets/projects/ruuma%20entertainment%20management%20system/03.jpeg" alt="RUuMA Management 3"
-                style="object-position: left;">
+                class="active" decoding="async" style="object-position: left;">
+              <img data-src="assets/projects/ruuma%20entertainment%20management%20system/02.jpeg" alt="RUuMA Management 2"
+                decoding="async" style="object-position: left;">
+              <img data-src="assets/projects/ruuma%20entertainment%20management%20system/03.jpeg" alt="RUuMA Management 3"
+                decoding="async" style="object-position: left;">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('ruuma-management-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1290,10 +1303,10 @@
         <div class="project-card fade-up" data-cat="brand-portfolio" style="transition-delay:0.64s">
           <div class="project-media carousel">
             <div class="carousel-images" id="dreamlense-carousel">
-              <img src="assets/projects/Dreamlense/01.png" alt="Dreamlense 1" class="active">
-              <img src="assets/projects/Dreamlense/02.png" alt="Dreamlense 2">
-              <img src="assets/projects/Dreamlense/03.png" alt="Dreamlense 3">
-              <img src="assets/projects/Dreamlense/04.png" alt="Dreamlense 4">
+              <img src="assets/projects/Dreamlense/01.png" alt="Dreamlense 1" class="active" decoding="async">
+              <img data-src="assets/projects/Dreamlense/02.png" alt="Dreamlense 2" decoding="async">
+              <img data-src="assets/projects/Dreamlense/03.png" alt="Dreamlense 3" decoding="async">
+              <img data-src="assets/projects/Dreamlense/04.png" alt="Dreamlense 4" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('dreamlense-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1319,10 +1332,10 @@
           <div class="project-media carousel">
             <div class="carousel-images" id="challigraphy-carousel">
               <img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="Challigraphy Hand Writing 1"
-                class="active">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/02.jpeg" alt="Challigraphy Hand Writing 2">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/03.jpeg" alt="Challigraphy Hand Writing 3">
-              <img src="assets/projects/Challigraphy%20Hand%20Writing/04.jpeg" alt="Challigraphy Hand Writing 4">
+                class="active" decoding="async">
+              <img data-src="assets/projects/Challigraphy%20Hand%20Writing/02.jpeg" alt="Challigraphy Hand Writing 2" decoding="async">
+              <img data-src="assets/projects/Challigraphy%20Hand%20Writing/03.jpeg" alt="Challigraphy Hand Writing 3" decoding="async">
+              <img data-src="assets/projects/Challigraphy%20Hand%20Writing/04.jpeg" alt="Challigraphy Hand Writing 4" decoding="async">
             </div>
             <button class="carousel-btn prev" onclick="moveCarousel('challigraphy-carousel', -1)"
               aria-label="Previous image">&#10094;</button>
@@ -1366,38 +1379,38 @@
       <div class="testimonials-mosaic-wrap fade-up">
         <div class="testimonials-mosaic" aria-hidden="true">
           <div class="mosaic-col col-1">
-            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/01.jpg" alt="" loading="lazy"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/01.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-2">
-            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/01.png" alt="" loading="lazy"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Oleetzo/02.png" alt="" loading="lazy"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/01.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/01.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Oleetzo/02.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/01.png" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-3">
             <div class="mosaic-tile is-tall"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png"
-                alt="" loading="lazy"></div>
+                alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-4">
             <div class="mosaic-tile is-med"><img src="assets/projects/Kins%20Marine/02.png" alt=""
-                loading="lazy"></div>
+                loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-5">
             <div class="mosaic-tile is-med"><img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt=""
-                loading="lazy"></div>
+                loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-6">
-            <div class="mosaic-tile is-tall"><img src="assets/projects/Oleetzo/01.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile is-tall"><img src="assets/projects/Oleetzo/01.png" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-7">
-            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/02.png" alt="" loading="lazy"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/02.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="" loading="lazy" decoding="async"></div>
             <div class="mosaic-tile"><img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt=""
-                loading="lazy"></div>
+                loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-8">
-            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/02.png" alt="" loading="lazy"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/03.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/02.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/03.png" alt="" loading="lazy" decoding="async"></div>
           </div>
         </div>
 
@@ -1607,6 +1620,13 @@
           } else {
             card.setAttribute('data-pos', nextPos);
           }
+
+          if (nextPos === '0') {
+            const nextSlide = card.querySelector('.carousel-images img:nth-child(2)');
+            if (nextSlide && nextSlide.dataset.src && !nextSlide.getAttribute('src')) {
+              nextSlide.src = nextSlide.dataset.src;
+            }
+          }
         });
       }
 
@@ -1716,7 +1736,18 @@
       let nextIndex = (activeIndex + step) % images.length;
       if (nextIndex < 0) nextIndex = images.length - 1;
 
-      images[nextIndex].classList.add('active');
+      const targetImg = images[nextIndex];
+      if (targetImg.dataset.src && !targetImg.getAttribute('src')) {
+        targetImg.src = targetImg.dataset.src;
+      }
+
+      const preloadIndex = (nextIndex + (step >= 0 ? 1 : -1) + images.length) % images.length;
+      const preloadImg = images[preloadIndex];
+      if (preloadImg && preloadImg.dataset.src && !preloadImg.getAttribute('src')) {
+        preloadImg.src = preloadImg.dataset.src;
+      }
+
+      targetImg.classList.add('active');
     }
   </script>
 </body>
