@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 280 560" width="280" height="560">
+  <rect width="280" height="560" fill="#EBF8FF"/>
+  <g stroke="#1A2238" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="140" cy="492" rx="96" ry="22" fill="#EBF1FF" stroke="none"/>
+    <polygon points="140,486 218,444 140,402 62,444" fill="#9BB6FF"/>
+    <polygon points="62,444 140,486 140,510 62,468" fill="#FFFFFF"/>
+    <polygon points="140,486 218,444 218,468 140,510" fill="#2749A8"/>
+    <polygon points="140,432 218,390 140,348 62,390" fill="#9BB6FF"/>
+    <polygon points="62,390 140,432 140,456 62,414" fill="#FFFFFF"/>
+    <polygon points="140,432 218,390 218,414 140,456" fill="#2749A8"/>
+    <polygon points="140,378 218,336 140,294 62,336" fill="#9BB6FF"/>
+    <polygon points="62,336 140,378 140,402 62,360" fill="#FFFFFF"/>
+    <polygon points="140,378 218,336 218,360 140,402" fill="#2749A8"/>
+    <polygon points="140,324 218,282 140,240 62,282" fill="#9BB6FF"/>
+    <polygon points="62,282 140,324 140,348 62,306" fill="#FFFFFF"/>
+    <polygon points="140,324 218,282 218,306 140,348" fill="#2749A8"/>
+    <polygon points="140,78 176,122 154,122 154,216 126,216 126,122 104,122" fill="#9BB6FF"/>
+    <ellipse cx="206" cy="168" rx="32" ry="22" fill="#FFFFFF"/>
+    <circle cx="195" cy="168" r="3" fill="#2749A8"/>
+    <circle cx="206" cy="168" r="3" fill="#2749A8"/>
+    <circle cx="217" cy="168" r="3" fill="#2749A8"/>
+    <circle cx="72" cy="182" r="16" fill="#2749A8"/>
+    <circle cx="72" cy="182" r="6" fill="#FFFFFF"/>
+  </g>
+</svg>

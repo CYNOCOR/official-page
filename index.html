@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co https://wa.me mailto:;">
   <title>CYNOCOR - Advanced Systems Engineering</title>
   <meta name="description" content="Software, automation, and business systems engineered to move first, track precisely, and outlast the competition. Partner with CYNOCOR.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
@@ -970,6 +973,101 @@
 
     body.atmosphere-dark .orizon-glass-loc {
       color: rgba(250, 252, 255, 0.72);
+    }
+
+    /* Animated middle pulse visualizer inside .orizon-glass-card */
+    .orizon-glass-viz {
+      position: relative;
+      height: 54px;
+      margin: 6px 0 8px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(0, 112, 255, 0.06) 0%, rgba(56, 189, 248, 0.09) 100%);
+      border: 1px solid rgba(0, 112, 255, 0.12);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      gap: 12px;
+    }
+
+    body.atmosphere-dark .orizon-glass-viz {
+      background: linear-gradient(135deg, rgba(0, 112, 255, 0.14) 0%, rgba(56, 189, 248, 0.08) 100%);
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+
+    .orizon-glass-viz::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      width: 45%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+      transform: translateX(-120%);
+      animation: orizonVizSweep 3.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes orizonVizSweep {
+      0% { transform: translateX(-120%); }
+      55%, 100% { transform: translateX(260%); }
+    }
+
+    .orizon-viz-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .orizon-viz-bars span {
+      width: 3.5px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #0070FF 0%, #38BDF8 100%);
+      animation: orizonBarPulse 1.5s ease-in-out infinite;
+    }
+
+    .orizon-viz-bars span:nth-child(1) { height: 42%; animation-delay: 0s; }
+    .orizon-viz-bars span:nth-child(2) { height: 85%; animation-delay: 0.18s; }
+    .orizon-viz-bars span:nth-child(3) { height: 58%; animation-delay: 0.36s; }
+    .orizon-viz-bars span:nth-child(4) { height: 96%; animation-delay: 0.54s; }
+    .orizon-viz-bars span:nth-child(5) { height: 64%; animation-delay: 0.72s; }
+    .orizon-viz-bars span:nth-child(6) { height: 78%; animation-delay: 0.9s; }
+    .orizon-viz-bars span:nth-child(7) { height: 46%; animation-delay: 1.08s; }
+
+    @keyframes orizonBarPulse {
+      0%, 100% { transform: scaleY(0.48); opacity: 0.65; }
+      50% { transform: scaleY(1); opacity: 1; }
+    }
+
+    .orizon-viz-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #0F172A;
+      letter-spacing: 0.01em;
+    }
+
+    body.atmosphere-dark .orizon-viz-status {
+      color: #E2E8F0;
+    }
+
+    .orizon-viz-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #0070FF;
+      box-shadow: 0 0 0 0 rgba(0, 112, 255, 0.55);
+      animation: orizonDotPing 2s ease-out infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes orizonDotPing {
+      0% { box-shadow: 0 0 0 0 rgba(0, 112, 255, 0.55); }
+      70% { box-shadow: 0 0 0 7px rgba(0, 112, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(0, 112, 255, 0); }
     }
 
     .orizon-glass-arrow {
@@ -4074,6 +4172,15 @@
               <a href="#cyno-bot" class="orizon-glass-arrow" aria-label="Inspect CynoBot">&#8599;</a>
             </div>
 
+            <div class="orizon-glass-viz" aria-hidden="true">
+              <div class="orizon-viz-status">
+                <span>Zero-Lock Architecture &middot; Live</span>
+              </div>
+              <div class="orizon-viz-bars">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+            </div>
+
             <div class="orizon-glass-specs" id="orizonGlassSpecs">
               <span>100% Code Ownership</span>
               <span>99.98% SLA Uptime</span>
@@ -5125,7 +5232,7 @@
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float"
     href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
-    rel="noopener" aria-label="Chat with us on WhatsApp">
+    rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
     </svg>

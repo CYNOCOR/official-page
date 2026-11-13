@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 320" width="320" height="320">
+  <rect width="320" height="320" fill="#F0EDFF"/>
+  <g stroke="#1A2238" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+    <ellipse cx="160" cy="252" rx="88" ry="22" fill="#EBF1FF" stroke="none"/>
+    <polygon points="160,248 234,210 160,172 86,210" fill="#9BB6FF"/>
+    <polygon points="86,210 160,248 160,268 86,230" fill="#FFFFFF"/>
+    <polygon points="160,248 234,210 234,230 160,268" fill="#2749A8"/>
+    <polygon points="160,210 234,172 160,134 86,172" fill="#9BB6FF"/>
+    <polygon points="86,172 160,210 160,230 86,192" fill="#FFFFFF"/>
+    <polygon points="160,210 234,172 234,192 160,230" fill="#2749A8"/>
+    <polygon points="160,172 234,134 160,96 86,134" fill="#9BB6FF"/>
+    <polygon points="86,134 160,172 160,192 86,154" fill="#FFFFFF"/>
+    <polygon points="160,172 234,134 234,154 160,192" fill="#2749A8"/>
+    <circle cx="106" cy="154" r="3.5" fill="#2749A8"/>
+    <circle cx="106" cy="192" r="3.5" fill="#2749A8"/>
+    <circle cx="106" cy="230" r="3.5" fill="#2749A8"/>
+    <path d="M122,94 a18,18 0 0,1 18,-18 a24,24 0 0,1 44,-4 a16,16 0 0,1 14,22 Z" fill="#FFFFFF"/>
+    <circle cx="248" cy="112" r="10" fill="#9BB6FF"/>
+    <circle cx="72" cy="124" r="8" fill="#2749A8"/>
+  </g>
+</svg>

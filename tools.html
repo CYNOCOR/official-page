@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co https://wa.me mailto:;">
   <title>Tools - CYNOCOR</title>
   <meta name="description" content="Free web tools built by CYNOCOR — utilities for designers, developers, and creators.">
   <link rel="icon" href="assets/logo3W.png" type="image/png">
@@ -301,6 +304,74 @@
       opacity: 0.55;
     }
 
+    /* 3D Retro-Modern Tracked Robot Developing Tools Stage */
+    .tool-robo-stage {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 65% 42%, #FAFBFD 0%, #E7EEF8 65%, #D9E4F2 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    body.atmosphere-dark .tool-robo-stage {
+      background: radial-gradient(circle at 65% 42%, #1E293B 0%, #0F172A 75%, #090D16 100%);
+    }
+
+    .tool-robo-stage svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .tool-robo-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      color: #64748B;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+    }
+
+    body.atmosphere-dark .tool-robo-badge {
+      background: rgba(15, 23, 42, 0.8);
+      border-color: rgba(148, 163, 184, 0.2);
+      color: #94A3B8;
+    }
+
+    .tr-head { transform-box: fill-box; transform-origin: center bottom; animation: trHeadBob 3.2s ease-in-out infinite; }
+    .tr-eyes { transform-box: fill-box; transform-origin: center; animation: trBlink 4.2s infinite; }
+    .tr-arm-work { transform-box: fill-box; transform-origin: 18% 22%; animation: trArmWork 1.3s ease-in-out infinite; }
+    .tr-arm-help { transform-box: fill-box; transform-origin: 82% 22%; animation: trArmHelp 2.2s ease-in-out infinite; }
+    .tr-wheel { transform-box: fill-box; transform-origin: center; animation: trSpin 3s linear infinite; }
+    .tr-gear-cw { transform-box: fill-box; transform-origin: center; animation: trSpin 5s linear infinite; }
+    .tr-gear-ccw { transform-box: fill-box; transform-origin: center; animation: trSpinRev 3.8s linear infinite; }
+    .tr-spark-1 { transform-box: fill-box; transform-origin: center; animation: trSpark 1.3s ease-out infinite; }
+    .tr-spark-2 { transform-box: fill-box; transform-origin: center; animation: trSpark 1.3s ease-out infinite -0.65s; }
+    .tr-ant-pulse { transform-box: fill-box; transform-origin: center; animation: trPulse 1.8s ease-out infinite; }
+    .tr-float-ui { animation: trFloatUI 2.8s ease-in-out infinite; }
+
+    @keyframes trHeadBob { 0%,100% { transform: rotate(-1.5deg) translateY(0); } 50% { transform: rotate(2deg) translateY(1.5px); } }
+    @keyframes trBlink { 0%,92%,100% { transform: scaleY(1); } 96% { transform: scaleY(0.1); } }
+    @keyframes trArmWork { 0%,100% { transform: rotate(-10deg); } 50% { transform: rotate(12deg); } }
+    @keyframes trArmHelp { 0%,100% { transform: rotate(4deg); } 50% { transform: rotate(-8deg); } }
+    @keyframes trSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes trSpinRev { from { transform: rotate(360deg); } to { transform: rotate(0deg); } }
+    @keyframes trSpark { 0%,35% { opacity: 0; transform: scale(0.3); } 55% { opacity: 1; transform: scale(1.15); } 100% { opacity: 0; transform: scale(0.5) translateY(-5px); } }
+    @keyframes trPulse { 0% { opacity: 0.9; transform: scale(0.8); } 100% { opacity: 0; transform: scale(2.1); } }
+    @keyframes trFloatUI { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    @media (prefers-reduced-motion: reduce) { .tool-robo-stage * { animation: none !important; } }
+
     .tool-body {
       padding: 28px 24px 24px;
       flex: 1;
@@ -427,6 +498,7 @@
     @media (max-width: 540px) {
       .tool-grid { grid-template-columns: 1fr; }
       .section { padding: 56px 0; }
+      .tool-robo-badge { top: 8px; left: 8px; padding: 3px 8px; font-size: 0.62rem; }
     }
   </style>
 
@@ -583,13 +655,140 @@
         <!-- 2. Coming Soon placeholder -->
         <div class="tool-card coming-soon fade-up" style="transition-delay:0.08s">
           <div class="tool-media">
-            <div class="tool-media-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="3"/>
-                <circle cx="12" cy="12" r="3"/>
-                <path d="M12 3v3m0 12v3M3 12h3m12 0h3"/>
-              </svg>
-              <span>Coming Soon</span>
+            <div class="tool-robo-stage">
+              <span class="tool-robo-badge">Coming Soon</span>
+              <svg viewBox="0 0 360 225" aria-hidden="true">
+    <defs>
+      <linearGradient id="trWhite" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FFFFFF"/>
+        <stop offset="65%" stop-color="#E2E8F0"/>
+        <stop offset="100%" stop-color="#94A3B8"/>
+      </linearGradient>
+      <linearGradient id="trGold" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#FDE047"/>
+        <stop offset="50%" stop-color="#D97706"/>
+        <stop offset="100%" stop-color="#92400E"/>
+      </linearGradient>
+      <radialGradient id="trLens" cx="38%" cy="35%" r="65%">
+        <stop offset="0%" stop-color="#475569"/>
+        <stop offset="55%" stop-color="#1E293B"/>
+        <stop offset="100%" stop-color="#020617"/>
+      </radialGradient>
+      <linearGradient id="trBlue" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#38BDF8"/>
+        <stop offset="100%" stop-color="#0070FF"/>
+      </linearGradient>
+    </defs>
+    <!-- Ground Shadow -->
+    <ellipse cx="185" cy="212" rx="128" ry="8" fill="rgba(15,23,42,0.12)"/>
+
+    <!-- Design Tool Blueprint / Gear Workbench -->
+      <g transform="translate(212, 92)">
+        <rect x="0" y="96" width="110" height="10" rx="4" fill="#334155"/>
+        <rect x="14" y="106" width="8" height="16" rx="2" fill="#475569"/>
+        <rect x="88" y="106" width="8" height="16" rx="2" fill="#475569"/>
+        <!-- Floating UI & Gear Module being assembled -->
+        <g class="tr-float-ui">
+          <rect x="16" y="18" width="78" height="62" rx="10" fill="#FFFFFF" stroke="#0070FF" stroke-width="2"/>
+          <rect x="24" y="26" width="62" height="12" rx="4" fill="#E0F2FE"/>
+          <circle cx="30" cy="32" r="2.2" fill="#0070FF"/>
+          <circle cx="37" cy="32" r="2.2" fill="#38BDF8"/>
+          <!-- Spinning Gears inside tool -->
+          <g class="tr-gear-cw" transform="translate(45, 58)">
+            <circle cx="0" cy="0" r="12" fill="url(#trGold)" stroke="#78350F" stroke-width="1.2"/>
+            <circle cx="0" cy="0" r="4.5" fill="#FFFFFF"/>
+            <path d="M0,-15 V15 M-15,0 H15 M-11,-11 L11,11 M-11,11 L11,-11" stroke="#B45309" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="0" cy="0" r="9" fill="url(#trGold)"/>
+            <circle cx="0" cy="0" r="4" fill="#FFFFFF"/>
+          </g>
+          <g class="tr-gear-ccw" transform="translate(72, 54)">
+            <circle cx="0" cy="0" r="9" fill="url(#trBlue)"/>
+            <path d="M0,-11 V11 M-11,0 H11 M-8,-8 L8,8 M-8,8 L8,-8" stroke="#0070FF" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="0" cy="0" r="7" fill="url(#trBlue)"/>
+            <circle cx="0" cy="0" r="3" fill="#FFFFFF"/>
+          </g>
+        </g>
+      </g>
+
+    <!-- Retro-Modern White & Gold Tracked Robot -->
+    <g transform="translate(36, 12)">
+      <!-- Left Arm -->
+      <g class="tr-arm-help">
+        <circle cx="52" cy="116" r="11" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <rect x="36" y="122" width="14" height="28" rx="6" transform="rotate(14 43 136)" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+        <circle cx="37" cy="152" r="5.5" fill="#475569" stroke="#1E293B" stroke-width="1.4"/>
+      </g>
+
+      <!-- Tracked Base / Gold Tank Treads -->
+      <g transform="translate(44, 152)">
+        <rect x="8" y="8" width="76" height="32" rx="16" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+        <rect x="12" y="12" width="68" height="24" rx="12" fill="url(#trGold)"/>
+        <circle class="tr-wheel" cx="24" cy="24" r="9" fill="#334155" stroke="#FDE047" stroke-width="2"/>
+        <circle class="tr-wheel" cx="46" cy="24" r="7" fill="#334155" stroke="#FDE047" stroke-width="1.8"/>
+        <circle class="tr-wheel" cx="68" cy="24" r="9" fill="#334155" stroke="#FDE047" stroke-width="2"/>
+        <rect x="28" y="-2" width="36" height="14" rx="4" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+      </g>
+
+      <!-- Boxy White & Gold Torso -->
+      <rect x="56" y="102" width="68" height="52" rx="10" fill="url(#trWhite)" stroke="#1E293B" stroke-width="2"/>
+      <path d="M76,102 V114 H104 V102" fill="none" stroke="url(#trGold)" stroke-width="3.2" stroke-linejoin="round"/>
+      <circle cx="72" cy="138" r="5" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+      <circle cx="108" cy="138" r="5" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+      <!-- Neck -->
+      <rect x="81" y="92" width="18" height="12" rx="3" fill="#475569" stroke="#1E293B" stroke-width="1.5"/>
+
+      <!-- Right Working Arm Holding Wrench/Tool -->
+      <g class="tr-arm-work">
+        <circle cx="126" cy="116" r="11" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <rect x="124" y="110" width="34" height="14" rx="6" transform="rotate(-8 140 117)" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+        <!-- Wrench / Build Stylus -->
+        <path d="M156,112 L180,104" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="182" cy="103" r="5" fill="none" stroke="#475569" stroke-width="3"/>
+      </g>
+
+      <!-- Welding / Build Sparks -->
+      <g class="tr-spark-1" transform="translate(185, 98)">
+        <path d="M0,-8 V8 M-8,0 H8 M-5,-5 L5,5 M-5,5 L5,-5" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <g class="tr-spark-2" transform="translate(194, 110)">
+        <path d="M0,-6 V6 M-6,0 H6" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Boxy White & Gold Robot Head -->
+      <g class="tr-head">
+        <!-- Antennae -->
+        <line x1="72" y1="30" x2="66" y2="12" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="66" cy="10" r="4" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+        <line x1="110" y1="30" x2="114" y2="10" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="114" cy="8" r="4" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+        <circle class="tr-ant-pulse" cx="114" cy="8" r="7" fill="none" stroke="#0070FF" stroke-width="1.8"/>
+
+        <!-- Gold Speaker Ear -->
+        <ellipse cx="47" cy="60" rx="6" ry="15" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <ellipse cx="133" cy="60" rx="5" ry="13" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+
+        <!-- Main Boxy Head -->
+        <rect x="49" y="28" width="82" height="65" rx="13" fill="url(#trWhite)" stroke="#1E293B" stroke-width="2"/>
+        <!-- Gold Corner Brackets -->
+        <path d="M49,40 V31 Q49,28 52,28 H61" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M119,28 H128 Q131,28 131,31 V40" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M49,81 V90 Q49,93 52,93 H61" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M119,93 H128 Q131,93 131,90 V81" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Big Camera Lens Eyes -->
+        <g class="tr-eyes">
+          <circle cx="72" cy="58" r="13" fill="url(#trLens)" stroke="#1E293B" stroke-width="2"/>
+          <circle cx="72" cy="58" r="7" fill="#090D16"/>
+          <circle cx="68" cy="53" r="3.2" fill="#FFFFFF"/>
+          <circle cx="110" cy="58" r="13" fill="url(#trLens)" stroke="#1E293B" stroke-width="2"/>
+          <circle cx="110" cy="58" r="7" fill="#090D16"/>
+          <circle cx="106" cy="53" r="3.2" fill="#FFFFFF"/>
+        </g>
+        <!-- Friendly Smile -->
+        <path d="M84,78 Q91,82 98,78" fill="none" stroke="#1E293B" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
             </div>
           </div>
           <div class="tool-body">
@@ -606,11 +805,110 @@
         <!-- 3. Coming Soon placeholder -->
         <div class="tool-card coming-soon fade-up" style="transition-delay:0.16s">
           <div class="tool-media">
-            <div class="tool-media-placeholder">
-              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-              </svg>
-              <span>Coming Soon</span>
+            <div class="tool-robo-stage">
+              <span class="tool-robo-badge">Coming Soon</span>
+              <svg viewBox="0 0 360 225" aria-hidden="true">
+    
+    <!-- Ground Shadow -->
+    <ellipse cx="185" cy="212" rx="128" ry="8" fill="rgba(15,23,42,0.12)"/>
+
+    <!-- Automation Circuit & Cog Node being built -->
+      <g transform="translate(212, 92)">
+        <rect x="0" y="96" width="110" height="10" rx="4" fill="#334155"/>
+        <rect x="14" y="106" width="8" height="16" rx="2" fill="#475569"/>
+        <rect x="88" y="106" width="8" height="16" rx="2" fill="#475569"/>
+        <g class="tr-float-ui">
+          <rect x="18" y="16" width="76" height="64" rx="12" fill="#0F172A" stroke="#38BDF8" stroke-width="2"/>
+          <path d="M30,32 H56 L66,42 H82" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="30" cy="32" r="3" fill="#FDE047"/>
+          <circle cx="82" cy="42" r="3" fill="#38BDF8"/>
+          <g class="tr-gear-cw" transform="translate(56, 58)">
+            <path d="M0,-15 V15 M-15,0 H15 M-11,-11 L11,11 M-11,11 L11,-11" stroke="#F59E0B" stroke-width="3.2" stroke-linecap="round"/>
+            <circle cx="0" cy="0" r="10" fill="url(#trGold)"/>
+            <circle cx="0" cy="0" r="4" fill="#0F172A"/>
+          </g>
+        </g>
+      </g>
+
+    <!-- Retro-Modern White & Gold Tracked Robot -->
+    <g transform="translate(36, 12)">
+      <!-- Left Arm -->
+      <g class="tr-arm-help">
+        <circle cx="52" cy="116" r="11" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <rect x="36" y="122" width="14" height="28" rx="6" transform="rotate(14 43 136)" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+        <circle cx="37" cy="152" r="5.5" fill="#475569" stroke="#1E293B" stroke-width="1.4"/>
+      </g>
+
+      <!-- Tracked Base / Gold Tank Treads -->
+      <g transform="translate(44, 152)">
+        <rect x="8" y="8" width="76" height="32" rx="16" fill="#1E293B" stroke="#0F172A" stroke-width="2"/>
+        <rect x="12" y="12" width="68" height="24" rx="12" fill="url(#trGold)"/>
+        <circle class="tr-wheel" cx="24" cy="24" r="9" fill="#334155" stroke="#FDE047" stroke-width="2"/>
+        <circle class="tr-wheel" cx="46" cy="24" r="7" fill="#334155" stroke="#FDE047" stroke-width="1.8"/>
+        <circle class="tr-wheel" cx="68" cy="24" r="9" fill="#334155" stroke="#FDE047" stroke-width="2"/>
+        <rect x="28" y="-2" width="36" height="14" rx="4" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+      </g>
+
+      <!-- Boxy White & Gold Torso -->
+      <rect x="56" y="102" width="68" height="52" rx="10" fill="url(#trWhite)" stroke="#1E293B" stroke-width="2"/>
+      <path d="M76,102 V114 H104 V102" fill="none" stroke="url(#trGold)" stroke-width="3.2" stroke-linejoin="round"/>
+      <circle cx="72" cy="138" r="5" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+      <circle cx="108" cy="138" r="5" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+      <!-- Neck -->
+      <rect x="81" y="92" width="18" height="12" rx="3" fill="#475569" stroke="#1E293B" stroke-width="1.5"/>
+
+      <!-- Right Working Arm Holding Wrench/Tool -->
+      <g class="tr-arm-work">
+        <circle cx="126" cy="116" r="11" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <rect x="124" y="110" width="34" height="14" rx="6" transform="rotate(-8 140 117)" fill="url(#trWhite)" stroke="#1E293B" stroke-width="1.6"/>
+        <!-- Wrench / Build Stylus -->
+        <path d="M156,112 L180,104" stroke="#64748B" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="182" cy="103" r="5" fill="none" stroke="#475569" stroke-width="3"/>
+      </g>
+
+      <!-- Welding / Build Sparks -->
+      <g class="tr-spark-1" transform="translate(185, 98)">
+        <path d="M0,-8 V8 M-8,0 H8 M-5,-5 L5,5 M-5,5 L5,-5" stroke="#F59E0B" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+      <g class="tr-spark-2" transform="translate(194, 110)">
+        <path d="M0,-6 V6 M-6,0 H6" stroke="#38BDF8" stroke-width="2.2" stroke-linecap="round"/>
+      </g>
+
+      <!-- Boxy White & Gold Robot Head -->
+      <g class="tr-head">
+        <!-- Antennae -->
+        <line x1="72" y1="30" x2="66" y2="12" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="66" cy="10" r="4" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+        <line x1="110" y1="30" x2="114" y2="10" stroke="#1E293B" stroke-width="2.2"/>
+        <circle cx="114" cy="8" r="4" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.2"/>
+        <circle class="tr-ant-pulse" cx="114" cy="8" r="7" fill="none" stroke="#0070FF" stroke-width="1.8"/>
+
+        <!-- Gold Speaker Ear -->
+        <ellipse cx="47" cy="60" rx="6" ry="15" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+        <ellipse cx="133" cy="60" rx="5" ry="13" fill="url(#trGold)" stroke="#1E293B" stroke-width="1.6"/>
+
+        <!-- Main Boxy Head -->
+        <rect x="49" y="28" width="82" height="65" rx="13" fill="url(#trWhite)" stroke="#1E293B" stroke-width="2"/>
+        <!-- Gold Corner Brackets -->
+        <path d="M49,40 V31 Q49,28 52,28 H61" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M119,28 H128 Q131,28 131,31 V40" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M49,81 V90 Q49,93 52,93 H61" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+        <path d="M119,93 H128 Q131,93 131,90 V81" fill="none" stroke="#D97706" stroke-width="3.5" stroke-linecap="round"/>
+
+        <!-- Big Camera Lens Eyes -->
+        <g class="tr-eyes">
+          <circle cx="72" cy="58" r="13" fill="url(#trLens)" stroke="#1E293B" stroke-width="2"/>
+          <circle cx="72" cy="58" r="7" fill="#090D16"/>
+          <circle cx="68" cy="53" r="3.2" fill="#FFFFFF"/>
+          <circle cx="110" cy="58" r="13" fill="url(#trLens)" stroke="#1E293B" stroke-width="2"/>
+          <circle cx="110" cy="58" r="7" fill="#090D16"/>
+          <circle cx="106" cy="53" r="3.2" fill="#FFFFFF"/>
+        </g>
+        <!-- Friendly Smile -->
+        <path d="M84,78 Q91,82 98,78" fill="none" stroke="#1E293B" stroke-width="2.6" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>
             </div>
           </div>
           <div class="tool-body">
@@ -632,7 +930,7 @@
   <div id="site-footer"></div>
 
   <!-- Floating WhatsApp Button -->
-  <a class="whatsapp-float" href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="whatsapp-float" href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
     </svg>

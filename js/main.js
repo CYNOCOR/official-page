@@ -17,10 +17,9 @@
     sessionStorage.setItem('cynocor_loaded_once', '1');
   } catch (e) {}
 
-  let isDark = document.body.classList.contains('atmosphere-dark');
-  try {
-    if (!isDark && localStorage.getItem('cynocor_atmosphere') === 'dark') isDark = true;
-  } catch (e) {}
+  // Dark theme temporarily locked to light atmosphere
+  document.body.classList.remove('atmosphere-dark');
+  const isDark = false;
 
   const overlay = document.createElement('div');
   overlay.className = 'cyno-loader' + (isDark ? ' is-dark' : '');
@@ -510,16 +509,28 @@ document.addEventListener('DOMContentLoaded', () => {
   if (form) {
     const statusEl = document.getElementById('form-status');
     const submitBtn = form.querySelector('button[type="submit"]');
-    const email = form.dataset.email;
+    const email = (form.dataset.email || '').trim();
+    let lastSubmitAt = 0;
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+      const now = Date.now();
+      if (now - lastSubmitAt < 5000) {
+        statusEl.textContent = 'Please wait a moment before sending another message.';
+        statusEl.style.color = '#FF9500';
+        return;
+      }
+      if (!form.checkValidity() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        form.reportValidity();
+        return;
+      }
+      lastSubmitAt = now;
       const originalText = submitBtn.textContent;
       submitBtn.textContent = 'Sending...';
       submitBtn.disabled = true;
 
       try {
-        const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+        const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(email)}`, {
           method: 'POST',
           headers: { 'Accept': 'application/json' },
           body: new FormData(form)
@@ -603,7 +614,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9c.26.604.852.997 1.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
               </a>
               <div class="orizon-hub-theme-switch cyno-hub-theme-vert" role="group" aria-label="Atmosphere Theme">
-                <button type="button" class="orizon-dock-btn" id="orizonThemeDarkBtn" title="Obsidian Dark Atmosphere" aria-label="Dark Mode">
+                <button type="button" class="orizon-dock-btn" id="orizonThemeDarkBtn" title="Dark Mode (Locked)" aria-label="Dark Mode (Locked)" aria-disabled="true" disabled style="opacity:0.42;cursor:not-allowed;">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
                 </button>
                 <button type="button" class="orizon-dock-btn is-active" id="orizonThemeLightBtn" title="BRAIX Ice-Sky Atmosphere" aria-label="Light Mode">
@@ -756,31 +767,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Theme Atmosphere Switcher (BRAIX Ice-Sky Light vs Obsidian Dark)
+      // Theme Atmosphere Switcher (Locked to BRAIX Ice-Sky Light for now)
       const darkBtn = document.getElementById('orizonThemeDarkBtn');
       const lightBtn = document.getElementById('orizonThemeLightBtn');
 
-      function setAtmosphere(mode) {
-        const isDark = mode === 'dark';
-        document.body.classList.toggle('atmosphere-dark', isDark);
-        darkBtn.classList.toggle('is-active', isDark);
-        lightBtn.classList.toggle('is-active', !isDark);
-        try { localStorage.setItem('cynocor_atmosphere', mode); } catch (_) {}
+      function setAtmosphere() {
+        document.body.classList.remove('atmosphere-dark');
+        darkBtn.classList.remove('is-active');
+        lightBtn.classList.add('is-active');
+        try { localStorage.setItem('cynocor_atmosphere', 'light'); } catch (_) {}
       }
 
       darkBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        setAtmosphere('dark');
+        e.preventDefault();
       });
       lightBtn.addEventListener('click', (e) => {
         e.stopPropagation();
-        setAtmosphere('light');
+        setAtmosphere();
       });
 
-      try {
-        const saved = localStorage.getItem('cynocor_atmosphere');
-        if (saved === 'dark') setAtmosphere('dark');
-      } catch (_) {}
+      setAtmosphere();
     }
   }
 
@@ -843,31 +850,77 @@ modalLinks.forEach(link => {
     const descText = link.getAttribute("data-desc");
     const modalImagesContainer = document.getElementById("modalImagesContainer");
 
+    const sanitizeMediaUrl = (url) => {
+      if (!url) return '';
+      const trimmed = url.trim();
+      if (/^(assets\/|\/assets\/|https:\/\/)/i.test(trimmed)) return trimmed;
+      return '';
+    };
+
     if (imagesUrl) {
       video.style.display = 'none';
       modalImagesContainer.style.display = 'block';
-      const imagesArr = imagesUrl.split(',');
-      let imgHtml = '';
+      modalImagesContainer.textContent = '';
+      const imagesArr = imagesUrl.split(',').map(sanitizeMediaUrl).filter(Boolean);
       if (imagesArr.length > 1) {
-        imgHtml += `<div class="modal-carousel" id="modal-image-carousel">
-                      <div class="carousel-images" id="modal-carousel-inner">`;
+        const carousel = document.createElement('div');
+        carousel.className = 'modal-carousel';
+        carousel.id = 'modal-image-carousel';
+
+        const inner = document.createElement('div');
+        inner.className = 'carousel-images';
+        inner.id = 'modal-carousel-inner';
+
         imagesArr.forEach((imgSrc, idx) => {
-          imgHtml += `<img src="${imgSrc.trim()}" alt="Project Image" class="${idx === 0 ? 'active' : ''}">`;
+          const img = document.createElement('img');
+          img.src = imgSrc;
+          img.alt = 'Project Image';
+          img.decoding = 'async';
+          if (idx === 0) img.className = 'active';
+          inner.appendChild(img);
         });
-        imgHtml += `  </div>
-                      <button class="carousel-btn prev" style="opacity: 1;" onclick="moveCarousel('modal-carousel-inner', -1)" aria-label="Previous image">&#10094;</button>
-                      <button class="carousel-btn next" style="opacity: 1;" onclick="moveCarousel('modal-carousel-inner', 1)" aria-label="Next image">&#10095;</button>
-                    </div>`;
-      } else {
-        imgHtml = `<img src="${imagesArr[0].trim()}" style="width: 100%; height: 100%; object-fit: contain;">`;
+
+        const prevBtn = document.createElement('button');
+        prevBtn.type = 'button';
+        prevBtn.className = 'carousel-btn prev';
+        prevBtn.style.opacity = '1';
+        prevBtn.setAttribute('aria-label', 'Previous image');
+        prevBtn.textContent = '\u276E';
+        prevBtn.addEventListener('click', () => {
+          if (typeof window.moveCarousel === 'function') window.moveCarousel('modal-carousel-inner', -1);
+        });
+
+        const nextBtn = document.createElement('button');
+        nextBtn.type = 'button';
+        nextBtn.className = 'carousel-btn next';
+        nextBtn.style.opacity = '1';
+        nextBtn.setAttribute('aria-label', 'Next image');
+        nextBtn.textContent = '\u276F';
+        nextBtn.addEventListener('click', () => {
+          if (typeof window.moveCarousel === 'function') window.moveCarousel('modal-carousel-inner', 1);
+        });
+
+        carousel.append(inner, prevBtn, nextBtn);
+        modalImagesContainer.appendChild(carousel);
+      } else if (imagesArr.length === 1) {
+        const img = document.createElement('img');
+        img.src = imagesArr[0];
+        img.alt = 'Project Image';
+        img.decoding = 'async';
+        img.style.width = '100%';
+        img.style.height = '100%';
+        img.style.objectFit = 'contain';
+        modalImagesContainer.appendChild(img);
       }
-      modalImagesContainer.innerHTML = imgHtml;
     } else if (videoUrl) {
-      modalImagesContainer.style.display = 'none';
-      video.style.display = 'block';
-      videoSource.src = videoUrl;
-      video.load();
-      video.play();
+      const safeVideo = sanitizeMediaUrl(videoUrl);
+      if (safeVideo) {
+        modalImagesContainer.style.display = 'none';
+        video.style.display = 'block';
+        videoSource.src = safeVideo;
+        video.load();
+        video.play();
+      }
     }
 
     // Modal elements walata set karanawa
@@ -906,31 +959,6 @@ function closeModal() {
 document.addEventListener('DOMContentLoaded', () => {
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduceMotion) return;
-
-  // 1. Top Scroll Flow Progress Hairline
-  const flowBar = document.createElement('div');
-  flowBar.className = 'cyno-scroll-flow-bar';
-  flowBar.setAttribute('aria-hidden', 'true');
-  document.body.appendChild(flowBar);
-
-  let scrollHideTimer = 0;
-  const updateFlowBar = () => {
-    const doc = document.documentElement;
-    const maxScroll = Math.max(1, doc.scrollHeight - window.innerHeight);
-    const pct = Math.min(100, Math.max(0, (window.scrollY / maxScroll) * 100));
-    flowBar.style.width = pct.toFixed(2) + '%';
-    if (window.scrollY > 12) {
-      flowBar.classList.add('is-scrolling');
-      clearTimeout(scrollHideTimer);
-      scrollHideTimer = setTimeout(() => {
-        if (window.scrollY <= 12) flowBar.classList.remove('is-scrolling');
-      }, 900);
-    } else {
-      flowBar.classList.remove('is-scrolling');
-    }
-  };
-  window.addEventListener('scroll', updateFlowBar, { passive: true });
-  updateFlowBar();
 
   // 2. Silky Momentum Wheel Scroll (desktop fine-pointer)
   const isFinePointer = window.matchMedia && window.matchMedia('(pointer: fine)').matches;

@@ -4,6 +4,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob:; connect-src 'self' https://formsubmit.co https://cdn.jsdelivr.net; object-src 'none'; base-uri 'self'; form-action 'self' https://formsubmit.co https://wa.me mailto:;">
   <title>Projects - CYNOCOR</title>
   <meta name="description"
     content="Explore CYNOCOR's portfolio of software, automation, and infrastructure projects delivered for real businesses.">
@@ -916,6 +919,91 @@
       color: var(--text-secondary);
     }
 
+    .testimonials-empty {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 40px 32px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px dashed rgba(0, 112, 255, 0.28);
+      box-shadow: 0 12px 32px rgba(15, 23, 42, 0.05);
+      text-align: center;
+    }
+
+    .testimonials-empty-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(0, 112, 255, 0.08);
+      color: #0070FF;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .testimonials-empty-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #0070FF;
+      box-shadow: 0 0 0 3px rgba(0, 112, 255, 0.18);
+    }
+
+    .testimonials-empty h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin: 0 0 10px;
+    }
+
+    .testimonials-empty p {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0 0 22px;
+    }
+
+    .testimonials-empty-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 999px;
+      background: rgba(0, 112, 255, 0.08);
+      border: 1px solid rgba(0, 112, 255, 0.2);
+      color: #0070FF;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s var(--ease), color 0.25s var(--ease);
+    }
+
+    .testimonials-empty-btn:hover {
+      background: #0070FF;
+      border-color: #0070FF;
+      color: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    body.atmosphere-dark .testimonials-empty {
+      background: rgba(15, 23, 42, 0.72);
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+
+    body.atmosphere-dark .testimonials-empty h3 {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .testimonials-empty p {
+      color: #94A3B8;
+    }
+
     body.atmosphere-dark .mosaic-tile {
       border-color: rgba(148, 163, 184, 0.14);
       box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
@@ -994,6 +1082,20 @@
       .testimonials-grid {
         grid-template-columns: 1fr;
         gap: 28px;
+      }
+
+      .testimonials-empty {
+        padding: 28px 20px;
+        border-radius: 18px;
+      }
+
+      .testimonials-empty h3 {
+        font-size: 1.1rem;
+      }
+
+      .testimonials-empty p {
+        font-size: 0.875rem;
+        margin-bottom: 18px;
       }
     }
   </style>
@@ -1379,38 +1481,34 @@
       <div class="testimonials-mosaic-wrap fade-up">
         <div class="testimonials-mosaic" aria-hidden="true">
           <div class="mosaic-col col-1">
-            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/01.jpg" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-01.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/iso-sq-01.svg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-2">
-            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/01.png" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Oleetzo/02.png" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/01.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/iso-sq-02.svg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-02.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-03.jpg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-3">
-            <div class="mosaic-tile is-tall"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png"
-                alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile is-tall"><img src="assets/clipart/proj-tall-01.jpg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-4">
-            <div class="mosaic-tile is-med"><img src="assets/projects/Kins%20Marine/02.png" alt=""
-                loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile is-med"><img src="assets/clipart/iso-tall-01.svg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-5">
-            <div class="mosaic-tile is-med"><img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt=""
-                loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile is-med"><img src="assets/clipart/proj-tall-03.jpg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-6">
-            <div class="mosaic-tile is-tall"><img src="assets/projects/Oleetzo/01.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile is-tall"><img src="assets/clipart/iso-tall-02.svg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-7">
-            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/02.png" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt=""
-                loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-05.jpg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/iso-sq-03.svg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-11.jpg" alt="" loading="lazy" decoding="async"></div>
           </div>
           <div class="mosaic-col col-8">
-            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/02.png" alt="" loading="lazy" decoding="async"></div>
-            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/03.png" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/iso-sq-04.svg" alt="" loading="lazy" decoding="async"></div>
+            <div class="mosaic-tile"><img src="assets/clipart/proj-sq-12.jpg" alt="" loading="lazy" decoding="async"></div>
           </div>
         </div>
 
@@ -1420,114 +1518,11 @@
         </div>
       </div>
 
-      <div class="testimonials-grid fade-up" style="transition-delay: 0.12s;">
-        <article class="testimonial-card">
-          <div>
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-            </div>
-            <p class="testimonial-quote">"CYNOCOR transformed our booking and dispatch workflow into a fast, reliable
-              platform. Our team manages daily operations in half the time. Highly recommend!"</p>
-          </div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0070FF, #06B6D4);">KP</div>
-            <div class="testimonial-author-info">
-              <strong>Kasun P.</strong>
-              <span>Managing Director, Piyasara Travels</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card">
-          <div>
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-            </div>
-            <p class="testimonial-quote">"We needed an automated student and attendance system that felt effortless for
-              teachers and parents. The delivery was smooth, and the platform was exactly what we needed."</p>
-          </div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #2563EB, #6366F1);">ND</div>
-            <div class="testimonial-author-info">
-              <strong>Nadeesha D.</strong>
-              <span>Academic Lead, Sipnena Institute</span>
-            </div>
-          </div>
-        </article>
-
-        <article class="testimonial-card">
-          <div>
-            <div class="testimonial-stars" aria-label="5 out of 5 stars">
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-              <svg viewBox="0 0 20 20">
-                <path
-                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
-              </svg>
-            </div>
-            <p class="testimonial-quote">"Their engineering discipline and attention to UI detail stood out immediately.
-              Whether it is web architecture or brand visuals, CYNOCOR consistently delivers."</p>
-          </div>
-          <div class="testimonial-author">
-            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0EA5E9, #0284C7);">RM</div>
-            <div class="testimonial-author-info">
-              <strong>Roshan M.</strong>
-              <span>Operations Head, Kins Marine</span>
-            </div>
-          </div>
-        </article>
+      <div class="testimonials-empty fade-up" style="transition-delay: 0.12s;">
+        <span class="testimonials-empty-badge">Coming Soon</span>
+        <h3>Client Feedbacks Will Be Added Here</h3>
+        <p>We are currently curating verified reviews and project stories from our partners. Check back soon to read what clients say about working with CYNOCOR.</p>
+        <a href="contact.html" class="testimonials-empty-btn">Share Your Feedback &rarr;</a>
       </div>
     </div>
   </section>
@@ -1556,7 +1551,7 @@
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float"
     href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
-    rel="noopener" aria-label="Chat with us on WhatsApp">
+    rel="noopener noreferrer" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
       <path
         d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
