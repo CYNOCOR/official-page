@@ -16,7 +16,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=20261110.2">
+  <link rel="stylesheet" href="css/style.css?v=20261113.14">
 
   <style>
     .section {
@@ -33,11 +33,11 @@
     }
 
     .filter-btn {
-      padding: 10px 20px;
-      border-radius: 30px;
+      padding: 10px 22px;
+      border-radius: 999px;
       border: 1px solid var(--border);
-      background: transparent;
-      color: var(--text);
+      background: var(--bg-surface-solid);
+      color: var(--text-primary);
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -48,66 +48,280 @@
 
     .filter-btn:hover {
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent-bright);
+      background: rgba(0, 112, 255, 0.08);
     }
 
     .filter-btn.active {
-      background: var(--accent);
-      color: #fff;
-      border-color: var(--accent);
+      background: linear-gradient(135deg, #0070FF 0%, #1A85FF 100%);
+      color: #FAFCFF;
+      border-color: rgba(250, 252, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 112, 255, 0.4);
     }
 
-    /* ── Project Grid ─────────────────────────────────── */
+    /* ── Project Coverflow Showcase ───────────────────── */
+    .project-stage {
+      position: relative;
+      height: 430px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0 28px;
+      overflow: visible;
+    }
+
     .project-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .project-card {
-      background: var(--bg-surface-solid);
-      border-radius: 20px;
+      position: absolute;
+      width: 580px;
+      height: 380px;
+      border-radius: 24px;
       overflow: hidden;
-      border: 1px solid transparent;
-      box-shadow: var(--shadow-card);
-      display: flex;
-      flex-direction: column;
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      box-shadow:
+        0 20px 46px rgba(15, 23, 42, 0.12),
+        inset 0 1px 1px rgba(255, 255, 255, 0.78);
+      cursor: pointer;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      transform: translate3d(0, 0, 0);
+      transition:
+        transform 1.05s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform, opacity;
     }
 
-    .project-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-card-hover);
-      border-color: rgba(0, 102, 204, 0.1);
+    body.atmosphere-dark .project-card {
+      background: rgba(15, 23, 42, 0.42);
+      border-color: rgba(148, 163, 184, 0.24);
+      box-shadow:
+        0 24px 54px rgba(0, 0, 0, 0.42),
+        inset 0 1px 1px rgba(255, 255, 255, 0.14);
+    }
+
+    .project-card[data-pos="0"] {
+      transform: translate3d(0, 0, 0) scale(1);
+      z-index: 5;
+      opacity: 1;
+      box-shadow:
+        0 28px 64px rgba(15, 23, 42, 0.16),
+        0 0 0 1px rgba(255, 255, 255, 0.55),
+        inset 0 1px 1px rgba(255, 255, 255, 0.85);
+    }
+
+    .project-card[data-pos="-1"] {
+      transform: translate3d(-290px, 0, 0) scale(0.84);
+      z-index: 3;
+      opacity: 0.9;
+    }
+
+    .project-card[data-pos="1"] {
+      transform: translate3d(290px, 0, 0) scale(0.84);
+      z-index: 3;
+      opacity: 0.9;
+    }
+
+    .project-card[data-pos="-2"] {
+      transform: translate3d(-500px, 0, 0) scale(0.68);
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    .project-card[data-pos="2"] {
+      transform: translate3d(500px, 0, 0) scale(0.68);
+      z-index: 1;
+      opacity: 0.7;
+    }
+
+    .project-card[data-pos="hidden-left"] {
+      transform: translate3d(-640px, 0, 0) scale(0.54);
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .project-card[data-pos="hidden-right"] {
+      transform: translate3d(640px, 0, 0) scale(0.54);
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .project-card[data-pos="hidden"] {
+      transform: translate3d(0, 0, 0) scale(0.54);
+      z-index: 0;
+      opacity: 0;
+      pointer-events: none;
     }
 
     .project-media {
-      aspect-ratio: 16/10;
-      background: #E5E5EA;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 44px 12px 12px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.24) 0%, rgba(255, 255, 255, 0.08) 100%);
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      position: relative;
+    }
+
+    body.atmosphere-dark .project-media {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.32) 0%, rgba(15, 23, 42, 0.18) 100%);
+    }
+
+    .project-media::after {
+      display: none;
     }
 
     .project-media img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 14px;
       display: block;
-      transition: transform 0.5s var(--ease);
+      transition: transform 0.6s var(--ease);
     }
 
-    .project-card:hover .project-media img {
-      transform: scale(1.05);
+    .project-card[data-pos="0"]:hover .project-media img {
+      transform: scale(1.04);
     }
 
     .project-body {
-      padding: 28px 24px 24px;
-      flex: 1;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 3;
+      padding: 13px 18px 6px;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .project-body > :not(h3) {
+      display: none;
+    }
+
+    .project-body h3 {
+      margin: 0;
+      color: #0F172A;
+      font-size: 0.96rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    body.atmosphere-dark .project-body h3 {
+      color: #F8FAFC;
+    }
+
+    .coverflow-nav {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .coverflow-btn {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(15, 23, 42, 0.16);
+      background: var(--bg-surface-solid);
+      color: var(--text-primary);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.25s var(--ease), background 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .coverflow-btn:hover {
+      background: #0F172A;
+      border-color: #0F172A;
+      color: #ffffff;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.16);
+    }
+
+    body.atmosphere-dark .coverflow-btn {
+      border-color: rgba(148, 163, 184, 0.28);
+      background: rgba(15, 23, 42, 0.8);
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .coverflow-btn:hover {
+      background: #0070FF;
+      border-color: #0070FF;
+    }
+
+    @media (max-width: 960px) {
+      .project-stage {
+        height: 360px;
+      }
+
+      .project-card {
+        width: 440px;
+        height: 300px;
+      }
+
+      .project-card[data-pos="-1"] {
+        transform: translateX(-195px) scale(0.84);
+      }
+
+      .project-card[data-pos="1"] {
+        transform: translateX(195px) scale(0.84);
+      }
+
+      .project-card[data-pos="-2"] {
+        transform: translateX(-330px) scale(0.68);
+      }
+
+      .project-card[data-pos="2"] {
+        transform: translateX(330px) scale(0.68);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .project-stage {
+        height: 300px;
+      }
+
+      .project-card {
+        width: 325px;
+        height: 245px;
+      }
+
+      .project-card[data-pos="-1"] {
+        transform: translateX(-95px) scale(0.84);
+      }
+
+      .project-card[data-pos="1"] {
+        transform: translateX(95px) scale(0.84);
+      }
+
+      .project-card[data-pos="-2"],
+      .project-card[data-pos="2"] {
+        opacity: 0;
+        pointer-events: none;
+      }
     }
 
     .tag {
@@ -158,8 +372,17 @@
     }
 
     @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.35; transform: scale(0.8); }
+
+      0%,
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.35;
+        transform: scale(0.8);
+      }
     }
 
     .project-body h3 {
@@ -273,7 +496,7 @@
     }
 
     .modal-content {
-      background: #ffffff;
+      background: #FAFCFF;
       padding: 28px;
       border-radius: 20px;
       width: 860px;
@@ -281,7 +504,7 @@
       max-height: 90vh;
       overflow-y: auto;
       position: relative;
-      box-shadow: 0 32px 64px rgba(0, 0, 0, 0.28);
+      box-shadow: 0 32px 64px rgba(8, 8, 12, 0.28);
       transform: translateY(32px) scale(0.96);
       opacity: 0;
       transition: transform 0.4s var(--ease), opacity 0.4s ease;
@@ -350,7 +573,7 @@
       top: 14px;
       right: 16px;
       background: #f1f1f1;
-      color: #333;
+      color: #08080C;
       width: 36px;
       height: 36px;
       border-radius: 50%;
@@ -377,7 +600,7 @@
 
     .video-description h3 {
       font-size: 1.1rem;
-      color: #111;
+      color: var(--text-primary);
       margin-bottom: 8px;
       font-weight: 600;
       letter-spacing: -0.01em;
@@ -385,7 +608,7 @@
 
     .video-description p {
       font-size: 0.875rem;
-      color: #555;
+      color: var(--text-secondary);
       line-height: 1.65;
     }
 
@@ -415,9 +638,354 @@
         padding: 56px 0;
       }
     }
+
+    /* DARK MODE MODAL FIXES */
+    body.atmosphere-dark .modal-content {
+      background: #0D1322;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .close-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: #F8FAFC;
+    }
+
+    /* ── Testimonials / Customer Feedback Section ───────── */
+    .testimonials-section {
+      background: #ffffff;
+      padding: 108px 0 96px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testimonials-section::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 110px;
+      background: linear-gradient(180deg, rgba(244, 248, 255, 0.96) 0%, rgba(255, 255, 255, 0.72) 55%, rgba(255, 255, 255, 0) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 100%);
+      mask-image: linear-gradient(to bottom, #000 0%, #000 35%, transparent 100%);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    body.atmosphere-dark .testimonials-section {
+      background: var(--bg-base);
+    }
+
+    body.atmosphere-dark .testimonials-section::before {
+      background: linear-gradient(180deg, rgba(8, 12, 24, 0.85) 0%, rgba(8, 12, 24, 0) 100%);
+    }
+
+    @keyframes mosaicFloatUp {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-9px); }
+    }
+
+    @keyframes mosaicFloatDown {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(9px); }
+    }
+
+    .testimonials-mosaic-wrap {
+      position: relative;
+      max-width: 1120px;
+      margin: 0 auto;
+    }
+
+    .testimonials-mosaic {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 14px;
+      align-items: start;
+      position: relative;
+      z-index: 1;
+    }
+
+    .mosaic-col {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .mosaic-col.col-1,
+    .mosaic-col.col-8 {
+      margin-top: 34px;
+      animation: mosaicFloatUp 6.5s ease-in-out infinite;
+    }
+
+    .mosaic-col.col-8 {
+      animation-delay: -2.2s;
+    }
+
+    .mosaic-col.col-2,
+    .mosaic-col.col-7 {
+      margin-top: 10px;
+      animation: mosaicFloatDown 7.2s ease-in-out infinite;
+    }
+
+    .mosaic-col.col-7 {
+      animation-delay: -3.4s;
+    }
+
+    .mosaic-col.col-3,
+    .mosaic-col.col-6 {
+      margin-top: 42px;
+      animation: mosaicFloatUp 6.8s ease-in-out infinite;
+      animation-delay: -1.5s;
+    }
+
+    .mosaic-col.col-6 {
+      animation-delay: -4.1s;
+    }
+
+    .mosaic-col.col-4,
+    .mosaic-col.col-5 {
+      margin-top: 0;
+      animation: mosaicFloatDown 7.5s ease-in-out infinite;
+      animation-delay: -0.8s;
+    }
+
+    .mosaic-col.col-5 {
+      animation-delay: -4.6s;
+    }
+
+    .mosaic-tile {
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--bg-surface);
+      border: 1px solid rgba(15, 23, 42, 0.06);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.07);
+      aspect-ratio: 1 / 1;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .mosaic-tile.is-tall {
+      aspect-ratio: 1 / 1.85;
+    }
+
+    .mosaic-tile.is-med {
+      aspect-ratio: 1 / 2.1;
+    }
+
+    .mosaic-tile:hover {
+      transform: translateY(-6px) scale(1.03);
+      border-color: rgba(0, 112, 255, 0.25);
+      box-shadow: 0 18px 38px rgba(0, 112, 255, 0.16);
+      z-index: 2;
+    }
+
+    .mosaic-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s var(--ease);
+    }
+
+    .mosaic-tile:hover img {
+      transform: scale(1.06);
+    }
+
+    .testimonials-header {
+      text-align: center;
+      max-width: 560px;
+      margin: -118px auto 52px;
+      position: relative;
+      z-index: 3;
+      padding: 0 16px;
+    }
+
+    .testimonials-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 6px 18px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid rgba(15, 23, 42, 0.1);
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.05);
+      font-size: 0.78rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+    }
+
+    .testimonials-header h2 {
+      font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      color: var(--text-primary);
+    }
+
+    .testimonials-header h2 span {
+      display: block;
+      color: #94A3B8;
+      font-weight: 600;
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      max-width: 1060px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 8px 4px;
+    }
+
+    .testimonial-stars {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      margin-bottom: 16px;
+      color: #F59E0B;
+    }
+
+    .testimonial-stars svg {
+      width: 15px;
+      height: 15px;
+      fill: currentColor;
+    }
+
+    .testimonial-quote {
+      font-size: 0.9375rem;
+      line-height: 1.65;
+      color: var(--text-secondary);
+      margin-bottom: 24px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .testimonial-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.85rem;
+      color: #ffffff;
+      flex-shrink: 0;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.12);
+    }
+
+    .testimonial-author-info strong {
+      display: block;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.3;
+    }
+
+    .testimonial-author-info span {
+      display: block;
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+    }
+
+    body.atmosphere-dark .mosaic-tile {
+      border-color: rgba(148, 163, 184, 0.14);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
+    }
+
+    body.atmosphere-dark .testimonials-pill {
+      background: rgba(15, 23, 42, 0.9);
+      border-color: rgba(56, 189, 248, 0.25);
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .testimonials-header h2 {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .testimonials-header h2 span {
+      color: #64748B;
+    }
+
+    body.atmosphere-dark .testimonial-quote {
+      color: #CBD5E1;
+    }
+
+    body.atmosphere-dark .testimonial-author-info strong {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .testimonial-author-info span {
+      color: #94A3B8;
+    }
+
+    @media (max-width: 960px) {
+      .testimonials-mosaic {
+        grid-template-columns: repeat(6, 1fr);
+        gap: 10px;
+      }
+
+      .mosaic-col.col-1,
+      .mosaic-col.col-8 {
+        display: none;
+      }
+
+      .testimonials-header {
+        margin: -86px auto 44px;
+      }
+
+      .testimonials-grid {
+        gap: 24px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .testimonials-section {
+        padding: 56px 0 72px;
+      }
+
+      .testimonials-mosaic {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+      }
+
+      .mosaic-col.col-2,
+      .mosaic-col.col-7 {
+        display: none;
+      }
+
+      .mosaic-col.col-3,
+      .mosaic-col.col-6 {
+        margin-top: 20px;
+      }
+
+      .testimonials-header {
+        margin: 24px auto 36px;
+      }
+
+      .testimonials-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+    }
   </style>
 
-  <script src="js/footer.js" defer></script>
+  <script src="js/footer.js?v=20261113.14" defer></script>
 </head>
 
 <body>
@@ -468,7 +1036,8 @@
         <button class="filter-btn" data-filter="custom-software">Custom Software</button>
       </div>
 
-      <div class="project-grid">
+      <div class="project-stage fade-up">
+        <div class="project-grid" id="projectCoverflow">
 
         <!-- 1. Oleetzo -->
         <div class="project-card fade-up" data-cat="brand-portfolio">
@@ -490,7 +1059,8 @@
               <span class="tag">Brand & Portfolio</span>
             </div>
             <h3>Oleetzo (oleetzo.lk)</h3>
-            <p>A luxury digital brand showcase and web platform for single-origin Ceylon spices, celebrating authentic heritage, rich flavor profiles, and artisanal packaging.</p>
+            <p>A luxury digital brand showcase and web platform for single-origin Ceylon spices, celebrating authentic
+              heritage, rich flavor profiles, and artisanal packaging.</p>
             <a href="#" class="project-link open-modal"
               data-images="assets/projects/Oleetzo/01.png,assets/projects/Oleetzo/02.png,assets/projects/Oleetzo/03.png,assets/projects/Oleetzo/04.png,assets/projects/Oleetzo/05.png"
               data-title="Oleetzo (oleetzo.lk)"
@@ -521,7 +1091,8 @@
               <span class="badge-ongoing">In Progress</span>
             </div>
             <h3>Sripalee College (sripaleecollege.com)</h3>
-            <p>An official digital web portal for Sripalee College Horana, featuring bilingual localization, comprehensive clubs & societies directory, events calendar, and heritage archives.</p>
+            <p>An official digital web portal for Sripalee College Horana, featuring bilingual localization,
+              comprehensive clubs & societies directory, events calendar, and heritage archives.</p>
             <a href="#" class="project-link open-modal"
               data-images="assets/projects/Sripalee%20College/01.jpg,assets/projects/Sripalee%20College/02.png,assets/projects/Sripalee%20College/03.png,assets/projects/Sripalee%20College/04.png,assets/projects/Sripalee%20College/05.png"
               data-title="Sripalee College — Official Web Platform (sripaleecollege.com)"
@@ -535,7 +1106,8 @@
         <div class="project-card fade-up" data-cat="web-platforms" style="transition-delay:0.16s">
           <div class="project-media carousel">
             <div class="carousel-images" id="sipnena-carousel">
-              <img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt="Sipnena Education Institute 1" class="active">
+              <img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt="Sipnena Education Institute 1"
+                class="active">
               <img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt="Sipnena Education Institute 2">
               <img src="assets/projects/Sipnena%20Education%20Institute/03.png" alt="Sipnena Education Institute 3">
               <img src="assets/projects/Sipnena%20Education%20Institute/04.png" alt="Sipnena Education Institute 4">
@@ -552,7 +1124,8 @@
               <span class="badge-ongoing">In Progress</span>
             </div>
             <h3>Sipnena Education Institute</h3>
-            <p>A modern learning platform for a premier education institute supporting 4,200+ students across Grade 6–11 (O/L), featuring class finders, digital enrollment, and campus locators.</p>
+            <p>A modern learning platform for a premier education institute supporting 4,200+ students across Grade 6–11
+              (O/L), featuring class finders, digital enrollment, and campus locators.</p>
             <a href="#" class="project-link open-modal"
               data-images="assets/projects/Sipnena%20Education%20Institute/01.png,assets/projects/Sipnena%20Education%20Institute/02.png,assets/projects/Sipnena%20Education%20Institute/03.png,assets/projects/Sipnena%20Education%20Institute/04.png,assets/projects/Sipnena%20Education%20Institute/05.png"
               data-title="Sipnena Education Institute (Horana)"
@@ -566,7 +1139,8 @@
         <div class="project-card fade-up" data-cat="custom-software" style="transition-delay:0.24s">
           <div class="project-media carousel">
             <div class="carousel-images" id="piyasara-carousel">
-              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png" alt="Piyasara Travels Suite 1" class="active">
+              <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png" alt="Piyasara Travels Suite 1"
+                class="active">
               <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="Piyasara Travels Suite 2">
               <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/03.png" alt="Piyasara Travels Suite 3">
               <img src="assets/projects/Piyasara%20Travels%20Business%20Suite/04.png" alt="Piyasara Travels Suite 4">
@@ -583,7 +1157,8 @@
               <span class="badge-ongoing">In Progress</span>
             </div>
             <h3>Piyasara Travels Business Suite</h3>
-            <p>An enterprise business and financial management system for Piyasara Travels agency, streamlining customer inquiries, booking pipelines, invoicing, and real-time analytics.</p>
+            <p>An enterprise business and financial management system for Piyasara Travels agency, streamlining customer
+              inquiries, booking pipelines, invoicing, and real-time analytics.</p>
             <a href="#" class="project-link open-modal"
               data-images="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png,assets/projects/Piyasara%20Travels%20Business%20Suite/02.png,assets/projects/Piyasara%20Travels%20Business%20Suite/03.png,assets/projects/Piyasara%20Travels%20Business%20Suite/04.png,assets/projects/Piyasara%20Travels%20Business%20Suite/05.png"
               data-title="Piyasara Travels — Business & Financial Management Suite"
@@ -772,6 +1347,175 @@
 
 
       </div>
+      </div>
+
+      <div class="coverflow-nav fade-up" aria-label="Project carousel navigation">
+        <button class="coverflow-btn" id="coverflowPrev" type="button" aria-label="Previous project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        </button>
+        <button class="coverflow-btn" id="coverflowNext" type="button" aria-label="Next project">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Customer Feedbacks / Testimonials -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="testimonials-mosaic-wrap fade-up">
+        <div class="testimonials-mosaic" aria-hidden="true">
+          <div class="mosaic-col col-1">
+            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/01.jpg" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Challigraphy%20Hand%20Writing/01.jpeg" alt="" loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-2">
+            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/01.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Oleetzo/02.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/01.png" alt="" loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-3">
+            <div class="mosaic-tile is-tall"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/01.png"
+                alt="" loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-4">
+            <div class="mosaic-tile is-med"><img src="assets/projects/Kins%20Marine/02.png" alt=""
+                loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-5">
+            <div class="mosaic-tile is-med"><img src="assets/projects/Sipnena%20Education%20Institute/01.png" alt=""
+                loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-6">
+            <div class="mosaic-tile is-tall"><img src="assets/projects/Oleetzo/01.png" alt="" loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-7">
+            <div class="mosaic-tile"><img src="assets/projects/Sripalee%20College/02.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Piyasara%20Travels%20Business%20Suite/02.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Sipnena%20Education%20Institute/02.png" alt=""
+                loading="lazy"></div>
+          </div>
+          <div class="mosaic-col col-8">
+            <div class="mosaic-tile"><img src="assets/projects/Dreamlense/02.png" alt="" loading="lazy"></div>
+            <div class="mosaic-tile"><img src="assets/projects/Kins%20Marine/03.png" alt="" loading="lazy"></div>
+          </div>
+        </div>
+
+        <div class="testimonials-header">
+          <span class="testimonials-pill">Testimonials</span>
+          <h2>Trusted by creatives and leaders<span>from various industries</span></h2>
+        </div>
+      </div>
+
+      <div class="testimonials-grid fade-up" style="transition-delay: 0.12s;">
+        <article class="testimonial-card">
+          <div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+            </div>
+            <p class="testimonial-quote">"CYNOCOR transformed our booking and dispatch workflow into a fast, reliable
+              platform. Our team manages daily operations in half the time. Highly recommend!"</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0070FF, #06B6D4);">KP</div>
+            <div class="testimonial-author-info">
+              <strong>Kasun P.</strong>
+              <span>Managing Director, Piyasara Travels</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+            </div>
+            <p class="testimonial-quote">"We needed an automated student and attendance system that felt effortless for
+              teachers and parents. The delivery was smooth, and the platform was exactly what we needed."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #2563EB, #6366F1);">ND</div>
+            <div class="testimonial-author-info">
+              <strong>Nadeesha D.</strong>
+              <span>Academic Lead, Sipnena Institute</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card">
+          <div>
+            <div class="testimonial-stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+              <svg viewBox="0 0 20 20">
+                <path
+                  d="M10 1.5l2.57 5.2 5.74.84-4.15 4.05.98 5.72L10 14.6l-5.14 2.71.98-5.72L1.69 7.54l5.74-.84L10 1.5z" />
+              </svg>
+            </div>
+            <p class="testimonial-quote">"Their engineering discipline and attention to UI detail stood out immediately.
+              Whether it is web architecture or brand visuals, CYNOCOR consistently delivers."</p>
+          </div>
+          <div class="testimonial-author">
+            <div class="testimonial-avatar" style="background: linear-gradient(135deg, #0EA5E9, #0284C7);">RM</div>
+            <div class="testimonial-author-info">
+              <strong>Roshan M.</strong>
+              <span>Operations Head, Kins Marine</span>
+            </div>
+          </div>
+        </article>
+      </div>
     </div>
   </section>
 
@@ -807,34 +1551,151 @@
   </a>
 
   <!-- JavaScript -->
-  <script src="js/main.js?v=20261110.2" defer></script>
+  <script src="js/main.js?v=20261113.14" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const filterBtns = document.querySelectorAll('.filter-btn');
-      const projectCards = document.querySelectorAll('.project-card');
+      const allCards = Array.from(document.querySelectorAll('#projectCoverflow .project-card'));
+      const prevBtn = document.getElementById('coverflowPrev');
+      const nextBtn = document.getElementById('coverflowNext');
+      const stage = document.querySelector('.project-stage');
+      const videoModal = document.getElementById('videoModal');
+
+      let visibleCards = [...allCards];
+      let activeIndex = 0;
+      let isHovering = false;
+      let lastWheelAt = 0;
+
+      function stepCoverflow(dir) {
+        if (!visibleCards.length) return;
+        activeIndex = (activeIndex + dir + visibleCards.length) % visibleCards.length;
+        updateCoverflow();
+      }
+
+      function updateCoverflow() {
+        const len = visibleCards.length;
+        allCards.forEach(card => {
+          card.setAttribute('data-pos', 'hidden');
+        });
+
+        if (len === 0) return;
+
+        visibleCards.forEach((card, i) => {
+          let offset = i - activeIndex;
+          if (len >= 5) {
+            if (offset > len / 2) offset -= len;
+            if (offset < -len / 2) offset += len;
+          } else if (len >= 3) {
+            if (offset > Math.floor(len / 2)) offset -= len;
+            if (offset < -Math.floor(len / 2)) offset += len;
+          }
+
+          let nextPos = 'hidden-right';
+          if (offset >= -2 && offset <= 2) {
+            nextPos = String(offset);
+          } else if (offset < -2) {
+            nextPos = 'hidden-left';
+          }
+
+          const prevPos = card.getAttribute('data-pos');
+          if ((prevPos === 'hidden-left' && nextPos === 'hidden-right') ||
+              (prevPos === 'hidden-right' && nextPos === 'hidden-left')) {
+            card.style.transition = 'none';
+            card.setAttribute('data-pos', nextPos);
+            card.offsetHeight;
+            card.style.transition = '';
+          } else {
+            card.setAttribute('data-pos', nextPos);
+          }
+        });
+      }
+
+      allCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.open-modal') || e.target.closest('.carousel-btn')) return;
+          const idx = visibleCards.indexOf(card);
+          if (idx === -1) return;
+          if (idx !== activeIndex) {
+            activeIndex = idx;
+            updateCoverflow();
+          } else {
+            const modalTrigger = card.querySelector('.open-modal');
+            if (modalTrigger) modalTrigger.click();
+          }
+        });
+      });
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+          if (!visibleCards.length) return;
+          activeIndex = (activeIndex - 1 + visibleCards.length) % visibleCards.length;
+          updateCoverflow();
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+          if (!visibleCards.length) return;
+          activeIndex = (activeIndex + 1) % visibleCards.length;
+          updateCoverflow();
+        });
+      }
 
       filterBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-          // Remove active class from all buttons
           filterBtns.forEach(b => b.classList.remove('active'));
-          // Add active class to clicked button
           btn.classList.add('active');
 
           const filterValue = btn.getAttribute('data-filter');
-
-          projectCards.forEach(card => {
-            if (filterValue === 'all' || card.getAttribute('data-cat') === filterValue) {
-              card.style.display = 'flex';
-              // Trigger reflow to restart animation
-              card.style.animation = 'none';
-              card.offsetHeight; /* trigger reflow */
-              card.style.animation = null;
-            } else {
-              card.style.display = 'none';
-            }
-          });
+          visibleCards = allCards.filter(card =>
+            filterValue === 'all' || card.getAttribute('data-cat') === filterValue
+          );
+          activeIndex = 0;
+          updateCoverflow();
         });
       });
+
+      if (stage) {
+        stage.addEventListener('mousemove', (e) => {
+          isHovering = !!e.target.closest('.project-card[data-pos="0"]');
+        });
+
+        stage.addEventListener('mouseleave', () => {
+          isHovering = false;
+        });
+
+        stage.addEventListener('wheel', (e) => {
+          const centerCard = e.target.closest('.project-card[data-pos="0"]');
+          if (!centerCard || !visibleCards.length) return;
+          const delta = Math.abs(e.deltaY) >= Math.abs(e.deltaX) ? e.deltaY : e.deltaX;
+          if (Math.abs(delta) < 4) return;
+          e.preventDefault();
+          const now = Date.now();
+          if (now - lastWheelAt < 380) return;
+          lastWheelAt = now;
+          stepCoverflow(delta > 0 ? 1 : -1);
+        }, { passive: false });
+
+        let touchStartX = 0;
+        stage.addEventListener('touchstart', (e) => {
+          touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+        stage.addEventListener('touchend', (e) => {
+          const diff = e.changedTouches[0].screenX - touchStartX;
+          if (Math.abs(diff) > 40 && visibleCards.length) {
+            stepCoverflow(diff < 0 ? 1 : -1);
+          }
+        }, { passive: true });
+      }
+
+      setInterval(() => {
+        const modalOpen = videoModal && videoModal.classList.contains('active');
+        if (!isHovering && !modalOpen && visibleCards.length > 1) {
+          stepCoverflow(1);
+        }
+      }, 4200);
+
+      updateCoverflow();
     });
 
     function moveCarousel(containerId, step) {

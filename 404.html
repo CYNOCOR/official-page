@@ -54,22 +54,25 @@
       align-items: center;
       justify-content: center;
       padding: 16px 32px;
-      background: var(--accent);
-      color: #fff;
+      background: linear-gradient(135deg, #0070FF 0%, #1A85FF 100%);
+      border: 1px solid rgba(250, 252, 255, 0.25);
+      color: #FAFCFF;
       font-weight: 600;
-      border-radius: 8px;
+      border-radius: 999px;
       text-decoration: none;
-      transition: background 0.3s ease, transform 0.3s ease;
+      box-shadow: 0 8px 24px rgba(0, 112, 255, 0.38);
+      transition: filter 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
       font-size: 1rem;
     }
 
     .back-home-btn:hover {
-      background: #005bb5;
+      filter: brightness(1.1);
       transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(0, 112, 255, 0.52);
     }
   </style>
 
-  <script src="/js/footer.js" defer></script>
+  <script src="/js/footer.js?v=20261113.14" defer></script>
 </head>
 
 <body>

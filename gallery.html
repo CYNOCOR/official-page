@@ -16,14 +16,9 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
     rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=20261110.2">
+  <link rel="stylesheet" href="css/style.css?v=20261113.14">
 
   <style>
-    /* Tighter spacing between Page Hero and Gallery Filters */
-    .page-hero {
-      padding: 84px 0 42px;
-    }
-
     .section.gallery-section {
       padding: 34px 0 96px;
     }
@@ -41,7 +36,7 @@
       padding: 9px 22px;
       border-radius: 999px;
       border: 1px solid var(--border);
-      background: #ffffff;
+      background: var(--bg-surface-solid);
       color: var(--text-primary);
       font-size: 0.88rem;
       font-weight: 500;
@@ -54,14 +49,15 @@
 
     .filter-btn:hover {
       border-color: var(--accent);
-      color: var(--accent);
+      color: var(--accent-bright);
+      background: rgba(0, 112, 255, 0.08);
     }
 
     .filter-btn.active {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
-      box-shadow: 0 6px 18px rgba(0, 102, 204, 0.22);
+      background: linear-gradient(135deg, #0070FF 0%, #1A85FF 100%);
+      color: #FAFCFF;
+      border-color: rgba(250, 252, 255, 0.25);
+      box-shadow: 0 6px 20px rgba(0, 112, 255, 0.42);
     }
 
     /* ── Gallery Grid (4:5 Portrait Cards) ─────────────── */
@@ -75,17 +71,18 @@
       background: var(--bg-surface-solid);
       border-radius: 22px;
       overflow: hidden;
-      border: 1px solid rgba(0, 0, 0, 0.06);
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
-      transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
+      transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease), background 0.45s var(--ease);
     }
 
     .event-card:hover {
       transform: translateY(-6px);
+      background: var(--bg-surface-elevated);
       box-shadow: var(--shadow-card-hover);
-      border-color: rgba(0, 102, 204, 0.16);
+      border-color: rgba(0, 112, 255, 0.42);
     }
 
     /* ── 4:5 Aspect Ratio Event Banner (Images + Videos) ─ */
@@ -268,7 +265,7 @@
     .event-social-bar {
       padding: 14px 20px;
       background: linear-gradient(180deg, #f8fafd 0%, #f1f5f9 100%);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      border-bottom: 1px solid rgba(8, 8, 12, 0.06);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -291,9 +288,9 @@
       align-items: center;
       justify-content: center;
       text-decoration: none;
-      background: #ffffff;
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      background: #FAFCFF;
+      border: 1px solid rgba(8, 8, 12, 0.08);
+      box-shadow: 0 2px 8px rgba(8, 8, 12, 0.06);
       transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
       transition-duration: 0.28s;
       transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
@@ -355,8 +352,8 @@
 
     /* TikTok Official Icon Styling */
     .social-icon-btn.tt {
-      color: #111111;
-      border-color: rgba(0, 0, 0, 0.16);
+      color: #08080C;
+      border-color: rgba(8, 8, 12, 0.16);
     }
 
     .social-icon-btn.tt:hover {
@@ -400,8 +397,8 @@
       width: 100%;
       padding: 11px 18px;
       border-radius: 12px;
-      background: rgba(0, 102, 204, 0.08);
-      border: 1px solid rgba(0, 102, 204, 0.22);
+      background: rgba(0, 112, 255, 0.08);
+      border: 1px solid rgba(0, 112, 255, 0.24);
       color: var(--accent);
       font-size: 0.86rem;
       font-weight: 600;
@@ -418,8 +415,8 @@
     .uni-card-view-more-btn:hover {
       background: var(--accent);
       border-color: var(--accent);
-      color: #ffffff;
-      box-shadow: 0 8px 20px rgba(0, 102, 204, 0.24);
+      color: #FAFCFF;
+      box-shadow: 0 8px 20px rgba(0, 112, 255, 0.28);
       transform: translateY(-2px);
     }
 
@@ -439,24 +436,24 @@
       border-radius: 22px;
       overflow: hidden;
       background:
-        radial-gradient(80% 65% at 85% 15%, rgba(0, 168, 255, 0.24) 0%, transparent 60%),
-        radial-gradient(70% 60% at 15% 85%, rgba(0, 102, 204, 0.28) 0%, transparent 65%),
-        linear-gradient(155deg, #040d1a 0%, #081b33 52%, #051122 100%);
-      border: 1px solid rgba(90, 170, 255, 0.28);
-      box-shadow: 0 20px 45px rgba(2, 10, 24, 0.18);
+        radial-gradient(80% 65% at 85% 15%, rgba(0, 112, 255, 0.32) 0%, transparent 60%),
+        radial-gradient(70% 60% at 15% 85%, rgba(0, 112, 255, 0.24) 0%, transparent 65%),
+        linear-gradient(155deg, #08080C 0%, #0B1426 52%, #08080C 100%);
+      border: 1px solid rgba(0, 112, 255, 0.32);
+      box-shadow: 0 20px 45px rgba(8, 8, 12, 0.18);
       padding: 34px 28px;
       flex-direction: column;
       justify-content: space-between;
       align-items: flex-start;
-      color: #ffffff;
+      color: #FAFCFF;
       transition: transform 0.45s var(--ease), box-shadow 0.45s var(--ease), border-color 0.45s var(--ease);
       min-height: 100%;
     }
 
     .uni-view-more-card:hover {
       transform: translateY(-6px);
-      border-color: rgba(0, 210, 255, 0.65);
-      box-shadow: 0 28px 60px rgba(0, 80, 180, 0.28);
+      border-color: rgba(0, 112, 255, 0.65);
+      box-shadow: 0 28px 60px rgba(0, 112, 255, 0.28);
     }
 
     .uni-vm-top {
@@ -649,8 +646,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden;
-      box-shadow: 0 36px 90px rgba(0, 0, 0, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 36px 90px rgba(8, 8, 12, 0.6);
+      border: 1px solid rgba(250, 252, 255, 0.2);
       transform: translateY(28px) scale(0.96);
       transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -661,13 +658,13 @@
 
     .uni-modal-top-bar {
       padding: 22px 30px;
-      background: linear-gradient(135deg, #040d1a 0%, #0a1e38 60%, #061529 100%);
-      color: #ffffff;
+      background: linear-gradient(135deg, #08080C 0%, #0B1426 60%, #08080C 100%);
+      color: #FAFCFF;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 16px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-bottom: 1px solid rgba(250, 252, 255, 0.1);
       flex-shrink: 0;
     }
 
@@ -797,8 +794,8 @@
 
     /* "Coming Soon" Empty Section Cards inside Popup */
     .event-card.coming-soon-card {
-      background: linear-gradient(160deg, #ffffff 0%, #f1f5fb 100%);
-      border: 1.5px dashed rgba(0, 102, 204, 0.22);
+      background: linear-gradient(160deg, #FAFCFF 0%, #f1f5fb 100%);
+      border: 1.5px dashed rgba(0, 112, 255, 0.25);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -811,16 +808,16 @@
 
     .event-card.coming-soon-card:hover {
       transform: none;
-      border-color: rgba(0, 102, 204, 0.38);
-      box-shadow: 0 10px 28px rgba(0, 102, 204, 0.06);
+      border-color: rgba(0, 112, 255, 0.42);
+      box-shadow: 0 10px 28px rgba(0, 112, 255, 0.08);
     }
 
     .coming-soon-icon-circle {
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: rgba(0, 102, 204, 0.08);
-      border: 1px solid rgba(0, 102, 204, 0.18);
+      background: rgba(0, 112, 255, 0.08);
+      border: 1px solid rgba(0, 112, 255, 0.2);
       color: var(--accent);
       display: flex;
       align-items: center;
@@ -848,7 +845,7 @@
       position: fixed;
       inset: 0;
       z-index: 99999;
-      background: rgba(4, 8, 16, 0.88);
+      background: rgba(8, 8, 12, 0.88);
       backdrop-filter: blur(24px);
       -webkit-backdrop-filter: blur(24px);
       display: flex;
@@ -872,7 +869,7 @@
     }
 
     .lightbox-dialog {
-      background: #ffffff;
+      background: #FAFCFF;
       border-radius: 24px;
       width: 880px;
       max-width: 100%;
@@ -880,7 +877,7 @@
       overflow: hidden;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 32px 80px rgba(8, 8, 12, 0.5);
       transform: translateY(20px) scale(0.97);
       transition: transform 0.35s var(--ease);
       position: relative;
@@ -970,10 +967,6 @@
     }
 
     @media (max-width: 768px) {
-      .page-hero {
-        padding: 96px 0 32px !important;
-      }
-
       .section.gallery-section {
         padding: 24px 0 64px !important;
       }
@@ -1004,10 +997,6 @@
     }
 
     @media (max-width: 580px) {
-      .page-hero {
-        padding: 88px 0 28px !important;
-      }
-
       .section.gallery-section {
         padding: 20px 0 56px !important;
       }
@@ -1089,9 +1078,25 @@
         gap: 10px;
       }
     }
+  
+    /* DARK MODE MODAL & SOCIAL FIXES */
+    body.atmosphere-dark .uni-sections-dialog,
+    body.atmosphere-dark .lightbox-dialog {
+      background: #0D1322;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      color: #F8FAFC;
+    }
+    body.atmosphere-dark .social-icon-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.14);
+    }
+    body.atmosphere-dark .social-icon-btn.tt {
+      color: #F8FAFC;
+    }
+
   </style>
 
-  <script src="js/footer.js" defer></script>
+  <script src="js/footer.js?v=20261113.14" defer></script>
 </head>
 
 <body>
@@ -1165,24 +1170,24 @@
 
           <div class="event-social-bar">
             <div class="event-social-icons">
-              <a href="https://www.facebook.com/profile.php?id=61593575481680" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
+              <a href="https://www.facebook.com/share/p/1EZmdP8Dhb/" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/>
                 </svg>
               </a>
-              <a href="https://www.instagram.com/cynocorofficial/" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
+              <a href="https://www.instagram.com/p/DfmcijKmJMc/?utm_source=ig_web_copy_link&amp;obrf=MzRlODBiNWFlZA==&amp;srtk=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="2" y="2" width="20" height="20" rx="5"/>
                   <circle cx="12" cy="12" r="4.5"/>
                   <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
                 </svg>
               </a>
-              <a href="https://www.linkedin.com/company/cynocor/" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
+              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7526255480256495618" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M6.94 8.5H4.12V20h2.82V8.5ZM5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28ZM20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/>
                 </svg>
               </a>
-              <a href="https://www.tiktok.com/@cynocorofficial" target="_blank" rel="noopener" class="social-icon-btn tt" aria-label="View on TikTok" title="TikTok">
+              <a href="https://www.tiktok.com/@cynocor.official/photo/7706886748579630343?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7522163032911447559" target="_blank" rel="noopener" class="social-icon-btn tt" aria-label="View on TikTok" title="TikTok">
                 <svg viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1Z"/>
                 </svg>
@@ -1291,6 +1296,95 @@
               <span>View More</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
+          </div>
+        </article>
+
+        <!-- ── 4. CYNOBOT: FIVE STUDENTS BUILDING A ROBOT THAT TALKS BACK (Belongs to Robotics & AI & Iconic Moments) ── -->
+        <article class="event-card fade-up" data-cat="robotics-ai iconic-moments" style="transition-delay:0.2s">
+          <div class="event-banner" id="banner-cynobot-talks-back" style="background:radial-gradient(circle at 50% 45%, #0b2447 0%, #050f20 100%);">
+            <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+
+            <div class="event-slides">
+              <div class="event-slide active" data-type="image">
+                <img src="assets/gallery/cynobot-talks-back/cynobot-talks-back.jpg" alt="Five students are building a robot that talks back - CynoBot" style="object-fit:contain;">
+              </div>
+            </div>
+          </div>
+
+          <div class="event-social-bar">
+            <div class="event-social-icons">
+              <a href="https://www.facebook.com/share/r/1JBAdwSFuH/" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/reel/DfhXB-2s0TB/?utm_source=ig_web_copy_link&amp;srtk=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <circle cx="12" cy="12" r="4.5"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7525541159012749312" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5H4.12V20h2.82V8.5ZM5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28ZM20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="event-body">
+            <h3>A Robot That Talks Back</h3>
+            <p>Five students engineering CynoBot — an interactive autonomous robotics platform built to greet, converse, and assist people in real time.</p>
+          </div>
+        </article>
+
+        <!-- ── 5. CYNO ??? TEASER (Belongs to Robotics & AI & Iconic Moments) ── -->
+        <article class="event-card fade-up" data-cat="robotics-ai iconic-moments" style="transition-delay:0.25s">
+          <div class="event-banner" id="banner-cyno-teaser" style="background:radial-gradient(circle at 50% 45%, #3b4b5c 0%, #1d2631 100%);">
+            <button type="button" class="banner-expand-btn" onclick="openEventLightbox(this)" aria-label="Expand image">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+            </button>
+
+            <div class="event-slides">
+              <div class="event-slide active" data-type="image">
+                <img src="assets/gallery/cyno-teaser/cyno-teaser.jpg" alt="CYNO ??? by CYNOCOR — ATP | G 40 | 2026" style="object-fit:contain;">
+              </div>
+            </div>
+          </div>
+
+          <div class="event-social-bar">
+            <div class="event-social-icons">
+              <a href="https://www.facebook.com/share/p/19pCk4fZ5N/" target="_blank" rel="noopener" class="social-icon-btn fb" aria-label="View on Facebook" title="Facebook">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5h1.7V4.9c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3V11H8v3h2.2v8h3.3z"/>
+                </svg>
+              </a>
+              <a href="https://www.instagram.com/p/DfZJI-bMFp6/?utm_source=ig_web_copy_link&amp;obrf=MzRlODBiNWFlZA==&amp;srtk=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="social-icon-btn ig" aria-label="View on Instagram" title="Instagram">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5"/>
+                  <circle cx="12" cy="12" r="4.5"/>
+                  <circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+                </svg>
+              </a>
+              <a href="https://www.linkedin.com/feed/update/urn:li:activity:7524387739799052289" target="_blank" rel="noopener" class="social-icon-btn li" aria-label="View on LinkedIn" title="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6.94 8.5H4.12V20h2.82V8.5ZM5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28ZM20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"/>
+                </svg>
+              </a>
+              <a href="https://www.tiktok.com/@cynocor.official/photo/7705479370932030740?is_from_webapp=1&amp;sender_device=pc&amp;web_id=7522163032911447559" target="_blank" rel="noopener" class="social-icon-btn tt" aria-label="View on TikTok" title="TikTok">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1Z"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="event-body">
+            <h3>CYNO ??? — The Reveal Teaser</h3>
+            <p>First official teaser unveiling CYNOCOR's ATP | G 40 | 2026 robotics project before its national debut.</p>
           </div>
         </article>
 
@@ -1422,10 +1516,10 @@
       <div class="lightbox-media-col" id="lightboxMediaCol"></div>
       <div class="lightbox-info-col">
         <div>
-          <h3 id="lightboxTitle" style="font-size: 1.45rem; margin-bottom: 10px; color: #1d1d1f;">INFOTEL 2026</h3>
-          <p id="lightboxDesc" style="color: #515154; font-size: 0.93rem; line-height: 1.65;"></p>
+          <h3 id="lightboxTitle" style="font-size: 1.45rem; margin-bottom: 10px; color: var(--text-primary);">INFOTEL 2026</h3>
+          <p id="lightboxDesc" style="color: var(--text-secondary); font-size: 0.93rem; line-height: 1.65;"></p>
         </div>
-        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center;">
+        <div style="margin-top: 24px; padding-top: 18px; border-top: 1px solid var(--border); display: flex; align-items: center; justify-content: center;">
           <div class="event-social-icons" id="lightboxSocialBtns"></div>
         </div>
       </div>
@@ -1446,7 +1540,7 @@
   </a>
 
   <!-- Scripts -->
-  <script src="js/main.js?v=20261110.2" defer></script>
+  <script src="js/main.js?v=20261113.14" defer></script>
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const filterBtns = document.querySelectorAll('.filter-btn');

@@ -13,10 +13,213 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=20261110.2">
+  <link rel="stylesheet" href="css/style.css?v=20261113.14">
 
   <style>
-    .section { padding: 100px 0; }
+    .section { padding: 80px 0 100px; }
+
+    /* ── Frosted Folder Showcase (Top Section) ───────────── */
+    .tools-folder-sec {
+      padding: 96px 0 36px;
+    }
+
+    .tools-folder-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      align-items: end;
+    }
+
+    .folder-showcase-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .folder-stage {
+      position: relative;
+      width: 268px;
+      height: 214px;
+      margin-bottom: 18px;
+    }
+
+    .folder-back {
+      position: absolute;
+      left: 14px;
+      right: 14px;
+      top: 12px;
+      bottom: 8px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(203, 213, 225, 0.72) 0%, rgba(226, 232, 240, 0.45) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.08);
+    }
+
+    body.atmosphere-dark .folder-back {
+      background: linear-gradient(180deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.6) 100%);
+      border-color: rgba(148, 163, 184, 0.22);
+    }
+
+    .folder-cards {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    .folder-mini-shot {
+      position: absolute;
+      width: 108px;
+      height: 132px;
+      border-radius: 14px;
+      background: #FFFFFF;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 12px 26px rgba(15, 23, 42, 0.16);
+      overflow: hidden;
+      transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    body.atmosphere-dark .folder-mini-shot {
+      background: #0F172A;
+      border-color: #1E293B;
+    }
+
+    .folder-mini-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .folder-mini-shot.is-vector {
+      padding: 10px;
+      background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+    }
+
+    body.atmosphere-dark .folder-mini-shot.is-vector {
+      background: linear-gradient(180deg, #0F172A 0%, #1E293B 100%);
+    }
+
+    .folder-mini-shot.is-vector img {
+      object-fit: contain;
+    }
+
+    .folder-mini-shot.left {
+      top: 22px;
+      left: 24px;
+      transform: rotate(-11deg);
+      z-index: 1;
+    }
+
+    .folder-mini-shot.center {
+      top: 4px;
+      z-index: 2;
+    }
+
+    .folder-mini-shot.right {
+      top: 24px;
+      right: 24px;
+      transform: rotate(11deg);
+      z-index: 1;
+    }
+
+    .folder-showcase-card:hover .folder-mini-shot.left {
+      transform: rotate(-15deg) translate(-8px, -8px);
+    }
+
+    .folder-showcase-card:hover .folder-mini-shot.center {
+      transform: translateY(-10px) scale(1.04);
+    }
+
+    .folder-showcase-card:hover .folder-mini-shot.right {
+      transform: rotate(15deg) translate(8px, -8px);
+    }
+
+    .folder-flap-wrap {
+      position: absolute;
+      left: 10px;
+      right: 10px;
+      bottom: 0;
+      height: 122px;
+      z-index: 4;
+      filter: drop-shadow(0 16px 28px rgba(15, 23, 42, 0.14));
+      transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .folder-showcase-card:hover .folder-flap-wrap {
+      transform: translateY(3px);
+    }
+
+    .folder-flap {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.62) 0%, rgba(226, 240, 255, 0.42) 55%, rgba(255, 255, 255, 0.72) 100%);
+      backdrop-filter: blur(22px) saturate(170%);
+      -webkit-backdrop-filter: blur(22px) saturate(170%);
+      border: 1.5px solid rgba(255, 255, 255, 0.88);
+      clip-path: path('M 0,18 Q 0,0 18,0 L 116,0 Q 130,0 140,12 L 146,18 Q 154,26 168,26 L 230,26 Q 248,26 248,44 L 248,104 Q 248,122 230,122 L 18,122 Q 0,122 0,104 Z');
+      border-radius: 18px;
+      position: relative;
+    }
+
+    body.atmosphere-dark .folder-flap {
+      background: linear-gradient(160deg, rgba(30, 41, 59, 0.66) 0%, rgba(15, 23, 42, 0.54) 100%);
+      border-color: rgba(56, 189, 248, 0.28);
+    }
+
+    .folder-go-btn {
+      position: absolute;
+      right: 14px;
+      bottom: 14px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #18181B;
+      color: #FFFFFF;
+      border: 2px solid rgba(255, 255, 255, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.05rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.22);
+      z-index: 5;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), background 0.35s ease;
+    }
+
+    body.atmosphere-dark .folder-go-btn {
+      background: #F8FAFC;
+      color: #0F172A;
+      border-color: rgba(15, 23, 42, 0.8);
+    }
+
+    .folder-showcase-card:hover .folder-go-btn {
+      background: #0070FF;
+      color: #FFFFFF;
+      transform: scale(1.08) translate(1px, -1px);
+    }
+
+    .folder-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.55rem, 2.3vw, 2.05rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-transform: uppercase;
+      color: var(--text-primary);
+      line-height: 1;
+      margin: 0 0 6px;
+    }
+
+    .folder-sub {
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
 
     /* ── Tool Grid ─────────────────────────────────────── */
     .tool-grid {
@@ -29,17 +232,18 @@
       background: var(--bg-surface-solid);
       border-radius: 20px;
       overflow: hidden;
-      border: 1px solid transparent;
+      border: 1px solid var(--border);
       box-shadow: var(--shadow-card);
       display: flex;
       flex-direction: column;
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease), background 0.4s var(--ease);
     }
 
     .tool-card:hover {
       transform: translateY(-6px);
+      background: var(--bg-surface-elevated);
       box-shadow: var(--shadow-card-hover);
-      border-color: rgba(0, 102, 204, 0.12);
+      border-color: rgba(0, 112, 255, 0.42);
     }
 
     .tool-media {
@@ -66,12 +270,12 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: rgba(0, 102, 204, 0.0);
+      background: rgba(0, 112, 255, 0.0);
       transition: background 0.35s ease;
     }
 
     .tool-card:hover .tool-media::after {
-      background: rgba(0, 102, 204, 0.06);
+      background: rgba(0, 112, 255, 0.06);
     }
 
     /* Placeholder for empty media */
@@ -116,16 +320,6 @@
       gap: 6px;
     }
 
-    /* Category dot */
-    .tool-tag::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-      flex-shrink: 0;
-    }
-
     .tool-body h3 {
       font-size: 1.12rem;
       font-weight: 600;
@@ -156,15 +350,16 @@
       align-items: center;
       gap: 8px;
       padding: 9px 20px;
-      background: var(--accent);
-      color: #fff;
+      background: linear-gradient(135deg, #0070FF 0%, #1A85FF 100%);
+      border: 1px solid rgba(250, 252, 255, 0.25);
+      color: #FAFCFF;
       border-radius: 99px;
       font-size: 0.82rem;
       font-weight: 600;
       letter-spacing: 0.01em;
       text-decoration: none;
-      transition: background 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
-      box-shadow: 0 2px 12px rgba(0,102,204,0.22);
+      transition: filter 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(0, 112, 255, 0.35);
     }
 
     .tool-open-btn svg {
@@ -173,9 +368,9 @@
     }
 
     .tool-open-btn:hover {
-      background: #0052a3;
+      filter: brightness(1.1);
       transform: translateY(-1px);
-      box-shadow: 0 6px 20px rgba(0,102,204,0.32);
+      box-shadow: 0 8px 24px rgba(0, 112, 255, 0.5);
     }
 
     .tool-open-btn:hover svg {
@@ -195,22 +390,9 @@
     }
 
     .tool-status.live {
-      background: rgba(26,158,74,0.1);
-      color: #1a9e4a;
-    }
-
-    .tool-status.live::before {
-      content: '';
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #1a9e4a;
-      animation: livePulse 2s ease infinite;
-    }
-
-    @keyframes livePulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.5; transform: scale(0.75); }
+      background: rgba(16, 185, 129, 0.14);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.3);
     }
 
     /* ── Coming Soon Card ──────────────────────────────── */
@@ -224,12 +406,14 @@
     }
 
     .tool-status.soon {
-      background: rgba(100,100,120,0.08);
-      color: #888;
+      background: rgba(250, 252, 255, 0.06);
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
     }
 
     /* ── Responsive ──────────────────────────────────── */
     @media (max-width: 900px) {
+      .tools-folder-grid { grid-template-columns: 1fr; gap: 42px; }
       .tool-grid { grid-template-columns: repeat(2, 1fr); }
     }
 
@@ -244,7 +428,7 @@
     }
   </style>
 
-  <script src="js/footer.js" defer></script>
+  <script src="js/footer.js?v=20261113.14" defer></script>
 </head>
 
 <body>
@@ -284,8 +468,86 @@
     </div>
   </section>
 
+  <!-- Frosted Glass Folder Showcase -->
+  <section class="tools-folder-sec">
+    <div class="container">
+      <div class="tools-folder-grid">
+
+        <a href="https://cynocor.github.io/Place-Watermark/" target="_blank" rel="noopener noreferrer" class="folder-showcase-card fade-up">
+          <div class="folder-stage">
+            <div class="folder-back"></div>
+            <div class="folder-cards">
+              <div class="folder-mini-shot left is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/color-palette.svg" alt="Brand Assets">
+              </div>
+              <div class="folder-mini-shot center">
+                <img src="assets/tools/place watermark.jpeg" alt="Place Watermark">
+              </div>
+              <div class="folder-mini-shot right is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/building-websites.svg" alt="Web Export">
+              </div>
+            </div>
+            <div class="folder-flap-wrap">
+              <div class="folder-flap"></div>
+            </div>
+            <span class="folder-go-btn" aria-hidden="true">&#8599;</span>
+          </div>
+          <h2 class="folder-title">WATERMARK</h2>
+          <span class="folder-sub">Client-Side Image Protection</span>
+        </a>
+
+        <a href="#toolsGrid" class="folder-showcase-card fade-up" style="transition-delay:0.1s">
+          <div class="folder-stage">
+            <div class="folder-back"></div>
+            <div class="folder-cards">
+              <div class="folder-mini-shot left is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/firmware.svg" alt="Embedded Utilities">
+              </div>
+              <div class="folder-mini-shot center is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/programming.svg" alt="Developer Tools">
+              </div>
+              <div class="folder-mini-shot right is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/cloud-hosting.svg" alt="Cloud Workflows">
+              </div>
+            </div>
+            <div class="folder-flap-wrap">
+              <div class="folder-flap"></div>
+            </div>
+            <span class="folder-go-btn" aria-hidden="true">&#8599;</span>
+          </div>
+          <h2 class="folder-title">OPTIMIZE</h2>
+          <span class="folder-sub">Developer &amp; Workflow Utilities</span>
+        </a>
+
+        <a href="#toolsGrid" class="folder-showcase-card fade-up" style="transition-delay:0.2s">
+          <div class="folder-stage">
+            <div class="folder-back"></div>
+            <div class="folder-cards">
+              <div class="folder-mini-shot left is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/ai-agent.svg" alt="AI Helpers">
+              </div>
+              <div class="folder-mini-shot center is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/content-creator.svg" alt="Creative Studio">
+              </div>
+              <div class="folder-mini-shot right is-vector">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/real-time-analytics.svg" alt="Telemetry">
+              </div>
+            </div>
+            <div class="folder-flap-wrap">
+              <div class="folder-flap"></div>
+            </div>
+            <span class="folder-go-btn" aria-hidden="true">&#8599;</span>
+          </div>
+          <h2 class="folder-title">TRANSFORM</h2>
+          <span class="folder-sub">Creative &amp; Automation Suite</span>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
   <!-- Tools Gallery -->
-  <section class="section">
+  <section class="section" id="toolsGrid">
     <div class="container">
       <div class="tool-grid">
 
@@ -375,7 +637,7 @@
   </a>
 
   <!-- JavaScript -->
-  <script src="js/main.js?v=20261110.2" defer></script>
+  <script src="js/main.js?v=20261113.14" defer></script>
 
 </body>
 </html>

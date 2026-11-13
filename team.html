@@ -11,194 +11,465 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
 
-  <link rel="stylesheet" href="css/style.css?v=20261110.2">
+  <link rel="stylesheet" href="css/style.css?v=20261113.14">
 
   <style>
-    /* ── Team layout ─────────────────────────────────── */
-    .team-sec { padding: 48px 0 100px; }
-
-    .team-members {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      align-items: flex-start;
-      gap: 22px;
-      max-width: 1040px;
-      margin: 0 auto;
-      padding: 0 20px;
+    /* ── Full-Bleed 3D Concave Panoramic Team Cards ──── */
+    .team-sec {
+      padding: 88px 0 112px;
+      overflow-x: clip;
     }
 
-    /* ── Member card ─────────────────────────────────── */
-    .member {
+    .team-orbital-stage {
       position: relative;
       width: 100%;
-      background: var(--bg-surface-solid);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: var(--shadow-card);
+      max-width: 1380px;
+      min-height: auto;
+      margin: 0 auto;
+      padding: 96px 24px 64px;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      overflow: visible;
+    }
+
+    body.atmosphere-dark .orbital-anchor { fill: #0B1426; stroke: #5CE1FF; }
+    body.atmosphere-dark .orbital-anchor.is-active { fill: #5CE1FF; }
+
+    /* Shared-perspective 3D concave panoramic flex row */
+    .team-members {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      margin: 0 auto;
+      perspective: 820px;
+      perspective-origin: 50% 50%;
+      transform-style: preserve-3d;
+      z-index: 3;
+    }
+
+    /* ── Full-Bleed Portrait Card (Matches Reference) ── */
+    .team-members .member,
+    .team-members .member.fade-up,
+    .team-members .member.fade-up.visible {
+      position: relative;
+      flex: 0 0 176px;
+      width: 176px;
+      height: 288px;
+      padding: 0;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      background: #0B1220;
+      transform: translateX(var(--tx, 0px)) rotateY(var(--ry, 0deg)) translateZ(var(--tz, 0px)) scale(var(--sc, 1));
+      transform-origin: center center;
+      transform-style: preserve-3d;
+      box-shadow: 0 22px 48px rgba(10, 28, 62, 0.22);
       box-sizing: border-box;
-      transition:
-        transform 0.38s var(--ease),
-        box-shadow 0.38s var(--ease),
-        border-color 0.38s ease;
       cursor: pointer;
+      z-index: 4;
+      transition-delay: 0s !important;
+      transition:
+        transform 1.15s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 1.0s cubic-bezier(0.22, 1, 0.36, 1),
+        border-color 0.75s ease,
+        opacity 0.85s ease;
     }
 
-    .member:hover,
-    .member:focus-within {
-      transform: translateY(-7px);
-      box-shadow: 0 20px 48px rgba(0, 102, 204, 0.1), 0 6px 20px rgba(0,0,0,0.06);
-      border-color: rgba(0, 102, 204, 0.2);
+    body.atmosphere-dark .member {
+      border-color: rgba(56, 189, 248, 0.28);
+      box-shadow: 0 24px 52px rgba(0, 0, 0, 0.68);
     }
 
-    /* Accent bar on hover */
-    .member::before {
+    /* Subtle dark bottom gradient so name & expanded info are crisp over portrait */
+    .member::after {
       content: '';
       position: absolute;
-      top: 0; left: 20px; right: 20px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      border-radius: 0 0 2px 2px;
-      opacity: 0;
-      transform: scaleX(0.4);
-      transition: opacity 0.35s ease, transform 0.35s var(--ease);
+      inset: 0;
+      background: linear-gradient(180deg, transparent 42%, rgba(7, 11, 22, 0.55) 75%, rgba(7, 11, 22, 0.92) 100%);
+      pointer-events: none;
+      z-index: 1;
+      transition: background 0.55s ease;
     }
 
-    .member:hover::before,
-    .member:focus-within::before {
+    .member.is-popped::after,
+    .member.is-locked::after {
+      background: linear-gradient(180deg, rgba(7, 11, 22, 0.08) 0%, rgba(7, 11, 22, 0.55) 46%, rgba(7, 11, 22, 0.95) 100%);
+    }
+
+    .team-orbital-stage.has-active .team-members .member:not(.is-popped):not(.is-locked),
+    .team-orbital-stage.has-active .team-members .member.fade-up.visible:not(.is-popped):not(.is-locked) {
+      opacity: 0.42;
+      transform: translateX(var(--tx, 0px)) rotateY(var(--ry, 0deg)) translateZ(calc(var(--tz, 0px) - 4px)) scale(calc(var(--sc, 1) * 0.94));
+    }
+
+    .team-members .member.is-popped,
+    .team-members .member.fade-up.visible.is-popped,
+    .team-members .member.is-locked,
+    .team-members .member.fade-up.visible.is-locked {
+      transform: translate3d(var(--cx, 0px), 14px, 170px) rotateY(0deg) scale(1.42);
+      box-shadow: 0 34px 76px rgba(0, 112, 255, 0.32), 0 0 0 1.5px rgba(0, 112, 255, 0.5);
+      border-color: rgba(56, 189, 248, 0.85);
+      z-index: 60;
       opacity: 1;
-      transform: scaleX(1);
+      transition-delay: 0s !important;
+    }
+
+    .team-members .member.is-returning {
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .member.is-locked::before {
+      content: 'PINNED';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 4;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      padding: 4px 9px;
+      border-radius: 999px;
+      background: rgba(0, 112, 255, 0.85);
+      color: #FFFFFF;
+      backdrop-filter: blur(8px);
     }
 
     .member-photo {
+      position: absolute;
+      inset: 0;
       width: 100%;
-      aspect-ratio: 1;
+      height: 100%;
       object-fit: cover;
-      border-radius: 16px;
-      margin-bottom: 14px;
-      background: var(--bg-base);
-      transition: transform 0.38s var(--ease);
+      object-position: center top;
+      border-radius: 0;
+      margin: 0;
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .member:hover .member-photo {
-      transform: scale(1.025);
+    .member.is-popped .member-photo,
+    .member.is-locked .member-photo {
+      transform: scale(1.05);
     }
 
     .member h2 {
-      font-size: 1.05rem;
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 3;
+      font-size: 0.88rem;
       font-weight: 600;
-      color: var(--text-primary);
+      color: #FFFFFF;
+      text-align: left;
       margin: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       letter-spacing: -0.01em;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.65);
+      transition: bottom 0.9s cubic-bezier(0.22, 1, 0.36, 1), font-size 0.8s ease;
     }
 
-    /* ── Expandable info ─────────────────────────────── */
+    .member.is-popped h2,
+    .member.is-locked h2 {
+      bottom: 122px;
+      font-size: 0.92rem;
+    }
+
     .member-info {
+      position: absolute;
+      left: 12px;
+      right: 12px;
+      bottom: 12px;
+      z-index: 3;
       max-height: 0;
       opacity: 0;
       overflow: hidden;
-      margin-top: 0;
-      padding-top: 0;
-      border-top: 1px solid transparent;
       text-align: left;
+      transform: translateY(10px);
       transition:
-        max-height 0.42s var(--ease),
-        opacity 0.32s ease,
-        margin-top 0.38s ease,
-        padding-top 0.38s ease,
-        border-color 0.38s ease;
+        max-height 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        opacity 0.85s ease,
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
-    .member:hover .member-info,
-    .member:focus-within .member-info {
-      max-height: 320px;
+    .member.is-popped .member-info,
+    .member.is-locked .member-info {
+      max-height: 112px;
       opacity: 1;
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top-color: var(--border);
+      transform: translateY(0);
     }
 
     .member-info p {
-      color: var(--text-secondary);
-      font-size: 0.82rem;
-      line-height: 1.6;
-      margin: 0 0 14px 0;
+      color: rgba(235, 243, 255, 0.88);
+      font-size: 0.64rem;
+      line-height: 1.42;
+      margin: 0 0 8px 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
 
-    /* ── Social links ────────────────────────────────── */
-    .member-social-links {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      gap: 7px;
-    }
-
+    .member-social-links { display: flex; align-items: center; justify-content: flex-start; gap: 7px; }
     .member-social-links a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      border: 1px solid var(--border);
-      background: var(--bg-base);
-      color: var(--text-primary);
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.12);
+      color: #FFFFFF;
       text-decoration: none;
-      transition-property: color, background-color, border-color, box-shadow, transform, opacity, width;
-      transition-duration: 0.25s;
-      transition-timing-function: var(--ease);
+      backdrop-filter: blur(8px);
+      transition: color 0.25s ease, background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
     }
-
     .member-social-links a:hover {
-      border-color: var(--accent);
-      background: var(--accent);
-      color: #ffffff;
+      border-color: #0070FF; background: #0070FF; color: #FFFFFF;
       transform: translateY(-2px) scale(1.08);
     }
-
-    .member-social-links a svg {
-      width: 14px;
-      height: 14px;
-      display: block;
-    }
-
+    .member-social-links a svg { width: 13px; height: 13px; display: block; }
     .member:focus { outline: none; }
 
-    /* ── Responsive ─────────────────────────────────── */
-    @media (max-width: 860px) {
-      .team-members { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    @media (max-width: 1120px) {
+      .member { flex: 0 0 148px; width: 148px; height: 246px; }
+      .member:hover, .member.is-locked { flex: 0 0 230px; width: 230px; height: 340px; }
     }
 
-    @media (max-width: 768px) {
-      .team-sec { padding: 32px 0 72px; }
-      .team-members { grid-template-columns: repeat(2, 1fr); gap: 14px; padding: 0 16px; }
-      .member { padding: 16px; border-radius: 18px; }
-      .member h2 { font-size: 0.9375rem; }
-
-      /* Always show info on mobile */
-      .member-info {
-        max-height: 300px;
+    @media (max-width: 960px) {
+      .team-sec { padding: 16px 16px 72px; }
+      .team-orbital-stage { min-height: auto; padding: 8px 0; }
+      .orbital-stage-hint { display: none; }
+      .team-members {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        perspective: none;
+        transform-style: flat;
+      }
+      .member, .member:hover, .member.is-locked,
+      .team-orbital-stage.has-active .member:not(:hover):not(.is-locked) {
+        flex: none;
+        width: 100%;
+        height: auto;
+        padding: 14px;
+        border-radius: 22px;
+        background: rgba(255, 255, 255, 0.9);
+        border: 1.5px solid rgba(255, 255, 255, 0.98);
+        box-shadow: 0 14px 34px rgba(15, 52, 105, 0.1);
+        transform: none;
         opacity: 1;
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top-color: var(--border);
+      }
+      body.atmosphere-dark .member,
+      body.atmosphere-dark .member:hover,
+      body.atmosphere-dark .member.is-locked {
+        background: rgba(14, 22, 42, 0.9);
+        border-color: rgba(0, 112, 255, 0.28);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.52);
+      }
+      .member::after,
+      .team-members .member.is-returning {
+      pointer-events: none;
+      z-index: 20;
+    }
+
+    .member.is-locked::before {
+        display: none;
+      }
+      .member-photo,
+      .member:hover .member-photo,
+      .member.is-locked .member-photo {
+        position: relative;
+        inset: auto;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+        object-position: center 15%;
+        border-radius: 14px;
+        margin-bottom: 12px;
+        transform: none;
+      }
+      .member h2,
+      .member:hover h2,
+      .member.is-locked h2 {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        font-size: 1.04rem;
+        color: var(--text-primary);
+        text-shadow: none;
+        margin-bottom: 8px;
+      }
+      .member-info,
+      .member:hover .member-info,
+      .member.is-locked .member-info {
+        position: relative;
+        left: auto;
+        right: auto;
+        bottom: auto;
+        max-height: none;
+        opacity: 1;
+        transform: none;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
+      }
+      .member-info p {
+        color: var(--text-secondary);
+        font-size: 0.82rem;
+        -webkit-line-clamp: unset;
+        margin-bottom: 12px;
+      }
+      .member-social-links a {
+        border-color: var(--border);
+        background: var(--bg-base);
+        color: var(--text-primary);
       }
     }
 
-    @media (max-width: 480px) {
-      .team-members { grid-template-columns: 1fr; gap: 12px; padding: 0 14px; }
-      .member { padding: 14px; }
+    @media (max-width: 560px) { .team-members { grid-template-columns: 1fr; } }
+  
+    /* DARK MODE MOBILE CARD FIX */
+    @media (max-width: 900px) {
+      body.atmosphere-dark .team-orbital-stage.has-active .member:not(:hover):not(.is-locked),
+      body.atmosphere-dark .member {
+        background: rgba(13, 18, 30, 0.94);
+      }
     }
+
+    /* ── Team Arc Header & Bottom Pillars (Matches Reference) ── */
+    .team-arc-header {
+      text-align: center;
+      max-width: 680px;
+      margin: 0 auto 48px;
+      position: relative;
+      z-index: 4;
+    }
+
+    .team-arc-header h2 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      font-weight: 700;
+      line-height: 1.12;
+      letter-spacing: -0.03em;
+      color: var(--text-primary);
+      margin: 0 0 14px;
+    }
+
+    .team-arc-header p {
+      font-size: 0.96rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin: 0 auto 24px;
+    }
+
+    .team-arc-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 24px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      text-decoration: none;
+      color: var(--text-primary);
+      background: rgba(255, 255, 255, 0.72);
+      border: 1px solid rgba(0, 112, 255, 0.3);
+      box-shadow: 0 0 24px rgba(0, 112, 255, 0.14), 0 8px 20px rgba(15, 23, 42, 0.06);
+      backdrop-filter: blur(12px);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
+    }
+
+    .team-arc-cta:hover {
+      transform: translateY(-2px);
+      background: #0070FF;
+      color: #ffffff;
+      border-color: #0070FF;
+      box-shadow: 0 0 32px rgba(0, 112, 255, 0.38), 0 12px 26px rgba(0, 112, 255, 0.25);
+    }
+
+    body.atmosphere-dark .team-arc-header h2 {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .team-arc-header p {
+      color: #94A3B8;
+    }
+
+    body.atmosphere-dark .team-arc-cta {
+      background: rgba(15, 23, 42, 0.75);
+      color: #F8FAFC;
+      border-color: rgba(56, 189, 248, 0.38);
+      box-shadow: 0 0 26px rgba(0, 112, 255, 0.22);
+    }
+
+    body.atmosphere-dark .team-arc-cta:hover {
+      background: #0070FF;
+      border-color: #38BDF8;
+    }
+
+    .team-arc-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 36px;
+      max-width: 1020px;
+      margin: 68px auto 0;
+      padding: 0 16px;
+      text-align: center;
+      position: relative;
+      z-index: 4;
+    }
+
+    .team-arc-pillar h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.015em;
+      color: var(--text-primary);
+      margin: 0 0 8px;
+      line-height: 1.3;
+    }
+
+    .team-arc-pillar p {
+      font-size: 0.84rem;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+
+    body.atmosphere-dark .team-arc-pillar h3 {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .team-arc-pillar p {
+      color: #94A3B8;
+    }
+
+    @media (max-width: 768px) {
+      .team-arc-header {
+        margin-bottom: 32px;
+      }
+
+      .team-arc-pillars {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        margin-top: 44px;
+      }
+    }
+
   </style>
 
-  <script src="js/main.js?v=20261110.2" defer></script>
-  <script src="js/footer.js" defer></script>
+  <script src="js/main.js?v=20261113.14" defer></script>
+  <script src="js/footer.js?v=20261113.14" defer></script>
 </head>
 
 <body>
@@ -234,32 +505,61 @@
     <div class="container">
       <span class="eyebrow fade-up">Our People</span>
       <h1 class="fade-up" style="transition-delay:0.1s">Engineering Leadership</h1>
-      <p class="lead fade-up" style="transition-delay:0.2s">A tight-knit, senior team covering engineering, product, and growth. When you partner with CYNOCOR, you work directly with the experts building your system.</p>
+      <p class="lead fade-up" style="transition-delay:0.2s">A tight-knit, senior team covering engineering, product, and
+        growth. When you partner with CYNOCOR, you work directly with the experts building your system.</p>
+      </div>
     </div>
   </section>
 
   <!-- Team -->
   <section class="team-sec">
-    <div class="team-members">
+    <div class="team-orbital-stage" id="teamOrbitalStage">
+      <div class="team-arc-header fade-up">
+        <h2>Engineering Minds<br>Behind Every System</h2>
+        <p>Architects, cybersecurity specialists, and product engineers building resilient technology from concept to production.</p>
+        <a href="contact.html" class="team-arc-cta">Work With Us <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="team-members">
 
       <!-- Chanul -->
       <div class="member fade-up" tabindex="0" style="transition-delay:0.05s">
         <img src="assets/team/chanul.jpg" alt="Chanul Dilhara" class="member-photo">
         <h2>Chanul Dilhara</h2>
         <div class="member-info" tabindex="0">
-          <p>Leads product direction and technical architecture. Chanul ensures that every CYNOCOR system is scoped correctly and designed to scale seamlessly from day one.</p>
+          <p>Leads product direction and technical architecture. Chanul ensures that every CYNOCOR system is scoped
+            correctly and designed to scale seamlessly from day one.</p>
           <div class="member-social-links">
             <a href="mailto:rmcdilhara123@gmail.com" aria-label="Email Chanul">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                <path d="m3 8 9 6 9-6" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/chanul.dilhara" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/chanul.dilhara" target="_blank" rel="noopener noreferrer"
+              aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/chanul_dilhara_/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/chanul_dilhara_/" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.linkedin.com/in/chanul-dilhara-0a35a6379/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/chanul-dilhara-0a35a6379/" target="_blank" rel="noopener noreferrer"
+              aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
@@ -270,19 +570,40 @@
         <img src="assets/team/ravindu.png" alt="Ravindu Umapathi" class="member-photo">
         <h2>Ravindu Umapathi</h2>
         <div class="member-info">
-          <p>Drives business development and strategic planning. Ravindu connects our deep technical engineering work to your real-world market growth and ROI.</p>
+          <p>Drives business development and strategic planning. Ravindu connects our deep technical engineering work to
+            your real-world market growth and ROI.</p>
           <div class="member-social-links">
             <a href="mailto:ravinduumapathi411@gmail.com" aria-label="Email Ravindu">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                <path d="m3 8 9 6 9-6" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/share/1JmqyWnsUU/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/share/1JmqyWnsUU/?mibextid=wwXIfr" target="_blank"
+              rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/ravindu_umapathi?igsh=YXVyaHNuNW5ha3hq" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/ravindu_umapathi?igsh=YXVyaHNuNW5ha3hq" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.linkedin.com/in/ravindu-umapathi-mathara-arachchi-783aba2aa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/ravindu-umapathi-mathara-arachchi-783aba2aa/" target="_blank"
+              rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
@@ -293,19 +614,40 @@
         <img src="assets/team/Chamupathi.JPG" alt="Chamupathi Dewdunu" class="member-photo">
         <h2>Chamupathi Dewdunu</h2>
         <div class="member-info">
-          <p>Focuses on systems engineering and cloud infrastructure. Chamupathi guarantees that every build is mathematically precise, exceptionally stable, and highly secure.</p>
+          <p>Focuses on systems engineering and cloud infrastructure. Chamupathi guarantees that every build is
+            mathematically precise, exceptionally stable, and highly secure.</p>
           <div class="member-social-links">
             <a href="mailto:chamupathidewdunu@gmail.com" aria-label="Email Chamupathi">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                <path d="m3 8 9 6 9-6" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/share/14nPkGvaNuu/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/share/14nPkGvaNuu/?mibextid=wwXIfr" target="_blank"
+              rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/chamupathi_dewdunu/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/chamupathi_dewdunu/" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.linkedin.com/in/chamupathi-dewdunu/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/chamupathi-dewdunu/" target="_blank" rel="noopener noreferrer"
+              aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
@@ -316,19 +658,40 @@
         <img src="assets/team/amanya.jpeg" alt="Amanya Rubasinghe" class="member-photo">
         <h2>Amanya Rubasinghe</h2>
         <div class="member-info">
-          <p>Shapes the product experience and UI design across all platforms. Amanya ensures that complex backend systems remain flawlessly usable and human-centric.</p>
+          <p>Shapes the product experience and UI design across all platforms. Amanya ensures that complex backend
+            systems remain flawlessly usable and human-centric.</p>
           <div class="member-social-links">
             <a href="mailto:amanyarubasinghe15@gmail.com" aria-label="Email Amanya">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z"/><path d="m3 8 9 6 9-6"/></svg>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round">
+                <path d="M4 6h16a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2Z" />
+                <path d="m3 8 9 6 9-6" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/share/194T1x9VCX/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/share/194T1x9VCX/?mibextid=wwXIfr" target="_blank"
+              rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/amanya_rubasinghe?igsh=Nmx0am8zMjI5NWM0" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/amanya_rubasinghe?igsh=Nmx0am8zMjI5NWM0" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.linkedin.com/in/amanyarubasinghe/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/amanyarubasinghe/" target="_blank" rel="noopener noreferrer"
+              aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
@@ -336,19 +699,35 @@
 
       <!-- Thejana -->
       <div class="member fade-up" tabindex="0" style="transition-delay:0.33s">
-        <img src="assets/team/thejana.png" alt="Thejana Thathsara" class="member-photo" style="object-position: center 18%;">
+        <img src="assets/team/thejana.png" alt="Thejana Thathsara" class="member-photo"
+          style="object-position: center 18%;">
         <h2>Thejana Thathsara</h2>
         <div class="member-info">
-          <p>Leads cybersecurity operations, vulnerability management, and digital infrastructure defense. Thejana ensures that all CYNOCOR systems and deployed platforms remain robust, resilient, and secure against modern threats.</p>
+          <p>Leads cybersecurity operations, vulnerability management, and digital infrastructure defense. Thejana
+            ensures that all CYNOCOR systems and deployed platforms remain robust, resilient, and secure against modern
+            threats.</p>
           <div class="member-social-links">
             <a href="https://github.com/Bl4ckDr4gon" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                  d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/profile.php?id=61595557056251" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/profile.php?id=61595557056251" target="_blank" rel="noopener noreferrer"
+              aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/thejanathathsara/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/thejanathathsara/" target="_blank" rel="noopener noreferrer"
+              aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
@@ -356,36 +735,179 @@
 
       <!-- Ashendra -->
       <div class="member fade-up" tabindex="0" style="transition-delay:0.38s">
-        <img src="assets/team/ashendra.jpg" alt="Ashendra Liyanage" class="member-photo" style="object-position: center 20%;">
+        <img src="assets/team/ashendra.jpg" alt="Ashendra Liyanage" class="member-photo"
+          style="object-position: center 20%;">
         <h2>Ashendra Liyanage</h2>
         <div class="member-info">
-          <p>Leads quality assurance, testing protocols, and release reliability. Ashendra systematically audits software workflows and system interfaces to ensure all CYNOCOR builds perform flawlessly under real-world conditions.</p>
+          <p>Leads quality assurance, testing protocols, and release reliability. Ashendra systematically audits
+            software workflows and system interfaces to ensure all CYNOCOR builds perform flawlessly under real-world
+            conditions.</p>
           <div class="member-social-links">
-            <a href="https://www.linkedin.com/in/ashendra-neththaru-022578371?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-              <svg viewBox="0 0 24 24"><path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor"/><path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor"/><path d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z" fill="currentColor"/></svg>
+            <a href="https://www.linkedin.com/in/ashendra-neththaru-022578371?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+              target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+              <svg viewBox="0 0 24 24">
+                <path d="M6.94 8.5H4.12V20h2.82V8.5Z" fill="currentColor" />
+                <path d="M5.53 3.97a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28Z" fill="currentColor" />
+                <path
+                  d="M20 20h-2.81v-5.58c0-1.33-.03-3.04-1.86-3.04-1.86 0-2.15 1.45-2.15 2.95V20H10.4V8.5h2.7v1.57h.04c.38-.72 1.31-1.86 3.2-1.86 3.43 0 4.06 2.26 4.06 5.21V20Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.facebook.com/share/1K7E45nyR1/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-              <svg viewBox="0 0 24 24"><path d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z" fill="currentColor"/></svg>
+            <a href="https://www.facebook.com/share/1K7E45nyR1/?mibextid=wwXIfr" target="_blank"
+              rel="noopener noreferrer" aria-label="Facebook">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M14.5 8.2H16V5.4h-1.5c-2.2 0-3.6 1.5-3.6 4v1.6H9v2.8h1.9V20h2.9v-6.2h2.2l.4-2.8h-2.6V9.8c0-.9.3-1.6 1.2-1.6Z"
+                  fill="currentColor" />
+              </svg>
             </a>
-            <a href="https://www.instagram.com/ashendra.__?rpxt=b2drNnZnYWR0MDFv&utm_source=qr" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-              <svg viewBox="0 0 24 24"><path d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z" fill="currentColor"/></svg>
+            <a href="https://www.instagram.com/ashendra.__?rpxt=b2drNnZnYWR0MDFv&utm_source=qr" target="_blank"
+              rel="noopener noreferrer" aria-label="Instagram">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 7.1A4.9 4.9 0 1 0 16.9 12 4.91 4.91 0 0 0 12 7.1Zm0 8.1A3.2 3.2 0 1 1 15.2 12 3.2 3.2 0 0 1 12 15.2Zm5.1-8.4a1.1 1.1 0 1 0 1.1 1.1 1.1 1.1 0 0 0-1.1-1.1ZM19.4 2H4.6A2.6 2.6 0 0 0 2 4.6v14.8A2.6 2.6 0 0 0 4.6 22h14.8A2.6 2.6 0 0 0 22 19.4V4.6A2.6 2.6 0 0 0 19.4 2Zm.9 17.4a.9.9 0 0 1-.9.9H4.6a.9.9 0 0 1-.9-.9V4.6a.9.9 0 0 1 .9-.9h14.8a.9.9 0 0 1 .9.9Z"
+                  fill="currentColor" />
+              </svg>
             </a>
           </div>
         </div>
       </div>
 
+      </div>
+      <div class="team-arc-pillars fade-up" style="transition-delay: 0.14s;">
+        <div class="team-arc-pillar">
+          <h3>Architecture-First<br>Engineering</h3>
+          <p>Every platform is scoped for clean scalability, maintainability, and long-term uptime.</p>
+        </div>
+        <div class="team-arc-pillar">
+          <h3>Security &amp; Systems<br>Discipline</h3>
+          <p>Built with defense-in-depth practices, automated monitoring, and resilient infrastructure.</p>
+        </div>
+        <div class="team-arc-pillar">
+          <h3>Direct Client<br>Partnership</h3>
+          <p>You collaborate directly with the senior builders designing and shipping your product.</p>
+        </div>
+      </div>
     </div>
   </section>
+
+  <script>
+    (function () {
+      const stage = document.getElementById('teamOrbitalStage');
+      if (!stage) return;
+      const cards = Array.from(stage.querySelectorAll('.member'));
+      if (!cards.length) return;
+
+      const n = cards.length;
+      const stepPx = 176 + 20;
+
+      cards.forEach((card, i) => {
+        const u = n > 1 ? (i / (n - 1)) * 2 - 1 : 0;
+        const ry = -u * 26;
+        const tz = (u * u) * 52 + 8;
+        const sc = 0.90 + (u * u) * 0.08;
+        const tx = Math.sign(u) * Math.pow(Math.abs(u), 2) * 14;
+        const cx = ((n - 1) / 2 - i) * stepPx;
+        card.style.setProperty('--ry', ry.toFixed(1) + 'deg');
+        card.style.setProperty('--tz', tz.toFixed(1) + 'px');
+        card.style.setProperty('--sc', sc.toFixed(3));
+        card.style.setProperty('--tx', tx.toFixed(1) + 'px');
+        card.style.setProperty('--cx', cx.toFixed(1) + 'px');
+      });
+
+      const syncActiveClass = () => {
+        const anyActive = cards.some((c) => c.classList.contains('is-locked') || c.classList.contains('is-popped'));
+        stage.classList.toggle('has-active', anyActive);
+      };
+
+      let lastSwitchAt = 0;
+
+      const setReturning = (card) => {
+        if (!card) return;
+        clearTimeout(card._retTimer);
+        card.classList.add('is-returning');
+        card._retTimer = setTimeout(() => {
+          card.classList.remove('is-returning');
+        }, 700);
+      };
+
+      cards.forEach((card) => {
+        card.addEventListener('mouseenter', () => {
+          if (cards.some((c) => c.classList.contains('is-locked'))) return;
+          if (card.classList.contains('is-popped')) return;
+          const now = Date.now();
+          if (now - lastSwitchAt < 180) return;
+          lastSwitchAt = now;
+
+          cards.forEach((c) => {
+            if (c !== card && c.classList.contains('is-popped')) {
+              c.classList.remove('is-popped');
+              setReturning(c);
+            }
+          });
+          card.classList.remove('is-returning');
+          card.classList.add('is-popped');
+          syncActiveClass();
+        });
+        card.addEventListener('click', (e) => {
+          if (e.target.closest('.member-social-links a')) return;
+          e.stopPropagation();
+          const wasLocked = card.classList.contains('is-locked');
+          cards.forEach((c) => {
+            c.classList.remove('is-locked');
+            c.classList.remove('is-popped');
+            c.classList.remove('is-returning');
+          });
+          if (!wasLocked) card.classList.add('is-locked');
+          syncActiveClass();
+        });
+      });
+
+      stage.addEventListener('mouseleave', () => {
+        cards.forEach((c) => {
+          if (c.classList.contains('is-popped')) {
+            c.classList.remove('is-popped');
+            setReturning(c);
+          }
+        });
+        syncActiveClass();
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('.member') && cards.some((c) => c.classList.contains('is-locked') || c.classList.contains('is-popped'))) {
+          cards.forEach((c) => {
+            c.classList.remove('is-locked');
+            c.classList.remove('is-popped');
+          });
+          syncActiveClass();
+        }
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          cards.forEach((c) => {
+            c.classList.remove('is-locked');
+            c.classList.remove('is-popped');
+          });
+          syncActiveClass();
+        }
+      });
+    })();
+  </script>
 
   <!-- Footer -->
   <div id="site-footer"></div>
 
   <!-- Floating WhatsApp Button -->
-  <a class="whatsapp-float" href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">
+  <a class="whatsapp-float"
+    href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
+    rel="noopener" aria-label="Chat with us on WhatsApp">
     <svg viewBox="0 0 24 24" fill="currentColor">
-      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.572-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.99c-.002 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
     </svg>
   </a>
 
 </body>
+
 </html>

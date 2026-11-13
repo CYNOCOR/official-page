@@ -16,7 +16,7 @@
     rel="stylesheet">
 
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <link rel="stylesheet" href="css/style.css?v=20261110.2">
+  <link rel="stylesheet" href="css/style.css?v=20261113.14">
 
   <style>
     /* ─── Page-level overrides ─────────────────────────── */
@@ -25,24 +25,26 @@
       position: relative;
     }
 
-    /* ─── HERO ─────────────────────────────────────────── */
+    /* ─── BRAIX × ORIZON FRAMED HERO SHOWCASE ──────────── */
     .hero {
       position: relative;
-      min-height: 100vh;
+      min-height: auto;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding-top: 64px;
-      overflow: hidden;
-      background: linear-gradient(180deg, #020810 0%, #050e1a 60%, #081a2d 100%);
+      padding: 28px 24px 56px;
+      overflow: visible;
+      background: transparent;
     }
 
-    /* Video background */
-    .hero-video-wrap {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
+    body.atmosphere-dark .hero {
+      background: transparent;
+    }
+
+    /* Subtle video blend in background */
+    .hero-video-wrap,
+    .hero-orbs {
+      display: none;
     }
 
     .hero-video {
@@ -55,19 +57,24 @@
       height: auto;
       transform: translate(-50%, -50%);
       object-fit: cover;
-      opacity: 0.35;
+      opacity: 0.08;
+      mix-blend-mode: luminosity;
+      transition: opacity 0.4s ease;
+    }
+
+    body.atmosphere-dark .hero-video {
+      opacity: 0.3;
+      mix-blend-mode: normal;
     }
 
     .hero-video-overlay {
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        180deg,
-        rgba(2, 8, 16, 0.45) 0%,
-        rgba(2, 8, 16, 0.15) 40%,
-        rgba(5, 14, 26, 0.6) 80%,
-        rgba(5, 14, 26, 0.92) 100%
-      );
+      background: radial-gradient(circle at 50% 60%, transparent 20%, rgba(226, 238, 252, 0.45) 100%);
+    }
+
+    body.atmosphere-dark .hero-video-overlay {
+      background: linear-gradient(180deg, rgba(8, 8, 12, 0.5) 0%, rgba(8, 8, 12, 0.85) 100%);
     }
 
     /* Ambient orbs */
@@ -82,249 +89,1010 @@
     .orb {
       position: absolute;
       border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0;
-      animation: orbFloat 8s var(--ease) forwards;
+      filter: blur(75px);
+      opacity: 0.85;
     }
 
     .orb-1 {
-      width: 600px; height: 600px;
-      top: -120px; right: -80px;
-      background: radial-gradient(circle, rgba(38, 109, 255, 0.28), transparent 70%);
-      animation-delay: 0.3s;
-      animation-duration: 10s;
+      width: 560px; height: 560px;
+      bottom: -140px; left: 5%;
+      background: radial-gradient(circle, rgba(95, 172, 255, 0.55), transparent 70%);
     }
     .orb-2 {
-      width: 480px; height: 480px;
-      bottom: -100px; left: -60px;
-      background: radial-gradient(circle, rgba(58, 102, 220, 0.22), transparent 70%);
-      animation-delay: 0.6s;
-      animation-duration: 12s;
+      width: 520px; height: 520px;
+      bottom: -120px; right: 12%;
+      background: radial-gradient(circle, rgba(110, 182, 255, 0.5), transparent 70%);
     }
     .orb-3 {
-      width: 340px; height: 340px;
-      top: 30%; left: 55%;
-      background: radial-gradient(circle, rgba(92, 144, 255, 0.18), transparent 70%);
-      animation-delay: 0.9s;
-      animation-duration: 9s;
+      width: 420px; height: 420px;
+      top: 10%; left: 42%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.85), transparent 70%);
     }
 
-    @keyframes orbFloat {
-      0%   { opacity: 0; transform: scale(0.8) translateY(30px); }
-      30%  { opacity: 1; }
-      100% { opacity: 0.85; transform: scale(1) translateY(0px); }
+    body.atmosphere-dark .orb-3 {
+      background: radial-gradient(circle, rgba(0, 112, 255, 0.25), transparent 70%);
     }
 
-    /* Dot-grid texture */
-    .hero::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(120, 170, 255, 0.06) 1px, transparent 1px);
-      background-size: 36px 36px;
-      z-index: 1;
-      mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 90%);
-      -webkit-mask-image: radial-gradient(ellipse 80% 70% at 50% 40%, black 30%, transparent 90%);
-      pointer-events: none;
-    }
-
-    /* Hero content */
-    .hero-content {
+    /* Orizon Framed Stage Container */
+    .orizon-stage-frame {
       position: relative;
       z-index: 2;
-      max-width: 840px;
+      width: 100%;
+      max-width: 1340px;
+      min-height: 0;
+      border-radius: 38px;
+      border: 4px solid rgba(255, 255, 255, 0.94);
+      background:
+        radial-gradient(48% 54% at 48% 72%, rgba(122, 188, 255, 0.55) 0%, rgba(176, 216, 255, 0.28) 48%, transparent 76%),
+        radial-gradient(42% 48% at 16% 85%, rgba(135, 196, 255, 0.52) 0%, transparent 72%),
+        linear-gradient(165deg, rgba(235, 243, 251, 0.92) 0%, rgba(248, 251, 255, 0.88) 42%, rgba(178, 216, 255, 0.82) 100%);
+      box-shadow:
+        0 32px 80px rgba(15, 52, 105, 0.14),
+        0 4px 20px rgba(0, 112, 255, 0.08),
+        inset 0 1px 0 #FFFFFF;
+      padding: 22px 26px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: background 0.45s var(--ease), border-color 0.45s var(--ease), box-shadow 0.45s var(--ease);
     }
 
-    .hero-content > * {
-      opacity: 0;
-      animation: heroFadeUp 1s var(--ease) forwards;
+    body.atmosphere-dark .orizon-stage-frame {
+      border-color: rgba(0, 112, 255, 0.28);
+      background:
+        radial-gradient(50% 55% at 48% 68%, rgba(0, 112, 255, 0.26) 0%, transparent 72%),
+        linear-gradient(165deg, rgba(10, 14, 24, 0.92) 0%, rgba(8, 8, 12, 0.94) 55%, rgba(12, 24, 48, 0.92) 100%);
+      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.65), 0 0 40px rgba(0, 112, 255, 0.14);
     }
 
-    .hero-badge        { animation-delay: 0.1s; }
-    .hero-main-logo    { animation-delay: 0.22s; }
-    .hero-subheading   { animation-delay: 0.32s; }
-    .hero-lead         { animation-delay: 0.42s; }
-    .hero-actions      { animation-delay: 0.54s; }
-
-    @keyframes heroFadeUp {
-      0%   { opacity: 0; transform: translateY(28px); }
-      100% { opacity: 1; transform: translateY(0); }
+    /* ─── ORIZON TOP SCULPTED NOTCH BAR (INSIDE STAGE) ─── */
+    .orizon-notch-bar {
+      position: relative;
+      z-index: 20;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 18px;
     }
 
-    /* Eyebrow badge */
-    .hero-badge {
+    .orizon-top-pill {
+      margin-top: 16px;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 6px 14px 6px 10px;
-      background: rgba(38, 109, 255, 0.12);
-      border: 1px solid rgba(100, 158, 255, 0.28);
+      gap: 12px;
+      height: 46px;
+      padding: 0 22px;
       border-radius: 999px;
-      color: rgba(175, 208, 255, 0.9);
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 28px;
-      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      color: #08080C;
+      font-size: 0.84rem;
+      font-weight: 600;
+      box-shadow: 0 8px 24px rgba(12, 40, 85, 0.07);
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease);
     }
 
-    .hero-badge .dot {
-      width: 6px; height: 6px;
-      background: #4e9aff;
-      border-radius: 50%;
-      box-shadow: 0 0 6px rgba(78, 154, 255, 0.8);
-      animation: pulseDot 2s ease-in-out infinite;
+    .orizon-top-pill:hover {
+      transform: translateY(-2px);
+      background: #08080C;
+      color: #FAFCFF;
     }
 
-    @keyframes pulseDot {
-      0%, 100% { transform: scale(1); opacity: 1; }
-      50%       { transform: scale(1.5); opacity: 0.6; }
+    .orizon-pill-arrow {
+      color: #0070FF;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: transform 0.25s var(--ease), color 0.25s var(--ease);
     }
 
-    .hero-main-logo {
-      margin: 0 auto 22px;
-      line-height: 1;
+    .orizon-top-pill:hover .orizon-pill-arrow {
+      color: #5CE1FF;
+      transform: scale(1.15);
     }
 
-    .hero-main-logo img {
-      width: clamp(240px, 38vw, 500px);
-      height: auto;
-      display: block;
-      margin: 0 auto;
-      filter: drop-shadow(0 0 40px rgba(60, 120, 255, 0.25));
-    }
-
-    .hero-subheading {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1.05rem, 2vw, 1.45rem);
-      font-weight: 500;
-      letter-spacing: 0.015em;
-      color: rgba(190, 215, 255, 0.82);
-      margin-bottom: 20px;
-    }
-
-    .hero-lead {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(1rem, 1.8vw, 1.25rem);
-      font-weight: 400;
-      line-height: 1.65;
-      color: rgba(175, 200, 255, 0.62);
-      max-width: 580px;
-      margin: 0 auto 48px;
-    }
-
-    /* CTA group */
-    .hero-actions {
+    /* Sculpted White Center Notch */
+    .orizon-top-notch {
+      position: relative;
+      background: #FFFFFF;
+      padding: 12px 38px 14px;
+      border-radius: 0 0 34px 34px;
       display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
+      gap: 32px;
+      box-shadow: 0 12px 32px rgba(12, 42, 90, 0.07);
     }
 
-    .hero-cta {
+    body.atmosphere-dark .orizon-top-notch {
+      background: #0E1526;
+      border: 1px solid rgba(0, 112, 255, 0.22);
+      border-top: none;
+    }
+
+    /* Smooth organic curved ears on left and right of the notch */
+    .orizon-top-notch::before,
+    .orizon-top-notch::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 28px;
+      height: 28px;
+      pointer-events: none;
+    }
+
+    .orizon-top-notch::before {
+      left: -28px;
+      background: radial-gradient(circle at 0 100%, transparent 28px, #FFFFFF 28.5px);
+    }
+
+    .orizon-top-notch::after {
+      right: -28px;
+      background: radial-gradient(circle at 100% 100%, transparent 28px, #FFFFFF 28.5px);
+    }
+
+    body.atmosphere-dark .orizon-top-notch::before,
+    body.atmosphere-dark .orizon-top-notch::after {
+      display: none;
+    }
+
+    /* Interactive Dropdown Selectors inside the Orizon Notch */
+    .orizon-selector {
       position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-width: 190px;
-      min-height: 56px;
-      padding: 0 28px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, rgba(38, 109, 255, 0.92), rgba(61, 145, 255, 0.82));
-      border: 1px solid rgba(150, 200, 255, 0.4);
-      color: #f0f6ff;
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.22),
-        inset 0 -6px 12px rgba(9, 42, 114, 0.3),
-        0 14px 28px rgba(22, 78, 201, 0.35);
-      backdrop-filter: blur(10px);
-      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease), filter 0.28s var(--ease);
-      overflow: hidden;
+      text-align: left;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 12px;
+      transition: background 0.2s ease;
     }
 
-    .hero-cta::before {
+    .orizon-selector:hover {
+      background: rgba(0, 112, 255, 0.06);
+    }
+
+    .orizon-selector + .orizon-selector::before {
       content: '';
       position: absolute;
-      inset: 1px;
-      border-radius: inherit;
-      background: linear-gradient(120deg, rgba(255,255,255,0.24), rgba(255,255,255,0.04) 30%, rgba(255,255,255,0.12) 60%, transparent);
-      pointer-events: none;
+      left: -16px;
+      top: 15%;
+      height: 70%;
+      width: 1px;
+      background: rgba(8, 8, 12, 0.08);
     }
 
-    .hero-cta::after {
-      content: '';
-      position: absolute;
-      width: 54%;
-      height: 160%;
-      left: -14%;
-      top: -20%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-      transform: rotate(20deg) translateX(-160%);
-      transition: transform 0.85s ease;
-      pointer-events: none;
-    }
-
-    .hero-cta:hover {
-      transform: translateY(-2px) scale(1.02);
-      filter: brightness(1.08);
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.3),
-        inset 0 -6px 12px rgba(9, 42, 114, 0.38),
-        0 20px 36px rgba(22, 78, 201, 0.42);
-    }
-
-    .hero-cta:hover::after {
-      transform: rotate(20deg) translateX(270%);
-    }
-
-    .hero-cta-ghost {
-      display: inline-flex;
+    .orizon-sel-label {
+      display: flex;
       align-items: center;
-      justify-content: center;
-      gap: 7px;
-      min-height: 56px;
-      padding: 0 26px;
-      border-radius: 999px;
-      border: 1px solid rgba(120, 170, 255, 0.22);
-      color: rgba(175, 210, 255, 0.75);
-      font-size: 0.9375rem;
+      gap: 5px;
+      font-size: 0.68rem;
       font-weight: 500;
-      letter-spacing: -0.01em;
-      backdrop-filter: blur(8px);
-      background: rgba(255,255,255,0.04);
-      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+      color: #7A869A;
+      margin-bottom: 2px;
     }
 
-    .hero-cta-ghost:hover {
-      border-color: rgba(150, 200, 255, 0.45);
-      color: rgba(210, 230, 255, 0.95);
-      background: rgba(38, 109, 255, 0.08);
-      transform: translateY(-1px);
+    .orizon-sel-label svg {
+      width: 11px;
+      height: 11px;
+      color: #0070FF;
     }
 
-    .hero-cta-ghost svg,
-    .hero-cta svg {
-      width: 16px; height: 16px;
+    .orizon-sel-val {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #08080C;
+      white-space: nowrap;
+    }
+
+    body.atmosphere-dark .orizon-sel-val {
+      color: #FAFCFF;
+    }
+
+    .orizon-sel-val svg {
+      width: 13px;
+      height: 13px;
+      color: #646E82;
+      transition: transform 0.25s var(--ease);
+    }
+
+    .orizon-selector.is-open .orizon-sel-val svg {
+      transform: rotate(180deg);
+      color: #0070FF;
+    }
+
+    .orizon-sel-menu {
+      position: absolute;
+      top: calc(100% + 10px);
+      left: 0;
+      min-width: 200px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(0, 112, 255, 0.16);
+      border-radius: 16px;
+      padding: 6px;
+      box-shadow: 0 18px 40px rgba(8, 8, 12, 0.14);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
+      z-index: 50;
+    }
+
+    .orizon-selector.is-open .orizon-sel-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .orizon-sel-opt {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #1E293B;
+      text-align: left;
+      transition: background 0.18s ease, color 0.18s ease;
+    }
+
+    .orizon-sel-opt:hover,
+    .orizon-sel-opt.is-selected {
+      background: #0070FF;
+      color: #FAFCFF;
+    }
+
+    /* ─── MAIN 3-COLUMN BRAIX × ORIZON STAGE GRID ──────── */
+    .braix-stage-grid {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1.15fr 1fr 310px;
+      gap: 22px;
+      align-items: stretch;
+      flex: 1;
+    }
+
+    /* ── LEFT COLUMN (BRAIX Editorial + Orizon Bottom-Left Card) ── */
+    .braix-col-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      text-align: left;
+      padding-top: 8px;
+      position: relative;
+      z-index: 6;
+    }
+
+    .braix-focus-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      width: fit-content;
+      padding: 7px 16px 7px 11px;
+      border-radius: 999px;
+      background: #FFFFFF;
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 6px 20px rgba(12, 45, 95, 0.06);
+      font-size: 0.74rem;
+      font-weight: 600;
+      color: #1E293B;
+      margin-bottom: 18px;
+    }
+
+    .braix-quad-icon {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5px;
+      width: 12px;
+      height: 12px;
+    }
+    .braix-quad-icon span:nth-child(1) { background: #FF4D4D; border-radius: 1px; }
+    .braix-quad-icon span:nth-child(2) { background: #2ECC71; border-radius: 1px; }
+    .braix-quad-icon span:nth-child(3) { background: #0070FF; border-radius: 1px; }
+    .braix-quad-icon span:nth-child(4) { background: #FFB800; border-radius: 1px; }
+
+    /* BRAIX Staggered Editorial Display Typography */
+    .braix-headline {
+      font-family: 'Space Grotesk', 'Inter', sans-serif;
+      font-size: clamp(2.5rem, 4.5vw, 4.35rem);
+      font-weight: 300;
+      line-height: 1.02;
+      letter-spacing: 0.01em;
+      text-transform: uppercase;
+      color: #08080C;
+      margin: 0 0 22px;
+      user-select: none;
+    }
+
+    body.atmosphere-dark .braix-headline {
+      color: #FAFCFF;
+    }
+
+    .braix-headline .line-1 {
+      display: block;
+    }
+
+    .braix-headline .line-2 {
+      display: block;
+      padding-left: clamp(42px, 6.5vw, 110px);
+    }
+
+    .braix-headline .overlap-tint {
+      color: #0070FF;
+      font-weight: 500;
+      text-shadow: 0 2px 18px rgba(255, 255, 255, 0.85);
+    }
+
+    body.atmosphere-dark .braix-headline .overlap-tint {
+      color: #5CE1FF;
+      text-shadow: 0 0 24px rgba(0, 112, 255, 0.55);
+    }
+
+    .braix-headline .line-3 {
+      display: block;
+    }
+
+    /* BRAIX Pixel-Matrix Barcode + Micro-Copy Row */
+    .braix-matrix-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .braix-pixel-matrix {
+      display: grid;
+      grid-template-columns: repeat(4, 7px);
+      grid-auto-rows: 7px;
+      gap: 1.5px;
+      padding: 4px;
+      background: rgba(255, 255, 255, 0.55);
+      border-radius: 6px;
       flex-shrink: 0;
     }
 
+    .braix-pixel-matrix i {
+      display: block;
+      width: 7px;
+      height: 7px;
+      background: #FFFFFF;
+    }
 
-    /* ─── SERVICES MARQUEE STRIP ───────────────────────── */
+    .braix-pixel-matrix i.on {
+      background: #08080C;
+    }
+
+    .braix-micro-copy {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      line-height: 1.65;
+      text-transform: uppercase;
+      color: #1E293B;
+      max-width: 310px;
+    }
+
+    body.atmosphere-dark .braix-micro-copy {
+      color: rgba(250, 252, 255, 0.78);
+    }
+
+    /* Orizon Sculpted Bottom-Left White Card */
+    .orizon-bl-card {
+      background: #FFFFFF;
+      border-radius: 28px;
+      padding: 24px 26px;
+      box-shadow: 0 18px 44px rgba(12, 42, 90, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.95);
+      max-width: 380px;
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+
+    body.atmosphere-dark .orizon-bl-card {
+      background: rgba(15, 22, 38, 0.92);
+      border-color: rgba(0, 112, 255, 0.24);
+      color: #FAFCFF;
+    }
+
+    .orizon-bl-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 24px 52px rgba(0, 112, 255, 0.15);
+    }
+
+    .orizon-bl-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #08080C;
+      margin-bottom: 6px;
+    }
+
+    body.atmosphere-dark .orizon-bl-card h3 {
+      color: #FAFCFF;
+    }
+
+    .orizon-bl-card p {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      color: #646E82;
+      margin-bottom: 18px;
+    }
+
+    body.atmosphere-dark .orizon-bl-card p {
+      color: rgba(250, 252, 255, 0.7);
+    }
+
+    .orizon-bl-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .orizon-bl-stat strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: #08080C;
+    }
+
+    body.atmosphere-dark .orizon-bl-stat strong {
+      color: #FAFCFF;
+    }
+
+    .orizon-bl-stat span {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #646E82;
+    }
+
+    .orizon-bl-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .orizon-bl-avatars img {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: contain;
+      padding: 4px;
+      border: 2.5px solid #FFFFFF;
+      margin-left: -10px;
+      background: #EFF6FF;
+      box-shadow: 0 4px 10px rgba(8, 8, 12, 0.1);
+    }
+
+    .orizon-bl-avatars img:first-child {
+      margin-left: 0;
+    }
+
+    .orizon-bl-go {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #F0F5FA;
+      color: #08080C;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.95rem;
+      font-weight: 700;
+      margin-left: -6px;
+      border: 2px solid #FFFFFF;
+      transition: background 0.25s var(--ease), color 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .orizon-bl-go:hover {
+      background: #0070FF;
+      color: #FAFCFF;
+      transform: scale(1.08);
+    }
+
+    /* ── CENTER COLUMN (Visual Subject + Concentric Play Orb) ── */
+    .braix-col-center {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      min-height: 520px;
+    }
+
+    .braix-subject-stage {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      -webkit-mask-image: radial-gradient(ellipse 47% 47% at 50% 48%, #000 40%, rgba(0, 0, 0, 0.65) 64%, transparent 88%);
+      mask-image: radial-gradient(ellipse 47% 47% at 50% 48%, #000 40%, rgba(0, 0, 0, 0.65) 64%, transparent 88%);
+    }
+
+    /* Glowing Sky-Blue Aura behind CynoBot / Hardware */
+    .braix-subject-aura {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(118, 186, 255, 0.45) 52%, transparent 74%);
+      filter: blur(12px);
+      pointer-events: none;
+    }
+
+    /* Holographic Visor Ring around Subject */
+    .braix-visor-ring {
+      position: absolute;
+      top: 18%;
+      width: 310px;
+      height: 96px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(0, 112, 255, 0.35);
+      box-shadow: 0 0 28px rgba(0, 112, 255, 0.2);
+      transform: rotateX(72deg) rotateZ(-8deg);
+      pointer-events: none;
+      animation: visorOrbit 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes visorOrbit {
+      0%   { transform: rotateX(72deg) rotateZ(-10deg) scale(0.96); }
+      100% { transform: rotateX(68deg) rotateZ(8deg) scale(1.04); }
+    }
+
+    .braix-hero-figure {
+      position: relative;
+      z-index: 2;
+      width: clamp(350px, 37vw, 525px);
+      max-height: 545px;
+      object-fit: contain;
+      mix-blend-mode: multiply;
+      filter: brightness(1.05) contrast(1.08);
+      transform: translateX(-18px);
+      transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+    }
+
+    body.atmosphere-dark .braix-hero-figure {
+      mix-blend-mode: normal;
+      border-radius: 32px;
+      filter: contrast(1.08) brightness(0.92);
+    }
+
+    .braix-subject-stage.is-scanning .braix-hero-figure {
+      filter: drop-shadow(0 0 36px rgba(0, 112, 255, 0.75)) brightness(1.06);
+      transform: translateX(-18px) scale(1.04) translateY(-6px);
+    }
+
+    /* BRAIX Floating Concentric Frosted-Glass Play / Explore Orb */
+    .braix-explore-orb-wrap {
+      position: absolute;
+      bottom: 24px;
+      right: 6px;
+      z-index: 10;
+      width: 138px;
+      height: 138px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255, 255, 255, 0.88);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px;
+      box-shadow: 0 14px 36px rgba(0, 90, 200, 0.14);
+      animation: orbBreath 3.6s ease-in-out infinite alternate;
+    }
+
+    @keyframes orbBreath {
+      0%   { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-6px) scale(1.03); }
+    }
+
+    .braix-explore-orb {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, rgba(255, 255, 255, 0.92), rgba(210, 234, 255, 0.75));
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 2px solid #FFFFFF;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #08080C;
+      cursor: pointer;
+      box-shadow: inset 0 2px 8px rgba(255, 255, 255, 0.9);
+      transition: transform 0.28s var(--ease), background 0.28s var(--ease), box-shadow 0.28s var(--ease);
+    }
+
+    .braix-explore-orb:hover {
+      transform: scale(1.06);
+      background: #FFFFFF;
+      box-shadow: 0 12px 30px rgba(0, 112, 255, 0.28);
+    }
+
+    .braix-explore-orb svg {
+      width: 22px;
+      height: 22px;
+      fill: #08080C;
+      margin-left: 3px;
+      transition: fill 0.25s ease, transform 0.25s ease;
+    }
+
+    .braix-explore-orb:hover svg {
+      fill: #0070FF;
+      transform: scale(1.12);
+    }
+
+    .braix-explore-orb span {
+      font-size: 0.68rem;
+      font-weight: 700;
+      line-height: 1.2;
+      text-align: center;
+      color: #08080C;
+    }
+
+    /* ── RIGHT COLUMN (BRAIX Telemetry Bento Stack + Orizon Glass Card) ── */
+    .braix-col-right {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      z-index: 8;
+    }
+
+    .braix-bento-card {
+      background: #FFFFFF;
+      border-radius: 24px;
+      padding: 16px 18px;
+      box-shadow: 0 14px 34px rgba(12, 42, 90, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.96);
+      text-align: left;
+      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+    }
+
+    body.atmosphere-dark .braix-bento-card {
+      background: rgba(15, 22, 38, 0.92);
+      border-color: rgba(0, 112, 255, 0.22);
+      color: #FAFCFF;
+    }
+
+    .braix-bento-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 40px rgba(0, 112, 255, 0.14);
+    }
+
+    .braix-bento-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #08080C;
+      margin-bottom: 10px;
+    }
+
+    body.atmosphere-dark .braix-bento-head {
+      color: #FAFCFF;
+    }
+
+    .braix-bento-icon {
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      background: #08080C;
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.65rem;
+    }
+
+    .braix-bento-well {
+      background: #EAF3FC;
+      border-radius: 16px;
+      padding: 12px 14px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    body.atmosphere-dark .braix-bento-well {
+      background: rgba(0, 112, 255, 0.1);
+    }
+
+    .braix-bento-title-lg {
+      font-size: 0.98rem;
+      font-weight: 700;
+      line-height: 1.25;
+      color: #08080C;
+      margin-bottom: 6px;
+    }
+
+    body.atmosphere-dark .braix-bento-title-lg {
+      color: #FAFCFF;
+    }
+
+    .braix-bento-desc {
+      font-size: 0.72rem;
+      line-height: 1.5;
+      color: #5A6578;
+      margin-bottom: 12px;
+    }
+
+    body.atmosphere-dark .braix-bento-desc {
+      color: rgba(250, 252, 255, 0.7);
+    }
+
+    /* Cognitive / Core Load Split Readout */
+    .braix-core-viz {
+      min-height: 108px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+
+    .braix-lobe-stat {
+      position: absolute;
+      font-size: 0.66rem;
+      color: #646E82;
+      line-height: 1.2;
+    }
+
+    .braix-lobe-stat strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #08080C;
+    }
+
+    body.atmosphere-dark .braix-lobe-stat strong {
+      color: #FAFCFF;
+    }
+
+    .braix-lobe-stat.top-left { top: 8px; left: 10px; }
+    .braix-lobe-stat.bot-right { bottom: 8px; right: 10px; text-align: right; }
+
+    /* Sine Wave Telemetry Card */
+    .braix-wave-well {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px 8px 12px;
+    }
+
+    .braix-wave-badge {
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 10px 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: #08080C;
+      box-shadow: 0 4px 12px rgba(8, 8, 12, 0.05);
+      flex-shrink: 0;
+    }
+
+    /* ─── ORIZON FROSTED-GLASS CUTOUT CARD (BOTTOM RIGHT) ── */
+    .orizon-glass-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.62);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      border-radius: 26px;
+      padding: 18px 18px 16px;
+      box-shadow: 0 20px 48px rgba(10, 40, 90, 0.12);
+      text-align: left;
+      color: #08080C;
+    }
+
+    body.atmosphere-dark .orizon-glass-card {
+      background: rgba(16, 26, 46, 0.72);
+      border-color: rgba(0, 112, 255, 0.28);
+      color: #FAFCFF;
+    }
+
+    .orizon-glass-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+
+    .orizon-glass-top h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: inherit;
+      margin-bottom: 2px;
+    }
+
+    .orizon-glass-loc {
+      font-size: 0.68rem;
+      color: #4A5568;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    body.atmosphere-dark .orizon-glass-loc {
+      color: rgba(250, 252, 255, 0.72);
+    }
+
+    .orizon-glass-arrow {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      color: #08080C;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      box-shadow: 0 6px 16px rgba(8, 8, 12, 0.08);
+      transition: transform 0.25s var(--ease), background 0.25s var(--ease), color 0.25s var(--ease);
+    }
+
+    .orizon-glass-arrow:hover {
+      background: #0070FF;
+      color: #FAFCFF;
+      transform: scale(1.08);
+    }
+
+    .orizon-glass-specs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4px 10px;
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: #1E293B;
+      margin: 10px 0 12px;
+      padding-left: 52px;
+    }
+
+    body.atmosphere-dark .orizon-glass-specs {
+      color: rgba(250, 252, 255, 0.85);
+    }
+
+    .orizon-glass-actions {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 8px;
+      padding-left: 52px;
+    }
+
+    .orizon-act-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: #08080C;
+      cursor: pointer;
+      transition: transform 0.2s var(--ease), background 0.2s var(--ease), color 0.2s var(--ease);
+    }
+
+    .orizon-act-btn:hover,
+    .orizon-act-btn.is-liked {
+      background: #0070FF;
+      color: #FAFCFF;
+      border-color: #0070FF;
+      transform: translateY(-1px);
+    }
+
+    /* Circular Brand Emblem Cutout in Bottom-Left of Glass Card */
+    .orizon-cutout-emblem {
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: #0B1938;
+      border: 3px solid #FFFFFF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 20px rgba(8, 8, 12, 0.22);
+    }
+
+    .orizon-cutout-emblem img {
+      width: 26px;
+      height: 26px;
+      object-fit: contain;
+    }
+
+    @media (max-width: 1180px) {
+      .hero {
+        padding: 82px 16px 32px;
+      }
+      .braix-stage-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .braix-col-right {
+        grid-column: 1 / -1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .hero {
+        padding: 76px 12px 28px 12px;
+      }
+      .orizon-stage-frame {
+        padding: 16px;
+        border-radius: 26px;
+      }
+      .orizon-notch-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .orizon-top-pill {
+        display: none;
+      }
+      .orizon-top-notch {
+        border-radius: 20px;
+        padding: 12px 16px;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .orizon-top-notch::before,
+      .orizon-top-notch::after {
+        display: none;
+      }
+      .orizon-selector + .orizon-selector::before {
+        display: none;
+      }
+      .braix-stage-grid {
+        grid-template-columns: 1fr;
+      }
+      .braix-col-right {
+        grid-template-columns: 1fr;
+      }
+      .braix-col-center {
+        min-height: 390px;
+      }
+    }
+
+
+    /* ─── SERVICES MARQUEE STRIP (ORIZON FROSTED SKY-GLASS) ── */
     .services-strip {
       position: relative;
-      padding: 28px 0 22px;
+      width: calc(100% - 48px);
+      max-width: 1340px;
+      margin: 44px auto;
+      padding: 20px 0;
+      border-radius: 999px;
+      border: 3px solid rgba(255, 255, 255, 0.94);
       background:
-        radial-gradient(circle at top left, rgba(96, 156, 255, 0.12), transparent 30%),
-        linear-gradient(180deg, #020810 0%, #0b1220 100%);
-      border-top: 1px solid rgba(97, 151, 255, 0.14);
-      border-bottom: 1px solid rgba(97, 151, 255, 0.14);
+        linear-gradient(90deg, rgba(226, 239, 253, 0.85) 0%, rgba(248, 252, 255, 0.92) 50%, rgba(215, 234, 255, 0.85) 100%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 18px 44px rgba(15, 52, 105, 0.08);
       overflow: hidden;
+    }
+
+    body.atmosphere-dark .services-strip {
+      background: linear-gradient(90deg, rgba(12, 20, 38, 0.9) 0%, rgba(8, 8, 12, 0.94) 100%);
+      border-color: rgba(0, 112, 255, 0.25);
     }
 
     .services-strip::before,
@@ -332,7 +1100,7 @@
       content: '';
       position: absolute;
       top: 0;
-      width: 180px;
+      width: 120px;
       height: 100%;
       z-index: 2;
       pointer-events: none;
@@ -340,18 +1108,23 @@
 
     .services-strip::before {
       left: 0;
-      background: linear-gradient(90deg, #020810 0%, transparent 100%);
+      background: linear-gradient(90deg, rgba(232, 242, 252, 0.95) 0%, transparent 100%);
     }
 
     .services-strip::after {
       right: 0;
-      background: linear-gradient(270deg, #020810 0%, transparent 100%);
+      background: linear-gradient(270deg, rgba(222, 237, 254, 0.95) 0%, transparent 100%);
+    }
+
+    body.atmosphere-dark .services-strip::before,
+    body.atmosphere-dark .services-strip::after {
+      display: none;
     }
 
     .services-strip-track {
       display: flex;
       align-items: center;
-      gap: 16px;
+      gap: 14px;
       width: max-content;
       animation: marqueeScroll 30s linear infinite;
       will-change: transform;
@@ -365,54 +1138,41 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 9px;
       white-space: nowrap;
-      height: 52px;
+      height: 46px;
       padding: 0 22px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(255,255,255,0.07), rgba(80, 130, 255, 0.06));
-      border: 1px solid rgba(140, 185, 255, 0.18);
-      color: rgba(200, 220, 255, 0.85);
-      font-size: clamp(0.8rem, 1.05vw, 1rem);
-      font-weight: 500;
+      background: #FFFFFF;
+      border: 1.5px solid #FFFFFF;
+      color: #08080C;
+      font-size: clamp(0.8rem, 1vw, 0.92rem);
+      font-weight: 600;
       letter-spacing: -0.01em;
-      backdrop-filter: blur(12px);
-      box-shadow:
-        inset 0 1px 1px rgba(255,255,255,0.12),
-        0 6px 18px rgba(11, 18, 32, 0.22);
+      box-shadow: 0 8px 20px rgba(15, 52, 105, 0.06);
       transition: transform 0.28s var(--ease), border-color 0.28s ease, color 0.28s ease, background 0.28s ease;
       overflow: hidden;
     }
 
-    .service-badge .badge-dot {
-      width: 5px; height: 5px;
-      background: rgba(100, 160, 255, 0.7);
-      border-radius: 50%;
-      flex-shrink: 0;
+    body.atmosphere-dark .service-badge {
+      background: rgba(20, 32, 58, 0.85);
+      border-color: rgba(0, 112, 255, 0.25);
+      color: #FAFCFF;
     }
 
-    .service-badge::after {
-      content: '';
-      position: absolute;
-      width: 55%;
-      height: 150%;
-      left: -12%;
-      top: -18%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
-      transform: rotate(18deg) translateX(-130%);
-      transition: transform 0.75s ease;
-      pointer-events: none;
+    .service-badge .badge-dot {
+      width: 6px; height: 6px;
+      background: #0070FF;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 8px rgba(0, 112, 255, 0.5);
     }
 
     .service-badge:hover {
-      transform: translateY(-3px) scale(1.01);
-      border-color: rgba(130, 180, 255, 0.42);
-      background: linear-gradient(135deg, rgba(30, 97, 255, 0.22), rgba(70, 130, 255, 0.1));
-      color: #d8ebff;
-    }
-
-    .service-badge:hover::after {
-      transform: rotate(18deg) translateX(230%);
+      transform: translateY(-2px) scale(1.02);
+      background: #08080C;
+      border-color: #08080C;
+      color: #FAFCFF;
     }
 
     @keyframes marqueeScroll {
@@ -420,44 +1180,76 @@
       100% { transform: translateX(-50%); }
     }
 
-    /* ─── STATS BAND ───────────────────────────────────── */
+    /* ─── STATS BAND (ORIZON SCULPTED BENTO PODS) ──────── */
     .stats-band {
-      background: var(--bg-surface-solid);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      padding: 56px 0;
+      background: transparent;
+      padding: 52px 0 64px;
     }
 
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 0;
+      gap: 20px;
     }
 
     .stat-item {
-      text-align: center;
-      padding: 0 24px;
+      text-align: left;
+      padding: 28px 26px;
       position: relative;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 28px;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 18px 44px rgba(15, 52, 105, 0.07);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+
+    body.atmosphere-dark .stat-item {
+      background: rgba(14, 21, 38, 0.9);
+      border-color: rgba(0, 112, 255, 0.22);
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 52px rgba(0, 112, 255, 0.14);
     }
 
     .stat-item + .stat-item::before {
-      content: '';
+      display: none;
+    }
+
+    /* Orizon circular ↗ badge in top-right of each stat card */
+    .stat-item::after {
+      content: '↗';
       position: absolute;
-      left: 0;
-      top: 20%;
-      height: 60%;
-      width: 1px;
-      background: var(--border);
+      top: 20px;
+      right: 20px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #EAF3FC;
+      color: #0070FF;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+
+    body.atmosphere-dark .stat-item::after {
+      background: rgba(0, 112, 255, 0.16);
+      color: #5CE1FF;
     }
 
     .stat-num {
       font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(2rem, 3.5vw, 3rem);
+      font-size: clamp(2.1rem, 3.5vw, 2.85rem);
       font-weight: 700;
       letter-spacing: -0.04em;
       color: var(--text-primary);
       line-height: 1;
-      margin-bottom: 6px;
+      margin-bottom: 8px;
     }
 
     .stat-num span {
@@ -465,32 +1257,33 @@
     }
 
     .stat-label {
-      font-size: 0.82rem;
-      font-weight: 500;
+      font-size: 0.78rem;
+      font-weight: 600;
       color: var(--text-secondary);
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
-    /* ─── CAPABILITIES ─────────────────────────────────── */
+    /* ─── CAPABILITIES (ORIZON SCULPTED CARDS) ─────────── */
     .capabilities {
-      background: var(--bg-surface-solid);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      background: transparent;
     }
 
     .cap-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
+      gap: 22px;
     }
 
     .cap-card {
       position: relative;
-      background: var(--bg-base);
-      border-radius: 24px;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-radius: 32px;
       padding: 44px 40px;
-      border: 1px solid transparent;
+      border: 3px solid #FFFFFF;
+      box-shadow: 0 20px 50px rgba(15, 52, 105, 0.07);
       overflow: hidden;
       transition:
         transform 0.4s var(--ease),
@@ -499,37 +1292,42 @@
         box-shadow 0.4s var(--ease);
     }
 
+    body.atmosphere-dark .cap-card {
+      background: rgba(14, 21, 38, 0.9);
+      border-color: rgba(0, 112, 255, 0.24);
+    }
+
     .cap-card::before {
       content: '';
       position: absolute;
       inset: 0;
       border-radius: inherit;
-      background: linear-gradient(135deg, rgba(0,102,204,0.06), transparent 50%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
+      background: radial-gradient(circle at top right, rgba(135, 196, 255, 0.28), transparent 60%);
+      opacity: 1;
       pointer-events: none;
     }
 
     .cap-card:hover {
-      background: #EEEEF2;
-      transform: translateY(-5px);
-      border-color: rgba(0, 102, 204, 0.12);
-      box-shadow: 0 16px 48px rgba(0, 102, 204, 0.08), 0 4px 16px rgba(0, 0, 0, 0.04);
+      background: #FFFFFF;
+      transform: translateY(-6px);
+      border-color: #FFFFFF;
+      box-shadow: 0 26px 60px rgba(0, 112, 255, 0.15);
     }
 
-    .cap-card:hover::before {
-      opacity: 1;
+    body.atmosphere-dark .cap-card:hover {
+      background: rgba(18, 28, 50, 0.96);
+      border-color: rgba(0, 112, 255, 0.45);
     }
 
     /* Ghost number watermark */
     .cap-card-num {
       position: absolute;
-      top: -8px;
-      right: 20px;
+      top: 12px;
+      right: 24px;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 7rem;
+      font-size: 5.5rem;
       font-weight: 700;
-      color: rgba(0, 0, 0, 0.035);
+      color: rgba(0, 112, 255, 0.07);
       line-height: 1;
       letter-spacing: -0.04em;
       pointer-events: none;
@@ -538,27 +1336,28 @@
     }
 
     .cap-card:hover .cap-card-num {
-      color: rgba(0, 102, 204, 0.07);
+      color: rgba(0, 112, 255, 0.14);
     }
 
     .cap-icon {
-      width: 52px;
-      height: 52px;
-      background: var(--bg-surface-solid);
-      border-radius: 14px;
+      width: 54px;
+      height: 54px;
+      background: #EAF3FC;
+      border-radius: 16px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 28px;
       color: var(--accent);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(0, 102, 204, 0.1);
+      border: 2px solid #FFFFFF;
+      box-shadow: 0 6px 16px rgba(0, 112, 255, 0.1);
       transition: box-shadow 0.35s ease, transform 0.35s ease;
       position: relative;
       z-index: 1;
     }
 
     .cap-card:hover .cap-icon {
-      box-shadow: 0 4px 16px rgba(0, 102, 204, 0.2), 0 0 0 1px rgba(0, 102, 204, 0.2);
+      box-shadow: 0 4px 16px rgba(0, 112, 255, 0.22), 0 0 0 1px rgba(0, 112, 255, 0.24);
       transform: scale(1.05);
     }
 
@@ -581,7 +1380,33 @@
 
     /* ─── PROCESS ──────────────────────────────────────── */
     .process-section {
-      background: var(--bg-base);
+      position: relative;
+      background: transparent;
+    }
+
+    .process-section .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .process-section::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 84px;
+      pointer-events: none;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(236, 245, 255, 0.48) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
+    }
+
+    body.atmosphere-dark .process-section::after {
+      background: linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(10, 16, 30, 0.5) 100%);
     }
 
     .process-rail {
@@ -657,58 +1482,98 @@
       line-height: 1.6;
     }
 
-    /* ─── CTA BAND ─────────────────────────────────────── */
+    /* ─── CTA BAND (ORIZON FRAMED TWILIGHT-SKY SHOWCASE) ─ */
     .cta-band {
       position: relative;
-      padding: 100px 0;
+      width: calc(100% - 48px);
+      max-width: 1340px;
+      margin: 24px auto;
+      padding: 100px 32px 88px;
       text-align: center;
+      border-radius: 38px;
+      border: 4px solid rgba(255, 255, 255, 0.96);
       background:
-        radial-gradient(34% 42% at 92% 10%, rgba(92, 144, 255, 0.26), transparent 60%),
-        radial-gradient(26% 32% at 78% 65%, rgba(58, 102, 220, 0.16), transparent 64%),
-        radial-gradient(20% 24% at 18% 26%, rgba(58, 112, 255, 0.10), transparent 62%),
-        linear-gradient(90deg, #020810 0%, #050e1a 16%, #081a2d 36%, #050d1b 62%, #02080f 100%);
+        radial-gradient(50% 60% at 50% 25%, rgba(255, 255, 255, 0.65) 0%, transparent 68%),
+        radial-gradient(45% 55% at 80% 78%, rgba(72, 148, 240, 0.48) 0%, transparent 66%),
+        linear-gradient(165deg, #BFD9F8 0%, #DFEEFF 42%, #8EBDF2 85%, #6CA4E8 100%);
+      box-shadow: 0 30px 72px rgba(15, 52, 105, 0.14);
       overflow: hidden;
     }
 
+    body.atmosphere-dark .cta-band {
+      border-color: rgba(0, 112, 255, 0.28);
+      background:
+        radial-gradient(40% 50% at 50% 0%, rgba(0, 112, 255, 0.28), transparent 65%),
+        linear-gradient(180deg, #08080C 0%, #0A101F 50%, #06070B 100%);
+    }
+
     .cta-band::before {
-      content: '';
+      content: 'READY TO BUILD // DEPLOY WITH CYNOCOR';
       position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(120, 170, 255, 0.06) 1px, transparent 1px);
-      background-size: 36px 36px;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #FFFFFF;
+      color: #08080C;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      padding: 10px 34px 12px;
+      border-radius: 0 0 26px 26px;
+      box-shadow: 0 8px 24px rgba(12, 42, 90, 0.08);
       pointer-events: none;
+      white-space: nowrap;
+    }
+
+    body.atmosphere-dark .cta-band::before {
+      background: #0E1526;
+      color: #FAFCFF;
     }
 
     .cta-band .container { position: relative; z-index: 1; }
 
     .cta-band-eyebrow {
-      display: block;
-      font-size: 0.75rem;
-      font-weight: 500;
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.88);
+      padding: 6px 16px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      color: rgba(140, 185, 255, 0.7);
-      margin-bottom: 20px;
+      color: #0070FF;
+      margin-bottom: 18px;
+      box-shadow: 0 6px 18px rgba(12, 42, 90, 0.07);
     }
 
     .cta-band h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-size: clamp(2.1rem, 4vw, 3.4rem);
       font-weight: 700;
-      color: #edf4ff;
+      color: #08080C;
       letter-spacing: -0.04em;
-      line-height: 1.1;
+      line-height: 1.08;
       margin-bottom: 18px;
       max-width: 640px;
       margin-left: auto;
       margin-right: auto;
     }
 
+    body.atmosphere-dark .cta-band h2 {
+      color: #FAFCFF;
+    }
+
     .cta-band p {
-      color: rgba(195, 218, 255, 0.62);
+      color: #1E293B;
       font-size: 1.05rem;
-      max-width: 500px;
-      margin: 0 auto 44px;
+      font-weight: 500;
+      max-width: 520px;
+      margin: 0 auto 38px;
       line-height: 1.65;
+    }
+
+    body.atmosphere-dark .cta-band p {
+      color: rgba(250, 252, 255, 0.75);
     }
 
     .cta-band-actions {
@@ -725,19 +1590,20 @@
       gap: 8px;
       padding: 14px 30px;
       border-radius: 999px;
-      background: linear-gradient(135deg, rgba(38,109,255,0.9), rgba(61,145,255,0.82));
-      border: 1px solid rgba(140,200,255,0.35);
-      color: #f0f6ff;
+      background: linear-gradient(135deg, #0070FF 0%, #1A85FF 100%);
+      border: 1px solid rgba(250, 252, 255, 0.28);
+      color: #FAFCFF;
       font-size: 0.9375rem;
       font-weight: 600;
       letter-spacing: -0.01em;
-      box-shadow: 0 10px 28px rgba(22,78,201,0.3);
-      transition: transform 0.28s var(--ease), filter 0.28s var(--ease);
+      box-shadow: 0 10px 28px rgba(0, 112, 255, 0.42), 0 0 20px rgba(0, 112, 255, 0.22);
+      transition: transform 0.28s var(--ease), filter 0.28s var(--ease), box-shadow 0.28s var(--ease);
     }
 
     .cta-btn-primary:hover {
       transform: translateY(-2px);
       filter: brightness(1.1);
+      box-shadow: 0 14px 36px rgba(0, 112, 255, 0.55), 0 0 28px rgba(0, 112, 255, 0.32);
     }
 
     .cta-btn-ghost {
@@ -746,20 +1612,37 @@
       gap: 7px;
       padding: 14px 26px;
       border-radius: 999px;
-      border: 1px solid rgba(120,170,255,0.2);
-      color: rgba(175,210,255,0.75);
+      border: 1px solid rgba(0, 112, 255, 0.28);
+      color: #0B1120;
       font-size: 0.9375rem;
-      font-weight: 500;
-      backdrop-filter: blur(8px);
-      background: rgba(255,255,255,0.04);
-      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, transform 0.25s ease;
+      font-weight: 600;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 8px 22px rgba(15, 52, 105, 0.08);
+      transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
     }
 
     .cta-btn-ghost:hover {
-      border-color: rgba(140,190,255,0.4);
-      color: rgba(215,235,255,0.9);
-      background: rgba(38,109,255,0.08);
-      transform: translateY(-1px);
+      border-color: #0070FF;
+      color: #0070FF;
+      background: #FFFFFF;
+      box-shadow: 0 12px 28px rgba(0, 112, 255, 0.16);
+      transform: translateY(-2px);
+    }
+
+    body.atmosphere-dark .cta-btn-ghost {
+      border-color: rgba(120, 170, 255, 0.32);
+      color: rgba(226, 238, 255, 0.92);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+    }
+
+    body.atmosphere-dark .cta-btn-ghost:hover {
+      border-color: rgba(92, 225, 255, 0.65);
+      color: #FFFFFF;
+      background: rgba(0, 112, 255, 0.16);
+      box-shadow: 0 12px 28px rgba(0, 112, 255, 0.24);
     }
 
     /* ─── RESPONSIVE ───────────────────────────────────── */
@@ -805,115 +1688,9 @@
       .hero-lead { font-size: 0.9375rem; padding: 0 8px; }
     }
 
-    /* ─── LIQUID GLASS HERO NAV ─────────────────────────── */
-    /* At-top state: blends into the dark hero */
-    header.nav-hero {
-      background: rgba(6, 14, 28, 0.28);
-      backdrop-filter: saturate(160%) blur(28px);
-      -webkit-backdrop-filter: saturate(160%) blur(28px);
-      border-bottom: 1px solid rgba(140, 190, 255, 0.1);
-      transition:
-        background 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-        backdrop-filter 0.4s ease,
-        box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    /* Subtle inner highlight line at top for the glass edge */
+    /* ─── ORIZON SCULPTED FLOATING HERO NAV ────────────── */
     header.nav-hero::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg,
-        transparent 0%,
-        rgba(180, 210, 255, 0.25) 25%,
-        rgba(200, 225, 255, 0.35) 50%,
-        rgba(180, 210, 255, 0.25) 75%,
-        transparent 100%);
-      pointer-events: none;
-      opacity: 1;
-      transition: opacity 0.35s ease;
-    }
-
-    header.nav-hero.scrolled::after {
-      opacity: 0;
-    }
-
-    /* Nav links — white on dark hero */
-    header.nav-hero .nav-links a {
-      color: rgba(195, 218, 255, 0.72);
-    }
-    header.nav-hero .nav-links a:hover,
-    header.nav-hero .nav-links a.active {
-      color: rgba(255, 255, 255, 0.96);
-    }
-    header.nav-hero .nav-links a::after {
-      background: rgba(200, 225, 255, 0.7);
-    }
-
-    /* CTA button — glass pill on dark */
-    header.nav-hero .nav-cta {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(200, 225, 255, 0.22);
-      color: rgba(230, 242, 255, 0.92);
-      box-shadow: inset 0 1px 1px rgba(255,255,255,0.15), 0 4px 16px rgba(0,0,0,0.12);
-      transition:
-        background 0.3s ease,
-        border-color 0.3s ease,
-        color 0.3s ease,
-        transform 0.2s var(--ease);
-    }
-    header.nav-hero .nav-cta:hover {
-      background: rgba(255, 255, 255, 0.18);
-      border-color: rgba(200, 225, 255, 0.4);
-      color: #ffffff;
-      transform: scale(1.02);
-    }
-
-    /* Hamburger lines — white */
-    header.nav-hero .mobile-menu-toggle {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(200, 220, 255, 0.16);
-    }
-    header.nav-hero .mobile-menu-toggle span {
-      background-color: rgba(220, 235, 255, 0.88);
-    }
-
-    /* ── SCROLLED: revert to standard light nav ── */
-    header.nav-hero.scrolled {
-      background: rgba(245, 245, 247, 0.82);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
-    }
-    header.nav-hero.scrolled .nav-links a {
-      color: var(--text-secondary);
-    }
-    header.nav-hero.scrolled .nav-links a:hover,
-    header.nav-hero.scrolled .nav-links a.active {
-      color: var(--text-primary);
-    }
-    header.nav-hero.scrolled .nav-links a::after {
-      background: var(--accent);
-    }
-    header.nav-hero.scrolled .nav-cta {
-      background: var(--text-primary);
-      border: none;
-      color: #ffffff;
-      box-shadow: none;
-    }
-    header.nav-hero.scrolled .nav-cta:hover {
-      background: #000000;
-      color: #ffffff;
-    }
-    header.nav-hero.scrolled .mobile-menu-toggle {
-      background: rgba(0, 0, 0, 0.04);
-      border-color: rgba(0, 0, 0, 0.08);
-    }
-    header.nav-hero.scrolled .mobile-menu-toggle span {
-      background-color: var(--text-primary);
+      display: none;
     }
 
     /* ─── CANVAS NETWORK OVERLAY ─────────────────────── */
@@ -929,9 +1706,36 @@
 
     /* ─── IOT ARCHITECTURE DIAGRAM ──────────────────── */
     .iot-arch-section {
+      position: relative;
       background: var(--bg-surface-solid);
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
+      border-top: none;
+      border-bottom: none;
+      overflow: hidden;
+    }
+
+    .iot-arch-section .container {
+      position: relative;
+      z-index: 2;
+    }
+
+    .iot-arch-section::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 108px;
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(244, 249, 255, 0.65) 55%, rgba(235, 245, 255, 0.92) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.72) 52%, #000 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.72) 52%, #000 100%);
+    }
+
+    body.atmosphere-dark .iot-arch-section::after {
+      background: linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(11, 17, 32, 0.68) 55%, rgba(8, 10, 16, 0.95) 100%);
     }
 
     .iot-arch-diagram {
@@ -1036,95 +1840,650 @@
       100% { left: calc(100% + 4px); opacity: 0; }
     }
 
-    /* ─── INDUSTRIES SECTION ─────────────────────────── */
+    /* ─── INDUSTRIES SECTION (INTERACTIVE SECTOR LAB) ──── */
     .industries-section {
-      background: var(--bg-base);
-      border-bottom: 1px solid var(--border);
+      position: relative;
+      background:
+        radial-gradient(50% 45% at 50% 0%, rgba(0, 112, 255, 0.05) 0%, transparent 70%),
+        var(--bg-base);
+      border-bottom: none;
+      overflow: hidden;
+    }
+
+    .industries-section::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 92px;
+      pointer-events: none;
+      z-index: 3;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(238, 246, 255, 0.55) 100%);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, #000 100%);
+    }
+
+    body.atmosphere-dark .industries-section::after {
+      background: linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(8, 10, 16, 0.6) 100%);
+    }
+
+    /* Subtle animated background grid in Industries section */
+    .industries-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(8, 8, 12, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(8, 8, 12, 0.025) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, black 20%, transparent 90%);
+      -webkit-mask-image: radial-gradient(ellipse 80% 75% at 50% 50%, black 20%, transparent 90%);
+      pointer-events: none;
     }
 
     .industries-grid {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
-      gap: 14px;
+      gap: 16px;
       margin-top: 56px;
+      position: relative;
+      z-index: 2;
+      perspective: 1000px;
     }
 
     .industry-card {
+      --mx: 50%;
+      --my: 50%;
       position: relative;
       background: var(--bg-surface-solid);
-      border-radius: 18px;
-      padding: 28px 14px 24px;
-      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px 16px 22px;
+      border: 1px solid rgba(8, 8, 12, 0.07);
       overflow: hidden;
-      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease), border-color 0.35s var(--ease);
+      transition:
+        transform 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+        box-shadow 0.42s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease,
+        background 0.35s ease;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       gap: 10px;
-      cursor: default;
+      cursor: pointer;
+      user-select: none;
+      transform-style: preserve-3d;
+      will-change: transform;
     }
 
+    /* Top color bar with animated glow */
     .industry-card::before {
       content: '';
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
-      height: 3px;
-      border-radius: 18px 18px 0 0;
+      height: 4px;
+      border-radius: 20px 20px 0 0;
       background: var(--ind-color, var(--accent));
-      opacity: 0.65;
+      opacity: 0.72;
+      transition: height 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease;
+      z-index: 2;
+    }
+
+    /* Mouse-following radial spotlight inside card */
+    .industry-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        180px circle at var(--mx) var(--my),
+        color-mix(in srgb, var(--ind-color, #0070FF) 13%, transparent),
+        transparent 75%
+      );
+      opacity: 0;
       transition: opacity 0.35s ease;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .industry-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(0,0,0,0.08);
-      box-shadow: 0 18px 44px rgba(0,0,0,0.09);
+    .industry-card:hover,
+    .industry-card.is-active {
+      transform: translateY(-8px);
+      border-color: color-mix(in srgb, var(--ind-color, #0070FF) 48%, transparent);
+      box-shadow:
+        0 20px 44px -10px color-mix(in srgb, var(--ind-color, #0070FF) 22%, rgba(8, 8, 12, 0.08)),
+        0 4px 14px rgba(8, 8, 12, 0.05);
+      background: #FFFFFF;
     }
 
-    .industry-card:hover::before { opacity: 1; }
+    .industry-card:hover::before,
+    .industry-card.is-active::before {
+      opacity: 1;
+      height: 5px;
+      box-shadow: 0 2px 14px var(--ind-color, var(--accent));
+    }
+
+    .industry-card:hover::after,
+    .industry-card.is-active::after {
+      opacity: 1;
+    }
+
+    /* Card top index & live dot */
+    .industry-card-meta {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(8, 8, 12, 0.28);
+      letter-spacing: 0.06em;
+      margin-top: -8px;
+      margin-bottom: 2px;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
+    }
+
+    .industry-card:hover .industry-card-meta,
+    .industry-card.is-active .industry-card-meta {
+      color: var(--ind-color, var(--accent));
+    }
+
+    .industry-live-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--ind-color, var(--accent));
+      opacity: 0.35;
+      position: relative;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .industry-card:hover .industry-live-dot,
+    .industry-card.is-active .industry-live-dot {
+      opacity: 1;
+      box-shadow: 0 0 8px var(--ind-color, var(--accent));
+    }
+
+    .industry-card.is-active .industry-live-dot::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 1.5px solid var(--ind-color, var(--accent));
+      animation: sectorPing 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+
+    @keyframes sectorPing {
+      0%   { transform: scale(0.8); opacity: 0.9; }
+      100% { transform: scale(2.1); opacity: 0; }
+    }
+
+    .industry-icon-wrap {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 4px 0;
+      z-index: 1;
+    }
+
+    /* Animated orbit ring around icon on hover/active */
+    .industry-icon-ring {
+      position: absolute;
+      inset: -7px;
+      border-radius: 18px;
+      border: 1.5px dashed color-mix(in srgb, var(--ind-color, #0070FF) 45%, transparent);
+      opacity: 0;
+      transform: scale(0.85) rotate(0deg);
+      transition: opacity 0.35s ease, transform 0.45s var(--ease);
+      pointer-events: none;
+    }
+
+    .industry-card:hover .industry-icon-ring,
+    .industry-card.is-active .industry-icon-ring {
+      opacity: 1;
+      transform: scale(1) rotate(90deg);
+    }
 
     .industry-icon {
-      width: 46px;
-      height: 46px;
-      border-radius: 13px;
+      width: 52px;
+      height: 52px;
+      border-radius: 15px;
       background: var(--bg-base);
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--ind-color, var(--accent));
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-      transition: transform 0.3s ease;
+      box-shadow: 0 2px 10px rgba(8, 8, 12, 0.05);
+      transition:
+        transform 0.38s cubic-bezier(0.34, 1.56, 0.64, 1),
+        background 0.35s ease,
+        color 0.35s ease,
+        box-shadow 0.35s ease;
+      position: relative;
+      z-index: 1;
     }
 
-    .industry-card:hover .industry-icon { transform: scale(1.1); }
+    .industry-card:hover .industry-icon,
+    .industry-card.is-active .industry-icon {
+      transform: scale(1.12) translateY(-2px);
+      background: var(--ind-color, var(--accent));
+      color: #FAFCFF;
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--ind-color, #0070FF) 38%, transparent);
+    }
 
     .industry-card h4 {
-      font-size: 0.82rem;
-      font-weight: 600;
+      font-size: 0.88rem;
+      font-weight: 700;
       letter-spacing: -0.01em;
       color: var(--text-primary);
-      margin: 0;
+      margin: 2px 0 0;
+      position: relative;
+      z-index: 1;
+      transition: color 0.3s ease;
     }
 
     .industry-card p {
-      font-size: 0.74rem;
+      font-size: 0.75rem;
       color: var(--text-secondary);
       line-height: 1.5;
       margin: 0;
+      position: relative;
+      z-index: 1;
+      flex: 1;
+    }
+
+    /* Mini animated telemetry equalizer bars inside each card */
+    .industry-wave {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      height: 14px;
+      margin-top: 6px;
+      position: relative;
+      z-index: 1;
+      opacity: 0.35;
+      transition: opacity 0.3s ease;
+    }
+
+    .industry-card:hover .industry-wave,
+    .industry-card.is-active .industry-wave {
+      opacity: 1;
+    }
+
+    .industry-wave span {
+      width: 3px;
+      height: 4px;
+      border-radius: 99px;
+      background: var(--ind-color, var(--accent));
+      transition: height 0.3s ease;
+    }
+
+    .industry-card:hover .industry-wave span,
+    .industry-card.is-active .industry-wave span {
+      animation: eqBounce 1.1s ease-in-out infinite alternate;
+    }
+
+    .industry-wave span:nth-child(1) { animation-delay: 0.0s; height: 5px; }
+    .industry-wave span:nth-child(2) { animation-delay: 0.18s; height: 10px; }
+    .industry-wave span:nth-child(3) { animation-delay: 0.32s; height: 7px; }
+    .industry-wave span:nth-child(4) { animation-delay: 0.12s; height: 12px; }
+    .industry-wave span:nth-child(5) { animation-delay: 0.26s; height: 6px; }
+
+    @keyframes eqBounce {
+      0%   { height: 4px; opacity: 0.55; }
+      100% { height: 14px; opacity: 1; }
+    }
+
+    /* ── Interactive Sector Telemetry Spotlight Console ── */
+    .industry-spotlight {
+      --spot-color: #0070FF;
+      position: relative;
+      z-index: 2;
+      margin-top: 28px;
+      background: #FAFCFF;
+      border-radius: 26px;
+      border: 1px solid rgba(8, 8, 12, 0.08);
+      box-shadow:
+        0 20px 50px rgba(8, 8, 12, 0.06),
+        0 2px 10px rgba(8, 8, 12, 0.03);
+      overflow: hidden;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
+    }
+
+    .industry-spotlight:hover {
+      border-color: color-mix(in srgb, var(--spot-color) 35%, rgba(8, 8, 12, 0.08));
+      box-shadow:
+        0 24px 60px color-mix(in srgb, var(--spot-color) 12%, rgba(8, 8, 12, 0.07)),
+        0 4px 14px rgba(8, 8, 12, 0.04);
+    }
+
+    /* Auto-cycle progress bar at top of console */
+    .industry-spotlight-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: rgba(8, 8, 12, 0.05);
+      overflow: hidden;
+      z-index: 3;
+    }
+
+    .industry-spotlight-bar {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(90deg, var(--spot-color), #0070FF);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    .industry-spotlight-inner {
+      display: grid;
+      grid-template-columns: 1.25fr 1fr;
+      gap: 36px;
+      padding: 36px 40px;
+      align-items: center;
+      position: relative;
+    }
+
+    /* Ambient corner glow inside spotlight */
+    .industry-spotlight-inner::before {
+      content: '';
+      position: absolute;
+      right: -80px;
+      bottom: -80px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, color-mix(in srgb, var(--spot-color) 14%, transparent), transparent 70%);
+      pointer-events: none;
+      transition: background 0.5s ease;
+    }
+
+    .spot-info {
+      position: relative;
+      z-index: 1;
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .spot-info.is-switching {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+
+    .spot-header-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .spot-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 14px;
+      border-radius: 999px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: color-mix(in srgb, var(--spot-color) 11%, transparent);
+      color: var(--spot-color);
+      border: 1px solid color-mix(in srgb, var(--spot-color) 28%, transparent);
+    }
+
+    .spot-badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--spot-color);
+      box-shadow: 0 0 8px var(--spot-color);
+      animation: pulseDot 1.8s ease-in-out infinite;
+    }
+
+    .spot-code {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.06em;
+    }
+
+    .spot-title {
+      font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.025em;
+      margin-bottom: 10px;
+      line-height: 1.2;
+    }
+
+    .spot-desc {
+      font-size: 0.94rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+      margin-bottom: 20px;
+      max-width: 56ch;
+    }
+
+    .spot-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+
+    .spot-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px;
+      border-radius: 10px;
+      background: var(--bg-base);
+      border: 1px solid rgba(8, 8, 12, 0.07);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    }
+
+    .spot-tag::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--spot-color);
+    }
+
+    .spot-tag:hover {
+      transform: translateY(-2px);
+      border-color: var(--spot-color);
+      background: #FFFFFF;
+    }
+
+    .spot-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--spot-color);
+      padding: 9px 18px;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--spot-color) 10%, transparent);
+      border: 1px solid color-mix(in srgb, var(--spot-color) 25%, transparent);
+      transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .spot-cta:hover {
+      background: var(--spot-color);
+      color: #FAFCFF;
+      transform: translateX(3px);
+      box-shadow: 0 8px 20px color-mix(in srgb, var(--spot-color) 32%, transparent);
+    }
+
+    .spot-cta svg {
+      width: 15px;
+      height: 15px;
+      transition: transform 0.25s ease;
+    }
+
+    .spot-cta:hover svg {
+      transform: translateX(3px);
+    }
+
+    /* Right side: Obsidian Telemetry HUD Card inside Spotlight */
+    .spot-telemetry-card {
+      position: relative;
+      z-index: 1;
+      background:
+        radial-gradient(80% 70% at 85% 15%, color-mix(in srgb, var(--spot-color) 28%, transparent), transparent 65%),
+        linear-gradient(155deg, #08080C 0%, #0D1220 100%);
+      border-radius: 20px;
+      padding: 24px 24px 22px;
+      color: #FAFCFF;
+      border: 1px solid rgba(250, 252, 255, 0.1);
+      box-shadow: 0 18px 40px rgba(8, 8, 12, 0.22);
+      overflow: hidden;
+    }
+
+    .spot-telemetry-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(250, 252, 255, 0.08);
+    }
+
+    .spot-telemetry-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(250, 252, 255, 0.75);
+    }
+
+    .spot-telemetry-status {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 3px 9px;
+      border-radius: 99px;
+      background: rgba(16, 185, 129, 0.16);
+      color: #34D399;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      letter-spacing: 0.06em;
+    }
+
+    /* Animated SVG Signal Path */
+    .spot-signal-viz {
+      position: relative;
+      height: 64px;
+      margin-bottom: 18px;
+      border-radius: 12px;
+      background: rgba(250, 252, 255, 0.03);
+      border: 1px solid rgba(250, 252, 255, 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 0 12px;
+    }
+
+    .spot-signal-svg {
+      width: 100%;
+      height: 44px;
+      overflow: visible;
+    }
+
+    .spot-signal-line {
+      fill: none;
+      stroke: var(--spot-color);
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-dasharray: 8 6;
+      animation: signalDash 2.5s linear infinite;
+      filter: drop-shadow(0 0 6px var(--spot-color));
+    }
+
+    .spot-signal-glow {
+      fill: none;
+      stroke: var(--spot-color);
+      stroke-width: 6;
+      opacity: 0.22;
+      stroke-linecap: round;
+    }
+
+    @keyframes signalDash {
+      to { stroke-dashoffset: -56; }
+    }
+
+    .spot-metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .spot-metric-box {
+      background: rgba(250, 252, 255, 0.04);
+      border: 1px solid rgba(250, 252, 255, 0.08);
+      border-radius: 12px;
+      padding: 12px 10px;
+      text-align: center;
+      transition: border-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .spot-metric-box:hover {
+      border-color: var(--spot-color);
+      transform: translateY(-2px);
+    }
+
+    .spot-metric-val {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #FAFCFF;
+      line-height: 1.1;
+      margin-bottom: 4px;
+    }
+
+    .spot-metric-lbl {
+      font-size: 0.66rem;
+      font-weight: 500;
+      color: rgba(250, 252, 255, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
     @media (max-width: 1100px) {
       .iot-arch-diagram { flex-wrap: wrap; gap: 24px 16px; }
       .arch-connector { display: none; }
       .industries-grid { grid-template-columns: repeat(3, 1fr); }
+      .industry-spotlight-inner { grid-template-columns: 1fr; gap: 24px; padding: 28px 24px; }
     }
 
     @media (max-width: 640px) {
-      .industries-grid { grid-template-columns: repeat(2, 1fr); }
+      .industries-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
       .arch-node-icon { width: 64px; height: 64px; }
+      .industry-spotlight-inner { padding: 22px 18px; }
+      .spot-metrics-grid { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+      .spot-metric-val { font-size: 0.98rem; }
     }
 
     /* ─── APPLE-STYLE ANNOUNCEMENT PILL ───────────────── */
@@ -1202,600 +2561,1297 @@
 
     /* ─── CYNOBOT · BLUEPRINT SECTION ─────────────────── */
     :root {
-      --cyno-ground: #0b2140;
-      --cyno-ink: #ffffff;
-      --cyno-ink-soft: rgba(225, 236, 255, 0.78);
-      --cyno-accent: #8ab8ff;
-      --cyno-rule: rgba(160, 196, 255, 0.16);
-      --cyno-rule-strong: rgba(160, 196, 255, 0.5);
+      --cyno-ground: #EAF3FD;
+      --cyno-ink: #08080C;
+      --cyno-ink-soft: #475569;
+      --cyno-accent: #0070FF;
+      --cyno-rule: rgba(0, 112, 255, 0.09);
+      --cyno-rule-strong: rgba(0, 112, 255, 0.42);
+      --cyno-subgrid: rgba(0, 112, 255, 0.045);
+      --cyno-glow: rgba(140, 198, 255, 0.36);
+      --cyno-frame-border: rgba(255, 255, 255, 0.96);
+      --cyno-frame-shadow: 0 30px 72px rgba(15, 52, 105, 0.12);
+      --cyno-sheet-bg: rgba(255, 255, 255, 0.84);
+      --cyno-sheet-border: rgba(255, 255, 255, 0.96);
+      --cyno-sheet-shadow: 0 24px 60px rgba(15, 52, 105, 0.1), inset 0 1px 0 #FFFFFF;
+      --cyno-note-bg: rgba(255, 255, 255, 0.9);
+      --cyno-note-border: rgba(0, 112, 255, 0.14);
+      --cyno-note-shadow: 0 8px 24px rgba(15, 52, 105, 0.07);
+      --cyno-robot-shadow: drop-shadow(0 24px 36px rgba(12, 42, 90, 0.22));
+      --cyno-link-hover: #08080C;
     }
 
+    body.atmosphere-dark {
+      --cyno-ground: #080B14;
+      --cyno-ink: #FAFCFF;
+      --cyno-ink-soft: rgba(225, 236, 255, 0.78);
+      --cyno-accent: #2684FF;
+      --cyno-rule: rgba(0, 112, 255, 0.16);
+      --cyno-rule-strong: rgba(0, 112, 255, 0.55);
+      --cyno-subgrid: rgba(0, 112, 255, 0.06);
+      --cyno-glow: rgba(0, 112, 255, 0.24);
+      --cyno-frame-border: rgba(0, 112, 255, 0.28);
+      --cyno-frame-shadow: 0 30px 72px rgba(0, 0, 0, 0.65), 0 0 40px rgba(0, 112, 255, 0.14);
+      --cyno-sheet-bg: rgba(12, 20, 38, 0.78);
+      --cyno-sheet-border: rgba(0, 112, 255, 0.28);
+      --cyno-sheet-shadow: 0 24px 64px rgba(0, 0, 0, 0.5), 0 0 40px rgba(0, 112, 255, 0.14);
+      --cyno-note-bg: rgba(15, 24, 46, 0.74);
+      --cyno-note-border: rgba(0, 112, 255, 0.24);
+      --cyno-note-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      --cyno-robot-shadow: drop-shadow(0 0 32px rgba(0, 112, 255, 0.35));
+      --cyno-link-hover: #FFFFFF;
+    }
+
+    /* ── MEET CYNOBOT — BORDERLESS 3D EDITORIAL SHOWCASE ── */
     .cyno {
       position: relative;
-      scroll-margin-top: 72px;
-      padding: clamp(72px, 10vw, 128px) 0;
-      background-color: var(--cyno-ground);
-      background-image:
-        linear-gradient(var(--cyno-rule) 1px, transparent 1px),
-        linear-gradient(90deg, var(--cyno-rule) 1px, transparent 1px),
-        linear-gradient(rgba(160, 196, 255, 0.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(160, 196, 255, 0.06) 1px, transparent 1px);
-      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
-      background-position: center top;
-      color: var(--cyno-ink);
-      overflow: hidden;
+      scroll-margin-top: 24px;
+      padding: 96px 28px 132px;
+      background: transparent;
+      border: none;
+      overflow-x: clip;
+      z-index: 2;
     }
 
-    .cyno ::selection { background: var(--cyno-accent); color: var(--cyno-ground); }
-
-    .cyno-sheet {
-      position: relative;
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: clamp(32px, 5vw, 64px);
-      border: 1px solid var(--cyno-rule-strong);
-      background: rgba(11, 33, 64, 0.72);
-    }
-
-    /* Drawing-sheet corner ticks */
-    .cyno-sheet::before,
-    .cyno-sheet::after {
+    .cyno::after {
       content: '';
       position: absolute;
-      width: 18px;
-      height: 18px;
-      border: 0 solid var(--cyno-accent);
-      pointer-events: none;
-    }
-    .cyno-sheet::before { top: -1px; left: -1px; border-top-width: 2px; border-left-width: 2px; }
-    .cyno-sheet::after { bottom: -1px; right: -1px; border-bottom-width: 2px; border-right-width: 2px; }
-
-    .cyno-title {
-      font-size: clamp(2.5rem, 5.5vw, 4.25rem);
-      font-weight: 600;
-      line-height: 1.04;
-      letter-spacing: -0.035em;
-      color: var(--cyno-ink);
-      text-wrap: balance;
-    }
-
-    .cyno-title-sub { display: block; color: var(--cyno-ink-soft); }
-
-    .cyno-lead {
-      margin-top: 20px;
-      max-width: 34ch;
-      font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
-      line-height: 1.55;
-      color: var(--cyno-ink-soft);
-      text-wrap: pretty;
-    }
-
-    .cyno-say { color: var(--cyno-ink); white-space: nowrap; }
-
-    /* Robot + annotations */
-    .cyno-drawing {
-      position: relative;
-      width: min(300px, 46%);
-      aspect-ratio: 460 / 1024;
-      margin: clamp(40px, 6vw, 64px) 0 0 clamp(0px, 6vw, 72px);
-    }
-
-    .cyno-robot {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      user-select: none;
-    }
-
-    .cyno-notes { list-style: none; margin: 0; padding: 0; }
-
-    .cyno-note {
-      position: absolute;
-      top: var(--y);
-      left: calc(100% + 48px);
-      width: max-content;
-      max-width: min(30ch, 42vw);
-      transform: translateY(-50%);
-      font-size: 1.0625rem;
-      line-height: 1.45;
-      color: var(--cyno-ink);
-    }
-
-    /* Hairline leader from the point on the robot to the label */
-    .cyno-leader {
-      position: absolute;
-      top: var(--y);
-      left: var(--x);
-      width: calc(100% - var(--x) + 36px);
-      height: 1px;
-      background: var(--cyno-rule-strong);
-      transform-origin: left center;
-      pointer-events: none;
-    }
-
-    .cyno-leader::before {
-      content: '';
-      position: absolute;
-      left: -4px;
-      top: -4px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--cyno-ground);
-      border: 1.5px solid var(--cyno-accent);
-    }
-
-    .cyno-leader::after {
-      content: '';
-      position: absolute;
+      left: 0;
       right: 0;
-      top: -3px;
-      width: 1px;
-      height: 7px;
-      background: var(--cyno-accent);
+      bottom: 0;
+      height: 110px;
+      pointer-events: none;
+      z-index: 4;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(244, 249, 255, 0.52) 46%, var(--bg-surface-solid) 100%);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      -webkit-mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 52%, #000 100%);
+      mask-image: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.7) 52%, #000 100%);
     }
 
-    .cyno-actions {
+    body.atmosphere-dark .cyno::after {
+      background: linear-gradient(180deg, rgba(8, 12, 22, 0) 0%, rgba(11, 17, 32, 0.56) 46%, var(--bg-surface-solid) 100%);
+    }
+
+    .cyno-stage {
+      position: relative;
+      max-width: 1240px;
+      margin: 0 auto;
+      min-height: 500px;
       display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 16px 28px;
-      margin-top: clamp(40px, 6vw, 56px);
-      padding-top: 32px;
-      border-top: 1px solid var(--cyno-rule);
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .cyno-btn {
-      display: inline-flex;
+    .cyno-stage::before {
+      content: '';
+      position: absolute;
+      inset: -20px 6% 0;
+      background: radial-gradient(50% 48% at 50% 46%, rgba(0, 112, 255, 0.13) 0%, rgba(56, 189, 248, 0.08) 46%, transparent 74%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Refined "COMING SOON." backdrop — Light Theme VR-poster editorial depth */
+    .cyno-mega-backdrop {
+      position: absolute;
+      top: 40%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      z-index: 1;
+      text-align: center;
+      font-family: 'Space Grotesk', var(--font-stack, 'Inter', sans-serif);
+      font-weight: 800;
+      font-size: clamp(2.6rem, 9.8vw, 8.5rem);
+      line-height: 0.9;
+      letter-spacing: -0.045em;
+      white-space: nowrap;
+      color: rgba(255, 255, 255, 0.96);
+      filter: drop-shadow(0 14px 36px rgba(15, 52, 105, 0.12)) drop-shadow(0 2px 8px rgba(0, 112, 255, 0.08));
+      user-select: none;
+      pointer-events: none;
+      margin: 0;
+      transition: color 0.35s ease, filter 0.35s ease;
+    }
+
+    body.atmosphere-dark .cyno-mega-backdrop {
+      color: rgba(248, 250, 252, 0.94);
+      filter: drop-shadow(0 16px 42px rgba(0, 112, 255, 0.28));
+    }
+
+    .cyno-editorial-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: 260px minmax(0, 1fr) 260px;
+      align-items: center;
+      gap: 18px;
+      min-height: 460px;
+      padding-top: 28px;
+    }
+
+    .cyno-side-left,
+    .cyno-side-right {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+      min-height: 360px;
+      padding: 88px 0 18px;
+      z-index: 4;
+    }
+
+    .cyno-side-right {
+      align-items: flex-end;
+      text-align: right;
+    }
+
+    .cyno-metric-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .cyno-metric-avatars {
+      display: flex;
+      align-items: center;
+    }
+
+    .cyno-metric-avatars img {
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #F4F9FF;
+      margin-left: -12px;
+      background: #E2E8F0;
+      box-shadow: 0 6px 16px rgba(11, 25, 54, 0.16);
+      transition: transform 0.25s ease;
+    }
+
+    .cyno-metric-avatars img:hover {
+      transform: translateY(-2px) scale(1.06);
+      z-index: 2;
+    }
+
+    .cyno-metric-avatars img:first-child {
+      margin-left: 0;
+    }
+
+    body.atmosphere-dark .cyno-metric-avatars img {
+      border-color: #0B1120;
+    }
+
+    .cyno-metric-val {
+      font-family: var(--font-stack, 'Inter', sans-serif);
+      font-size: 1.45rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #0B1120;
+      line-height: 1;
+    }
+
+    .cyno-metric-sub {
+      display: block;
+      margin-top: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #64748B;
+    }
+
+    body.atmosphere-dark .cyno-metric-val {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .cyno-metric-sub {
+      color: #94A3B8;
+    }
+
+    .cyno-editorial-copy {
+      max-width: 24ch;
+    }
+
+    .cyno-editorial-copy h3 {
+      margin: 0 0 8px;
+      font-family: var(--font-stack, 'Inter', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0B1120;
+    }
+
+    .cyno-editorial-copy p {
+      margin: 0 0 14px;
+      font-size: 0.84rem;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .cyno-dotted-rule {
+      width: 100%;
+      height: 2px;
+      background-image: radial-gradient(circle, rgba(11, 17, 32, 0.4) 1px, transparent 1.2px);
+      background-size: 7px 2px;
+      background-repeat: repeat-x;
+    }
+
+    body.atmosphere-dark .cyno-editorial-copy h3 {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .cyno-editorial-copy p {
+      color: #94A3B8;
+    }
+
+    body.atmosphere-dark .cyno-dotted-rule {
+      background-image: radial-gradient(circle, rgba(248, 250, 252, 0.35) 1px, transparent 1.2px);
+    }
+
+    /* Center 3D Bust Viewport */
+    .cyno-3d-wrap {
+      position: relative;
+      width: 100%;
+      height: clamp(410px, 46vw, 500px);
+      display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 0 24px;
-      border-radius: 999px;
-      background: var(--cyno-ink);
-      color: var(--cyno-ground);
-      font-size: 1rem;
-      font-weight: 600;
-      letter-spacing: -0.01em;
-      transition: transform var(--duration-fast) var(--ease-smooth-out), background-color var(--duration-fast) var(--ease-smooth-out);
+      z-index: 3;
+      cursor: grab;
+      -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 82%, rgba(0, 0, 0, 0.55) 92%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 0%, #000 82%, rgba(0, 0, 0, 0.55) 92%, transparent 100%);
     }
 
-    .cyno-btn:hover { background: #dbe8ff; transform: translateY(-2px); }
-    .cyno-btn:active { transform: translateY(0) scale(0.98); }
+    .cyno-3d-wrap:active {
+      cursor: grabbing;
+    }
 
-    .cyno-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      min-height: 44px;
-      color: var(--cyno-accent);
-      font-size: 1rem;
+    #cynoBot3DCanvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      filter: drop-shadow(0 22px 34px rgba(11, 25, 54, 0.22)) drop-shadow(0 6px 14px rgba(0, 112, 255, 0.12));
+    }
+
+    body.atmosphere-dark #cynoBot3DCanvas {
+      filter: drop-shadow(0 24px 40px rgba(0, 0, 0, 0.55)) drop-shadow(0 0 28px rgba(0, 112, 255, 0.24));
+    }
+
+    /* Right Index List */
+    .cyno-index-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+      font-size: 0.78rem;
       font-weight: 500;
+      color: #475569;
     }
 
-    .cyno-link svg {
-      width: 14px;
-      height: 14px;
-      transition: transform var(--duration-fast) var(--ease-smooth-out);
+    .cyno-index-list li {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
     }
 
-    .cyno-link:hover { color: #ffffff; }
-    .cyno-link:hover svg { transform: translateX(3px); }
-
-    .cyno :focus-visible { outline: 2px solid var(--cyno-accent); outline-offset: 3px; }
-
-    /* The one authored moment: leaders draw out from the robot, labels follow */
-    .cyno.is-armed .cyno-leader {
-      transform: scaleX(0);
-      transition: transform var(--duration-very-slow) var(--ease-smooth-out);
-      transition-delay: calc(var(--i) * 140ms);
+    .cyno-index-list span {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      color: #0B1120;
+      opacity: 0.7;
     }
-    .cyno.is-armed .cyno-note {
-      opacity: 0;
-      transform: translate(calc(-1 * var(--distance-medium)), -50%);
-      transition:
-        opacity var(--duration-slow) var(--ease-smooth-out),
-        transform var(--duration-slow) var(--ease-smooth-out);
-      transition-delay: calc(var(--i) * 140ms + 260ms);
-    }
-    .cyno.is-armed.is-drawn .cyno-leader { transform: scaleX(1); }
-    .cyno.is-armed.is-drawn .cyno-note { opacity: 1; transform: translate(0, -50%); }
 
-    @media (min-width: 1024px) {
-      .cyno-sheet {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        grid-template-rows: auto auto 1fr auto;
-        column-gap: 48px;
+    body.atmosphere-dark .cyno-index-list {
+      color: #94A3B8;
+    }
+
+    body.atmosphere-dark .cyno-index-list span {
+      color: #5CE1FF;
+    }
+
+    /* Circular Accent CTA (SAPFORCE-style) */
+    .cyno-orb-cta {
+      width: 128px;
+      height: 128px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #0070FF 0%, #38BDF8 100%);
+      color: #FFFFFF;
+      text-decoration: none;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      text-align: center;
+      font-size: 0.76rem;
+      font-weight: 700;
+      line-height: 1.25;
+      box-shadow: 0 20px 44px -10px rgba(0, 112, 255, 0.48);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .cyno-orb-cta:hover {
+      transform: scale(1.06) translateY(-3px);
+      box-shadow: 0 26px 54px -10px rgba(0, 112, 255, 0.62);
+      color: #FFFFFF;
+    }
+
+    .cyno-orb-play {
+      font-size: 0.7rem;
+      opacity: 0.92;
+    }
+
+    @media (max-width: 960px) {
+      .cyno {
+        padding: 44px 18px 56px;
       }
-      .cyno-title, .cyno-lead, .cyno-actions { grid-column: 1; }
-      .cyno-actions { grid-row: 4; align-self: end; }
-      .cyno-title { font-size: clamp(2.75rem, 3.8vw, 3.5rem); }
-      .cyno-drawing {
-        grid-column: 2;
-        grid-row: 1 / -1;
-        align-self: center;
-        width: 210px;
-        margin: 0 272px 0 0;
+      .cyno-mega-backdrop {
+        margin-bottom: -26px;
       }
-      .cyno-note { max-width: 24ch; }
-    }
-
-    @media (min-width: 761px) and (max-width: 1023px) {
-      .cyno-drawing { width: 240px; margin-left: 0; }
-      .cyno-note { max-width: 24ch; }
+      .cyno-editorial-grid {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        gap: 18px;
+      }
+      .cyno-3d-wrap {
+        order: 1;
+        height: 360px;
+      }
+      .cyno-side-left {
+        order: 2;
+        min-height: auto;
+        padding: 0;
+        gap: 16px;
+        align-items: center;
+        text-align: center;
+      }
+      .cyno-side-right {
+        order: 3;
+        min-height: auto;
+        padding: 0;
+        gap: 18px;
+        align-items: center;
+        text-align: center;
+      }
+      .cyno-index-list li {
+        justify-content: center;
+      }
+      .cyno-orb-cta {
+        width: 112px;
+        height: 112px;
+      }
     }
 
     @media (max-width: 760px) {
-      .cyno { background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px; }
-      .cyno-sheet { border-left: 0; border-right: 0; padding: 40px 20px; }
-      .cyno-drawing { width: 100%; aspect-ratio: auto; margin: 40px 0 0; }
-      .cyno-robot { width: min(220px, 60vw); height: auto; aspect-ratio: 460 / 1024; margin: 0 auto; }
-      .cyno-leader { display: none; }
-      .cyno-notes {
-        display: grid;
-        gap: 14px;
-        margin-top: 32px;
-        padding-top: 28px;
-        border-top: 1px solid var(--cyno-rule);
-      }
-      .cyno-note,
-      .cyno.is-armed .cyno-note,
-      .cyno.is-armed.is-drawn .cyno-note {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: auto;
-        max-width: none;
-        transform: none;
-        opacity: 1;
-        padding-left: 22px;
-      }
-      .cyno-note::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        top: 0.5em;
-        width: 9px;
-        height: 9px;
-        border-radius: 50%;
-        border: 1.5px solid var(--cyno-accent);
-      }
-      .cyno-actions { flex-direction: column; align-items: stretch; }
-      .cyno-btn { width: 100%; }
-      .cyno-link { justify-content: center; }
       .apple-pill-text { white-space: normal; }
     }
-
-    /* ─── CYNOCOR SPLASH SCREEN ───────────────────────── */
-    body.splash-hold {
-      overflow: hidden;
+    /* ── TOP EDITORIAL CYBER-HUMAN HERO ─────────────────── */
+    .cyno-prime-hero {
+      position: relative;
+      padding: 96px 24px 64px;
+      overflow-x: clip;
+      overflow-y: visible;
+      z-index: 2;
+      background: transparent;
     }
 
-    body.splash-hold .hero-content > *,
-    body.splash-hold .hero-stealth-banner,
-    body.splash-hold .orb {
-      animation-play-state: paused !important;
+    body.atmosphere-dark .cyno-prime-hero {
+      background: transparent;
     }
 
-    .cynocor-splash {
-      position: fixed;
-      inset: 0;
-      z-index: 99999;
-      display: flex;
-      flex-direction: column;
+    .cyno-prime-frame {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(0, 1fr);
       align-items: center;
-      justify-content: center;
-      background:
-        radial-gradient(circle at 50% 45%, rgba(38, 109, 255, 0.16) 0%, rgba(10, 28, 58, 0.08) 38%, transparent 70%),
-        linear-gradient(180deg, #020810 0%, #050e1a 60%, #071628 100%);
-      overflow: hidden;
-      will-change: opacity, transform, clip-path;
-      transition:
-        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-        visibility 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      gap: 32px;
+      min-height: min(640px, 78vh);
     }
 
-    /* Subtle dot-grid texture matching the hero */
-    .cynocor-splash::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(rgba(120, 170, 255, 0.07) 1px, transparent 1px);
-      background-size: 36px 36px;
-      mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 85%);
-      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 50%, black 20%, transparent 85%);
-      pointer-events: none;
-    }
-
-    /* Ambient glow pulse behind logo */
-    .splash-glow {
-      position: absolute;
-      width: min(460px, 75vw);
-      height: min(460px, 75vw);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(38, 120, 255, 0.12) 0%, rgba(0, 180, 255, 0.03) 48%, transparent 70%);
-      filter: blur(56px);
-      pointer-events: none;
-      animation: splashGlowPulse 2.4s ease-in-out infinite alternate;
-    }
-
-    @keyframes splashGlowPulse {
-      0%   { transform: scale(0.94); opacity: 0.45; }
-      100% { transform: scale(1.06); opacity: 0.75; }
-    }
-
-    .splash-inner {
+    .cyno-prime-copy {
       position: relative;
       z-index: 2;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      padding: 0 24px;
-      transition:
-        transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-        opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-        filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      max-width: 530px;
+      padding: 12px 0;
     }
 
-    .splash-logo-wrap {
-      position: relative;
+    .cyno-prime-title {
+      margin: 0 0 18px;
+      font-family: var(--font-heading, 'Outfit', 'Inter', sans-serif);
+      font-size: clamp(2.2rem, 4.3vw, 3.65rem);
+      line-height: 1.08;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      color: #0b1120;
+    }
+
+    .cyno-prime-title .is-muted {
+      color: #8b95a5;
+      font-weight: 500;
+    }
+
+    .cyno-prime-sub {
+      margin: 0 0 30px;
+      max-width: 440px;
+      font-size: clamp(0.95rem, 1.15vw, 1.05rem);
+      line-height: 1.65;
+      color: #5b6474;
+    }
+
+    .cyno-prime-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .cyno-prime-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 18px;
-      opacity: 0;
-      transform: translateY(14px) scale(0.95);
-      animation: splashLogoIn 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.04s forwards;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      background: #0b1120;
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+      letter-spacing: -0.01em;
+      box-shadow: 0 18px 34px -12px rgba(11, 17, 32, 0.42);
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+                  background 0.25s ease;
     }
 
-    /* Faint neon aura radiating softly outside the logo mask */
-    .splash-logo-neon {
-      position: absolute;
-      inset: -18px;
-      z-index: 1;
-      pointer-events: none;
-      opacity: 0.42;
-      filter:
-        blur(8px)
-        drop-shadow(0 0 6px rgba(0, 210, 255, 0.28))
-        drop-shadow(0 0 16px rgba(38, 120, 255, 0.22));
+    .cyno-prime-btn:hover {
+      transform: translateY(-2px);
+      background: #17223b;
+      box-shadow: 0 22px 40px -12px rgba(11, 17, 32, 0.52);
     }
 
-    /* Inner element masked to the exact CYNOCOR wolf & letter contours */
-    .splash-logo-neon::before {
-      content: '';
-      position: absolute;
-      inset: 18px;
-      -webkit-mask-image: url('assets/logo2.png');
-      -webkit-mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-image: url('assets/logo2.png');
-      mask-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      background: conic-gradient(
-        from 0deg at 50% 50%,
-        rgba(0, 60, 255, 0.08) 0deg,
-        rgba(30, 136, 255, 0.35) 55deg,
-        rgba(0, 220, 255, 0.55) 95deg,
-        rgba(200, 242, 255, 0.65) 110deg,
-        rgba(0, 220, 255, 0.55) 125deg,
-        rgba(0, 60, 255, 0.08) 180deg,
-        rgba(30, 136, 255, 0.35) 235deg,
-        rgba(0, 220, 255, 0.55) 275deg,
-        rgba(200, 242, 255, 0.65) 290deg,
-        rgba(0, 220, 255, 0.55) 305deg,
-        rgba(0, 60, 255, 0.08) 360deg
-      );
-      background-size: 200% 200%;
-      animation: neonLogoSweep 2.2s linear infinite;
+    .cyno-prime-badge {
+      display: inline-flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
-    /* Subtle neon shimmer masked to the logo strokes */
-    .splash-logo-wrap::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      -webkit-mask-image: url('assets/logo2.png');
-      -webkit-mask-size: contain;
-      -webkit-mask-repeat: no-repeat;
-      -webkit-mask-position: center;
-      mask-image: url('assets/logo2.png');
-      mask-size: contain;
-      mask-repeat: no-repeat;
-      mask-position: center;
-      background: linear-gradient(
-        110deg,
-        transparent 25%,
-        rgba(100, 210, 255, 0.22) 47%,
-        rgba(220, 245, 255, 0.32) 50%,
-        rgba(100, 210, 255, 0.22) 53%,
-        transparent 75%
-      );
-      background-size: 240% 100%;
-      mix-blend-mode: screen;
-      animation: neonTubeShimmer 2s ease-in-out infinite;
+    .cyno-prime-badge-label {
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: #7b8494;
     }
 
-    @keyframes neonLogoSweep {
-      0%   { background-position: 0% 50%; }
-      50%  { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .cyno-prime-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 4px 12px;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #ffffff;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      box-shadow: 0 8px 18px -8px rgba(37, 99, 235, 0.55);
     }
 
-    @keyframes neonTubeShimmer {
-      0%   { background-position: 140% 0; }
-      100% { background-position: -40% 0; }
-    }
-
-    .splash-logo {
+    .cyno-prime-visual {
       position: relative;
-      z-index: 2;
-      width: clamp(230px, 38vw, 420px);
-      height: auto;
-      display: block;
-      user-select: none;
-      filter:
-        drop-shadow(0 0 5px rgba(90, 195, 255, 0.22))
-        drop-shadow(0 0 16px rgba(38, 120, 255, 0.18));
-      animation: neonTubeFlicker 2s ease-in-out infinite alternate;
-      transition: filter 0.35s ease, transform 0.35s ease;
-    }
-
-    @keyframes neonTubeFlicker {
-      0% {
-        filter:
-          drop-shadow(0 0 4px rgba(90, 195, 255, 0.14))
-          drop-shadow(0 0 12px rgba(38, 120, 255, 0.12));
-      }
-      100% {
-        filter:
-          drop-shadow(0 0 7px rgba(120, 215, 255, 0.32))
-          drop-shadow(0 0 22px rgba(38, 125, 255, 0.26));
-      }
-    }
-
-    /* Gentle glow pulse right as page finishes loading */
-    .cynocor-splash.is-ready .splash-logo {
-      filter:
-        drop-shadow(0 0 9px rgba(150, 225, 255, 0.42))
-        drop-shadow(0 0 26px rgba(46, 135, 255, 0.32));
-      transform: scale(1.015);
-    }
-
-    .splash-tagline {
-      font-family: 'Space Grotesk', sans-serif;
-      font-size: clamp(0.7rem, 1.1vw, 0.82rem);
-      font-weight: 500;
-      letter-spacing: 0.24em;
-      text-transform: uppercase;
-      color: rgba(185, 216, 255, 0.72);
-      text-shadow: 0 0 12px rgba(78, 154, 255, 0.22);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: splashTagIn 0.65s cubic-bezier(0.16, 1, 0.3, 1) 0.18s forwards;
-    }
-
-    /* Exit transition to reveal the landing page */
-    .cynocor-splash.is-revealing {
-      opacity: 0;
-      transform: scale(1.045);
-      visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: clamp(430px, 58vw, 650px);
+      overflow: hidden;
       pointer-events: none;
+      user-select: none;
+      -webkit-mask-image: radial-gradient(ellipse 48% 48% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.85) 75%, rgba(0, 0, 0, 0.32) 89%, transparent 98%);
+      mask-image: radial-gradient(ellipse 48% 48% at 50% 50%, #000 58%, rgba(0, 0, 0, 0.85) 75%, rgba(0, 0, 0, 0.32) 89%, transparent 98%);
     }
 
-    .cynocor-splash.is-revealing .splash-inner {
-      transform: translateY(-16px) scale(1.04);
-      opacity: 0;
-      filter: blur(8px);
+    .cyno-prime-visual::before {
+      content: '';
+      position: absolute;
+      inset: 8% 6%;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.14) 0%, rgba(249, 115, 22, 0.08) 45%, transparent 72%);
+      filter: blur(36px);
+      z-index: 0;
     }
 
-    .cynocor-splash.is-hidden {
-      display: none !important;
+    .cyno-prime-img {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: contrast(1.06) saturate(1.1);
     }
 
-    @keyframes splashLogoIn {
+    body.atmosphere-dark .cyno-prime-title {
+      color: #f8fafc;
+    }
+
+    body.atmosphere-dark .cyno-prime-title .is-muted {
+      color: #7e8ba3;
+    }
+
+    body.atmosphere-dark .cyno-prime-sub {
+      color: #9aa7bd;
+    }
+
+    body.atmosphere-dark .cyno-prime-btn {
+      background: #ffffff;
+      color: #0b1120;
+      box-shadow: 0 18px 34px -12px rgba(255, 255, 255, 0.22);
+    }
+
+    body.atmosphere-dark .cyno-prime-btn:hover {
+      background: #e2e8f0;
+    }
+
+    body.atmosphere-dark .cyno-prime-badge-label {
+      color: #94a3b8;
+    }
+
+    body.atmosphere-dark .cyno-prime-img {
+      filter: brightness(0.9) contrast(1.08) saturate(1.08);
+    }
+
+    @media (max-width: 960px) {
+      .cyno-prime-hero {
+        padding: 84px 20px 18px;
+      }
+
+      .cyno-prime-frame {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        min-height: auto;
+        text-align: center;
+      }
+
+      .cyno-prime-copy {
+        max-width: 100%;
+        margin: 0 auto;
+        order: 1;
+      }
+
+      .cyno-prime-sub {
+        margin: 0 auto 24px;
+      }
+
+      .cyno-prime-actions {
+        justify-content: center;
+      }
+
+      .cyno-prime-visual {
+        order: 2;
+        height: clamp(300px, 72vw, 430px);
+      }
+    }
+    /* ── TOP HERO EDITORIAL MOTIONS ─────────────────────── */
+    @keyframes cynoPrimeReveal {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes cynoPrimeVisualIn {
+      from {
+        opacity: 0;
+        transform: translateY(16px) scale(0.96);
+      }
       to {
         opacity: 1;
         transform: translateY(0) scale(1);
       }
     }
 
-    @keyframes splashTagIn {
-      to {
+    @keyframes cynoPrimeFloat {
+      0%, 100% {
+        transform: translate3d(0, 0, 0) scale(1);
+      }
+      50% {
+        transform: translate3d(0, -10px, 0) scale(1.015);
+      }
+    }
+
+    @keyframes cynoPrimeAura {
+      0%, 100% {
+        opacity: 0.72;
+        transform: scale(0.96);
+      }
+      50% {
         opacity: 1;
-        transform: translateY(0);
+        transform: scale(1.06);
+      }
+    }
+
+    .cyno-prime-title {
+      animation: cynoPrimeReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.08s both;
+    }
+
+    .cyno-prime-sub {
+      animation: cynoPrimeReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s both;
+    }
+
+    .cyno-prime-actions {
+      animation: cynoPrimeReveal 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.32s both;
+    }
+
+    .cyno-prime-copy,
+    .cyno-prime-visual {
+      will-change: transform;
+    }
+
+    .cyno-prime-visual {
+      animation: cynoPrimeVisualIn 1.15s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+    }
+
+    .cyno-prime-visual::before {
+      animation: cynoPrimeAura 8s ease-in-out infinite;
+    }
+
+    .cyno-prime-img {
+      animation: cynoPrimeFloat 7.5s ease-in-out 0.6s infinite;
+      will-change: transform;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cyno-prime-title,
+      .cyno-prime-sub,
+      .cyno-prime-actions,
+      .cyno-prime-visual,
+      .cyno-prime-visual::before,
+      .cyno-prime-img {
+        animation: none !important;
+        transform: none !important;
+      }
+    }
+
+
+
+  
+    /* DARK MODE VISIBILITY FIXES */
+    body.atmosphere-dark .industry-card:hover,
+    body.atmosphere-dark .industry-card.is-active {
+      background: rgba(15, 23, 42, 0.92);
+      border-color: color-mix(in srgb, var(--ind-color, #0070FF) 55%, transparent);
+    }
+    body.atmosphere-dark .industry-spotlight {
+      background: rgba(13, 18, 30, 0.92);
+      border-color: rgba(56, 189, 248, 0.18);
+    }
+    body.atmosphere-dark .industry-spotlight-progress {
+      background: rgba(255, 255, 255, 0.06);
+    }
+    body.atmosphere-dark .spot-tag:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+    body.atmosphere-dark .orizon-top-pill,
+    body.atmosphere-dark .braix-focus-pill,
+    body.atmosphere-dark .braix-wave-badge,
+    body.atmosphere-dark .orizon-glass-arrow,
+    body.atmosphere-dark .orizon-act-btn {
+      background: rgba(15, 23, 42, 0.88);
+      color: #F8FAFC;
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+    body.atmosphere-dark .orizon-sel-menu {
+      background: rgba(15, 23, 42, 0.96);
+      border-color: rgba(56, 189, 248, 0.22);
+    }
+    body.atmosphere-dark .orizon-sel-opt {
+      color: #E2E8F0;
+    }
+    body.atmosphere-dark .orizon-bl-go {
+      background: rgba(255, 255, 255, 0.1);
+      color: #F8FAFC;
+    }
+    body.atmosphere-dark .braix-explore-orb,
+    body.atmosphere-dark .braix-explore-orb span {
+      color: #F8FAFC;
+    }
+    body.atmosphere-dark .braix-explore-orb:hover {
+      background: rgba(15, 23, 42, 0.92);
+    }
+    body.atmosphere-dark .cta-band-eyebrow {
+      background: rgba(15, 23, 42, 0.88);
+      color: #5CE1FF;
+    }
+
+  
+    /* LAPTOP VIEWPORT COMPACT FIT (NO CROPPING) */
+    @media (min-width: 961px) and (max-height: 860px), (min-width: 961px) {
+      .orizon-stage-frame {
+        padding: 20px 26px 20px;
+      }
+      .braix-stage-grid {
+        gap: 18px;
+        align-items: center;
+      }
+      .braix-headline {
+        font-size: clamp(2.05rem, 3.6vw, 3.15rem);
+        margin: 12px 0 12px;
+      }
+      .braix-matrix-row {
+        margin-bottom: 14px;
+      }
+      .orizon-bl-card {
+        padding: 16px 18px;
+      }
+      .braix-col-right {
+        gap: 10px;
+      }
+      .braix-bento-card {
+        padding: 12px 16px;
+        border-radius: 20px;
+      }
+      .braix-bento-head {
+        margin-bottom: 6px;
+      }
+      .braix-bento-well {
+        height: 58px !important;
+      }
+      .braix-bento-well.braix-core-viz {
+        height: 76px !important;
+      }
+      .braix-bento-well.braix-wave-well {
+        height: 44px !important;
+      }
+      .orizon-glass-card {
+        padding: 12px 16px;
+      }
+    }
+  
+    /* ── INDUSTRIES AUTO-PLAY EDITORIAL SHOWCASE ───────── */
+    .industries-section {
+      padding: 64px 24px 88px;
+      background: transparent;
+      overflow-x: clip;
+    }
+
+    .ind-section-header {
+      max-width: 820px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .ind-section-title {
+      margin: 0;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2rem, 3.6vw, 3rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      color: #0B1120;
+    }
+
+    body.atmosphere-dark .ind-section-title {
+      color: #F8FAFC;
+    }
+
+    .ind-showcase-wrap {
+      position: relative;
+      max-width: 1280px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr) 260px;
+      align-items: center;
+      min-height: 520px;
+    }
+
+    .ind-left-col {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 490px;
+      padding: 20px 16px 20px 0;
+    }
+
+    .ind-kicker {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+      font-weight: 800;
+      line-height: 1.06;
+      letter-spacing: -0.03em;
+      text-transform: none;
+      color: #0B1120;
+      margin-bottom: 14px;
+    }
+
+    .ind-kicker-accent {
+      color: #0070FF;
+    }
+
+    .ind-hero-title {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .ind-hero-title.is-switching {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+
+    .ind-title-main {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(1.85rem, 2.85vw, 2.5rem);
+      font-weight: 800;
+      line-height: 0.98;
+      letter-spacing: -0.03em;
+      color: #0B1120;
+    }
+
+    .ind-title-sub {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(0.84rem, 1.15vw, 1.05rem);
+      font-weight: 600;
+      letter-spacing: 0.22em;
+      color: #1E293B;
+    }
+
+    .ind-subhead {
+      margin: 0 0 8px;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #0B1120;
+    }
+
+    .ind-desc {
+      margin: 0 0 14px;
+      font-size: 0.84rem;
+      line-height: 1.55;
+      color: #475569;
+      max-width: 30ch;
+      transition: opacity 0.35s ease;
+    }
+
+    .ind-meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .ind-sector-code {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #0070FF;
+      letter-spacing: 0.04em;
+    }
+
+    .ind-explore-link {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: #0B1120;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s ease, transform 0.2s ease;
+    }
+
+    .ind-explore-link:hover {
+      color: #0070FF;
+      transform: translateX(2px);
+    }
+
+    .ind-progress-track {
+      width: 100%;
+      height: 3px;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.1);
+      overflow: hidden;
+    }
+
+    .ind-progress-fill {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #0070FF, #38BDF8);
+      transform-origin: left center;
+      transform: scaleX(0);
+    }
+
+    /* Center Futuristic Visual Stage */
+    .ind-visual-stage {
+      position: relative;
+      z-index: 2;
+      grid-column: 2 / 4;
+      grid-row: 1;
+      height: 510px;
+      margin-right: 92px;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 28px 70px rgba(12, 42, 90, 0.18);
+      background: #1B3B5F;
+    }
+
+    .ind-visual-backdrop {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(60% 60% at 50% 35%, color-mix(in srgb, var(--ind-accent, #0070FF) 42%, transparent) 0%, transparent 72%),
+        linear-gradient(155deg, #274C77 0%, #162B47 55%, #0B1526 100%);
+      z-index: 1;
+      transition: background 0.6s ease;
+    }
+
+    .ind-visual-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      opacity: 0;
+      transform: scale(1.07);
+      transition: opacity 0.85s ease, transform 5.2s cubic-bezier(0.22, 1, 0.36, 1);
+      z-index: 2;
+    }
+
+    .ind-visual-img.is-active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .ind-visual-stage::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(8, 15, 30, 0.22) 0%, transparent 40%, rgba(8, 15, 30, 0.32) 100%);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .ind-intro {
+      margin: 14px 0 0;
+      font-size: 0.82rem;
+      line-height: 1.55;
+      color: #475569;
+      max-width: 30ch;
+    }
+
+    body.atmosphere-dark .ind-intro {
+      color: #94A3B8;
+    }
+
+    .ind-visual-hud {
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(8, 15, 30, 0.58);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.16);
+      color: #F8FAFC;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .ind-hud-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #38BDF8;
+      box-shadow: 0 0 10px #38BDF8;
+    }
+
+    /* Right Floating Mini-Card Carousel overlapping the visual edge */
+    .ind-mini-rail {
+      position: relative;
+      z-index: 5;
+      grid-column: 3;
+      grid-row: 1;
+      justify-self: end;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      padding-right: 8px;
+    }
+
+    .ind-mini-cards {
+      display: flex;
+      gap: 10px;
+    }
+
+    .ind-mini-card {
+      width: 136px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(255, 255, 255, 0.9);
+      border-radius: 18px;
+      padding: 6px 6px 10px;
+      box-shadow: 0 18px 40px rgba(10, 28, 62, 0.18);
+      cursor: pointer;
+      text-align: left;
+      transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+    }
+
+    .ind-mini-card:hover {
+      transform: translateY(-6px) scale(1.02);
+      box-shadow: 0 24px 48px rgba(0, 112, 255, 0.24);
+    }
+
+    .ind-mini-thumb {
+      width: 100%;
+      height: 86px;
+      border-radius: 13px;
+      overflow: hidden;
+      background: #1B3B5F;
+      margin-bottom: 8px;
+    }
+
+    .ind-mini-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      transition: transform 0.5s ease;
+    }
+
+    .ind-mini-card:hover .ind-mini-thumb img {
+      transform: scale(1.07);
+    }
+
+    .ind-mini-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      padding: 0 4px;
+    }
+
+    .ind-mini-foot span:first-child {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #0B1120;
+      line-height: 1.2;
+    }
+
+    .ind-mini-arrow {
+      width: 22px;
+      height: 22px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #1E4E79;
+      color: #FFFFFF;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .ind-mini-card:hover .ind-mini-arrow {
+      background: #0070FF;
+      transform: translate(1px, -1px);
+    }
+
+    .ind-controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .ind-dots {
+      display: flex;
+      gap: 7px;
+      padding-right: 2px;
+    }
+
+    .ind-next-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 13px 6px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(15, 23, 42, 0.12);
+      background: rgba(255, 255, 255, 0.94);
+      color: #0B1120;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 0.74rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(10, 28, 62, 0.12);
+      transition: transform 0.25s ease, background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .ind-next-btn svg {
+      width: 14px;
+      height: 14px;
+      transition: transform 0.25s ease;
+    }
+
+    .ind-next-btn:hover {
+      background: #0070FF;
+      color: #FFFFFF;
+      border-color: #0070FF;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 24px rgba(0, 112, 255, 0.28);
+    }
+
+    .ind-next-btn:hover svg {
+      transform: translateX(2px);
+    }
+
+    .ind-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      border: none;
+      background: rgba(15, 23, 42, 0.2);
+      cursor: pointer;
+      transition: width 0.3s ease, background 0.3s ease;
+    }
+
+    .ind-dot.is-active {
+      width: 24px;
+      background: #0070FF;
+    }
+
+    /* Dark Theme Support */
+    body.atmosphere-dark .ind-desc {
+      color: #94A3B8;
+    }
+
+    body.atmosphere-dark .ind-kicker {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .ind-kicker-accent {
+      color: #5CE1FF;
+    }
+
+    body.atmosphere-dark .ind-title-main {
+      color: #E2E8F0;
+    }
+
+    body.atmosphere-dark .ind-subhead,
+    body.atmosphere-dark .ind-explore-link {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .ind-title-sub {
+      color: #94A3B8;
+    }
+
+    body.atmosphere-dark .ind-next-btn {
+      background: rgba(15, 23, 42, 0.92);
+      color: #F8FAFC;
+      border-color: rgba(56, 189, 248, 0.28);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.42);
+    }
+
+    body.atmosphere-dark .ind-next-btn:hover {
+      background: #0070FF;
+      color: #FFFFFF;
+      border-color: #38BDF8;
+    }
+
+    body.atmosphere-dark .ind-sector-code {
+      color: #5CE1FF;
+    }
+
+    body.atmosphere-dark .ind-progress-track {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    body.atmosphere-dark .ind-mini-card {
+      background: rgba(15, 23, 42, 0.94);
+      border-color: rgba(56, 189, 248, 0.24);
+      box-shadow: 0 22px 52px rgba(0, 0, 0, 0.55);
+    }
+
+    body.atmosphere-dark .ind-mini-foot span:first-child {
+      color: #F8FAFC;
+    }
+
+    body.atmosphere-dark .ind-dot {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    body.atmosphere-dark .ind-dot.is-active {
+      background: #5CE1FF;
+    }
+
+    @media (max-width: 1024px) {
+      .ind-showcase-wrap {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      .ind-left-col {
+        min-height: auto;
+        padding: 0;
+        gap: 20px;
+      }
+      .ind-visual-stage {
+        grid-column: 1;
+        grid-row: 2;
+        margin-right: 0;
+        height: 360px;
+        clip-path: none;
+      }
+      .ind-mini-rail {
+        grid-column: 1;
+        grid-row: 3;
+        justify-self: stretch;
+        align-items: center;
+      }
+      .ind-mini-cards {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
       }
     }
   </style>
 
-  <script src="js/main.js?v=20261110.2" defer></script>
-  <script src="js/footer.js" defer></script>
+  <script src="js/main.js?v=20261113.14" defer></script>
+  <script src="js/footer.js?v=20261113.14" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js" defer></script>
 </head>
 
-<body class="splash-hold">
+<body>
 
-  <!-- ── CYNOCOR SPLASH SCREEN ─────────────────────────── -->
-  <div class="cynocor-splash" id="cynocor-splash" role="status" aria-label="Loading CYNOCOR">
-    <div class="splash-glow" aria-hidden="true"></div>
-    <div class="splash-inner">
-      <div class="splash-logo-wrap">
-        <span class="splash-logo-neon" aria-hidden="true"></span>
-        <img src="assets/logo2.png" alt="CYNOCOR" class="splash-logo" fetchpriority="high">
-      </div>
-      <span class="splash-tagline">Advanced Systems Engineering</span>
-    </div>
-  </div>
-  <script>
-    (function () {
-      var splash = document.getElementById('cynocor-splash');
-      if (!splash) return;
 
-      var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      if (reduceMotion) {
-        document.body.classList.remove('splash-hold');
-        splash.classList.add('is-hidden');
-        return;
-      }
-
-      var startTime = performance.now();
-      var MIN_DISPLAY_MS = 950; // enough time for the neon light to orbit around the logo
-      var MAX_WAIT_MS = 2600;   // safety fallback so slow assets never block the user
-      var revealed = false;
-
-      function revealLandingPage() {
-        if (revealed) return;
-        revealed = true;
-
-        var elapsed = performance.now() - startTime;
-        var remaining = Math.max(0, MIN_DISPLAY_MS - elapsed);
-
-        setTimeout(function () {
-          splash.classList.add('is-ready');
-
-          setTimeout(function () {
-            // Release hero animations right as the splash screen transitions away
-            document.body.classList.remove('splash-hold');
-            splash.classList.add('is-revealing');
-            splash.setAttribute('aria-hidden', 'true');
-
-            setTimeout(function () {
-              splash.classList.add('is-hidden');
-            }, 850);
-          }, 240);
-        }, remaining);
-      }
-
-      if (document.readyState === 'complete') {
-        revealLandingPage();
-      } else {
-        window.addEventListener('load', revealLandingPage, { once: true });
-        setTimeout(revealLandingPage, MAX_WAIT_MS);
-      }
-
-      // Ensure back/forward cache restores don't stay stuck on splash
-      window.addEventListener('pageshow', function (e) {
-        if (e.persisted) {
-          document.body.classList.remove('splash-hold');
-          splash.classList.add('is-hidden');
-        }
-      });
-    })();
-  </script>
 
   <!-- Navigation -->
   <header class="nav-hero" id="site-header">
     <div class="container nav-inner">
       <a href="index.html" class="brand" aria-label="CYNOCOR home">
-        <img src="assets/logo2.png" alt="CYNOCOR logo" id="nav-logo"
-             data-hero-src="assets/logo2.png"
+        <img src="assets/logo.png" alt="CYNOCOR logo" id="nav-logo"
+             data-hero-src="assets/logo.png"
              data-scrolled-src="assets/logo.png">
       </a>
       <nav class="nav-links">
@@ -1808,7 +3864,7 @@
         <a href="tools.html">Tools</a>
       </nav>
       <div class="nav-right">
-        <a href="contact.html" class="nav-cta">Contact Us</a>
+        <a href="contact.html" class="nav-cta">Let's Connect</a>
         <button class="mobile-menu-toggle" aria-label="Toggle menu">
           <span></span>
           <span></span>
@@ -1818,9 +3874,34 @@
     </div>
   </header>
 
-  <!-- ── HERO ──────────────────────────────────────────── -->
+  <!-- ── TOP EDITORIAL CYBER-HUMAN HERO ────────────────── -->
+  <section class="cyno-prime-hero" aria-label="CYNOCOR Overview">
+    <div class="cyno-prime-frame">
+      <div class="cyno-prime-copy">
+        <h1 class="cyno-prime-title">
+          <span class="is-muted">Technologically driven</span> Autonomous Systems with AI
+        </h1>
+        <p class="cyno-prime-sub">
+          Engineering resilient software, intelligent agents, and high-precision digital platforms—built to unify and scale your operations.
+        </p>
+        <div class="cyno-prime-actions">
+          <a href="contact.html" class="cyno-prime-btn">Request Demo</a>
+          <div class="cyno-prime-badge">
+            <span class="cyno-prime-badge-label">Engineered by</span>
+            <span class="cyno-prime-badge-pill">CYNOCOR</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cyno-prime-visual">
+        <img src="assets/home/hero-cyber-head.jpg" alt="CYNOCOR Cybernetic AI Architecture" class="cyno-prime-img" loading="eager" decoding="async">
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BRAIX × ORIZON FRAMED HERO SHOWCASE ──────────── -->
   <section class="hero" id="hero">
-    <!-- Video -->
+    <!-- Subtle Video Blend -->
     <div class="hero-video-wrap">
       <video class="hero-video" autoplay loop muted playsinline preload="auto">
         <source src="assets/home/background.mp4" type="video/mp4">
@@ -1828,7 +3909,7 @@
       <div class="hero-video-overlay"></div>
     </div>
 
-    <!-- Ambient orbs + IoT network canvas -->
+    <!-- Ambient Sky Orbs + IoT Network Canvas -->
     <div class="hero-orbs" aria-hidden="true">
       <canvas id="iot-net"></canvas>
       <div class="orb orb-1"></div>
@@ -1836,46 +3917,207 @@
       <div class="orb orb-3"></div>
     </div>
 
-    <!-- Content -->
-    <div class="container hero-content">
-      <span class="hero-badge">
-        <span class="dot"></span>
-        Advanced Systems Engineering
-      </span>
+    <!-- Framed Orizon × BRAIX Interactive Viewport -->
+    <div class="orizon-stage-frame" id="orizonStageFrame">
 
-      <h1 class="hero-main-logo">
-        <img src="assets/logo2.png" alt="CYNOCOR">
-      </h1>
+      <!-- Main 3-Column BRAIX × Orizon Interactive Grid -->
+      <div class="braix-stage-grid">
 
-      <p class="hero-subheading">The Apex Animal of Advanced Systems</p>
+        <!-- LEFT COLUMN: BRAIX Editorial Typography + Orizon Sculpted Corner Card -->
+        <div class="braix-col-left">
+          <div>
+            <div class="braix-focus-pill">
+              <span class="braix-quad-icon" aria-hidden="true">
+                <span></span><span></span><span></span><span></span>
+              </span>
+              <span id="braixFocusText">Built for Measurable Client ROI</span>
+            </div>
 
-      <p class="hero-lead">
-        Software, automation, and business systems engineered to move first,
-        track precisely, and outlast the competition.
-      </p>
+            <h1 class="braix-headline">
+              <span class="line-1">SCALE FASTER</span>
+              <span class="line-2">WITH <span class="overlap-tint" id="braixDynamicWord">SMART</span></span>
+              <span class="line-3">SYSTEMS</span>
+            </h1>
 
-      <div class="hero-actions">
-        <a href="services.html" class="hero-cta" id="hero-cta-primary">
-          Explore Services
-          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
-        </a>
-        <a href="about.html" class="hero-cta-ghost" id="hero-cta-ghost">
-          Our Story
-        </a>
-      </div>
+            <div class="braix-matrix-row">
+              <div class="braix-pixel-matrix" aria-hidden="true">
+                <i class="on"></i><i></i><i class="on"></i><i class="on"></i>
+                <i></i><i class="on"></i><i class="on"></i><i></i>
+                <i class="on"></i><i class="on"></i><i></i><i class="on"></i>
+                <i></i><i class="on"></i><i></i><i class="on"></i>
+                <i class="on"></i><i></i><i class="on"></i><i></i>
+                <i class="on"></i><i class="on"></i><i class="on"></i><i></i>
+                <i></i><i class="on"></i><i></i><i class="on"></i>
+                <i class="on"></i><i></i><i class="on"></i><i class="on"></i>
+              </div>
+              <p class="braix-micro-copy" id="braixMicroCopy">
+                AUTOMATE MANUAL WORK, CUT OPERATIONAL COSTS, AND LAUNCH RELIABLE AI &amp; SOFTWARE BUILT AROUND YOUR BUSINESS.
+              </p>
+            </div>
+          </div>
 
-      <!-- Apple-Style Hero News Pill -->
-      <div class="hero-stealth-banner">
-        <a href="#cyno-bot" class="apple-news-pill">
-          <img src="assets/home/cynobot-logo.png" alt="" class="apple-pill-logo" width="28" height="28">
-          <span class="apple-pill-tag">Coming soon</span>
-          <span class="apple-pill-text">Meet <strong translate="no">Cynobot</strong></span>
-          <svg class="apple-pill-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3l5 5-5 5"/></svg>
-        </a>
+          <!-- Orizon Sculpted Bottom-Left White Card -->
+          <div class="orizon-bl-card">
+            <h3>Why Clients Choose CYNOCOR</h3>
+            <p>Cut operational costs, automate repetitive workflows, and own custom-engineered systems built for long-term scale.</p>
+            <div class="orizon-bl-footer">
+              <div class="orizon-bl-stat">
+                <strong>99.98%</strong>
+                <span>Uptime &amp; Reliability</span>
+              </div>
+              <div class="orizon-bl-avatars">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/ai-agent.svg" alt="AI Systems">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/programming.svg" alt="Automation">
+                <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/cloud-hosting.svg" alt="Scalable Systems">
+                <a href="projects.html" class="orizon-bl-go" aria-label="View all projects" title="View Projects">&#8599;</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CENTER COLUMN: Interactive Subject Centerpiece + Concentric Play/Explore Orb -->
+        <div class="braix-col-center">
+          <div class="braix-subject-stage" id="braixSubjectStage">
+            <div class="braix-subject-aura" aria-hidden="true"></div>
+            <div class="braix-visor-ring" aria-hidden="true"></div>
+            <img src="assets/home/hero-cyber-brain.jpg" alt="CYNOCOR Intelligent Neural Architecture" class="braix-hero-figure" id="braixHeroFigure">
+          </div>
+
+          <!-- BRAIX Concentric Frosted-Glass Play / Explore Orb -->
+          <div class="braix-explore-orb-wrap">
+            <button type="button" class="braix-explore-orb" id="braixExploreOrbBtn" aria-label="Explore CynoBot & Live Telemetry">
+              <svg viewBox="0 0 24 24"><polygon points="6,4 20,12 6,20"/></svg>
+              <span id="braixOrbLabel">Explore<br>Benefits</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- RIGHT COLUMN: BRAIX Telemetry Bento Stack + Orizon Frosted-Glass Cutout Card -->
+        <div class="braix-col-right">
+
+          <!-- Card 1: Neural & Sensor State (BRAIX Top Card) -->
+          <div class="braix-bento-card">
+            <div class="braix-bento-head">
+              <span class="braix-bento-icon">&#9635;</span>
+              <span id="braixCard1Title">24/7 Automated Efficiency</span>
+            </div>
+            <div class="braix-bento-well" style="height:86px; display:flex; align-items:flex-end; justify-content:center;">
+              <svg width="160" height="72" viewBox="0 0 160 72" fill="none" aria-hidden="true">
+                <g stroke="#15803D" stroke-width="1.35" stroke-linecap="round" opacity="0.85">
+                  <path d="M80 70 C80 52, 65 40, 42 22"/>
+                  <path d="M80 70 C80 50, 58 32, 26 36"/>
+                  <path d="M80 70 C78 46, 68 26, 56 10"/>
+                  <path d="M80 70 C80 44, 80 24, 80 6"/>
+                  <path d="M80 70 C82 46, 92 26, 104 10"/>
+                  <path d="M80 70 C80 50, 102 32, 134 36"/>
+                  <path d="M80 70 C80 52, 95 40, 118 22"/>
+                  <path d="M62 44 C52 34, 44 28, 34 18"/>
+                  <path d="M98 44 C108 34, 116 28, 126 18"/>
+                  <path d="M72 34 C66 22, 62 16, 48 14"/>
+                  <path d="M88 34 C94 22, 98 16, 112 14"/>
+                </g>
+                <g fill="#0070FF">
+                  <circle cx="42" cy="22" r="2.3"/><circle cx="26" cy="36" r="2"/><circle cx="56" cy="10" r="2.3"/>
+                  <circle cx="80" cy="6" r="2.6"/><circle cx="104" cy="10" r="2.3"/><circle cx="134" cy="36" r="2"/>
+                  <circle cx="118" cy="22" r="2.3"/><circle cx="34" cy="18" r="1.8"/><circle cx="126" cy="18" r="1.8"/>
+                </g>
+                <ellipse cx="80" cy="69" rx="9" ry="3.5" fill="#14532D"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Card 2: Cognitive & Edge AI Analysis (BRAIX Middle Card) -->
+          <div class="braix-bento-card">
+            <div class="braix-bento-title-lg" id="braixCard2Title">Lower Cost, Faster Delivery</div>
+            <p class="braix-bento-desc" id="braixCard2Desc">
+              Reduce manual overhead and launch production-ready AI, IoT, and web platforms faster with zero lock-in.
+            </p>
+            <div class="braix-bento-well braix-core-viz">
+              <div class="braix-lobe-stat top-left">
+                <span id="braixStat1Label">Cost Saved</span>
+                <strong id="braixStat1Val">45%</strong>
+              </div>
+              <!-- Glowing AI Core / Brain SVG -->
+              <svg width="86" height="82" viewBox="0 0 86 82" fill="none" aria-hidden="true">
+                <defs>
+                  <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stop-color="#0070FF" stop-opacity="0.55"/>
+                    <stop offset="65%" stop-color="#6366F1" stop-opacity="0.22"/>
+                    <stop offset="100%" stop-color="#0070FF" stop-opacity="0"/>
+                  </radialGradient>
+                </defs>
+                <circle cx="43" cy="41" r="36" fill="url(#coreGlow)"/>
+                <ellipse cx="43" cy="39" rx="22" ry="17" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1.5"/>
+                <path d="M26 38 C32 30, 54 30, 60 38 C54 46, 32 46, 26 38 Z" stroke="#60A5FA" stroke-width="1.2" fill="rgba(0,112,255,0.35)"/>
+                <path d="M43 22 L43 58" stroke="#93C5FD" stroke-width="1.2" stroke-dasharray="2 2"/>
+                <circle cx="35" cy="36" r="2.2" fill="#5CE1FF"/>
+                <circle cx="51" cy="36" r="2.2" fill="#5CE1FF"/>
+                <circle cx="43" cy="44" r="2.2" fill="#F43F5E"/>
+              </svg>
+              <div class="braix-lobe-stat bot-right">
+                <strong id="braixStat2Val">3x</strong>
+                <span id="braixStat2Label">Faster Launch</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Real-Time Telemetry Sine Wave (BRAIX Bottom Card) -->
+          <div class="braix-bento-card">
+            <div class="braix-bento-head">
+              <span class="braix-bento-icon">&#9635;</span>
+              <span>Client Productivity Gain</span>
+            </div>
+            <div class="braix-bento-well braix-wave-well">
+              <svg width="175" height="40" viewBox="0 0 175 40" fill="none" aria-hidden="true">
+                <path d="M0 20 Q 42 4, 86 20 T 175 20" stroke="#334155" stroke-width="1.3" fill="none"/>
+                <path d="M0 24 Q 44 36, 88 20 T 175 16" stroke="#0070FF" stroke-width="1.4" fill="none"/>
+                <line x1="0" y1="20" x2="175" y2="20" stroke="#94A3B8" stroke-width="0.7" stroke-dasharray="3 3"/>
+              </svg>
+              <span class="braix-wave-badge" id="braixWavePct">+68%</span>
+            </div>
+          </div>
+
+          <!-- Card 4: Orizon Frosted-Glass Cutout Card -->
+          <div class="orizon-glass-card">
+            <div class="orizon-glass-top">
+              <div>
+                <h4 id="orizonGlassTitle">Full Code &amp; System Ownership</h4>
+                <div class="orizon-glass-loc" id="orizonGlassLoc">
+                  <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  Dedicated Support &middot; Zero Lock-In
+                </div>
+              </div>
+              <a href="#cyno-bot" class="orizon-glass-arrow" aria-label="Inspect CynoBot">&#8599;</a>
+            </div>
+
+            <div class="orizon-glass-specs" id="orizonGlassSpecs">
+              <span>&#9889; 45% Cost Reduction</span>
+              <span>&#128737; 100% Ownership</span>
+              <span>&#8862; 24/7 Automation</span>
+              <span>&#9678; 99.98% SLA Uptime</span>
+            </div>
+
+            <div class="orizon-glass-actions">
+              <button type="button" class="orizon-act-btn" id="orizonLikeBtn" aria-label="Like system">
+                <span>&#9825;</span> <span id="orizonLikeCount">4.4K</span>
+              </button>
+              <button type="button" class="orizon-act-btn" id="orizonSaveBtn" aria-label="Save system">
+                <span>&#128278;</span> <span id="orizonSaveCount">157</span>
+              </button>
+              <button type="button" class="orizon-act-btn" id="orizonShareBtn" aria-label="Share system">
+                <span>&#8599;</span>
+              </button>
+            </div>
+
+            <div class="orizon-cutout-emblem" title="CYNOCOR Verified System">
+              <img src="assets/logo3W.png" alt="CYNOCOR">
+            </div>
+          </div>
+
+        </div>
+
       </div>
     </div>
-
-
   </section>
 
   <!-- ── SERVICES MARQUEE ───────────────────────────────── -->
@@ -1929,31 +4171,49 @@
 
   <!-- ── CYNOBOT (BLUEPRINT TEASER) ───────────────────── -->
   <section class="cyno" id="cyno-bot" aria-labelledby="cyno-title">
-    <div class="container">
-      <div class="cyno-sheet">
-        <h2 class="cyno-title" id="cyno-title">Meet <span translate="no">Cynobot</span>.<span class="cyno-title-sub">Coming soon.</span></h2>
-        <p class="cyno-lead">
-          A smart robot that takes care of repetitive tasks, starting at the front desk.
-          <span class="cyno-say">Say &ldquo;<span translate="no">Sai-no-bot</span>&rdquo;.</span>
-        </p>
+    <div class="cyno-stage">
+      <div class="cyno-mega-backdrop" id="cyno-title" aria-label="CynoBot Coming Soon">COMING SOON.</div>
 
-        <div class="cyno-drawing">
-          <img src="assets/home/cyno-bot.png" class="cyno-robot" width="460" height="1024"
-            alt="Render of Cynobot: a boxy robot with round eyes on a screen face and a display on its chest" loading="lazy" decoding="async">
-          <span class="cyno-leader" style="--x:58%; --y:9%; --i:0" aria-hidden="true"></span>
-          <span class="cyno-leader" style="--x:47%; --y:29%; --i:1" aria-hidden="true"></span>
-          <span class="cyno-leader" style="--x:79%; --y:55%; --i:2" aria-hidden="true"></span>
-          <ul class="cyno-notes" aria-label="What Cynobot does">
-            <li class="cyno-note" style="--y:9%; --i:0">Notices you when you arrive.</li>
-            <li class="cyno-note" style="--y:29%; --i:1">Greets you and helps solve your problem.</li>
-            <li class="cyno-note" style="--y:55%; --i:2">Gives directions and tells you about the institute or company.</li>
-          </ul>
+      <div class="cyno-editorial-grid">
+        <!-- Left Editorial Column -->
+        <div class="cyno-side-left">
+          <div>
+            <div class="cyno-metric-row">
+              <div class="cyno-metric-avatars">
+                <img src="assets/home/cynobot-welcome.png" alt="CynoBot Greeting">
+                <img src="assets/home/cynobot-help.png" alt="CynoBot Interactive Display">
+                <img src="assets/home/cynobot-eyes.png" alt="CynoBot Vision">
+              </div>
+              <span class="cyno-metric-val">24/7</span>
+            </div>
+            <span class="cyno-metric-sub">Autonomous Front-Desk AI</span>
+          </div>
+
+          <div class="cyno-editorial-copy">
+            <h3>Meet CynoBot</h3>
+            <p>
+              Smart interactive robotics engineered to greet visitors, answer inquiries, and guide teams with real-time vision &amp; voice AI.
+            </p>
+            <div class="cyno-dotted-rule" aria-hidden="true"></div>
+          </div>
         </div>
 
-        <div class="cyno-actions">
-          <a href="contact.html?subject=Inquiry-CYNO-BOT-Priority-Access" class="cyno-btn">Get Launch Updates</a>
-          <a href="team.html" class="cyno-link">Meet the Team Behind It
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+        <!-- Center Interactive 3D CynoBot Bust -->
+        <div class="cyno-3d-wrap" id="cyno3dStage">
+          <canvas id="cynoBot3DCanvas" aria-label="Interactive 3D CynoBot Bust Model"></canvas>
+        </div>
+
+        <!-- Right Editorial Column -->
+        <div class="cyno-side-right">
+          <ul class="cyno-index-list" aria-label="CynoBot Core Capabilities">
+            <li>Vision Recognition <span>/01</span></li>
+            <li>Natural Voice AI <span>/02</span></li>
+            <li>Edge Telemetry <span>/03</span></li>
+          </ul>
+
+          <a href="contact.html?subject=Inquiry-CYNO-BOT-Priority-Access" class="cyno-orb-cta">
+            <span class="cyno-orb-play">&#9654;</span>
+            <span>Get Launch<br>Updates</span>
           </a>
         </div>
       </div>
@@ -2087,64 +4347,79 @@
     </div>
   </section>
 
-  <!-- ── INDUSTRIES WE SERVE ─────────────────────────────── -->
+  <!-- ── INDUSTRIES WE SERVE (AUTO-PLAY EDITORIAL SHOWCASE) ── -->
   <section class="section industries-section" id="industries">
-    <div class="container">
-      <div class="section-header fade-up">
-        <span class="eyebrow">Industries We Serve</span>
-        <h2>Connecting every sector.</h2>
-        <p>We apply IoT and AI automation expertise across diverse industries, each with unique constraints and extraordinary potential.</p>
+    <div class="ind-section-header fade-up">
+      <h2 class="ind-section-title">Connecting <span class="ind-kicker-accent">every sector.</span></h2>
+    </div>
+
+    <div class="ind-showcase-wrap">
+      <!-- Left Editorial Column -->
+      <div class="ind-left-col">
+        <div class="ind-top-block">
+          <h3 class="ind-hero-title" id="indHeroTitle">
+            <span class="ind-title-main" id="indTitleMain">Manufacturing</span>
+            <span class="ind-title-sub" id="indTitleSub">S M A R T  F A C T O R Y</span>
+          </h3>
+          <p class="ind-intro">We apply IoT and AI automation expertise across diverse industries, each with unique constraints and extraordinary potential.</p>
+        </div>
+
+        <div class="ind-bottom-block">
+          <h3 class="ind-subhead" id="indSubhead">Manufacturing</h3>
+          <p class="ind-desc" id="indDesc">
+            Smart factory automation and predictive maintenance
+          </p>
+        </div>
       </div>
-      <div class="industries-grid">
 
-        <div class="industry-card fade-up" style="--ind-color:#0066cc">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-          </div>
-          <h4>Manufacturing</h4>
-          <p>Smart factory automation and predictive maintenance</p>
+      <!-- Center Angled Futuristic Visual Stage -->
+      <div class="ind-visual-stage" id="indVisualStage" style="--ind-accent:#0070FF">
+        <div class="ind-visual-backdrop"></div>
+        <img src="assets/home/sectors/manufacturing.jpg" alt="Manufacturing Smart Factory" class="ind-visual-img is-active" id="indVisualImgA">
+        <img src="assets/home/sectors/agriculture.jpg" alt="Agriculture Precision Farming" class="ind-visual-img" id="indVisualImgB">
+      </div>
+
+      <!-- Right Overlapping Floating Mini-Card Carousel -->
+      <div class="ind-mini-rail">
+        <div class="ind-mini-cards" id="indMiniCards">
+          <button type="button" class="ind-mini-card" id="indMini1" data-idx="1">
+            <div class="ind-mini-thumb">
+              <img src="assets/home/sectors/agriculture.jpg" alt="" id="indMini1Img">
+            </div>
+            <div class="ind-mini-foot">
+              <span id="indMini1Title">Agriculture</span>
+              <span class="ind-mini-arrow">&#8599;</span>
+            </div>
+          </button>
+
+          <button type="button" class="ind-mini-card" id="indMini2" data-idx="2">
+            <div class="ind-mini-thumb">
+              <img src="assets/home/sectors/healthcare.jpg" alt="" id="indMini2Img">
+            </div>
+            <div class="ind-mini-foot">
+              <span id="indMini2Title">Healthcare</span>
+              <span class="ind-mini-arrow">&#8599;</span>
+            </div>
+          </button>
         </div>
 
-        <div class="industry-card fade-up" style="--ind-color:#1a9e4a; transition-delay:0.06s">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12m0 0C8.13 12 5 8.87 5 5h14c0 3.87-3.13 7-7 7z"/></svg>
+        <div class="ind-controls-row">
+          <div class="ind-dots" id="indDots" role="tablist" aria-label="Select industry sector">
+            <button type="button" class="ind-dot is-active" data-sector-idx="0" aria-label="Manufacturing"></button>
+            <button type="button" class="ind-dot" data-sector-idx="1" aria-label="Agriculture"></button>
+            <button type="button" class="ind-dot" data-sector-idx="2" aria-label="Healthcare"></button>
+            <button type="button" class="ind-dot" data-sector-idx="3" aria-label="Smart Cities"></button>
+            <button type="button" class="ind-dot" data-sector-idx="4" aria-label="Energy"></button>
+            <button type="button" class="ind-dot" data-sector-idx="5" aria-label="Automotive"></button>
           </div>
-          <h4>Agriculture</h4>
-          <p>Precision farming and soil &amp; crop monitoring</p>
+          <button type="button" class="ind-next-btn" id="indNextBtn" aria-label="Next sector">
+            <span>Next</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M5 12h14"></path>
+              <path d="m12 5 7 7-7 7"></path>
+            </svg>
+          </button>
         </div>
-
-        <div class="industry-card fade-up" style="--ind-color:#c0392b; transition-delay:0.12s">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
-          </div>
-          <h4>Healthcare</h4>
-          <p>Remote patient monitoring and medical IoT</p>
-        </div>
-
-        <div class="industry-card fade-up" style="--ind-color:#e67e22; transition-delay:0.18s">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-          </div>
-          <h4>Smart Cities</h4>
-          <p>Infrastructure sensing and urban AI management</p>
-        </div>
-
-        <div class="industry-card fade-up" style="--ind-color:#8e44ad; transition-delay:0.24s">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-          </div>
-          <h4>Energy</h4>
-          <p>Smart grid optimization and consumption analytics</p>
-        </div>
-
-        <div class="industry-card fade-up" style="--ind-color:#16a085; transition-delay:0.30s">
-          <div class="industry-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
-          </div>
-          <h4>Automotive</h4>
-          <p>Connected vehicle telemetry and fleet tracking</p>
-        </div>
-
       </div>
     </div>
   </section>
@@ -2432,6 +4707,464 @@
     })();
   </script>
 
+  <!-- ── Industries Auto-Play Editorial Showcase Controller ── -->
+  <script>
+    (function () {
+      var section = document.getElementById('industries');
+      var titleEl = document.getElementById('indHeroTitle');
+      var titleMain = document.getElementById('indTitleMain');
+      var titleSub = document.getElementById('indTitleSub');
+      var subheadEl = document.getElementById('indSubhead');
+      var descEl = document.getElementById('indDesc');
+      var codeEl = document.getElementById('indSectorCode');
+      var stageEl = document.getElementById('indVisualStage');
+      var hudEl = document.getElementById('indHudLabel');
+      var imgA = document.getElementById('indVisualImgA');
+      var imgB = document.getElementById('indVisualImgB');
+      var fillEl = document.getElementById('indProgressFill');
+      var mini1 = document.getElementById('indMini1');
+      var mini2 = document.getElementById('indMini2');
+      var mini1Img = document.getElementById('indMini1Img');
+      var mini2Img = document.getElementById('indMini2Img');
+      var mini1Title = document.getElementById('indMini1Title');
+      var mini2Title = document.getElementById('indMini2Title');
+      var nextBtn = document.getElementById('indNextBtn');
+      var dots = Array.prototype.slice.call(document.querySelectorAll('.ind-dot[data-sector-idx]'));
+      if (!section || !titleEl || !stageEl || !imgA || !imgB) return;
+
+      var SECTORS = [
+        {
+          main: 'Manufacturing',
+          sub: 'S M A R T  F A C T O R Y',
+          miniTitle: 'Manufacturing',
+          hud: 'Manufacturing · Smart Factory & AI',
+          code: '01 / 06 · Predictive Maintenance',
+          accent: '#0070FF',
+          img: 'assets/home/sectors/manufacturing.jpg',
+          desc: 'Smart factory automation and predictive maintenance'
+        },
+        {
+          main: 'Agriculture',
+          sub: 'P R E C I S I O N  F A R M',
+          miniTitle: 'Agriculture',
+          hud: 'Agriculture · Soil & Crop IoT',
+          code: '02 / 06 · Precision Farming',
+          accent: '#1a9e4a',
+          img: 'assets/home/sectors/agriculture.jpg',
+          desc: 'Precision farming and soil & crop monitoring'
+        },
+        {
+          main: 'Healthcare',
+          sub: 'M E D I C A L  I O T',
+          miniTitle: 'Healthcare',
+          hud: 'Healthcare · Patient Biometrics',
+          code: '03 / 06 · Remote Monitoring',
+          accent: '#e11d48',
+          img: 'assets/home/sectors/healthcare.jpg',
+          pos: 'center top',
+          desc: 'Remote patient monitoring and medical IoT'
+        },
+        {
+          main: 'Smart Cities',
+          sub: 'U R B A N  A I  G R I D',
+          miniTitle: 'Smart Cities',
+          hud: 'Smart Cities · Infrastructure AI',
+          code: '04 / 06 · Urban Sensing',
+          accent: '#f97316',
+          img: 'assets/home/sectors/smart-cities.jpg',
+          desc: 'Infrastructure sensing and urban AI management'
+        },
+        {
+          main: 'Energy',
+          sub: 'S M A R T  G R I D S',
+          miniTitle: 'Energy',
+          hud: 'Energy · Smart Grid Analytics',
+          code: '05 / 06 · Grid Optimization',
+          accent: '#8b5cf6',
+          img: 'assets/home/sectors/energy.jpg',
+          desc: 'Smart grid optimization and consumption analytics'
+        },
+        {
+          main: 'Automotive',
+          sub: 'F L E E T  T E L E M E T R Y',
+          miniTitle: 'Automotive',
+          hud: 'Automotive · Connected Vehicles',
+          code: '06 / 06 · Fleet Tracking',
+          accent: '#0d9488',
+          img: 'assets/home/sectors/automotive.jpg',
+          desc: 'Connected vehicle telemetry and fleet tracking'
+        }
+      ];
+
+      var cur = 0;
+      var usingA = true;
+      var DURATION = 4600;
+      var timer = null;
+      var paused = false;
+
+      function restartProgress() {
+        if (!fillEl) return;
+        fillEl.style.transition = 'none';
+        fillEl.style.transform = 'scaleX(0)';
+        void fillEl.offsetWidth;
+        fillEl.style.transition = 'transform ' + DURATION + 'ms linear';
+        fillEl.style.transform = 'scaleX(1)';
+      }
+
+      function render(idx, animate) {
+        cur = (idx + SECTORS.length) % SECTORS.length;
+        var s = SECTORS[cur];
+        var next1Idx = (cur + 1) % SECTORS.length;
+        var next2Idx = (cur + 2) % SECTORS.length;
+
+        if (animate) {
+          titleEl.classList.add('is-switching');
+          descEl.style.opacity = '0';
+          setTimeout(function () {
+            titleMain.textContent = s.main;
+            titleSub.textContent = s.sub;
+            if (subheadEl) subheadEl.textContent = s.main;
+            descEl.textContent = s.desc;
+            if (codeEl) codeEl.textContent = s.code;
+            if (hudEl) hudEl.textContent = s.hud;
+            titleEl.classList.remove('is-switching');
+            descEl.style.opacity = '1';
+          }, 220);
+        } else {
+          titleMain.textContent = s.main;
+            titleSub.textContent = s.sub;
+            if (subheadEl) subheadEl.textContent = s.main;
+          descEl.textContent = s.desc;
+          if (codeEl) codeEl.textContent = s.code;
+          if (hudEl) hudEl.textContent = s.hud;
+        }
+
+        stageEl.style.setProperty('--ind-accent', s.accent);
+
+        // Crossfade active stage visual
+        var incoming = usingA ? imgB : imgA;
+        var outgoing = usingA ? imgA : imgB;
+        incoming.src = s.img;
+        incoming.style.objectPosition = s.pos || 'center center';
+        incoming.classList.add('is-active');
+        outgoing.classList.remove('is-active');
+        usingA = !usingA;
+
+        // Update 2 floating mini preview cards
+        var n1 = SECTORS[next1Idx];
+        var n2 = SECTORS[next2Idx];
+        mini1.setAttribute('data-idx', String(next1Idx));
+        mini1Img.src = n1.img;
+        mini1Title.textContent = n1.miniTitle;
+
+        mini2.setAttribute('data-idx', String(next2Idx));
+        mini2Img.src = n2.img;
+        mini2Title.textContent = n2.miniTitle;
+
+        dots.forEach(function (d, i) {
+          d.classList.toggle('is-active', i === cur);
+        });
+
+        restartProgress();
+      }
+
+      function startAutoPlay() {
+        clearInterval(timer);
+        timer = setInterval(function () {
+          if (!paused) render(cur + 1, true);
+        }, DURATION);
+      }
+
+      mini1.addEventListener('click', function () {
+        render(Number(mini1.getAttribute('data-idx')), true);
+        startAutoPlay();
+      });
+
+      mini2.addEventListener('click', function () {
+        render(Number(mini2.getAttribute('data-idx')), true);
+        startAutoPlay();
+      });
+
+      dots.forEach(function (d) {
+        d.addEventListener('click', function () {
+          render(Number(d.getAttribute('data-sector-idx')), true);
+          startAutoPlay();
+        });
+      });
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', function () {
+          render(cur + 1, true);
+          startAutoPlay();
+        });
+      }
+
+      section.addEventListener('mouseenter', function () { paused = true; });
+      section.addEventListener('mouseleave', function () { paused = false; });
+
+      render(0, false);
+      startAutoPlay();
+    })();
+  </script>
+
+  <!-- ── BRAIX × Orizon Interactive Stage Controller ───── -->
+  <script>
+    (function () {
+      var stageFrame = document.getElementById('orizonStageFrame');
+      if (!stageFrame) return;
+
+      var selectors = Array.prototype.slice.call(stageFrame.querySelectorAll('.orizon-selector'));
+      var selSectorVal = document.getElementById('orizonSelSectorVal');
+      var selSystemVal = document.getElementById('orizonSelSystemVal');
+      var selTelemetryVal = document.getElementById('orizonSelTelemetryVal');
+
+      var focusText = document.getElementById('braixFocusText');
+      var dynamicWord = document.getElementById('braixDynamicWord');
+      var microCopy = document.getElementById('braixMicroCopy');
+      var card1Title = document.getElementById('braixCard1Title');
+      var card2Title = document.getElementById('braixCard2Title');
+      var card2Desc = document.getElementById('braixCard2Desc');
+      var stat1Val = document.getElementById('braixStat1Val');
+      var stat2Val = document.getElementById('braixStat2Val');
+      var wavePct = document.getElementById('braixWavePct');
+
+      var glassTitle = document.getElementById('orizonGlassTitle');
+      var glassLoc = document.getElementById('orizonGlassLoc');
+      var glassSpecs = document.getElementById('orizonGlassSpecs');
+
+      var subjectStage = document.getElementById('braixSubjectStage');
+      var heroFigure = document.getElementById('braixHeroFigure');
+      var exploreOrbBtn = document.getElementById('braixExploreOrbBtn');
+      var orbLabel = document.getElementById('braixOrbLabel');
+
+      var SECTOR_PRESETS = {
+        robotics: {
+          word: 'SMART',
+          focus: 'Built for Measurable Client ROI',
+          micro: 'AUTOMATE MANUAL WORK, CUT OPERATIONAL COSTS, AND LAUNCH RELIABLE AI & SOFTWARE BUILT AROUND YOUR BUSINESS.',
+          c1: '24/7 Automated Efficiency',
+          c2: 'Lower Cost, Faster Delivery',
+          desc: 'Reduce manual overhead and launch production-ready AI, IoT, and web platforms faster with zero lock-in.',
+          s1: '45%', s2: '3x', wave: '+68%',
+          gTitle: 'Full Code & System Ownership',
+          gLoc: 'Dedicated Support · Zero Lock-In',
+          specs: ['&#9889; 45% Cost Reduction', '&#128737; 100% Ownership', '&#8862; 24/7 Automation', '&#9678; 99.98% SLA Uptime']
+        },
+        manufacturing: {
+          word: 'FACTORIES',
+          focus: 'Autonomous Industrial Telemetry',
+          micro: 'PREDICTIVE VIBRATION SENSING, PLC EDGE GATEWAYS, AND REAL-TIME OEE DASHBOARDS ENGINEERED FOR ZERO UNPLANNED DOWNTIME.',
+          c1: 'PLC & Sensor Mesh State',
+          c2: 'Predictive Anomaly Load',
+          desc: 'High-frequency acoustic and thermal telemetry streaming from industrial production lines.',
+          s1: '94%', s2: '88%', wave: '92%',
+          gTitle: 'Industrial Edge Gateway',
+          gLoc: 'Smart Factory Floor // 01',
+          specs: ['&#8862; 1.8ms Modbus', '&#9678; OEE Analytics', '&#9889; Anomaly AI', '&#128737; 99.99% Uptime']
+        },
+        agriculture: {
+          word: 'HARVESTS',
+          focus: 'Precision Agro-Sensing Mesh',
+          micro: 'LONG-RANGE LORAWAN SOIL MESHES, AUTOMATED DRIP FERTIGATION, AND MICRO-CLIMATE FORECASTING ACROSS PLANTATIONS.',
+          c1: 'Soil & Root Moisture Mesh',
+          c2: 'Micro-Climate AI Analysis',
+          desc: 'Multi-depth NPK nutrient telemetry and autonomous irrigation scheduling across 12km range.',
+          s1: '86%', s2: '64%', wave: '74%',
+          gTitle: 'Agro-Mesh Telemetry Node',
+          gLoc: 'Plantation Sector // 02',
+          specs: ['&#8862; 12km LoRaWAN', '&#9678; NPK Sensing', '&#9889; Solar Powered', '&#128737; 5+ Yr Battery']
+        },
+        healthcare: {
+          word: 'BIOMETRICS',
+          focus: 'Clinical Biometric Telemetry',
+          micro: 'ENCRYPTED WEARABLE NODES, BEDSIDE EDGE GATEWAYS, AND CONTINUOUS AI VITAL STREAMING FOR RAPID TRIAGE.',
+          c1: 'Biometric Vital Stream',
+          c2: 'Clinical Triage AI Load',
+          desc: 'End-to-end encrypted patient telemetry with sub-second anomaly alerting and HL7 FHIR sync.',
+          s1: '98%', s2: '91%', wave: '84%',
+          gTitle: 'Clinical Biometric Hub',
+          gLoc: 'Medical IoT Ward // 03',
+          specs: ['&#8862; < 1s Alerting', '&#9678; BLE 5.3 Mesh', '&#9889; 256-Bit E2E', '&#128737; 24/7 Vitals']
+        },
+        smartcities: {
+          word: 'CITIES',
+          focus: 'Urban Infrastructure AI Grid',
+          micro: 'ADAPTIVE TRAFFIC VISION, SMART STREETLIGHT MESHES, AND MUNICIPAL ENERGY ORCHESTRATION AT METROPOLITAN SCALE.',
+          c1: 'Urban Node Topology',
+          c2: 'Grid & Traffic Flow AI',
+          desc: 'Distributed computer vision and NB-IoT environmental sensors balancing city-wide load.',
+          s1: '91%', s2: '77%', wave: '68%',
+          gTitle: 'Metro Edge Controller',
+          gLoc: 'Smart City Grid // 04',
+          specs: ['&#8862; 10k+ Nodes', '&#9678; Vision AI', '&#9889; -29% Energy', '&#128737; 99.9% Mesh']
+        }
+      };
+
+      var SYSTEM_PRESETS = {
+        cynobot: { title: 'CynoBot Front-Desk AI', s1: '80%', s2: '50%' },
+        edgemesh: { title: 'Edge Vision RTOS Cluster', s1: '95%', s2: '82%' },
+        cloudos: { title: 'CYNOCOR Enterprise Cloud OS', s1: '89%', s2: '99%' }
+      };
+
+      var TEL_PRESETS = {
+        realtime: '98%',
+        peak: '99.9%',
+        eco: '56%'
+      };
+
+      function closeAllSelectors() {
+        selectors.forEach(function (s) { s.classList.remove('is-open'); });
+      }
+
+      selectors.forEach(function (sel) {
+        sel.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var wasOpen = sel.classList.contains('is-open');
+          closeAllSelectors();
+          if (!wasOpen) sel.classList.add('is-open');
+        });
+      });
+
+      document.addEventListener('click', closeAllSelectors);
+
+      // Handle Sector Selection
+      stageFrame.querySelectorAll('[data-sector-preset]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var key = btn.getAttribute('data-sector-preset');
+          var p = SECTOR_PRESETS[key];
+          if (!p) return;
+
+          btn.parentElement.querySelectorAll('.orizon-sel-opt').forEach(function (b) {
+            b.classList.toggle('is-selected', b === btn);
+          });
+          selSectorVal.textContent = btn.textContent;
+          closeAllSelectors();
+
+          dynamicWord.textContent = p.word;
+          focusText.textContent = p.focus;
+          microCopy.textContent = p.micro;
+          card1Title.textContent = p.c1;
+          card2Title.textContent = p.c2;
+          card2Desc.textContent = p.desc;
+          stat1Val.textContent = p.s1;
+          stat2Val.textContent = p.s2;
+          wavePct.textContent = p.wave;
+          glassTitle.textContent = p.gTitle;
+          glassLoc.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> ' + p.gLoc;
+          glassSpecs.innerHTML = p.specs.map(function (sp) { return '<span>' + sp + '</span>'; }).join('');
+        });
+      });
+
+      // Handle System Core Selection
+      stageFrame.querySelectorAll('[data-sys-preset]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var key = btn.getAttribute('data-sys-preset');
+          var p = SYSTEM_PRESETS[key];
+          if (!p) return;
+
+          btn.parentElement.querySelectorAll('.orizon-sel-opt').forEach(function (b) {
+            b.classList.toggle('is-selected', b === btn);
+          });
+          selSystemVal.textContent = btn.textContent;
+          closeAllSelectors();
+
+          glassTitle.textContent = p.title;
+          stat1Val.textContent = p.s1;
+          stat2Val.textContent = p.s2;
+        });
+      });
+
+      // Handle Telemetry Mode Selection
+      stageFrame.querySelectorAll('[data-tel-preset]').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+          e.stopPropagation();
+          var key = btn.getAttribute('data-tel-preset');
+          btn.parentElement.querySelectorAll('.orizon-sel-opt').forEach(function (b) {
+            b.classList.toggle('is-selected', b === btn);
+          });
+          selTelemetryVal.textContent = btn.textContent;
+          closeAllSelectors();
+
+          if (TEL_PRESETS[key]) {
+            wavePct.textContent = TEL_PRESETS[key];
+          }
+        });
+      });
+
+      // Interactive Play / Explore Orb
+      if (exploreOrbBtn && subjectStage) {
+        exploreOrbBtn.addEventListener('click', function () {
+          subjectStage.classList.add('is-scanning');
+          orbLabel.innerHTML = 'Scanning<br>Telemetry...';
+          wavePct.textContent = '99%';
+          stat1Val.textContent = '96%';
+          stat2Val.textContent = '94%';
+
+          setTimeout(function () {
+            subjectStage.classList.remove('is-scanning');
+            orbLabel.innerHTML = 'Explore<br>Benefits';
+            var target = document.getElementById('cyno-bot');
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 950);
+        });
+      }
+
+      // Subtle 3D Mouse Parallax on Hero Subject
+      stageFrame.addEventListener('mousemove', function (e) {
+        if (!heroFigure) return;
+        var rect = stageFrame.getBoundingClientRect();
+        var nx = ((e.clientX - rect.left) / rect.width) - 0.5;
+        var ny = ((e.clientY - rect.top) / rect.height) - 0.5;
+        heroFigure.style.transform = 'translate3d(' + (nx * 14).toFixed(1) + 'px, ' + (ny * 10).toFixed(1) + 'px, 0) rotateY(' + (nx * 8).toFixed(1) + 'deg)';
+      });
+
+      stageFrame.addEventListener('mouseleave', function () {
+        if (heroFigure) heroFigure.style.transform = '';
+      });
+
+      // Orizon Glass Card Interactive Buttons (Like, Save, Share)
+      var likeBtn = document.getElementById('orizonLikeBtn');
+      var likeCount = document.getElementById('orizonLikeCount');
+      var saveBtn = document.getElementById('orizonSaveBtn');
+      var saveCount = document.getElementById('orizonSaveCount');
+      var shareBtn = document.getElementById('orizonShareBtn');
+
+      if (likeBtn && likeCount) {
+        var liked = false;
+        likeBtn.addEventListener('click', function () {
+          liked = !liked;
+          likeBtn.classList.toggle('is-liked', liked);
+          likeCount.textContent = liked ? '4.5K' : '4.4K';
+        });
+      }
+
+      if (saveBtn && saveCount) {
+        var saved = false;
+        saveBtn.addEventListener('click', function () {
+          saved = !saved;
+          saveBtn.classList.toggle('is-liked', saved);
+          saveCount.textContent = saved ? '158' : '157';
+        });
+      }
+
+      if (shareBtn) {
+        shareBtn.addEventListener('click', function () {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(window.location.href);
+          }
+          shareBtn.classList.add('is-liked');
+          shareBtn.innerHTML = '<span>&#10003;</span>';
+          setTimeout(function () {
+            shareBtn.classList.remove('is-liked');
+            shareBtn.innerHTML = '<span>&#8599;</span>';
+          }, 1400);
+        });
+      }
+    })();
+  </script>
+
   <!-- Floating WhatsApp Button -->
   <a class="whatsapp-float"
     href="https://wa.me/94742321760?text=Hi%20CYNOCOR%2C%20I%27d%20like%20to%20get%20in%20touch." target="_blank"
@@ -2441,6 +5174,508 @@
     </svg>
   </a>
 
+
+  <script>
+    (function () {
+      const hero = document.querySelector('.cyno-prime-hero');
+      const copy = document.querySelector('.cyno-prime-copy');
+      const visual = document.querySelector('.cyno-prime-visual');
+      if (!hero || !copy || !visual) return;
+      if (window.matchMedia && (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !window.matchMedia('(pointer: fine)').matches)) {
+        return;
+      }
+
+      let targetX = 0, targetY = 0;
+      let curX = 0, curY = 0;
+      let rafId = 0;
+
+      function tick() {
+        curX += (targetX - curX) * 0.065;
+        curY += (targetY - curY) * 0.065;
+        visual.style.transform = `translate3d(${(curX * 11).toFixed(2)}px, ${(curY * 8).toFixed(2)}px, 0)`;
+        copy.style.transform = `translate3d(${(-curX * 4).toFixed(2)}px, ${(-curY * 3).toFixed(2)}px, 0)`;
+        if (Math.abs(targetX - curX) > 0.002 || Math.abs(targetY - curY) > 0.002) {
+          rafId = requestAnimationFrame(tick);
+        } else {
+          rafId = 0;
+        }
+      }
+
+      function schedule() {
+        if (!rafId) rafId = requestAnimationFrame(tick);
+      }
+
+      hero.addEventListener('mousemove', function (e) {
+        const rect = hero.getBoundingClientRect();
+        targetX = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        targetY = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        schedule();
+      }, { passive: true });
+
+      hero.addEventListener('mouseleave', function () {
+        targetX = 0;
+        targetY = 0;
+        schedule();
+      });
+    })();
+  </script>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', function () {
+      var stage = document.getElementById('cyno3dStage');
+      var canvas = document.getElementById('cynoBot3DCanvas');
+      var section = document.getElementById('cyno-bot');
+      if (!stage || !canvas || !section || typeof THREE === 'undefined') return;
+
+      var renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.08;
+
+      var scene = new THREE.Scene();
+      var camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+      camera.position.set(0, 0.08, 6.35);
+
+      // Studio Lighting
+      var hemiLight = new THREE.HemisphereLight(0xffffff, 0xcbd5e1, 1.35);
+      scene.add(hemiLight);
+
+      var keyLight = new THREE.DirectionalLight(0xffffff, 1.55);
+      keyLight.position.set(3.5, 4.5, 5.2);
+      scene.add(keyLight);
+
+      var rimLight = new THREE.DirectionalLight(0x7dd3fc, 1.1);
+      rimLight.position.set(-4.0, 2.5, -3.5);
+      scene.add(rimLight);
+
+      var fillLight = new THREE.PointLight(0x38bdf8, 0.75, 12);
+      fillLight.position.set(0, -1.2, 3.2);
+      scene.add(fillLight);
+
+      // Materials matching CynoBot Blender reference
+      var whiteMat = new THREE.MeshPhysicalMaterial({
+        color: 0xf4f8fc,
+        roughness: 0.16,
+        metalness: 0.18,
+        clearcoat: 0.92,
+        clearcoatRoughness: 0.12
+      });
+      var darkMat = new THREE.MeshPhysicalMaterial({
+        color: 0x101622,
+        roughness: 0.22,
+        metalness: 0.72,
+        clearcoat: 0.8,
+        clearcoatRoughness: 0.16
+      });
+      var screenMat = new THREE.MeshPhysicalMaterial({
+        color: 0x05070b,
+        roughness: 0.06,
+        metalness: 0.25,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.04
+      });
+      var cyanGlowMat = new THREE.MeshStandardMaterial({
+        color: 0x93d5ff,
+        emissive: 0x60b8ff,
+        emissiveIntensity: 1.75,
+        roughness: 0.12
+      });
+
+      var botRoot = new THREE.Group();
+      botRoot.scale.setScalar(1.06);
+      scene.add(botRoot);
+
+      // Helper for rounded box geometry using ExtrudeGeometry
+      function createRoundedPanel(w, h, d, r) {
+        var shape = new THREE.Shape();
+        var hw = w / 2, hh = h / 2;
+        shape.moveTo(-hw + r, -hh);
+        shape.lineTo(hw - r, -hh);
+        shape.quadraticCurveTo(hw, -hh, hw, -hh + r);
+        shape.lineTo(hw, hh - r);
+        shape.quadraticCurveTo(hw, hh, hw - r, hh);
+        shape.lineTo(-hw + r, hh);
+        shape.quadraticCurveTo(-hw, hh, -hw, hh - r);
+        shape.lineTo(-hw, -hh + r);
+        shape.quadraticCurveTo(-hw, -hh, -hw + r, -hh);
+        var geo = new THREE.ExtrudeGeometry(shape, {
+          depth: d,
+          bevelEnabled: true,
+          bevelThickness: 0.075, bevelSize: 0.07, bevelSegments: 8
+        });
+        geo.center();
+        return geo;
+      }
+
+      // ── TORSO / BUST ──
+      var torsoGroup = new THREE.Group();
+      torsoGroup.position.set(0, -0.82, 0);
+      botRoot.add(torsoGroup);
+
+      var torsoBody = new THREE.Mesh(createRoundedPanel(1.75, 1.85, 0.96, 0.12), whiteMat);
+      torsoGroup.add(torsoBody);
+
+      // Chest Black Display Frame + "AI" Canvas Texture
+      var chestBezel = new THREE.Mesh(createRoundedPanel(1.16, 1.12, 0.1, 0.1), darkMat);
+      chestBezel.position.set(0, 0.04, 0.51);
+      torsoGroup.add(chestBezel);
+
+      var aiCanvas = document.createElement('canvas');
+      aiCanvas.width = 256;
+      aiCanvas.height = 256;
+      var actx = aiCanvas.getContext('2d');
+      actx.fillStyle = '#05070b';
+      actx.fillRect(0, 0, 256, 256);
+      var aiTex = new THREE.CanvasTexture(aiCanvas);
+      aiTex.colorSpace = THREE.SRGBColorSpace;
+      var wolfImg = new Image();
+      wolfImg.onload = function () {
+        actx.fillStyle = '#05070b';
+        actx.fillRect(0, 0, 256, 256);
+        actx.save();
+        actx.shadowColor = '#60b8ff';
+        actx.shadowBlur = 18;
+        actx.drawImage(wolfImg, 36, 36, 184, 184);
+        actx.restore();
+        aiTex.needsUpdate = true;
+      };
+      wolfImg.src = 'assets/home/cynobot-wolf.png';
+
+      var chestScreen = new THREE.Mesh(
+        new THREE.PlaneGeometry(1.0, 0.96),
+        new THREE.MeshBasicMaterial({ map: aiTex })
+      );
+      chestScreen.position.set(0, 0.04, 0.648);
+      torsoGroup.add(chestScreen);
+
+      // Subtle screw dots on torso
+      [-0.68, 0.68].forEach(function (sx) {
+        var dot = new THREE.Mesh(new THREE.SphereGeometry(0.022, 12, 12), darkMat);
+        dot.position.set(sx, 0.78, 0.54);
+        torsoGroup.add(dot);
+      });
+
+      // Shoulders & Upper Arms
+      [-1, 1].forEach(function (side) {
+        var armGroup = new THREE.Group();
+        armGroup.position.set(side * 1.14, 0.54, 0);
+        torsoGroup.add(armGroup);
+
+        var shoulderBlock = new THREE.Mesh(createRoundedPanel(0.42, 0.44, 0.56, 0.06), darkMat);
+        armGroup.add(shoulderBlock);
+
+        var shoulderGlow = new THREE.Mesh(new THREE.TorusGeometry(0.18, 0.02, 12, 28), cyanGlowMat);
+        shoulderGlow.rotation.y = Math.PI / 2;
+        shoulderGlow.position.set(-side * 0.23, 0, 0);
+        armGroup.add(shoulderGlow);
+
+        var upperArm = new THREE.Mesh(createRoundedPanel(0.36, 0.82, 0.42, 0.06), whiteMat);
+        upperArm.position.set(0, -0.64, 0);
+        armGroup.add(upperArm);
+
+        var elbowJoint = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 0.34, 20), darkMat);
+        elbowJoint.rotation.z = Math.PI / 2;
+        elbowJoint.position.set(0, -1.14, 0);
+        armGroup.add(elbowJoint);
+      });
+
+      // ── NECK ──
+      var neck = new THREE.Mesh(new THREE.CylinderGeometry(0.28, 0.34, 0.55, 24), darkMat);
+      neck.position.set(0, 0.25, 0);
+      botRoot.add(neck);
+
+      // ── HEAD ──
+      var headGroup = new THREE.Group();
+      headGroup.position.set(0, 0.98, 0);
+      botRoot.add(headGroup);
+
+      var headShell = new THREE.Mesh(createRoundedPanel(1.62, 1.16, 0.94, 0.22), whiteMat);
+      headGroup.add(headShell);
+
+      var faceBezel = new THREE.Mesh(createRoundedPanel(1.36, 0.92, 0.08, 0.16), screenMat);
+      faceBezel.position.set(0, 0, 0.49);
+      headGroup.add(faceBezel);
+
+      // Glowing Ring Eyes
+      var eyesGroup = new THREE.Group();
+      eyesGroup.position.set(0, 0.08, 0.615);
+      headGroup.add(eyesGroup);
+
+      var leftEye = new THREE.Mesh(new THREE.TorusGeometry(0.145, 0.042, 16, 36), cyanGlowMat);
+      leftEye.position.set(-0.33, 0, 0);
+      eyesGroup.add(leftEye);
+
+      var rightEye = new THREE.Mesh(new THREE.TorusGeometry(0.145, 0.042, 16, 36), cyanGlowMat);
+      rightEye.position.set(0.33, 0, 0);
+      eyesGroup.add(rightEye);
+
+      // Glowing Smile Arc
+      var smile = new THREE.Mesh(new THREE.TorusGeometry(0.12, 0.026, 12, 24, Math.PI), cyanGlowMat);
+      smile.rotation.z = Math.PI;
+      smile.position.set(0, -0.14, 0.615);
+      headGroup.add(smile);
+
+      // Side Ear Pods + Glowing Cyan Rings
+      [-1, 1].forEach(function (side) {
+        var earPod = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.26, 0.14, 28), darkMat);
+        earPod.rotation.z = Math.PI / 2;
+        earPod.position.set(side * 0.87, 0, 0);
+        headGroup.add(earPod);
+
+        var earRing = new THREE.Mesh(new THREE.TorusGeometry(0.17, 0.024, 12, 28), cyanGlowMat);
+        earRing.rotation.y = Math.PI / 2;
+        earRing.position.set(side * 0.945, 0, 0);
+        headGroup.add(earRing);
+      });
+
+      // Orbital rings removed per user request for clean bust silhouette
+
+      // Resize handler
+      function resize() {
+        var w = stage.clientWidth || 500;
+        var h = stage.clientHeight || 440;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize);
+
+      // Smooth Mouse Tracking
+      var targetYaw = 0, targetPitch = 0;
+      var curYaw = 0, curPitch = 0;
+
+      section.addEventListener('mousemove', function (e) {
+        var rect = section.getBoundingClientRect();
+        var nx = ((e.clientX - rect.left) / rect.width - 0.5) * 2;
+        var ny = ((e.clientY - rect.top) / rect.height - 0.5) * 2;
+        targetYaw = nx * 0.55;
+        targetPitch = ny * 0.26;
+      }, { passive: true });
+
+      section.addEventListener('mouseleave', function () {
+        targetYaw = 0;
+        targetPitch = 0;
+      });
+
+      // Animation loop
+      var clock = new THREE.Clock();
+      var isVisible = true;
+      if ('IntersectionObserver' in window) {
+        var visObs = new IntersectionObserver(function (entries) {
+          isVisible = entries[0].isIntersecting;
+        }, { threshold: 0.02 });
+        visObs.observe(section);
+      }
+
+      function animate() {
+        requestAnimationFrame(animate);
+        if (!isVisible) return;
+        var t = clock.getElapsedTime();
+
+        curYaw += (targetYaw - curYaw) * 0.07;
+        curPitch += (targetPitch - curPitch) * 0.07;
+
+        // Bust + head follow mouse smoothly + subtle float
+        botRoot.position.y = -0.14 + Math.sin(t * 1.4) * 0.07;
+        botRoot.rotation.y = curYaw * 0.65 + Math.sin(t * 0.6) * 0.06;
+        botRoot.rotation.x = curPitch * 0.45;
+
+        headGroup.rotation.y = curYaw * 0.55;
+        headGroup.rotation.x = curPitch * 0.55;
+
+        // Gentle eye blink every ~4.5s
+        var blinkCycle = t % 4.5;
+        var eyeScaleY = (blinkCycle > 4.28 && blinkCycle < 4.44) ? 0.15 : 1;
+        eyesGroup.scale.y += (eyeScaleY - eyesGroup.scale.y) * 0.35;
+
+        
+
+        renderer.render(scene, camera);
+      }
+      animate();
+    });
+  </script>
+  <!-- ── Top Hero Interactive 3D Cyber-Human Bust Controller (GLB) ── -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+  <script type="module">
+    import * as THREE from 'three';
+    import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
+    (function () {
+      const canvas = document.getElementById('cynoPrime3DCanvas');
+      if (!canvas) return;
+
+      const wrap = canvas.parentElement;
+      const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'high-performance' });
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.15;
+
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
+      camera.position.set(0, 0.18, 5.6);
+
+      // Procedural Studio Environment Map for crisp glass & chrome reflections
+      const pmrem = new THREE.PMREMGenerator(renderer);
+      const envScene = new THREE.Scene();
+      envScene.background = new THREE.Color(0xdbeafe);
+      const p1 = new THREE.Mesh(new THREE.PlaneGeometry(14, 8), new THREE.MeshBasicMaterial({ color: 0xffffff }));
+      p1.position.set(5, 6, 5); p1.lookAt(0, 0, 0);
+      const p2 = new THREE.Mesh(new THREE.PlaneGeometry(14, 8), new THREE.MeshBasicMaterial({ color: 0x93c5fd }));
+      p2.position.set(-7, 2, -4); p2.lookAt(0, 0, 0);
+      const p3 = new THREE.Mesh(new THREE.PlaneGeometry(10, 6), new THREE.MeshBasicMaterial({ color: 0xffedd5 }));
+      p3.position.set(0, -5, 4); p3.lookAt(0, 0, 0);
+      envScene.add(p1, p2, p3);
+      scene.environment = pmrem.fromScene(envScene, 0.04).texture;
+      pmrem.dispose();
+
+      // Studio Lighting
+      scene.add(new THREE.AmbientLight(0xeef6ff, 1.15));
+      const keyLight = new THREE.DirectionalLight(0xfff7ed, 2.2);
+      keyLight.position.set(4.5, 5.5, 5.5);
+      scene.add(keyLight);
+
+      const rimLight = new THREE.DirectionalLight(0x60a5fa, 1.65);
+      rimLight.position.set(-5.0, 2.5, -4.0);
+      scene.add(rimLight);
+
+      const fillLight = new THREE.DirectionalLight(0xffffff, 1.0);
+      fillLight.position.set(-3.0, -2.0, 4.0);
+      scene.add(fillLight);
+
+      const bustGroup = new THREE.Group();
+      scene.add(bustGroup);
+
+      const headGroup = new THREE.Group();
+      bustGroup.add(headGroup);
+
+      let modelReady = false;
+      let startTime = null;
+
+      // Load cyber-human-bust.glb via GLTFLoader
+      const loader = new GLTFLoader();
+      loader.load(
+        'assets/cyber-human-bust.glb',
+        (gltf) => {
+          const model = gltf.scene;
+
+          // Auto-scale & center bust cleanly inside camera frame
+          const box = new THREE.Box3().setFromObject(model);
+          const size = box.getSize(new THREE.Vector3());
+          const center = box.getCenter(new THREE.Vector3());
+          const maxDim = Math.max(size.x, size.y, size.z) || 1;
+          const scale = 3.1 / maxDim;
+
+          model.scale.setScalar(scale);
+          model.position.set(
+            -center.x * scale,
+            -center.y * scale,
+            -center.z * scale
+          );
+
+          model.traverse((child) => {
+            if (child.isMesh && child.material) {
+              const mats = Array.isArray(child.material) ? child.material : [child.material];
+              mats.forEach((m) => {
+                if ('envMapIntensity' in m) m.envMapIntensity = 1.3;
+                m.needsUpdate = true;
+              });
+            }
+          });
+
+          headGroup.add(model);
+          // Start immediately in right-side profile pose
+          headGroup.rotation.y = 1.16;
+          headGroup.rotation.x = -0.05;
+          modelReady = true;
+          startTime = null;
+        },
+        undefined,
+        (err) => {
+          console.error('Failed to load assets/cyber-human-bust.glb:', err);
+        }
+      );
+
+      function resize() {
+        const w = wrap.clientWidth || 520;
+        const h = wrap.clientHeight || 520;
+        renderer.setSize(w, h, false);
+        camera.aspect = w / h;
+        camera.updateProjectionMatrix();
+      }
+      resize();
+      window.addEventListener('resize', resize, { passive: true });
+
+      // Interactive pointer + drag state
+      let pointerX = 0, pointerY = 0;
+      let isDragging = false, lastDragX = 0, lastDragY = 0;
+      let dragYaw = 0, dragPitch = 0;
+
+      wrap.addEventListener('pointermove', (e) => {
+        const r = wrap.getBoundingClientRect();
+        pointerX = ((e.clientX - r.left) / r.width - 0.5) * 2;
+        pointerY = ((e.clientY - r.top) / r.height - 0.5) * 2;
+        if (isDragging) {
+          dragYaw += (e.clientX - lastDragX) * 0.008;
+          dragPitch = Math.max(-0.4, Math.min(0.4, dragPitch + (e.clientY - lastDragY) * 0.006));
+          lastDragX = e.clientX;
+          lastDragY = e.clientY;
+        }
+      });
+      wrap.addEventListener('pointerdown', (e) => {
+        isDragging = true;
+        lastDragX = e.clientX;
+        lastDragY = e.clientY;
+      });
+      window.addEventListener('pointerup', () => { isDragging = false; });
+
+      function smoothstep(edge0, edge1, x) {
+        const t = Math.max(0, Math.min(1, (x - edge0) / (edge1 - edge0)));
+        return t * t * (3 - 2 * t);
+      }
+
+      function animate(now) {
+        requestAnimationFrame(animate);
+        if (!modelReady) return;
+        if (!startTime) startTime = now;
+        const t = (now - startTime) * 0.001;
+
+        // Intro Choreography:
+        // 0.0s - 1.1s: Side profile (facing right)
+        // 1.1s - 2.4s: Slowly look UP
+        // 2.4s - 3.8s: Slowly look DOWN
+        // 3.8s - 5.8s: Smoothly turn straight toward the user (+Z)
+        // 5.8s+: Subtle breathing + mouse tracking + drag-to-rotate
+        const introYaw = 1.16 * (1 - smoothstep(3.8, 5.8, t));
+        const lookUp = -0.24 * smoothstep(1.1, 2.3, t) * (1 - smoothstep(2.4, 3.3, t));
+        const lookDown = 0.22 * smoothstep(2.5, 3.6, t) * (1 - smoothstep(3.9, 5.4, t));
+        const introPitch = -0.05 * (1 - smoothstep(3.8, 5.8, t)) + lookUp + lookDown;
+
+        const interactiveBlend = smoothstep(5.2, 6.2, t);
+        const targetYaw = introYaw + dragYaw + pointerX * 0.34 * interactiveBlend;
+        const targetPitch = introPitch + dragPitch + pointerY * 0.18 * interactiveBlend;
+
+        headGroup.rotation.y += (targetYaw - headGroup.rotation.y) * 0.08;
+        headGroup.rotation.x += (targetPitch - headGroup.rotation.x) * 0.08;
+
+        // Subtle breathing
+        bustGroup.position.y = Math.sin(t * 1.4) * 0.025;
+
+        renderer.render(scene, camera);
+      }
+      requestAnimationFrame(animate);
+    })();
+  </script>
 </body>
 
 </html>
