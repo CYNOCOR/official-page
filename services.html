@@ -84,6 +84,17 @@
       .build-float-card.left{left:-12px}
       .build-float-card.right{right:-12px}
     }
+    @media(max-width:640px){
+      .build-showcase-sec{padding:56px 0 64px}
+      .build-tier-bar{flex-wrap:wrap;justify-content:center;border-radius:20px;gap:4px}
+      .build-arch{width:min(300px,calc(100vw - 36px));height:434px}
+      .build-device{width:calc(100% - 22px);height:406px}
+      .build-float-card{padding:8px 11px;min-width:124px}
+      .build-float-card.left{left:0;bottom:-12px}
+      .build-float-card.right{right:0;top:-12px}
+      .build-experts{flex-wrap:wrap;justify-content:center}
+      .how-band{padding-bottom:56px}
+    }
     /* ─── How Band (Editorial Stepped Horizontal Scroll) ─── */
     .how-band{background:transparent;border-top:1px solid rgba(255,255,255,.55);padding:0 0 96px;position:relative}
     body.atmosphere-dark .how-band{border-top-color:rgba(148,163,184,.16)}

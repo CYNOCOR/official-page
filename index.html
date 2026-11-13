@@ -613,8 +613,8 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      -webkit-mask-image: radial-gradient(ellipse 47% 47% at 50% 48%, #000 40%, rgba(0, 0, 0, 0.65) 64%, transparent 88%);
-      mask-image: radial-gradient(ellipse 47% 47% at 50% 48%, #000 40%, rgba(0, 0, 0, 0.65) 64%, transparent 88%);
+      -webkit-mask-image: radial-gradient(ellipse 56% 56% at 50% 49%, #000 62%, rgba(0, 0, 0, 0.78) 80%, transparent 98%);
+      mask-image: radial-gradient(ellipse 56% 56% at 50% 49%, #000 62%, rgba(0, 0, 0, 0.78) 80%, transparent 98%);
     }
 
     /* Glowing Sky-Blue Aura behind CynoBot / Hardware */
@@ -748,13 +748,53 @@
     }
 
     .braix-bento-card {
-      background: #FFFFFF;
-      border-radius: 24px;
-      padding: 16px 18px;
-      box-shadow: 0 14px 34px rgba(12, 42, 90, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.96);
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border-radius: 26px;
+      padding: 26px 24px;
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 14px 36px rgba(12, 42, 90, 0.06), inset 0 1px 1px rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.85);
       text-align: left;
-      transition: transform 0.28s var(--ease), box-shadow 0.28s var(--ease);
+      transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+    }
+
+    .braix-simple-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(15, 23, 42, 0.08);
+    }
+
+    body.atmosphere-dark .braix-simple-metrics {
+      border-top-color: rgba(148, 163, 184, 0.16);
+    }
+
+    .braix-simple-stat strong {
+      display: block;
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      color: #0F172A;
+      line-height: 1.1;
+    }
+
+    body.atmosphere-dark .braix-simple-stat strong {
+      color: #F8FAFC;
+    }
+
+    .braix-simple-stat span {
+      display: block;
+      font-size: 0.7rem;
+      color: var(--text-secondary);
+      margin-top: 3px;
     }
 
     body.atmosphere-dark .braix-bento-card {
@@ -884,13 +924,17 @@
     /* ─── ORIZON FROSTED-GLASS CUTOUT CARD (BOTTOM RIGHT) ── */
     .orizon-glass-card {
       position: relative;
-      background: rgba(255, 255, 255, 0.62);
+      background: rgba(255, 255, 255, 0.64);
       backdrop-filter: blur(24px) saturate(180%);
       -webkit-backdrop-filter: blur(24px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.88);
       border-radius: 26px;
-      padding: 18px 18px 16px;
-      box-shadow: 0 20px 48px rgba(10, 40, 90, 0.12);
+      padding: 26px 24px 22px;
+      min-height: 235px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 48px rgba(10, 40, 90, 0.10);
       text-align: left;
       color: #08080C;
     }
@@ -951,14 +995,14 @@
     }
 
     .orizon-glass-specs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4px 10px;
-      font-size: 0.68rem;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 0.78rem;
       font-weight: 600;
       color: #1E293B;
-      margin: 10px 0 12px;
-      padding-left: 52px;
+      margin: 14px 0 4px;
+      padding-left: 56px;
     }
 
     body.atmosphere-dark .orizon-glass-specs {
@@ -3992,92 +4036,32 @@
           </div>
         </div>
 
-        <!-- RIGHT COLUMN: BRAIX Telemetry Bento Stack + Orizon Frosted-Glass Cutout Card -->
+        <!-- RIGHT COLUMN: Smooth Simple Summary + Orizon Frosted-Glass Card -->
         <div class="braix-col-right">
 
-          <!-- Card 1: Neural & Sensor State (BRAIX Top Card) -->
-          <div class="braix-bento-card">
-            <div class="braix-bento-head">
-              <span class="braix-bento-icon">&#9635;</span>
-              <span id="braixCard1Title">24/7 Automated Efficiency</span>
-            </div>
-            <div class="braix-bento-well" style="height:86px; display:flex; align-items:flex-end; justify-content:center;">
-              <svg width="160" height="72" viewBox="0 0 160 72" fill="none" aria-hidden="true">
-                <g stroke="#15803D" stroke-width="1.35" stroke-linecap="round" opacity="0.85">
-                  <path d="M80 70 C80 52, 65 40, 42 22"/>
-                  <path d="M80 70 C80 50, 58 32, 26 36"/>
-                  <path d="M80 70 C78 46, 68 26, 56 10"/>
-                  <path d="M80 70 C80 44, 80 24, 80 6"/>
-                  <path d="M80 70 C82 46, 92 26, 104 10"/>
-                  <path d="M80 70 C80 50, 102 32, 134 36"/>
-                  <path d="M80 70 C80 52, 95 40, 118 22"/>
-                  <path d="M62 44 C52 34, 44 28, 34 18"/>
-                  <path d="M98 44 C108 34, 116 28, 126 18"/>
-                  <path d="M72 34 C66 22, 62 16, 48 14"/>
-                  <path d="M88 34 C94 22, 98 16, 112 14"/>
-                </g>
-                <g fill="#0070FF">
-                  <circle cx="42" cy="22" r="2.3"/><circle cx="26" cy="36" r="2"/><circle cx="56" cy="10" r="2.3"/>
-                  <circle cx="80" cy="6" r="2.6"/><circle cx="104" cy="10" r="2.3"/><circle cx="134" cy="36" r="2"/>
-                  <circle cx="118" cy="22" r="2.3"/><circle cx="34" cy="18" r="1.8"/><circle cx="126" cy="18" r="1.8"/>
-                </g>
-                <ellipse cx="80" cy="69" rx="9" ry="3.5" fill="#14532D"/>
-              </svg>
-            </div>
-          </div>
-
-          <!-- Card 2: Cognitive & Edge AI Analysis (BRAIX Middle Card) -->
+          <!-- Clean Frosted Summary Card -->
           <div class="braix-bento-card">
             <div class="braix-bento-title-lg" id="braixCard2Title">Lower Cost, Faster Delivery</div>
             <p class="braix-bento-desc" id="braixCard2Desc">
               Reduce manual overhead and launch production-ready AI, IoT, and web platforms faster with zero lock-in.
             </p>
-            <div class="braix-bento-well braix-core-viz">
-              <div class="braix-lobe-stat top-left">
-                <span id="braixStat1Label">Cost Saved</span>
+            <div class="braix-simple-metrics">
+              <div class="braix-simple-stat">
                 <strong id="braixStat1Val">45%</strong>
+                <span id="braixStat1Label">Cost Saved</span>
               </div>
-              <!-- Glowing AI Core / Brain SVG -->
-              <svg width="86" height="82" viewBox="0 0 86 82" fill="none" aria-hidden="true">
-                <defs>
-                  <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stop-color="#0070FF" stop-opacity="0.55"/>
-                    <stop offset="65%" stop-color="#6366F1" stop-opacity="0.22"/>
-                    <stop offset="100%" stop-color="#0070FF" stop-opacity="0"/>
-                  </radialGradient>
-                </defs>
-                <circle cx="43" cy="41" r="36" fill="url(#coreGlow)"/>
-                <ellipse cx="43" cy="39" rx="22" ry="17" fill="#1E3A8A" stroke="#3B82F6" stroke-width="1.5"/>
-                <path d="M26 38 C32 30, 54 30, 60 38 C54 46, 32 46, 26 38 Z" stroke="#60A5FA" stroke-width="1.2" fill="rgba(0,112,255,0.35)"/>
-                <path d="M43 22 L43 58" stroke="#93C5FD" stroke-width="1.2" stroke-dasharray="2 2"/>
-                <circle cx="35" cy="36" r="2.2" fill="#5CE1FF"/>
-                <circle cx="51" cy="36" r="2.2" fill="#5CE1FF"/>
-                <circle cx="43" cy="44" r="2.2" fill="#F43F5E"/>
-              </svg>
-              <div class="braix-lobe-stat bot-right">
+              <div class="braix-simple-stat">
                 <strong id="braixStat2Val">3x</strong>
                 <span id="braixStat2Label">Faster Launch</span>
               </div>
+              <div class="braix-simple-stat">
+                <strong id="braixWavePct">+68%</strong>
+                <span>Productivity</span>
+              </div>
             </div>
           </div>
 
-          <!-- Card 3: Real-Time Telemetry Sine Wave (BRAIX Bottom Card) -->
-          <div class="braix-bento-card">
-            <div class="braix-bento-head">
-              <span class="braix-bento-icon">&#9635;</span>
-              <span>Client Productivity Gain</span>
-            </div>
-            <div class="braix-bento-well braix-wave-well">
-              <svg width="175" height="40" viewBox="0 0 175 40" fill="none" aria-hidden="true">
-                <path d="M0 20 Q 42 4, 86 20 T 175 20" stroke="#334155" stroke-width="1.3" fill="none"/>
-                <path d="M0 24 Q 44 36, 88 20 T 175 16" stroke="#0070FF" stroke-width="1.4" fill="none"/>
-                <line x1="0" y1="20" x2="175" y2="20" stroke="#94A3B8" stroke-width="0.7" stroke-dasharray="3 3"/>
-              </svg>
-              <span class="braix-wave-badge" id="braixWavePct">+68%</span>
-            </div>
-          </div>
-
-          <!-- Card 4: Orizon Frosted-Glass Cutout Card -->
+          <!-- Orizon Frosted-Glass Cutout Card -->
           <div class="orizon-glass-card">
             <div class="orizon-glass-top">
               <div>
@@ -4091,22 +4075,8 @@
             </div>
 
             <div class="orizon-glass-specs" id="orizonGlassSpecs">
-              <span>&#9889; 45% Cost Reduction</span>
-              <span>&#128737; 100% Ownership</span>
-              <span>&#8862; 24/7 Automation</span>
-              <span>&#9678; 99.98% SLA Uptime</span>
-            </div>
-
-            <div class="orizon-glass-actions">
-              <button type="button" class="orizon-act-btn" id="orizonLikeBtn" aria-label="Like system">
-                <span>&#9825;</span> <span id="orizonLikeCount">4.4K</span>
-              </button>
-              <button type="button" class="orizon-act-btn" id="orizonSaveBtn" aria-label="Save system">
-                <span>&#128278;</span> <span id="orizonSaveCount">157</span>
-              </button>
-              <button type="button" class="orizon-act-btn" id="orizonShareBtn" aria-label="Share system">
-                <span>&#8599;</span>
-              </button>
+              <span>100% Code Ownership</span>
+              <span>99.98% SLA Uptime</span>
             </div>
 
             <div class="orizon-cutout-emblem" title="CYNOCOR Verified System">
@@ -5052,7 +5022,7 @@
           wavePct.textContent = p.wave;
           glassTitle.textContent = p.gTitle;
           glassLoc.innerHTML = '<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> ' + p.gLoc;
-          glassSpecs.innerHTML = p.specs.map(function (sp) { return '<span>' + sp + '</span>'; }).join('');
+          glassSpecs.innerHTML = p.specs.slice(0, 2).map(function (sp) { return '<span>' + sp + '</span>'; }).join('');
         });
       });
 
@@ -5110,19 +5080,6 @@
           }, 950);
         });
       }
-
-      // Subtle 3D Mouse Parallax on Hero Subject
-      stageFrame.addEventListener('mousemove', function (e) {
-        if (!heroFigure) return;
-        var rect = stageFrame.getBoundingClientRect();
-        var nx = ((e.clientX - rect.left) / rect.width) - 0.5;
-        var ny = ((e.clientY - rect.top) / rect.height) - 0.5;
-        heroFigure.style.transform = 'translate3d(' + (nx * 14).toFixed(1) + 'px, ' + (ny * 10).toFixed(1) + 'px, 0) rotateY(' + (nx * 8).toFixed(1) + 'deg)';
-      });
-
-      stageFrame.addEventListener('mouseleave', function () {
-        if (heroFigure) heroFigure.style.transform = '';
-      });
 
       // Orizon Glass Card Interactive Buttons (Like, Save, Share)
       var likeBtn = document.getElementById('orizonLikeBtn');

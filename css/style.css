@@ -46,6 +46,10 @@
   padding: 0;
 }
 
+html {
+  overflow-x: clip;
+}
+
 body {
   font-family: var(--font-stack);
   background-color: var(--bg-base);
@@ -1182,7 +1186,7 @@ body.atmosphere-dark .wa-orbit-ring {
     align-self: flex-start;
     width: auto;
     height: 54px;
-    padding: 0 32px;
+    padding: 0 48px;
     gap: 4px;
     border-radius: 0 0 32px 32px;
     background: var(--orizon-notch-bg);
@@ -1287,27 +1291,27 @@ body.atmosphere-dark .wa-orbit-ring {
     display: block !important;
     position: absolute;
     bottom: 0;
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     pointer-events: none;
   }
 
   header .nav-links a.active::before {
-    left: -18px;
+    left: -16px;
     right: auto;
     transform: none;
     border-radius: 0;
     transition: none;
-    background: radial-gradient(circle at 0 0, transparent 18px, var(--cyno-active-tab-bg) 18.5px);
+    background: radial-gradient(circle at 0 0, transparent 16px, var(--cyno-active-tab-bg) 16.5px);
   }
 
   header .nav-links a.active::after {
     left: auto;
-    right: -18px;
+    right: -16px;
     transform: none;
     border-radius: 0;
     transition: none;
-    background: radial-gradient(circle at 100% 0, transparent 18px, var(--cyno-active-tab-bg) 18.5px);
+    background: radial-gradient(circle at 100% 0, transparent 16px, var(--cyno-active-tab-bg) 16.5px);
   }
 
   header .nav-links a.active:hover {
@@ -2639,6 +2643,10 @@ footer > *:not(.cyno-footer-nerves) {
   }
   .orizon-ph-bl-card {
     max-width: none;
+  }
+  .orizon-ph-glass-card {
+    padding: 12px 14px;
+    gap: 12px;
   }
   footer {
     margin: 16px 12px 24px;
