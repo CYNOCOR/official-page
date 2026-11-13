@@ -250,42 +250,55 @@
       .team-members {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 18px;
+        width: 100%;
+        max-width: 700px;
+        margin: 0 auto;
         perspective: none;
         transform-style: flat;
       }
-      .member, .member:hover, .member.is-locked,
-      .team-orbital-stage.has-active .member:not(:hover):not(.is-locked) {
+      .team-members .member,
+      .team-members .member.fade-up,
+      .team-members .member.fade-up.visible,
+      .team-members .member:hover,
+      .team-members .member.is-popped,
+      .team-members .member.fade-up.visible.is-popped,
+      .team-members .member.is-locked,
+      .team-members .member.fade-up.visible.is-locked,
+      .team-orbital-stage.has-active .team-members .member:not(.is-popped):not(.is-locked),
+      .team-orbital-stage.has-active .team-members .member.fade-up.visible:not(.is-popped):not(.is-locked) {
         flex: none;
         width: 100%;
         height: auto;
-        padding: 14px;
+        padding: 16px;
         border-radius: 22px;
-        background: rgba(255, 255, 255, 0.9);
-        border: 1.5px solid rgba(255, 255, 255, 0.98);
-        box-shadow: 0 14px 34px rgba(15, 52, 105, 0.1);
-        transform: none;
-        opacity: 1;
+        background: rgba(255, 255, 255, 0.88);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1.5px solid rgba(255, 255, 255, 0.96);
+        box-shadow: 0 14px 34px rgba(15, 52, 105, 0.09);
+        transform: none !important;
+        opacity: 1 !important;
+        cursor: default;
+        z-index: 1;
       }
-      body.atmosphere-dark .member,
-      body.atmosphere-dark .member:hover,
-      body.atmosphere-dark .member.is-locked {
+      body.atmosphere-dark .team-members .member,
+      body.atmosphere-dark .team-members .member.fade-up.visible,
+      body.atmosphere-dark .team-members .member:hover,
+      body.atmosphere-dark .team-members .member.is-popped,
+      body.atmosphere-dark .team-members .member.is-locked {
         background: rgba(14, 22, 42, 0.9);
-        border-color: rgba(0, 112, 255, 0.28);
-        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.52);
+        border-color: rgba(56, 189, 248, 0.25);
+        box-shadow: 0 16px 36px rgba(0, 0, 0, 0.5);
       }
-      .member::after,
-      .team-members .member.is-returning {
-      pointer-events: none;
-      z-index: 20;
-    }
-
-    .member.is-locked::before {
-        display: none;
+      .team-members .member::after,
+      .team-members .member.is-locked::before {
+        display: none !important;
       }
-      .member-photo,
-      .member:hover .member-photo,
-      .member.is-locked .member-photo {
+      .team-members .member-photo,
+      .team-members .member:hover .member-photo,
+      .team-members .member.is-popped .member-photo,
+      .team-members .member.is-locked .member-photo {
         position: relative;
         inset: auto;
         width: 100%;
@@ -294,24 +307,26 @@
         object-fit: cover;
         object-position: center 15%;
         border-radius: 14px;
-        margin-bottom: 12px;
+        margin-bottom: 14px;
         transform: none;
       }
-      .member h2,
-      .member:hover h2,
-      .member.is-locked h2 {
+      .team-members .member h2,
+      .team-members .member:hover h2,
+      .team-members .member.is-popped h2,
+      .team-members .member.is-locked h2 {
         position: relative;
         left: auto;
         right: auto;
         bottom: auto;
-        font-size: 1.04rem;
+        font-size: 1.08rem;
         color: var(--text-primary);
         text-shadow: none;
         margin-bottom: 8px;
       }
-      .member-info,
-      .member:hover .member-info,
-      .member.is-locked .member-info {
+      .team-members .member-info,
+      .team-members .member:hover .member-info,
+      .team-members .member.is-popped .member-info,
+      .team-members .member.is-locked .member-info {
         position: relative;
         left: auto;
         right: auto;
@@ -322,20 +337,26 @@
         padding-top: 10px;
         border-top: 1px solid var(--border);
       }
-      .member-info p {
+      .team-members .member-info p {
         color: var(--text-secondary);
-        font-size: 0.82rem;
+        font-size: 0.84rem;
+        line-height: 1.55;
         -webkit-line-clamp: unset;
         margin-bottom: 12px;
       }
-      .member-social-links a {
+      .team-members .member-social-links a {
         border-color: var(--border);
         background: var(--bg-base);
         color: var(--text-primary);
       }
     }
 
-    @media (max-width: 560px) { .team-members { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) {
+      .team-members {
+        grid-template-columns: 1fr;
+        max-width: 360px;
+      }
+    }
   
     /* DARK MODE MOBILE CARD FIX */
     @media (max-width: 900px) {
@@ -831,8 +852,18 @@
         }, 700);
       };
 
+      const isMobile = () => window.innerWidth <= 960;
+
+      window.addEventListener('resize', () => {
+        if (isMobile()) {
+          cards.forEach((c) => c.classList.remove('is-locked', 'is-popped', 'is-returning'));
+          stage.classList.remove('has-active');
+        }
+      });
+
       cards.forEach((card) => {
         card.addEventListener('mouseenter', () => {
+          if (isMobile()) return;
           if (cards.some((c) => c.classList.contains('is-locked'))) return;
           if (card.classList.contains('is-popped')) return;
           const now = Date.now();
@@ -850,6 +881,7 @@
           syncActiveClass();
         });
         card.addEventListener('click', (e) => {
+          if (isMobile()) return;
           if (e.target.closest('.member-social-links a')) return;
           e.stopPropagation();
           const wasLocked = card.classList.contains('is-locked');
