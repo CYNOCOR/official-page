@@ -791,38 +791,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // 7. Inject Orizon Framed Widgets into Inner Page Heroes (.page-hero)
-  const pageHeroContainer = document.querySelector('.page-hero .container');
-  if (pageHeroContainer && !pageHeroContainer.querySelector('.orizon-page-hero-widgets')) {
-    const phWidgets = document.createElement('div');
-    phWidgets.className = 'orizon-page-hero-widgets';
-    phWidgets.innerHTML = `
-      <div class="orizon-ph-bl-card">
-        <div class="orizon-ph-bl-stat">
-          <strong>20+</strong>
-          <span>Systems Delivered</span>
-        </div>
-        <div class="orizon-ph-avatars">
-          <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/connected-world.svg" alt="IoT Systems">
-          <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/firmware.svg" alt="Embedded Systems">
-          <img src="https://cdn.jsdelivr.net/npm/undraw-svg@2.0.0/svgs/real-time-analytics.svg" alt="Live Telemetry">
-          <a href="projects.html" class="orizon-ph-go" aria-label="View Projects">&#8599;</a>
-        </div>
-      </div>
-
-      <div class="orizon-ph-glass-card">
-        <div class="orizon-ph-emblem">
-          <img src="assets/logo3W.png" alt="CYNOCOR">
-        </div>
-        <div class="orizon-ph-glass-info">
-          <h4>CynoBot &amp; Full-Stack IoT</h4>
-          <span>&#9889; 4.2ms Edge Latency &bull; 99.98% Uptime</span>
-        </div>
-        <a href="contact.html" class="orizon-ph-go" aria-label="Connect with CYNOCOR">&#8599;</a>
-      </div>
-    `;
-    pageHeroContainer.appendChild(phWidgets);
-  }
+  // (Inner-page hero widgets removed.)
 
 });
 

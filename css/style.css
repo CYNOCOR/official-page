@@ -961,7 +961,7 @@ body.atmosphere-dark .wa-orbit-ring {
   .page-hero h1 { margin-bottom: 16px; }
   .page-hero .lead { font-size: 1rem; }
 
-  h1 { font-size: 2.2rem !important; }
+  h1, h2.braix-headline { font-size: 2.2rem !important; }
   h2 { font-size: 1.75rem !important; }
 
   .container { padding: 0 18px; }
@@ -1058,7 +1058,7 @@ body.atmosphere-dark .wa-orbit-ring {
 }
 
 @media (max-width: 480px) {
-  h1 { font-size: 1.875rem !important; }
+  h1, h2.braix-headline { font-size: 1.875rem !important; }
   h2 { font-size: 1.5rem !important; }
 
   .container { padding: 0 14px; }
